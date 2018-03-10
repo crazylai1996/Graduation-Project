@@ -1,0 +1,246 @@
+* {
+  font-family: "微软雅黑";
+}
+/*
+ *遮照层
+ */
+.popup-mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+  -moz-opacity: 0.6;
+}
+/*
+ *弹出框
+ */
+.popup-wrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 11;
+  width: 450px;
+  height: 360px;
+  background-color: #fff;
+}
+/*
+ *关闭按钮
+ */
+.popup-close-btn {
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  width: 24px;
+  line-height: 24px;
+  font-size: 18px;
+  color: #999999;
+  text-align: center;
+  text-decoration: none;
+  background-color: #fff;
+  border-radius: 50%;
+}
+.popup-close-btn:hover {
+  color: #cc3333;
+}
+.popup-close-btn:before {
+  content: "\2716";
+}
+/*
+ *弹出表单
+ */
+.popup-contents {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 300px;
+  height: 310px;
+  margin: auto;
+}
+/*
+ *导航tab
+ */
+.navi-tab {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-bottom: 24px;
+  text-align: center;
+}
+.navi-tab li {
+  display: inline-block;
+  width: 36px;
+  margin: 0 8px;
+  line-height: 23px;
+  text-align: center;
+}
+.navi-tab a {
+  width: 36px;
+  line-height: 20px;
+  font-size: 18px;
+  color: #333333;
+  text-decoration: none;
+}
+/*
+ *当前选中
+ */
+.current-tab {
+  color: #1a1a1a !important;
+  border-bottom: 3px #996699 solid;
+}
+/*
+ *表单项
+ */
+.form-item {
+  position: relative;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.form-item .item-label {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  z-index: 12;
+  display: block;
+  padding: 0 3px;
+  font-size: 12px;
+  color: #333333;
+  background-color: #fff;
+  transition: all linear .2s;
+}
+.form-item .current-label {
+  top: -8px;
+  color: #996699;
+}
+.form-item .long-input {
+  width: 100%;
+}
+.form-item .short-input {
+  width: 35%;
+}
+.form-item input {
+  padding: 9px 10px;
+  font-size: 13px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #cc99cc;
+  outline: none;
+  transition: border-color ease-in-out 0.2s;
+}
+.form-item input:focus {
+  border: 1px solid #996699;
+}
+.form-item img,
+.form-item .get-msg-captcha {
+  float: right;
+  width: 30%;
+  height: 35px;
+  font-size: 13px;
+  vertical-align: bottom;
+}
+.form-item .get-msg-captcha {
+  display: inline-block;
+  line-height: 35px;
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  background-color: #0092d2;
+}
+/*
+ *表单操作选项
+ */
+.relative-op {
+  width: 100%;
+}
+.relative-op .op-left {
+  float: left;
+}
+.relative-op .op-right {
+  float: right;
+}
+.relative-op a {
+  font-size: 12px;
+  color: #1a1a1a;
+  text-decoration: none;
+}
+.relative-op a:hover {
+  color: #0092d2;
+  text-decoration: underline;
+}
+.relative-op .select-login-style {
+  text-decoration: none;
+}
+.relative-op .select-login-style:hover {
+  color: #996699;
+  text-decoration: none;
+}
+.relative-op label {
+  font-size: 12px;
+  color: #333333;
+  cursor: pointer;
+}
+.relative-op input {
+  vertical-align: middle;
+  margin-right: 5px;
+  color: #1a1a1a;
+}
+/*
+ *登录提示
+ */
+.login-tips,
+.register-tips,
+.quick-login-tips {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  clear: both;
+  color: #cc3333;
+  font-size: 12px;
+}
+/*
+ *登录按钮
+ */
+.login-btn,
+.register-btn,
+.quick-login-btn {
+  width: 100%;
+  display: inline-block;
+  margin-top: 10px;
+  line-height: 40px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 2px;
+  background-color: #996699;
+  background: -webkit-linear-gradient(#cc99cc, #996699);
+  background: -o-linear-gradient(#cc99cc, #996699);
+  background: -moz-linear-gradient(#cc99cc, #996699);
+  background: linear-gradient(#cc99cc, #996699);
+}
+.login-btn:hover,
+.register-btn:hover,
+.quick-login-btn:hover {
+  background: -webkit-linear-gradient(bottom, #cc99cc, #996699);
+  background: -o-linear-gradient(bottom, #cc99cc, #996699);
+  background: -moz-linear-gradient(bottom, #cc99cc, #996699);
+  background: linear-gradient(to top, #cc99cc, #996699);
+}
+.phone-quick-login,
+.phone-register {
+  display: none;
+}

@@ -1,0 +1,45 @@
+/*
+ *导航栏移入移出事件,展开更多
+ */
+$(".user-navi>li,.more-beauty").hover(function(){
+  $(this).find(".more").show();
+},function(){
+  $(this).find(".more").hide();
+});
+/*
+ *选择搜索类型
+ */
+$(".search-type").click(function(){
+  $(this).siblings("ul").toggle();
+});
+$(".s-type-slector a").click(function(){
+  $(".search-type").html($(this).html());
+  $(".s-type-slector").hide();
+});
+/*
+ *子分类展开
+ */
+$(".category-index>li>a").hover(function(){
+  $(this).siblings(".sub-category").show();
+},function(){
+  $(this).siblings(".sub-category").hide();
+});
+$(".sub-category").hover(function(){
+  $(this).siblings("a").toggleClass("current-category");
+  $(this).show();
+},function(){
+  $(this).siblings("a").toggleClass("current-category");
+  $(this).hide();
+});
+/*
+ *最新动态导航栏点击事件，榜单时间段切换
+ */
+$(".nc-title li,.mc-head-time li").click(function(){
+  $(this).addClass("current").siblings("li").removeClass("current");
+});
+/*
+ *榜单条目hover事件
+ */
+$(".mc-body>li").hover(function(){
+  $(this).addClass("current").siblings("li").removeClass("current");
+});

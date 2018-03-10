@@ -1,0 +1,106 @@
+
+//透明度混合
+.opacity_mixin(@opacity) {
+  @opacityPercentage: @opacity * 100;
+  opacity: @opacity;
+  filter:alpha(Opacity=@opacityPercentage);
+  -moz-opacity: @opacity;
+}
+
+//线性渐变效果(向下)
+.linear_gradient_to_bottom(@color, @dark_color){
+  background: -webkit-linear-gradient(@color, @dark_color);
+  background: -o-linear-gradient(@color, @dark_color);
+  background: -moz-linear-gradient(@color, @dark_color);
+  background: linear-gradient(@color, @dark_color);
+}
+
+//线性渐变效果(向上)
+.linear_gradient_to_top(@color, @dark_color){
+  background: -webkit-linear-gradient(bottom,@color, @dark_color);
+  background: -o-linear-gradient(bottom,@color, @dark_color);
+  background: -moz-linear-gradient(bottom,@color, @dark_color);
+  background: linear-gradient(to top,@color, @dark_color);
+}
+
+//线性渐变色按钮混合
+.linear_gradient(@color, @dark_color) {
+  .linear_gradient_to_bottom(@color, @dark_color);
+
+  &:hover {
+    .linear_gradient_to_top(@color, @dark_color);
+  }
+}
+
+//常用无序列表
+.horizontal_ul(){
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+//文本不换行，用省略号隐藏
+.no_wrap_text(){
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow:ellipsis;
+}
+
+//小字体(<12px)
+.smaller-font(@scale){
+    font-size:12px;
+
+    transform: scale(@scale);
+    transform-origin:0 0;
+
+    -ms-transform: scale(@scale);         /* IE 9 */
+    -ms-transform-origin:0 0;       /* IE 9 */
+
+    -webkit-transform: scale(@scale); /* Safari 和 Chrome */
+    -webkit-transform-origin:0 0;   /* Safari 和 Chrome */
+
+    -moz-transform: scale(@scale);        /* Firefox */
+    -moz-transform-origin:0 0;      /* Firefox */
+
+    -o-transform: scale(@scale);      /* Opera */
+    -o-transform-origin:0 0;        /* Opera */
+}
+
+//旋转
+.rotate(@deg){
+  transform:rotate(@deg);
+  -ms-transform:rotate(@deg); 	/* IE 9 */
+  -moz-transform:rotate(@deg); 	/* Firefox */
+  -webkit-transform:rotate(@deg); /* Safari 和 Chrome */
+  -o-transform:rotate(@deg); 	/* Opera */
+
+  transition: all .2s ease-in-out;
+}
+
+//三角形
+.triangle(@_,@size,@color){
+  display: inline-block;
+  width: 0;
+  height: 0;
+
+  border:@size solid transparent;
+}
+
+//三角形(向下)
+.triangle(bottom,@size,@color){
+  border-top-color: @color;
+}
+//三角形(向上)
+.triangle(top,@size,@color){
+  border-bottom-color: @color;
+}
+//三角形(向左)
+.triangle(left,@size,@color){
+  border-right-color: @color;
+}
+//三角形(向右)
+.triangle(right,@size,@color){
+  border-left-color: @color;
+}
