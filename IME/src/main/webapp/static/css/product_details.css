@@ -13,12 +13,18 @@ body {
   width: 1000px;
   margin: 0 auto;
 }
+.main-container hr {
+  margin: 15px 0;
+  border: solid 0.5px #ddbbdd;
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+  -moz-opacity: 0.4;
+}
 /*
  *当前位置
  */
 .current-pos {
   width: 100%;
-  margin-bottom: 20px;
   font-size: 12px;
 }
 .current-pos a {
@@ -158,7 +164,7 @@ body {
  */
 .product-base-info {
   float: left;
-  width: 390px;
+  width: 435px;
   min-height: 357px;
   margin-left: 15px;
 }
@@ -219,8 +225,9 @@ body {
 .product-rating-wrapped {
   float: left;
   position: relative;
-  width: 280px;
+  width: 225px;
   height: 357px;
+  margin-left: 15px;
 }
 .product-rating {
   width: 210px;
@@ -370,4 +377,136 @@ body {
 .product-rating .product-ops .love-btn font {
   font-weight: 700;
   color: #cc99cc;
+}
+/**
+ * 使用心得块
+ */
+.comment-container {
+  width: 1000px;
+  margin: 0 auto;
+  margin-top: 15px;
+  box-sizing: border-box;
+  clear: both;
+}
+.comment-containter-left {
+  float: left;
+  width: 750px;
+  box-sizing: border-box;
+}
+.comment-containter-right {
+  float: left;
+  width: 240px;
+  margin-left: 10px;
+  box-sizing: border-box;
+  border-radius: 1px;
+  box-shadow: 0 0 2px #ddbbdd;
+  background-color: #ffffff;
+}
+/**
+ * 使用心得分析
+ */
+.comment-analysis {
+  width: 100%;
+  height: auto;
+  border-radius: 1px;
+  box-shadow: 0 0 2px #ddbbdd;
+  background-color: #ffffff;
+}
+/**
+ * 使用心得分析标题
+ */
+.analysis-title {
+  height: 35px;
+  border-bottom: 0.5px solid #e6e6e6;
+  background-color: #fcfcfc;
+}
+.analysis-title a {
+  display: inline-block;
+  line-height: 35px;
+  text-decoration: none;
+}
+.analysis-title .name {
+  height: 100%;
+  padding: 0 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #996699;
+  text-align: left;
+  border-left: 2px solid #cc99cc;
+  transition: all 0.2s ease-in-out;
+}
+.analysis-title .name:hover {
+  text-decoration: none;
+  border-left: 5px solid #cc99cc;
+}
+.analysis-title .title {
+  font-size: 12px;
+  color: #333333;
+}
+/**
+ * 具体分析项
+ */
+.analysis-contents {
+  width: 100%;
+  height: 125px;
+}
+.analysis-details {
+  width: 660px;
+  margin: 0 auto;
+  margin-top: 25px;
+  padding-left: -20px;
+  padding-bottom: 10px;
+}
+.analysis-type {
+  float: left;
+  width: 200px;
+  margin-left: 20px;
+}
+.analysis-type .type-name {
+  display: inline-block;
+  width: 200px;
+  height: 25px;
+  box-sizing: border-box;
+  padding-left: 15px;
+  line-height: 25px;
+  color: #996699;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  background-color: #e6cce6;
+}
+.analysis-type .type-details {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.analysis-type .type-on-weight {
+  height: 12px;
+  margin: 5px auto;
+}
+.analysis-type .type-on-weight > span {
+  float: left;
+  display: inline-block;
+  line-height: 12px;
+  font-size: 12px;
+}
+.analysis-type .type-on-weight .type-item {
+  width: 40px;
+  height: 12px;
+  color: #333333;
+}
+.analysis-type .type-on-weight .item-power-wrapped {
+  max-width: 125px;
+  height: 12px;
+  line-height: 12px;
+}
+.analysis-type .type-on-weight .item-power-wrapped .item-power {
+  display: block;
+  height: 100%;
+  background-color: #cc99cc;
+}
+.analysis-type .type-on-weight .item-per {
+  width: 35px;
+  height: 12px;
+  color: #000000;
 }
