@@ -5,7 +5,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <title>化妆品详情 - 爱美丽</title>
+  <link rel="stylesheet" href="css\hearts\star-rating.css">
   <link rel="stylesheet" href="css\product_details.css" />
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -52,29 +54,136 @@
           </div>
         </div>
         <!-- 产品评级分布 -->
-        <div class="rating-container">
-          <div class="rating-title">
-            性价评分
-          </div>
-          <div class="rating-count">
-            <div class="left">
-              8.4
+        <div class="product-rating-wrapped">
+          <div class="product-rating">
+            <!-- 评分统计 -->
+            <div class="rating-brief">
+              <div class="rating-title">
+                综合性价评分
+              </div>
+              <div class="rating-count">
+                <div class="left">
+                  <strong>9.0</strong>
+                </div>
+                <div class="right">
+                  <span class="right-up">
+                    <input value="4.5" type="number"
+                     class="rating" min=0 max=5
+                     step=0.5 data-size="xxs"
+                    data-only-show="true" data-symbol="&#xe005;">
+                  </span>
+                  <span class="right-down"><a href="#">283471人评价</a></span>
+                </div>
+              </div>
             </div>
-            <div class="right">
-              <span class="right-up"></span>
-              <span class="right-down"></span>
+            <!-- 评分分布 -->
+            <div class="rating-more">
+              <ul class="rating-details">
+                <!-- 一个 -->
+                <li class="rating-on-weight">
+                  <span class="rating-wrapped">
+                    <input value="5" type="number"
+                   class="rating" min=0 max=5
+                   step=0.5 data-size="xxxs"
+                  data-only-show="true" data-symbol="&#xe005;">
+                  </span>
+                  <span class="rating-power-wrapped">
+                    <span class="rating-power" data-power="1.0"></span>
+                  </span>
+                  <span class="rating-per">
+                    100%
+                  </span>
+                </li>
+                <!-- 一个结束  -->
+                <!-- 一个 -->
+                <li class="rating-on-weight">
+                  <span class="rating-wrapped">
+                    <input value="4" type="number"
+                   class="rating" min=0 max=5
+                   step=0.5 data-size="xxxs"
+                  data-only-show="true" data-symbol="&#xe005;">
+                  </span>
+                  <span class="rating-power-wrapped">
+                    <span class="rating-power" data-power="1.0"></span>
+                  </span>
+                  <span class="rating-per">
+                    100%
+                  </span>
+                </li>
+                <!-- 一个结束  -->
+                <!-- 一个 -->
+                <li class="rating-on-weight">
+                  <span class="rating-wrapped">
+                    <input value="3" type="number"
+                   class="rating" min=0 max=5
+                   step=0.5 data-size="xxxs"
+                  data-only-show="true" data-symbol="&#xe005;">
+                  </span>
+                  <span class="rating-power-wrapped">
+                    <span class="rating-power" data-power="1.0"></span>
+                  </span>
+                  <span class="rating-per">
+                    100%
+                  </span>
+                </li>
+                <!-- 一个结束  -->
+                <!-- 一个 -->
+                <li class="rating-on-weight">
+                  <span class="rating-wrapped">
+                    <input value="2" type="number"
+                   class="rating" min=0 max=5
+                   step=0.5 data-size="xxxs"
+                  data-only-show="true" data-symbol="&#xe005;">
+                  </span>
+                  <span class="rating-power-wrapped">
+                    <span class="rating-power" data-power="1.0"></span>
+                  </span>
+                  <span class="rating-per">
+                    100%
+                  </span>
+                </li>
+                <!-- 一个结束  -->
+                <!-- 一个 -->
+                <li class="rating-on-weight">
+                  <span class="rating-wrapped">
+                    <input value="1" type="number"
+                   class="rating" min=0 max=5
+                   step=0.5 data-size="xxxs"
+                  data-only-show="true" data-symbol="&#xe005;">
+                  </span>
+                  <span class="rating-power-wrapped">
+                    <span class="rating-power" data-power="1.0"></span>
+                  </span>
+                  <span class="rating-per">
+                    100%
+                  </span>
+                </li>
+                <!-- 一个结束  -->
+              </ul>
+              <hr>
+              <div class="product-ops">
+                <div class="btn-wrapped">
+                  <a href="#" class="reply-btn">发表使用心得</a>
+                </div>
+                <div class="btn-wrapped">
+                  <a href="#" class="love-btn"><font>&#10010;关注&nbsp;&nbsp;</font>|&nbsp;&nbsp;0人</a>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="">
-
           </div>
         </div>
+
+      </div>
+      <!-- 产品使用心得分析 -->
+      <div class="">
+
       </div>
     </div>
   </div>
 
   <script src="js\jquery.js"></script>
   <script src="js\product_details.js"></script>
+  <script src="js\hearts\star-rating.js"></script>
 </body>
 
 </html>

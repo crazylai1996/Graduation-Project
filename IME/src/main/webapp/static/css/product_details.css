@@ -1,4 +1,4 @@
-* {
+body {
   font-family: "微软雅黑";
 }
 /*
@@ -158,7 +158,7 @@
  */
 .product-base-info {
   float: left;
-  width: 340px;
+  width: 390px;
   min-height: 357px;
   margin-left: 15px;
 }
@@ -211,5 +211,163 @@
   color: #999999;
 }
 .product-base-info .product-details .show-more {
+  color: #cc99cc;
+}
+/*
+ *产品评分汇总
+ */
+.product-rating-wrapped {
+  float: left;
+  position: relative;
+  width: 280px;
+  height: 357px;
+}
+.product-rating {
+  width: 210px;
+  height: 100%;
+  margin: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -105px;
+  /*使用负值margin将子块偏移自身宽度值的50%*/
+  margin-top: -178px;
+}
+.product-rating .rating-brief {
+  background-color: #fff6f5;
+}
+.product-rating .rating-title {
+  width: 100%;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  color: #666666;
+  font-size: 14px;
+  font-weight: 700;
+}
+.product-rating .rating-count {
+  width: 170px;
+  height: 50px;
+  margin: 0 auto;
+}
+.product-rating .rating-count .left {
+  float: left;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  color: #996699;
+  font-size: 30px;
+}
+.product-rating .rating-count .right {
+  float: left;
+  width: 110px;
+  height: 50px;
+  margin-left: 10px;
+}
+.product-rating .rating-count .right .right-down a {
+  display: inline-block;
+  height: 18px;
+  line-height: 18px;
+  font-size: 12px;
+  color: #0092d2;
+  text-decoration: none;
+}
+.product-rating .rating-count .right .right-down a:hover {
+  background-color: #0092d2;
+  color: #ffffff;
+}
+.product-rating .rating-more {
+  padding: 5px 5px;
+  margin-top: 15px;
+  background-color: #fff6f5;
+}
+.product-rating .rating-more hr {
+  border: dotted 0.5px #996699;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  -moz-opacity: 0.5;
+}
+.product-rating .rating-details {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.product-rating .rating-on-weight {
+  height: 12px;
+  margin: 10px auto;
+}
+.product-rating .rating-on-weight > span {
+  float: left;
+  display: inline-block;
+}
+.product-rating .rating-on-weight .rating-wrapped {
+  height: 12px;
+  line-height: 12px;
+}
+.product-rating .rating-on-weight .rating-wrapped input {
+  vertical-align: middle;
+}
+.product-rating .rating-on-weight .rating-power-wrapped {
+  max-width: 95px;
+  height: 12px;
+  line-height: 12px;
+}
+.product-rating .rating-on-weight .rating-power {
+  display: block;
+  height: 100%;
+  background-color: #cc99cc;
+}
+.product-rating .rating-on-weight .rating-per {
+  width: 35px;
+  height: 12px;
+  line-height: 12px;
+  text-align: center;
+  color: #000000;
+  font-size: 12px;
+}
+.product-rating .product-ops .btn-wrapped {
+  width: 100%;
+  height: 40px;
+  text-align: center;
+}
+.product-rating .product-ops .reply-btn {
+  display: inline-block;
+  width: 110px;
+  height: 30px;
+  box-sizing: border-box;
+  line-height: 30px;
+  text-align: center;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  border: solid 0.5px #cccccc;
+  box-shadow: 0 0 3px #e6e6e6;
+  border-radius: 4px;
+  background-color: #cc99cc;
+}
+.product-rating .product-ops .love-btn {
+  display: inline-block;
+  width: 110px;
+  height: 30px;
+  box-sizing: border-box;
+  line-height: 30px;
+  text-align: center;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  border: solid 0.5px #cccccc;
+  box-shadow: 0 0 3px #e6e6e6;
+  border-radius: 4px;
+  background-color: #cc99cc;
+  color: #666666;
+  background: -webkit-linear-gradient(#ffffff, #f0f0f0);
+  background: -o-linear-gradient(#ffffff, #f0f0f0);
+  background: -moz-linear-gradient(#ffffff, #f0f0f0);
+  background: linear-gradient(#ffffff, #f0f0f0);
+}
+.product-rating .product-ops .love-btn font {
+  font-weight: 700;
   color: #cc99cc;
 }

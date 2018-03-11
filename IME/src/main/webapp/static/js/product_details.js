@@ -11,6 +11,9 @@ $(document).ready(function() {
   var imgsDisplay = $(".image-display").find("img");
   var imgCount = imgDivs.length;
 
+  /**
+   * [设置图片高度，使其适应外层div]
+   */
   function initImgDisplay() {
     for (var i = 0; i < imgsDisplay.length; i++) {
       var imgObj = imgsDisplay.eq(i);
@@ -43,6 +46,9 @@ $(document).ready(function() {
   var moveInterval = 20;
   var speed = oneDistance / (moveTime / moveInterval);
 
+  /**
+   * [设置缩略图图片高度适应外层div]
+   */
   function initLiImgs() {
     for (var i = 0; i < liImgs.length; i++) {
       var liImgObj = liImgs.eq(i);
@@ -65,6 +71,9 @@ $(document).ready(function() {
     });
   }
 
+  /**
+   * [缩略图跳到上一页]
+   */
   function switchToLastPage(targetPosition) {
     if (timeOut) {
       return;
@@ -81,6 +90,9 @@ $(document).ready(function() {
     }, moveInterval);
   }
 
+  /**
+   * [缩略图跳到下一页]
+   */
   function switchToNextPage(targetPosition) {
     if (timeOut) {
       return;
@@ -97,10 +109,10 @@ $(document).ready(function() {
     }, moveInterval);
   }
 
+  /**
+   * [添加按钮点击事件]
+   */
   function initBtns() {
-    // if (maxPage == 1) {
-    //   $(".thumbnail-container span").hide();
-    // }
     $(".previous-btn").click(function() {
       if (currentPage == 0 || !timeOut) {
         return;
@@ -119,6 +131,10 @@ $(document).ready(function() {
     });
   }
 
+  /**
+   * [显示第几张图片]
+   * @param  {[type]} index [第几张]
+   */
   function showImg(index) {
     clearTimeout(autoTimer);
     imgDivs.removeClass();
@@ -129,6 +145,9 @@ $(document).ready(function() {
     autoPlay();
   }
 
+  /**
+   * [自动播放]
+   */
   function autoPlay() {
     autoTimer = setTimeout(function() {
       currentImg++;
@@ -139,10 +158,30 @@ $(document).ready(function() {
     }, 4000);
   }
 
+  /**
+   * [启动产品图片轮播]
+   */
   $(function(){
     initImgDisplay();
     initLiImgs();
     initBtns();
     autoPlay();
   });
+
+  /**
+   * [加载评分插件]
+   */
+  var $input = $('input.rating'), count = Object.keys($input).length;
+  if (count > 0) {
+      $input.rating();
+  }
+  /**
+   * [显示图形统计]
+   */
+  function showPower(power) {
+    var powerClassName = $(power).attr("class")+"-wrapped";
+    var powerWidth = parseInt($("."+powerClassName).css("max-width"));
+    $(power).width(powerWidth * parseFloat($(power).data("power")));
+  }
+  showPower($(".rating-power"));
 });
