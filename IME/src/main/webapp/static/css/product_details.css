@@ -497,8 +497,10 @@ body {
   font-size: 12px;
 }
 .analysis-type .type-on-weight .type-item {
-  width: 40px;
+  width: 35px;
   height: 12px;
+  margin-right: 5px;
+  text-align: right;
   color: #333333;
 }
 .analysis-type .type-on-weight .item-power-wrapped {
