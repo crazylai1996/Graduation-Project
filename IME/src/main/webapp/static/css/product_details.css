@@ -405,7 +405,8 @@ body {
 /**
  * 使用心得分析
  */
-.comment-analysis {
+.comment-analysis,
+.comment-list {
   width: 100%;
   height: auto;
   border-radius: 1px;
@@ -415,17 +416,20 @@ body {
 /**
  * 使用心得分析标题
  */
-.analysis-title {
+.analysis-title,
+.comment-list-title {
   height: 35px;
   border-bottom: 0.5px solid #e6e6e6;
   background-color: #fcfcfc;
 }
-.analysis-title a {
+.analysis-title a,
+.comment-list-title a {
   display: inline-block;
   line-height: 35px;
   text-decoration: none;
 }
-.analysis-title .name {
+.analysis-title .name,
+.comment-list-title .name {
   height: 100%;
   padding: 0 8px;
   font-size: 14px;
@@ -435,11 +439,13 @@ body {
   border-left: 2px solid #cc99cc;
   transition: all 0.2s ease-in-out;
 }
-.analysis-title .name:hover {
+.analysis-title .name:hover,
+.comment-list-title .name:hover {
   text-decoration: none;
   border-left: 5px solid #cc99cc;
 }
-.analysis-title .title {
+.analysis-title .title,
+.comment-list-title .title {
   font-size: 12px;
   color: #333333;
 }
@@ -509,4 +515,50 @@ body {
   width: 35px;
   height: 12px;
   color: #000000;
+}
+/**
+ * 用户使用心得列表
+ */
+.comment-list {
+  margin-top: 15px;
+}
+.comment-search-wrapped {
+  width: 100%;
+  padding-left: 9px;
+  margin-top: 7.5px;
+  background-color: #fcfcfc;
+}
+.comment-search-wrapped > span {
+  display: inline-block;
+  line-height: 30px;
+  vertical-align: middle;
+}
+.comment-search-wrapped .search-label {
+  margin: 0 8px;
+  font-size: 12px;
+  color: #666666;
+}
+.comment-search-wrapped .search-params {
+  color: #999999;
+  font-size: 13px;
+}
+.comment-search-wrapped .search-params select {
+  width: 115px;
+  height: 21px;
+  margin: 0 3px;
+}
+.comment-search-wrapped .search-btn {
+  display: inline-block;
+  padding: 2px 8px;
+  margin-left: 5px;
+  vertical-align: middle;
+  text-decoration: none;
+  text-align: center;
+  font-size: 12px;
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 2px;
+  border: solid 0.5px #cccccc;
+  box-shadow: 0 0 1px #e6e6e6;
+  background-color: #cc99cc;
 }
