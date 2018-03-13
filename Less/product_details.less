@@ -715,6 +715,11 @@
   .horizontal_ul();
 
   width: 100%;
+  margin-top: 10px;
+
+  li{
+    height: 185px;
+  }
 }
 /*
  *使用心得条目
@@ -741,6 +746,9 @@
 
   img{
     width: @_width;
+
+    border-radius: 2px;
+    border: solid 2px @border_color;
   }
   p{
     .no_wrap_text();
@@ -790,7 +798,7 @@
 
     color: @font_color;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 550;
     text-decoration: none;
 
     transition: all .2s ease-in-out;
@@ -813,6 +821,8 @@
   }
   //使用民心得详情
   .comment-comment{
+    height: 55px;
+
     font-size: 13px;
     color: @font_color;
   }
@@ -830,8 +840,9 @@
     margin: 0;
     margin: 3px 0;
 
-    border: dotted .5px @border_color;
+    border: dashed .5px @border_color;
   }
+  //评论操作
   .comment-ops{
     text-align: right;
     font-size: 13px;

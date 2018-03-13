@@ -572,6 +572,10 @@ body {
   padding: 0;
   list-style: none;
   width: 100%;
+  margin-top: 10px;
+}
+.comment-list li {
+  height: 185px;
 }
 /*
  *使用心得条目
@@ -593,6 +597,8 @@ body {
 }
 .portrait-wrapped img {
   width: 100px;
+  border-radius: 2px;
+  border: solid 2px #cccccc;
 }
 .portrait-wrapped p {
   overflow: hidden;
@@ -636,7 +642,7 @@ body {
   margin: 5px auto;
   color: #333333;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 550;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
 }
@@ -653,6 +659,7 @@ body {
   color: #cc99cc;
 }
 .comment-detail .comment-comment {
+  height: 55px;
   font-size: 13px;
   color: #333333;
 }
@@ -667,7 +674,7 @@ body {
 .comment-detail hr {
   margin: 0;
   margin: 3px 0;
-  border: dotted 0.5px #cccccc;
+  border: dashed 0.5px #cccccc;
 }
 .comment-detail .comment-ops {
   text-align: right;
