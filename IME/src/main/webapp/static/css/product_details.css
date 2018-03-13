@@ -241,7 +241,7 @@ body {
   margin-top: -178px;
 }
 .product-rating .rating-brief {
-  background-color: #fff6f5;
+  background-color: #ffedeb;
 }
 .product-rating .rating-title {
   width: 100%;
@@ -286,7 +286,7 @@ body {
 .product-rating .rating-more {
   padding: 5px 5px;
   margin-top: 15px;
-  background-color: #fff6f5;
+  background-color: #ffedeb;
 }
 .product-rating .rating-more hr {
   border: dotted 0.5px #996699;
@@ -406,7 +406,7 @@ body {
  * 使用心得分析
  */
 .comment-analysis,
-.comment-list {
+.comment-contents {
   width: 100%;
   height: auto;
   border-radius: 1px;
@@ -521,7 +521,7 @@ body {
 /**
  * 用户使用心得列表
  */
-.comment-list {
+.comment-contents {
   margin-top: 15px;
 }
 .comment-search-wrapped {
@@ -564,3 +564,27 @@ body {
   box-shadow: 0 0 1px #e6e6e6;
   background-color: #cc99cc;
 }
+/**
+ * 使用心得列表块
+ */
+.comment-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+}
+/*
+ *使用心得条目
+ */
+.comment-item {
+  width: 100%;
+}
+.comment-item .left {
+  float: left;
+}
+.comment-item .right {
+  float: left;
+}
+/*
+ *使用心得用户头像
+ */

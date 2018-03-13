@@ -650,7 +650,7 @@
 /**
  * 用户使用心得列表
  */
-.comment-list:extend(.comment-analysis){
+.comment-contents:extend(.comment-analysis){
   margin-top: @div_margin;
 }
 .comment-list-title:extend(.analysis-title all){}
@@ -705,5 +705,35 @@
     border: solid .5px @border_color;
     box-shadow: 0 0 1px lighten(@border_color,10%);
     background-color: @main_color;
+  }
+}
+/**
+ * 使用心得列表块
+ */
+.comment-list{
+
+  .horizontal_ul();
+
+  width: 100%;
+}
+/*
+ *使用心得条目
+ */
+.comment-item{
+  width: 100%;
+
+  .left{
+    float: left;
+  }
+  .right{
+    float: left;
+  }
+}
+/*
+ *使用心得用户头像
+ */
+.portrait-wrapped{
+  img{
+
   }
 }
