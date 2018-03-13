@@ -733,7 +733,114 @@
  *使用心得用户头像
  */
 .portrait-wrapped{
-  img{
+  @_width: 100px;
+  @child_width: 100px;
+  @child_height: 21px;
 
+  width: 150px;
+
+  img{
+    width: @_width;
+  }
+  p{
+    .no_wrap_text();
+
+    width: @child_width;
+    height: @child_height;
+    margin: 0;
+    padding: 0;
+
+    line-height: @child_height;
+    text-align: center;
+    font-size: 12px;
+    color: @font_color;
+  }
+  font{
+    color: @main_color;
+  }
+  .love-her-btn{
+    display: inline-block;
+    width: 52px;
+    height: @child_height;
+    margin-top: 2px;
+
+    line-height:@child_height;
+    text-align: center;
+    text-decoration: none;
+    color: @white_color;
+    font-weight: 600;
+
+    border-radius: 2px;
+    border: solid .5px @border_color;
+    background-color: @main_color;
+  }
+}
+/*
+ *评论详情
+ */
+.comment-detail{
+  @_width: 600px;
+
+  width: @_width;
+
+  //评论标题
+  .comment-title{
+    width: 100%;
+    margin: 5px auto;
+
+    color: @font_color;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+
+    transition: all .2s ease-in-out;
+
+    &:hover{
+      color: @main_color;
+    }
+  }
+  //评论用户
+  .comment-user{
+    margin: 8px auto;
+
+    font-size: 12px;
+    color: @desc_strong_color;
+
+    a{
+      text-decoration: none;
+      color: @main_color;
+    }
+  }
+  //使用民心得详情
+  .comment-comment{
+    font-size: 13px;
+    color: @font_color;
+  }
+  //评论时间
+  .comment-time{
+    display: block;
+    width: 100%;
+    padding-right: 10px;
+
+    text-align: right;
+    font-size: 12px;
+    color: @desc_color;
+  }
+  hr{
+    margin: 0;
+    margin: 3px 0;
+
+    border: dotted .5px @border_color;
+  }
+  .comment-ops{
+    text-align: right;
+    font-size: 13px;
+
+    a{
+      padding: 0 4px;
+
+      text-decoration: none;
+      color: @main_color;
+    }
   }
 }
