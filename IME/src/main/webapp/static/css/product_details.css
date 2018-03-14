@@ -576,6 +576,7 @@ body {
 }
 .comment-list li {
   height: 185px;
+  padding-left: 5px;
 }
 /*
  *使用心得条目
@@ -593,7 +594,7 @@ body {
  *使用心得用户头像
  */
 .portrait-wrapped {
-  width: 150px;
+  width: 145px;
 }
 .portrait-wrapped img {
   width: 100px;
