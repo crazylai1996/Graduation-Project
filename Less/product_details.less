@@ -5,7 +5,7 @@
 //边框混合
 .border_shadow(){
   border-radius: 1px;
-  box-shadow: 0 0 2px lighten(@main_color,10%);
+  box-shadow: 0 0 2px lighten(@main_color,8%);
   background-color: @white_color;
 }
 /*
@@ -25,7 +25,7 @@
   hr{
     margin: 15px 0;
 
-    border: solid .5px lighten(@main_color,10%);
+    border: solid .5px lighten(@main_color,15%);
 
     .opacity_mixin(0.4);
   }
@@ -80,7 +80,7 @@
   width: @left_width;
   height: @left_width;
 
-  border: solid 1px @border_color;
+  border: solid .5px lighten(@main_color,15%);
 }
 /*
 *产品图片大图显示
@@ -733,6 +733,7 @@
   }
   .right{
     float: left;
+    position: relative;
   }
 }
 /*
@@ -785,12 +786,37 @@
   }
 }
 /*
+ *直角三角形
+ */
+.triangle-pointer{
+  position: absolute;
+  z-index: 1;
+
+  left: -25px;
+  top: 10px;
+
+  .right-angled-triangle-left(25px,lighten(@main_color,15%));
+
+  .background{
+    position: absolute;
+    z-index: 2;
+
+    top: -24px;
+    left: -23px;
+
+    .right-angled-triangle-left(23px,@white_color);
+  }
+}
+/*
  *评论详情
  */
 .comment-detail{
   @_width: 600px;
 
   width: @_width;
+
+  .border_shadow();
+  padding: 0 5px;
 
   //评论标题
   .comment-title{
@@ -820,7 +846,7 @@
       color: @main_color;
     }
   }
-  //使用民心得详情
+  //使用心得详情
   .comment-comment{
     height: 55px;
 
@@ -853,6 +879,50 @@
 
       text-decoration: none;
       color: @main_color;
+    }
+  }
+}
+/**
+ * 添加点评
+ */
+.comment-add-container{
+  margin-top: @div_margin;
+
+  .label{
+    @_height: 38px;
+
+    width: 100%;
+    height: @_height;
+
+    line-height: @_height;
+    font-size: 20px;
+    font-weight: 500;
+    color: @font_color;
+  }
+  hr{
+    margin: 0;
+    margin-bottom: @div_margin;
+
+    border: solid 1px @main_color;
+  }
+  .title-input{
+    @_height: 35px;
+
+    height: @_height;
+    width: 100%;
+    margin-bottom: @div_margin / 2 ;
+
+    .comment-title-label{
+      line-height: @_height;
+      font-size: 14px;
+      color: @font_color;
+    }
+    .comment-title{
+      width: 400px;
+
+      line-height: @_height - 5px;
+
+      border: solid .5px lighten(@main_color,15%);
     }
   }
 }

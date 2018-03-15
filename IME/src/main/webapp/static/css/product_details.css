@@ -15,7 +15,7 @@ body {
 }
 .main-container hr {
   margin: 15px 0;
-  border: solid 0.5px #ddbbdd;
+  border: solid 0.5px #e6cce6;
   opacity: 0.4;
   filter: alpha(opacity=40);
   -moz-opacity: 0.4;
@@ -56,7 +56,7 @@ body {
   float: left;
   width: 300px;
   height: 300px;
-  border: solid 1px #cccccc;
+  border: solid 0.5px #e6cce6;
 }
 /*
 *产品图片大图显示
@@ -399,7 +399,7 @@ body {
   margin-left: 10px;
   box-sizing: border-box;
   border-radius: 1px;
-  box-shadow: 0 0 2px #ddbbdd;
+  box-shadow: 0 0 2px #dab4da;
   background-color: #ffffff;
 }
 /**
@@ -410,7 +410,7 @@ body {
   width: 100%;
   height: auto;
   border-radius: 1px;
-  box-shadow: 0 0 2px #ddbbdd;
+  box-shadow: 0 0 2px #dab4da;
   background-color: #ffffff;
 }
 /**
@@ -589,6 +589,7 @@ body {
 }
 .comment-item .right {
   float: left;
+  position: relative;
 }
 /*
  *使用心得用户头像
@@ -633,10 +634,37 @@ body {
   background-color: #cc99cc;
 }
 /*
+ *直角三角形
+ */
+.triangle-pointer {
+  position: absolute;
+  z-index: 1;
+  left: -25px;
+  top: 10px;
+  width: 0;
+  height: 0;
+  border-top: 25px solid #e6cce6;
+  border-left: 25px solid transparent;
+}
+.triangle-pointer .background {
+  position: absolute;
+  z-index: 2;
+  top: -24px;
+  left: -23px;
+  width: 0;
+  height: 0;
+  border-top: 23px solid #ffffff;
+  border-left: 23px solid transparent;
+}
+/*
  *评论详情
  */
 .comment-detail {
   width: 600px;
+  border-radius: 1px;
+  box-shadow: 0 0 2px #dab4da;
+  background-color: #ffffff;
+  padding: 0 5px;
 }
 .comment-detail .comment-title {
   width: 100%;
@@ -685,4 +713,38 @@ body {
   padding: 0 4px;
   text-decoration: none;
   color: #cc99cc;
+}
+/**
+ * 添加点评
+ */
+.comment-add-container {
+  margin-top: 15px;
+}
+.comment-add-container .label {
+  width: 100%;
+  height: 38px;
+  line-height: 38px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #333333;
+}
+.comment-add-container hr {
+  margin: 0;
+  margin-bottom: 15px;
+  border: solid 1px #cc99cc;
+}
+.comment-add-container .title-input {
+  height: 35px;
+  width: 100%;
+  margin-bottom: 7.5px;
+}
+.comment-add-container .title-input .comment-title-label {
+  line-height: 35px;
+  font-size: 14px;
+  color: #333333;
+}
+.comment-add-container .title-input .comment-title {
+  width: 400px;
+  line-height: 30px;
+  border: solid 0.5px #e6cce6;
 }

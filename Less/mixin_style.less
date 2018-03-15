@@ -104,3 +104,10 @@
 .triangle(right,@size,@color){
   border-left-color: @color;
 }
+//直角三角形(向左)
+.right-angled-triangle-left(@size,@color){
+  width: 0;
+  height: 0;
+  border-top: @size solid @color;
+  border-left: @size solid transparent;
+}

@@ -183,8 +183,7 @@ $(document).ready(function() {
     var powerWidth = parseInt($("."+powerClassName).css("max-width"));
     $(power).width(powerWidth * parseFloat($(power).data("power")));
   }
-  //评分占比
-  showPower($(".rating-power"));
-  //评论心得分析
-  showPower($(".item-power"));
+  //评分占比评论心得分析
+  showPower($(".rating-power,.item-power"));
+
 });

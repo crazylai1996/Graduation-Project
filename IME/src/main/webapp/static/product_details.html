@@ -404,23 +404,24 @@
                 <div class="portrait-wrapped">
                   <img src="img\portrait_test.jpg">
                   <p>crazylai1996</p>
-                  <p>点评数(<font>999</font>)</p>
+                  <p>点评数(
+                    <font>999</font>)</p>
                   <p><a href="#" class="love-her-btn">关注她</a></p>
                 </div>
               </div>
               <div class="right">
+                <div class="triangle-pointer">
+                  <div class="background">
+                  </div>
+                </div>
                 <div class="comment-detail">
                   <a href="#" class="comment-title">精华液有点不够敷的赶脚</a>
-                  <input value="4" type="number"
-                     class="rating" min=0 max=5
-                     step=0.5 data-size="xxs"
-                      data-only-show="true" data-symbol="&#xe005;">
+                  <input value="4" type="number" class="rating" min=0 max=5 step=0.5 data-size="xxs" data-only-show="true" data-symbol="&#xe005;">
                   <div class="comment-user">
                     By<a>智慧果</a>&nbsp;&nbsp;合性皮肤&nbsp;&nbsp;31-39岁&nbsp;&nbsp;购买方式：网上购买
                   </div>
-                  <p class="comment-comment">本着支持国货的心，网购了一套鸟家的面膜。
-                    这款膜不是蚕丝膜，感觉像是纸膜，所以亲肤性方面自然要比蚕丝膜逊色不少。
-                    精华液有淡淡的玫瑰香，但是量太少了，冬天的话，感觉颇有些不够敷。美白的话，也没有明显感觉。</p>
+                  <p class="comment-comment">本着支持国货的心，网购了一套鸟家的面膜。 这款膜不是蚕丝膜，感觉像是纸膜，所以亲肤性方面自然要比蚕丝膜逊色不少。 精华液有淡淡的玫瑰香，但是量太少了，冬天的话，感觉颇有些不够敷。美白的话，也没有明显感觉。
+                  </p>
                   <span class="comment-time">2018-03-13</span>
                   <hr>
                   <div class="comment-ops">
@@ -435,23 +436,24 @@
                 <div class="portrait-wrapped">
                   <img src="img\portrait_test.jpg">
                   <p>crazylai1996</p>
-                  <p>点评数(<font>999</font>)</p>
+                  <p>点评数(
+                    <font>999</font>)</p>
                   <p><a href="#" class="love-her-btn">关注她</a></p>
                 </div>
               </div>
               <div class="right">
+                <div class="triangle-pointer">
+                  <div class="background">
+                  </div>
+                </div>
                 <div class="comment-detail">
                   <a href="#" class="comment-title">精华液有点不够敷的赶脚</a>
-                  <input value="4" type="number"
-                     class="rating" min=0 max=5
-                     step=0.5 data-size="xxs"
-                      data-only-show="true" data-symbol="&#xe005;">
+                  <input value="4" type="number" class="rating" min=0 max=5 step=0.5 data-size="xxs" data-only-show="true" data-symbol="&#xe005;">
                   <div class="comment-user">
                     By<a>智慧果</a>&nbsp;&nbsp;合性皮肤&nbsp;&nbsp;31-39岁&nbsp;&nbsp;购买方式：网上购买
                   </div>
-                  <p class="comment-comment">本着支持国货的心，网购了一套鸟家的面膜。
-                    这款膜不是蚕丝膜，感觉像是纸膜，所以亲肤性方面自然要比蚕丝膜逊色不少。
-                    精华液有淡淡的玫瑰香，但是量太少了，冬天的话，感觉颇有些不够敷。美白的话，也没有明显感觉。</p>
+                  <p class="comment-comment">本着支持国货的心，网购了一套鸟家的面膜。 这款膜不是蚕丝膜，感觉像是纸膜，所以亲肤性方面自然要比蚕丝膜逊色不少。 精华液有淡淡的玫瑰香，但是量太少了，冬天的话，感觉颇有些不够敷。美白的话，也没有明显感觉。
+                  </p>
                   <span class="comment-time">2018-03-13</span>
                   <hr>
                   <div class="comment-ops">
@@ -462,8 +464,17 @@
             </li>
           </ul>
         </div>
-        <div class="">
-          <textarea cols="0" rows="5" name="introduction" class="form-control" id="demo" style="margin: 0px -0.5px 0px 0px; height: 250px; width:100%;">
+        <!-- 评论框 -->
+        <div class="comment-add-container">
+          <div class="label">
+            我来点评
+          </div>
+          <hr>
+          <div class="title-input">
+            <span class="comment-title-label">标题：</span>
+            <input class="comment-title" type="text" name="">
+          </div>
+          <textarea cols="0" rows="5" name="introduction" class="form-control" id="comment-input" style="margin: 0px -0.5px 0px 0px; height: 250px; width:100%;">
           </textarea>
         </div>
       </div>
@@ -474,50 +485,52 @@
   </div>
 
   <script src="js\jquery.js"></script>
-  <script src="js\product_details.js"></script>
   <script src="plugins\star-rating\star-rating.js"></script>
   <script type="text/javascript" src="plugins\kindeditor\lang\zh-CN.js"></script>
   <script type="text/javascript" src="plugins\kindeditor\kindeditor-all-min.js"></script>
+  <script src="js\product_details.js"></script>
   <script type="text/javascript">
-initkindEditor();
-//初始化富文本
-function initkindEditor() {
-   KindEditor.ready(function (K) {
-       var editor = K.create('#demo', {
-           themeType: "simple",
-           uploadJson: '../../KEHandler/upload_json.ashx?action=upload_base',
-           resizeType: 1,
-           pasteType: 2,
-           syncType: "",
-           filterMode: true,
-           allowPreviewEmoticons: false,
-           items: [
-                  'source', 'undo', 'redo', 'plainpaste', 'wordpaste', 'clearhtml', 'quickformat',
-                  'selectall', 'fullscreen', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor',
-                  'bold', 'italic', 'underline', 'hr', 'removeformat', '|', 'justifyleft', 'justifycenter',
-                  'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'link', 'image',
-                  'unlink', 'emoticons'
-              ],
-           afterCreate: function () {
-               this.sync();
-           },
-           afterBlur: function () {
-               this.sync();
-           },
-           afterChange: function () {
-              //富文本输入区域的改变事件，一般用来编写统计字数等判断
-                K('.word_count1').html("最多20000个字符,已输入" + this.count() + "个字符");
-           },
-           afterUpload:function(url){
-             //上传图片后的代码
-           },
-           allowFileManager: false,
-           allowFlashUpload: false,
-           allowMediaUpload: false,
-           allowFileUpload: false
-       });
-   });
-}
+  /**
+   *[初始化富文本]
+   */
+  function initkindEditor() {
+    KindEditor.ready(function(K) {
+      var editor = K.create('#comment-input', {
+        themeType: "simple",
+        uploadJson: '',
+        resizeType: 1,
+        pasteType: 2,
+        syncType: "",
+        filterMode: true,
+        allowPreviewEmoticons: false,
+        items: [
+          'source', 'undo', 'redo', 'plainpaste', 'wordpaste', 'clearhtml', 'quickformat',
+          'selectall', 'fullscreen', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor',
+          'bold', 'italic', 'underline', 'hr', 'removeformat', '|', 'justifyleft', 'justifycenter',
+          'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'link', 'image',
+          'unlink', 'emoticons'
+        ],
+        afterCreate: function() {
+          this.sync();
+        },
+        afterBlur: function() {
+          this.sync();
+        },
+        afterChange: function() {
+          //富文本输入区域的改变事件，一般用来编写统计字数等判断
+          K('.word_count1').html("最多20000个字符,已输入" + this.count() + "个字符");
+        },
+        afterUpload: function(url) {
+          //上传图片后的代码
+        },
+        allowFileManager: false,
+        allowFlashUpload: false,
+        allowMediaUpload: false,
+        allowFileUpload: false
+      });
+    });
+  }
+  initkindEditor();
   </script>
 </body>
 
