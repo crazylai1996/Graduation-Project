@@ -734,7 +734,8 @@ body {
   border: solid 1px #cc99cc;
 }
 .comment-add-container .title-input,
-.comment-add-container .rating-input {
+.comment-add-container .rating-input,
+.comment-add-container .rating-input > div {
   height: 35px;
   width: 100%;
   margin-bottom: 7.5px;
@@ -750,7 +751,22 @@ body {
   border: solid 0.5px #e6cce6;
 }
 .comment-add-container .rating-input .comment-rating-label {
+  float: left;
   line-height: 35px;
   font-size: 14px;
   color: #333333;
+}
+.comment-add-container .rating-input > div {
+  display: inline-block;
+  width: auto;
+}
+.comment-add-container .rating-input .buy-way {
+  display: inline-block;
+  height: 35px;
+  margin-left: 45px;
+  color: #666666;
+  font-size: 13px;
+}
+.comment-add-container .rating-input .buy-way option {
+  padding-top: 10px;
 }

@@ -926,15 +926,32 @@
       border: solid .5px lighten(@main_color,15%);
     }
   }
+  //性价评分输入
   .rating-input:extend(.comment-add-container .title-input){
     @_height: 35px;
     .comment-rating-label{
+      float: left;
+
       line-height: @_height;
       font-size: 14px;
       color: @font_color;
     }
-    input{
-      
+    &>div{
+      display: inline-block;
+      width: auto;
+
+    }
+    .buy-way{
+      display: inline-block;
+      height: @_height;
+      margin-left: 3 * @div_margin;
+
+      color: @desc_strong_color;
+      font-size: 13px;
+
+      option{
+        padding-top: 10px;
+      }
     }
   }
 }
