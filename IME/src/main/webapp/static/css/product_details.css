@@ -575,7 +575,7 @@ body {
   margin-top: 10px;
 }
 .comment-list li {
-  height: 185px;
+  height: 186px;
   padding-left: 5px;
 }
 /*
@@ -733,7 +733,8 @@ body {
   margin-bottom: 15px;
   border: solid 1px #cc99cc;
 }
-.comment-add-container .title-input {
+.comment-add-container .title-input,
+.comment-add-container .rating-input {
   height: 35px;
   width: 100%;
   margin-bottom: 7.5px;
@@ -747,4 +748,9 @@ body {
   width: 400px;
   line-height: 30px;
   border: solid 0.5px #e6cce6;
+}
+.comment-add-container .rating-input .comment-rating-label {
+  line-height: 35px;
+  font-size: 14px;
+  color: #333333;
 }

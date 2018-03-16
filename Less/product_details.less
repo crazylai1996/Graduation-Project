@@ -718,7 +718,7 @@
   margin-top: 10px;
 
   li{
-    height: 185px;
+    height: 186px;
     padding-left: 5px;
   }
 }
@@ -905,6 +905,7 @@
 
     border: solid 1px @main_color;
   }
+  //评论标题输入
   .title-input{
     @_height: 35px;
 
@@ -923,6 +924,17 @@
       line-height: @_height - 5px;
 
       border: solid .5px lighten(@main_color,15%);
+    }
+  }
+  .rating-input:extend(.comment-add-container .title-input){
+    @_height: 35px;
+    .comment-rating-label{
+      line-height: @_height;
+      font-size: 14px;
+      color: @font_color;
+    }
+    input{
+      
     }
   }
 }
