@@ -4,9 +4,6 @@ body {
 /*
  *内容主体外层
  */
-/*
- *内容主体外层
- */
 .main-wrapped {
   width: 100%;
   margin: 0 auto;
@@ -42,4 +39,10 @@ body {
 .current-pos .split-line:before {
   content: ">>";
   margin: 0 2px;
+}
+/**
+ * 添加新产品
+ */
+.product-add-container {
+  width: 1000px;
 }
