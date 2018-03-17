@@ -942,15 +942,31 @@
 
     }
     .buy-way{
-      display: inline-block;
+      @_width: 100px;
+
+      position: relative;
+
+      width: @_width;
       height: @_height;
       margin-left: 3 * @div_margin;
 
       color: @desc_strong_color;
       font-size: 13px;
 
-      option{
-        padding-top: 10px;
+      .buy-way-title{
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        padding-left: 10px;
+
+        line-height: @_height;
+
+        border: solid .5px @border_color;
+      }
+      .buy-way-sel{
+        .horizontal_ul();
+        position: absolute;
       }
     }
   }
