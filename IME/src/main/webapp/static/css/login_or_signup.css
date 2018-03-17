@@ -2,6 +2,9 @@ body {
   font-family: "微软雅黑";
 }
 /*
+ *内容主体外层
+ */
+/*
  *遮照层
  */
 .popup-mask {
@@ -95,7 +98,7 @@ body {
  */
 .current-tab {
   color: #1a1a1a !important;
-  border-bottom: 3px #996699 solid;
+  border-bottom: 3px #c388c3 solid;
 }
 /*
  *表单项
@@ -119,7 +122,7 @@ body {
 }
 .form-item .current-label {
   top: -8px;
-  color: #996699;
+  color: #c388c3;
 }
 .form-item .long-input {
   width: 100%;
@@ -137,7 +140,7 @@ body {
   transition: border-color ease-in-out 0.2s;
 }
 .form-item input:focus {
-  border: 1px solid #996699;
+  border: 1px solid #c388c3;
 }
 .form-item img,
 .form-item .get-msg-captcha {
@@ -182,7 +185,7 @@ body {
   text-decoration: none;
 }
 .relative-op .select-login-style:hover {
-  color: #996699;
+  color: #c388c3;
   text-decoration: none;
 }
 .relative-op label {
@@ -226,19 +229,19 @@ body {
   cursor: pointer;
   border: none;
   border-radius: 2px;
-  background-color: #996699;
-  background: -webkit-linear-gradient(#cc99cc, #996699);
-  background: -o-linear-gradient(#cc99cc, #996699);
-  background: -moz-linear-gradient(#cc99cc, #996699);
-  background: linear-gradient(#cc99cc, #996699);
+  background-color: #c388c3;
+  background: -webkit-linear-gradient(#cc99cc, #c388c3);
+  background: -o-linear-gradient(#cc99cc, #c388c3);
+  background: -moz-linear-gradient(#cc99cc, #c388c3);
+  background: linear-gradient(#cc99cc, #c388c3);
 }
 .login-btn:hover,
 .register-btn:hover,
 .quick-login-btn:hover {
-  background: -webkit-linear-gradient(bottom, #cc99cc, #996699);
-  background: -o-linear-gradient(bottom, #cc99cc, #996699);
-  background: -moz-linear-gradient(bottom, #cc99cc, #996699);
-  background: linear-gradient(to top, #cc99cc, #996699);
+  background: -webkit-linear-gradient(bottom, #cc99cc, #c388c3);
+  background: -o-linear-gradient(bottom, #cc99cc, #c388c3);
+  background: -moz-linear-gradient(bottom, #cc99cc, #c388c3);
+  background: linear-gradient(to top, #cc99cc, #c388c3);
 }
 .phone-quick-login,
 .phone-register {

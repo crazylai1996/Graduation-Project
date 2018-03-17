@@ -4,6 +4,9 @@ body {
 /*
  *内容主体外层
  */
+/*
+ *内容主体外层
+ */
 .main-wrapped {
   width: 100%;
   margin: 0 auto;
@@ -36,7 +39,7 @@ body {
   color: #cc99cc;
 }
 .current-pos .split-line:before {
-  content: ">";
+  content: ">>";
   margin: 0 2px;
 }
 .current-pos .product-name {
@@ -120,7 +123,7 @@ body {
   width: 0;
   height: 0;
   border: 8px solid transparent;
-  border-right-color: #996699;
+  border-right-color: #c388c3;
 }
 .thumbnail-container .next-btn:before {
   content: "";
@@ -131,7 +134,7 @@ body {
   width: 0;
   height: 0;
   border: 8px solid transparent;
-  border-left-color: #996699;
+  border-left-color: #c388c3;
 }
 /*
  *缩略图列表
@@ -157,7 +160,7 @@ body {
   vertical-align: middle;
 }
 .thumbnail-list .current-li {
-  border: solid #996699 0.5px;
+  border: solid #c388c3 0.5px;
 }
 /*
  产品基本信息
@@ -241,7 +244,7 @@ body {
   margin-top: -178px;
 }
 .product-rating .rating-brief {
-  background-color: #ffedeb;
+  background-color: #fff0f5;
 }
 .product-rating .rating-title {
   width: 100%;
@@ -262,7 +265,7 @@ body {
   width: 50px;
   height: 50px;
   line-height: 50px;
-  color: #996699;
+  color: #c388c3;
   font-size: 30px;
 }
 .product-rating .rating-count .right {
@@ -286,10 +289,10 @@ body {
 .product-rating .rating-more {
   padding: 5px 5px;
   margin-top: 13px;
-  background-color: #ffedeb;
+  background-color: #fff0f5;
 }
 .product-rating .rating-more hr {
-  border: dotted 0.5px #996699;
+  border: dotted 0.5px #c388c3;
   opacity: 0.5;
   filter: alpha(opacity=50);
   -moz-opacity: 0.5;
@@ -438,7 +441,7 @@ body {
   padding: 0 8px;
   font-size: 14px;
   font-weight: 700;
-  color: #996699;
+  color: #c388c3;
   text-align: left;
   border-left: 2px solid #cc99cc;
   transition: all 0.2s ease-in-out;
@@ -481,7 +484,7 @@ body {
   box-sizing: border-box;
   padding-left: 15px;
   line-height: 25px;
-  color: #996699;
+  color: #c388c3;
   font-size: 14px;
   font-weight: 600;
   border-radius: 6px;
@@ -830,7 +833,7 @@ body {
 .comment-add-container .rating-input .buy-way .buy-way-sel li:hover {
   color: #333333;
   cursor: pointer;
-  background-color: #ffedeb;
+  background-color: #fff0f5;
 }
 .comment-add-container .comment-add-btn {
   width: 100%;
@@ -853,7 +856,7 @@ body {
   background-color: #cc99cc;
 }
 .comment-add-container .comment-add-btn .add-btn:hover {
-  background-color: #996699;
+  background-color: #c388c3;
 }
 .same-class-rec .scr-title .see-more {
   float: right;

@@ -1,11 +1,12 @@
 //颜色定义
-@white_color: #fff;
-@dark_color: #000;
-@bg_color: lighten(#ffe4e1,2%);//背景
+@white_color: #fff;//白色
+@dark_color: #000;//黑色
+@light_purple: #fff0f5;//淡紫色
+@bg_color: lighten(@light_purple,0%);//背景
 @grey_bg_color: lighten(@desc_color,39%);
 @border_color: lighten(@desc_color,20%);//边框
 @desc_color: #999999;//描述
-@desc_strong_color: #666666;
+@desc_strong_color: #666666;//描述加强
 @font_color: #333333;//正文字体
 @font_strong_color: darken(@font_color,10%);//强调字体
 //@font_strong_color: lighten(@title_color,20%);//强调字体
@@ -13,7 +14,8 @@
 
 @link_color: #0092d2;//链接
 @main_color: #CC99CC;//主
-@main_strong_color: #996699;//主强调
+@main_strong_color: darken(@main_color,5%);//主强调
+//@main_strong_color: #996699;//主强调
 @alert_color: #CC3333;//提醒，红色
 
 //网页宽度定义
@@ -25,4 +27,28 @@
 //字体
 body{
   font-family: "微软雅黑";
+}
+/*
+ *内容主体外层
+ */
+.main_div(){
+  .main-wrapped {
+    width: 100%;
+    margin: 0 auto;
+
+    background-color: @white_color;
+  }
+
+  .main-container {
+    width: @global_width;
+    margin: 0 auto;
+
+    hr{
+      margin: 15px 0;
+
+      border: solid .5px lighten(@main_color,15%);
+
+      .opacity_mixin(0.4);
+    }
+  }
 }

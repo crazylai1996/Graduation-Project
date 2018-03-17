@@ -10,25 +10,7 @@
 /*
  *内容主体外层
  */
-.main-wrapped {
-  width: 100%;
-  margin: 0 auto;
-
-  background-color: @white_color;
-}
-
-.main-container {
-  width: @global_width;
-  margin: 0 auto;
-
-  hr{
-    margin: 15px 0;
-
-    border: solid .5px lighten(@main_color,15%);
-
-    .opacity_mixin(0.4);
-  }
-}
+.main_div();
 /*
  *当前位置
  */
@@ -50,7 +32,7 @@
 
   .split-line {
     &:before {
-      content: ">";
+      content: ">>";
       margin: 0 2px;
     }
   }
@@ -1024,7 +1006,7 @@
       }
     }
   }
-  //评论请加按钮
+  //评论添加按钮
   .comment-add-btn{
     @_height: 30px;
 
