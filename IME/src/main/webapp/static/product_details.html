@@ -481,18 +481,61 @@
               step=0.5 data-size="xs" data-symbol="&#xe005;">
             <div class="buy-way">
               <span class="buy-way-title">购买方式</span>
-              <ul class="buy-way-sel">
+              <ul class="buy-way-sel more-sel">
                 <li>天猫商城</li>
                 <li>京东商城</li>
+                <li>其他方式</li>
               </ul>
             </div>
           </div>
+          <!-- 评论框 -->
           <textarea cols="0" rows="5" name="introduction" class="form-control" id="comment-input" style="margin: 0px -0.5px 0px 0px; height: 250px; width:100%;">
           </textarea>
+          <!-- 评论添加按钮 -->
+          <div class="comment-add-btn">
+            <a href="#" class="add-btn">写好了</a>
+          </div>
         </div>
       </div>
       <div class="comment-containter-right">
-
+        <div class="same-class-rec">
+          <div class="scr-title">
+            <a href="#" class="scr-title-name">同类产品推荐</a>
+            <a href="#" class="see-more">换一换</a>
+          </div>
+          <ul class="scr-list">
+            <li class="scr-item">
+              <img class="left picture" src="img\commodity_test.jpg">
+              <div class="right">
+                <h3 class="name"><a href="#">NEWA/妞娃家用RF射频电子美容仪器</a></h3>
+                <p class="count">
+                  <span>4.9分</span>|
+                  <span><a href="#">999</a>点评</span>
+                </p>
+              </div>
+            </li>
+            <li class="scr-item">
+              <img class="left picture" src="img\commodity_test.jpg">
+              <div class="right">
+                <h3 class="name"><a href="#">NEWA/妞娃家用RF射频电子美容仪器</a></h3>
+                <p class="count">
+                  <span>4.9分</span>|
+                  <span><a href="#">999</a>点评</span>
+                </p>
+              </div>
+            </li>
+            <li class="scr-item">
+              <img class="left picture" src="img\commodity_test.jpg">
+              <div class="right">
+                <h3 class="name"><a href="#">NEWA/妞娃家用RF射频电子美容仪器</a></h3>
+                <p class="count">
+                  <span>4.9分</span>|
+                  <span><a href="#">999</a>点评</span>
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -511,7 +554,7 @@
       var editor = K.create('#comment-input', {
         themeType: "simple",
         uploadJson: '',
-        resizeType: 1,
+        resizeType: 0,
         pasteType: 2,
         syncType: "",
         filterMode: true,

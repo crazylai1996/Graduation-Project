@@ -1,7 +1,6 @@
 @import "mixin_style.less";
 @import "global_style.less";
 
-@div_margin: 15px;
 //边框混合
 .border_shadow(){
   border-radius: 1px;
@@ -716,9 +715,10 @@
 
   width: 100%;
   margin-top: 10px;
+  padding-bottom: 15px;
 
   li{
-    height: 186px;
+    height: 198px;
     padding-left: 5px;
   }
 }
@@ -873,6 +873,7 @@
   .comment-ops{
     text-align: right;
     font-size: 13px;
+    padding: 6px 0;
 
     a{
       padding: 0 4px;
@@ -918,17 +919,26 @@
       font-size: 14px;
       color: @font_color;
     }
+    //评论标题输入框
     .comment-title{
       width: 400px;
 
       line-height: @_height - 5px;
 
+      outline: none;
       border: solid .5px lighten(@main_color,15%);
+
+      &:focus{
+        border: solid 1px @main_color;
+      }
     }
   }
   //性价评分输入
   .rating-input:extend(.comment-add-container .title-input){
     @_height: 35px;
+
+    margin-bottom: @div_margin;
+
     .comment-rating-label{
       float: left;
 
@@ -941,8 +951,9 @@
       width: auto;
 
     }
+    //购买方式块
     .buy-way{
-      @_width: 100px;
+      @_width: 95px;
 
       position: relative;
 
@@ -953,6 +964,7 @@
       color: @desc_strong_color;
       font-size: 13px;
 
+      //购买方式标题
       .buy-way-title{
         display: inline-block;
         width: 100%;
@@ -962,11 +974,158 @@
 
         line-height: @_height;
 
+        cursor: pointer;
         border: solid .5px @border_color;
+
+        &::after{
+          position: absolute;
+          top: 50%;
+          right: 0;
+
+          margin-right: 5px;
+
+          content: "";
+          .triangle(bottom,5px,@desc_strong_color);
+
+          vertical-align: middle;
+        }
       }
+      //购买方式选择框
       .buy-way-sel{
         .horizontal_ul();
         position: absolute;
+
+        display: none;
+        box-sizing: border-box;
+
+        border: .5px solid @border_color;
+        border-top: none;
+        border-bottom: none;
+        background-color: @white_color;
+
+        li{
+          display: inline-block;
+          box-sizing: border-box;
+          width: 100%;
+          height: @_height;
+          padding-left: 10px;
+
+          line-height: @_height;
+
+          border-bottom: solid .5px @border_color;
+
+          &:hover{
+            color: @font_color;
+
+            cursor: pointer;
+            background-color: @bg_color;
+          }
+        }
+      }
+    }
+  }
+  //评论请加按钮
+  .comment-add-btn{
+    @_height: 30px;
+
+    width: 100%;
+    height: @_height;
+    margin-top: @div_margin;
+    margin-bottom: @div_margin;
+    text-align: right;
+
+    .add-btn{
+      display: inline-block;
+      width: 105px;
+      height: @_height;
+
+      line-height: @_height;
+      text-align: center;
+      text-decoration: none;
+      color: @white_color;
+      font-size: 14px;
+      font-weight: 600;
+
+      border-radius: 1px;
+      background-color: @main_color;
+
+      &:hover{
+        background-color: @main_strong_color;
+      }
+    }
+  }
+}
+.same-class-rec{
+  .scr-title:extend(.analysis-title all){
+    .scr-title-name:extend(.analysis-title .name){}
+    .see-more{
+      float: right;
+
+      margin-right: 10px;
+
+      font-size: 11px;
+      color: @desc_color;
+      vertical-align: text-bottom;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+  };
+  .scr-list{
+    .horizontal_ul();
+
+    padding: 10px 5px;
+  }
+  .scr-item{
+    @_height: 92px;
+
+    height: @_height;
+    padding: 5px 0;
+
+    .left{
+      @_width: 80px;
+      float: left;
+
+      width: @_width;
+    }
+    .right{
+      @_width: 145px;
+      float: left;
+
+      width: @_width;
+      margin-left: 5px;
+    }
+    .name{
+      @_height: 60px;
+      margin: 0;
+      height: @_height;
+
+      font-size: 14px;
+      color: @font_color;
+      a{
+        text-decoration: none;
+        color: @font_strong_color;
+
+        transition: all .2s ease-in-out;
+
+        &:hover{
+          color: @main_color;
+        }
+      }
+    }
+    .count{
+      @_height: 20px;
+
+      height: @_height;
+      margin: 0;
+
+      line-height: @_height;
+      color: @desc_strong_color;
+      font-size: 12px;
+
+      a{
+        text-decoration: none;
+        color: @main_color;
       }
     }
   }

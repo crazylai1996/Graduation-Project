@@ -186,4 +186,18 @@ $(document).ready(function() {
   //评分占比评论心得分析
   showPower($(".rating-power,.item-power"));
 
+  /**
+   * 购买方式选择
+   */
+  $(".buy-way-title").click(function(e){
+    $(this).siblings(".buy-way-sel").toggle();
+    e.stopPropagation();
+  });
+  $(".buy-way-sel li").click(function(){
+    $(".buy-way-title").html($(this).text());
+  });
+
+  $(document).click(function(){
+    $(".more-sel").hide();
+  });
 });

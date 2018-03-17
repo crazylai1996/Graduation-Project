@@ -166,7 +166,7 @@ body {
   float: left;
   width: 435px;
   min-height: 357px;
-  margin-left: 15px;
+  margin-left: 13px;
 }
 .product-base-info h1 {
   margin-bottom: 10px;
@@ -207,7 +207,7 @@ body {
   color: #666666;
 }
 .product-base-info .product-details {
-  margin-top: 30px;
+  margin-top: 26px;
 }
 .product-base-info .product-details p {
   color: #333333;
@@ -227,7 +227,7 @@ body {
   position: relative;
   width: 225px;
   height: 357px;
-  margin-left: 15px;
+  margin-left: 13px;
 }
 .product-rating {
   width: 210px;
@@ -285,7 +285,7 @@ body {
 }
 .product-rating .rating-more {
   padding: 5px 5px;
-  margin-top: 15px;
+  margin-top: 13px;
   background-color: #ffedeb;
 }
 .product-rating .rating-more hr {
@@ -384,7 +384,7 @@ body {
 .comment-container {
   width: 1000px;
   margin: 0 auto;
-  margin-top: 15px;
+  margin-top: 13px;
   box-sizing: border-box;
   clear: both;
 }
@@ -417,19 +417,23 @@ body {
  * 使用心得分析标题
  */
 .analysis-title,
-.comment-list-title {
+.comment-list-title,
+.same-class-rec .scr-title {
   height: 35px;
   border-bottom: 0.5px solid #e6e6e6;
   background-color: #fcfcfc;
 }
 .analysis-title a,
-.comment-list-title a {
+.comment-list-title a,
+.same-class-rec .scr-title a {
   display: inline-block;
   line-height: 35px;
   text-decoration: none;
 }
 .analysis-title .name,
-.comment-list-title .name {
+.comment-list-title .name,
+.same-class-rec .scr-title .name,
+.same-class-rec .scr-title .scr-title-name {
   height: 100%;
   padding: 0 8px;
   font-size: 14px;
@@ -440,12 +444,14 @@ body {
   transition: all 0.2s ease-in-out;
 }
 .analysis-title .name:hover,
-.comment-list-title .name:hover {
+.comment-list-title .name:hover,
+.same-class-rec .scr-title .name:hover {
   text-decoration: none;
   border-left: 5px solid #cc99cc;
 }
 .analysis-title .title,
-.comment-list-title .title {
+.comment-list-title .title,
+.same-class-rec .scr-title .title {
   font-size: 12px;
   color: #333333;
 }
@@ -522,12 +528,12 @@ body {
  * 用户使用心得列表
  */
 .comment-contents {
-  margin-top: 15px;
+  margin-top: 13px;
 }
 .comment-search-wrapped {
   width: 100%;
   padding-left: 9px;
-  margin-top: 7.5px;
+  margin-top: 6.5px;
   background-color: #fcfcfc;
 }
 .comment-search-wrapped > span {
@@ -573,9 +579,10 @@ body {
   list-style: none;
   width: 100%;
   margin-top: 10px;
+  padding-bottom: 15px;
 }
 .comment-list li {
-  height: 186px;
+  height: 198px;
   padding-left: 5px;
 }
 /*
@@ -708,6 +715,7 @@ body {
 .comment-detail .comment-ops {
   text-align: right;
   font-size: 13px;
+  padding: 6px 0;
 }
 .comment-detail .comment-ops a {
   padding: 0 4px;
@@ -718,7 +726,7 @@ body {
  * 添加点评
  */
 .comment-add-container {
-  margin-top: 15px;
+  margin-top: 13px;
 }
 .comment-add-container .label {
   width: 100%;
@@ -730,7 +738,7 @@ body {
 }
 .comment-add-container hr {
   margin: 0;
-  margin-bottom: 15px;
+  margin-bottom: 13px;
   border: solid 1px #cc99cc;
 }
 .comment-add-container .title-input,
@@ -738,7 +746,7 @@ body {
 .comment-add-container .rating-input > div {
   height: 35px;
   width: 100%;
-  margin-bottom: 7.5px;
+  margin-bottom: 6.5px;
 }
 .comment-add-container .title-input .comment-title-label {
   line-height: 35px;
@@ -748,7 +756,14 @@ body {
 .comment-add-container .title-input .comment-title {
   width: 400px;
   line-height: 30px;
+  outline: none;
   border: solid 0.5px #e6cce6;
+}
+.comment-add-container .title-input .comment-title:focus {
+  border: solid 1px #cc99cc;
+}
+.comment-add-container .rating-input {
+  margin-bottom: 13px;
 }
 .comment-add-container .rating-input .comment-rating-label {
   float: left;
@@ -762,9 +777,9 @@ body {
 }
 .comment-add-container .rating-input .buy-way {
   position: relative;
-  width: 100px;
+  width: 95px;
   height: 35px;
-  margin-left: 45px;
+  margin-left: 39px;
   color: #666666;
   font-size: 13px;
 }
@@ -775,11 +790,122 @@ body {
   box-sizing: border-box;
   padding-left: 10px;
   line-height: 35px;
+  cursor: pointer;
   border: solid 0.5px #cccccc;
+}
+.comment-add-container .rating-input .buy-way .buy-way-title::after {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin-right: 5px;
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  border-top-color: #666666;
+  vertical-align: middle;
 }
 .comment-add-container .rating-input .buy-way .buy-way-sel {
   margin: 0;
   padding: 0;
   list-style: none;
   position: absolute;
+  display: none;
+  box-sizing: border-box;
+  border: 0.5px solid #cccccc;
+  border-top: none;
+  border-bottom: none;
+  background-color: #ffffff;
+}
+.comment-add-container .rating-input .buy-way .buy-way-sel li {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 35px;
+  padding-left: 10px;
+  line-height: 35px;
+  border-bottom: solid 0.5px #cccccc;
+}
+.comment-add-container .rating-input .buy-way .buy-way-sel li:hover {
+  color: #333333;
+  cursor: pointer;
+  background-color: #ffedeb;
+}
+.comment-add-container .comment-add-btn {
+  width: 100%;
+  height: 30px;
+  margin-top: 13px;
+  margin-bottom: 13px;
+  text-align: right;
+}
+.comment-add-container .comment-add-btn .add-btn {
+  display: inline-block;
+  width: 105px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 1px;
+  background-color: #cc99cc;
+}
+.comment-add-container .comment-add-btn .add-btn:hover {
+  background-color: #996699;
+}
+.same-class-rec .scr-title .see-more {
+  float: right;
+  margin-right: 10px;
+  font-size: 11px;
+  color: #999999;
+  vertical-align: text-bottom;
+}
+.same-class-rec .scr-title .see-more:hover {
+  text-decoration: underline;
+}
+.same-class-rec .scr-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding: 10px 5px;
+}
+.same-class-rec .scr-item {
+  height: 92px;
+  padding: 5px 0;
+}
+.same-class-rec .scr-item .left {
+  float: left;
+  width: 80px;
+}
+.same-class-rec .scr-item .right {
+  float: left;
+  width: 145px;
+  margin-left: 5px;
+}
+.same-class-rec .scr-item .name {
+  margin: 0;
+  height: 60px;
+  font-size: 14px;
+  color: #333333;
+}
+.same-class-rec .scr-item .name a {
+  text-decoration: none;
+  color: #1a1a1a;
+  transition: all 0.2s ease-in-out;
+}
+.same-class-rec .scr-item .name a:hover {
+  color: #cc99cc;
+}
+.same-class-rec .scr-item .count {
+  height: 20px;
+  margin: 0;
+  line-height: 20px;
+  color: #666666;
+  font-size: 12px;
+}
+.same-class-rec .scr-item .count a {
+  text-decoration: none;
+  color: #cc99cc;
 }

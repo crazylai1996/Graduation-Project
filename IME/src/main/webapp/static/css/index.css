@@ -543,7 +543,7 @@ body {
   width: 1000px;
   height: 271px;
   margin: 0 auto;
-  margin-top: 10px;
+  margin-top: 13px;
   font-size: 14px;
 }
 /*
@@ -880,7 +880,7 @@ body {
 .main-contents {
   width: 1000px;
   margin: 0 auto;
-  margin-top: 10px;
+  margin-top: 13px;
   box-sizing: border-box;
   clear: both;
 }
@@ -939,7 +939,7 @@ body {
 .gyn-title .right {
   float: right;
   margin-right: 10px;
-  font-size: 12px;
+  font-size: 11px;
   color: #999999;
 }
 .gyn-title .right:hover {
@@ -999,8 +999,8 @@ body {
   border-radius: 1px;
   box-shadow: 0 0 2px #dab4da;
   background-color: #ffffff;
-  margin-top: 10px;
-  margin-bottom: 30px;
+  margin-top: 13px;
+  margin-bottom: 39px;
 }
 /*
  title: 最新内容
