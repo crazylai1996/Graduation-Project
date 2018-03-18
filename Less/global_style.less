@@ -2,7 +2,7 @@
 @white_color: #fff;//白色
 @dark_color: #000;//黑色
 @light_purple: #fff0f5;//淡紫色
-@bg_color: lighten(@light_purple,0%);//背景
+@bg_color: @light_purple;//背景
 @grey_bg_color: lighten(@desc_color,39%);
 @border_color: lighten(@desc_color,20%);//边框
 @desc_color: #999999;//描述
@@ -23,7 +23,21 @@
 
 //块间隙
 @div_margin: 13px;
-
+//初始化代码片段
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td { margin:0; padding:0; }
+body { background:#fff; color:#555; font-size:14px; font-family: Verdana, Arial, Helvetica, sans-serif; }
+td,th,caption { font-size:14px; }
+h1, h2, h3, h4, h5, h6 { font-weight:normal; font-size:100%; }
+address, caption, cite, code, dfn, em, strong, th, var { font-style:normal; font-weight:normal;}
+a { color:#555; text-decoration:none; }
+a:hover { text-decoration:underline; }
+img { border:none; }
+ol,ul,li { list-style:none; }
+input, textarea, select, button { font:14px Verdana,Helvetica,Arial,sans-serif; }
+table { border-collapse:collapse; }
+html {overflow-y: scroll;}
+.clearfix:after {content: "."; display: block; height:0; clear:both; visibility: hidden;}
+.clearfix { *zoom:1; }
 //字体
 body{
   font-family: "微软雅黑";
@@ -48,5 +62,14 @@ body{
 
       .opacity_mixin(0.4);
     }
+  }
+}
+//输入框样式
+.purple_input_style(){
+  outline: none;
+  border: solid .5px lighten(@main_color,15%);
+
+  &:focus{
+    border: solid 1px @main_color;
   }
 }

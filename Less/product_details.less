@@ -514,7 +514,7 @@
 
     font-size: 14px;
     font-weight: 700;
-    color: @main_strong_color;
+    color: @font_color;
     text-align: left;
 
     border-left: 2px solid @main_color;
@@ -907,12 +907,7 @@
 
       line-height: @_height - 5px;
 
-      outline: none;
-      border: solid .5px lighten(@main_color,15%);
-
-      &:focus{
-        border: solid 1px @main_color;
-      }
+      .purple_input_style();
     }
   }
   //性价评分输入

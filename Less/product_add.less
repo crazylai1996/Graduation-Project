@@ -37,4 +37,94 @@
  */
 .product-add-container{
   width: @global_width;
+  margin-top: @div_margin;
+
+  border-radius: 1px;
+  box-shadow: 0 0 2px lighten(@main_color,8%);
+  background-color: @white_color;
+}
+/**
+ * 添加新产品标题
+ */
+.add-title-label{
+  @_height: 35px;
+
+  width: 100%;
+  height: @_height;
+
+  border-bottom: .5px solid lighten(@border_color,10%);
+  background-color: @grey_bg_color;
+
+  a{
+    display: inline-block;
+    height: 100%;
+    padding: 0 8px;
+
+    line-height: @_height;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    color: @font_color;
+    text-align: left;
+
+    border-left: 2px solid @main_color;
+  }
+}
+/**
+ * 添加新产品输入表单
+ */
+.product-form{
+
+}
+.input-list{
+  .horizontal_ul();
+
+  li{
+    @_height: 46px;
+
+    height: @_height;
+    border-bottom: dotted .5px @border_color;
+  }
+  .input-label{
+    @_width: 150px;
+    @_height: 45px;
+
+    display: inline-block;
+    width: @_width;
+    height: @_height;
+    margin-right: 10px;
+
+    line-height: @_height;
+    text-align:right;
+    font-size: 14px;
+    color: @font_color;
+
+    background-color: @bg_color;
+  }
+  input{
+    @_height: 27px;
+
+    height: @_height;
+
+    vertical-align: middle;
+
+    .purple_input_style();
+  }
+  .lg-input{
+    @_width: 300px;
+
+    width: @_width;
+  }
+  .md-input{
+    @_width: 160px;
+
+    width: @_width;
+  }
+  .input-tips{
+    padding-left: 15px;
+
+    color: @main_strong_color;
+    font-size: 12px;
+    vertical-align: middle;
+  }
 }
