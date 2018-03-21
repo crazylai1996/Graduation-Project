@@ -172,13 +172,19 @@ body {
 /**
  * 添加新产品输入表单
  */
+.product-form {
+  width: 1000px;
+}
+/**
+ * 表单项
+ */
 .input-list {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 .input-list li {
-  height: 46px;
+  min-height: 46px;
   border-bottom: dotted 0.5px #cccccc;
 }
 .input-list .input-label {
@@ -192,15 +198,37 @@ body {
   color: #333333;
   background-color: #fff0f5;
 }
-.input-list input {
+.input-list .vertical-top {
+  height: 180px;
+}
+.input-list .vertical-top .input-label {
+  height: 100% !important;
+  vertical-align: top;
+}
+.input-list .vertical-top textarea {
+  margin-top: 6px;
+  resize: none;
+  outline: none;
+  border: solid 0.5px #e6cce6;
+}
+.input-list .vertical-top textarea:focus {
+  border: solid 1px #cc99cc;
+}
+.input-list input[type='text'],
+.input-list select {
   height: 27px;
   padding-left: 5px;
+  margin-right: 8px;
   vertical-align: middle;
   outline: none;
   border: solid 0.5px #e6cce6;
 }
-.input-list input:focus {
+.input-list input[type='text']:focus,
+.input-list select:focus {
   border: solid 1px #cc99cc;
+}
+.input-list input[type='file'] {
+  display: inline-block;
 }
 .input-list .lg-input {
   width: 300px;
@@ -208,9 +236,40 @@ body {
 .input-list .md-input {
   width: 180px;
 }
+.input-list .sm-input {
+  width: 120px;
+}
+.input-list .xs-input {
+  width: 70px;
+}
 .input-list .input-tips {
   padding-left: 15px;
   color: #c388c3;
   font-size: 12px;
   vertical-align: middle;
+}
+/**
+ * 添加按钮
+ */
+.add-product-op {
+  width: 1000px;
+  box-sizing: border-box;
+  margin-top: 13px;
+  padding-right: 15px;
+  padding-bottom: 10px;
+  text-align: right;
+}
+.add-product-op .add-confirm {
+  display: inline-block;
+  width: 105px;
+  height: 30px;
+  box-sizing: border-box;
+  color: #ffffff;
+  background-color: #cc99cc;
+  line-height: 30px;
+  text-decoration: none;
+  text-align: center;
+}
+.add-product-op .add-confirm:hover {
+  background-color: #c388c3;
 }
