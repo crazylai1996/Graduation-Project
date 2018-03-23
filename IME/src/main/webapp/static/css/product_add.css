@@ -123,7 +123,7 @@ body {
  */
 .current-pos {
   width: 100%;
-  font-size: 12px;
+  font-size: 13px;
 }
 .current-pos a {
   color: #1a1a1a;
@@ -139,11 +139,48 @@ body {
   margin: 0 2px;
 }
 /**
+ *  快速获取按钮
+ */
+.quick-get-info {
+  height: 25px;
+  margin-top: 13px;
+  font-size: 12px;
+}
+.quick-get-info .pointer {
+  color: #c388c3;
+  font-size: 14px;
+  font-weight: bolder;
+}
+.quick-get-info input {
+  height: 24px;
+  padding-left: 5px;
+  margin-right: 8px;
+  vertical-align: middle;
+  outline: none;
+  border: solid 0.5px #e6cce6;
+}
+.quick-get-info input:focus {
+  border: solid 1px #cc99cc;
+}
+.quick-get-info .get-btn {
+  display: inline-block;
+  width: 35px;
+  height: 20px;
+  line-height: 20px;
+  vertical-align: middle;
+  color: #ffffff;
+  font-size: 12px;
+  text-decoration: none;
+  text-align: center;
+  background-color: #cc99cc;
+  border-radius: 2px;
+}
+/**
  * 添加新产品
  */
 .product-add-container {
   width: 1000px;
-  margin-top: 13px;
+  margin-top: 10px;
   border-radius: 1px;
   box-shadow: 0 0 2px #dab4da;
   background-color: #ffffff;

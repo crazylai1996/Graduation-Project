@@ -11,7 +11,7 @@
 .current-pos {
   width: 100%;
 
-  font-size: 12px;
+  font-size: 13px;
 
   a {
     color: @font_strong_color;
@@ -33,11 +33,57 @@
   }
 }
 /**
+ *  快速获取按钮
+ */
+.quick-get-info{
+  @_height: 25px;
+
+  height: @_height;
+  margin-top: @div_margin;
+
+  font-size: 12px;
+
+  .pointer{
+    color: @main_strong_color;
+    font-size: 14px;
+    font-weight: bolder;
+  }
+  input{
+    @_height: 24px;
+
+    height: @_height;
+    padding-left: 5px;
+    margin-right: 8px;
+
+    vertical-align: middle;
+
+    .purple_input_style();
+  }
+  .get-btn{
+    @_height: 20px;
+
+    display: inline-block;
+    width: 35px;
+    height: @_height;
+
+    line-height: @_height;
+    vertical-align: middle;
+    color: @white_color;
+    font-size: 12px;
+    text-decoration: none;
+    text-align: center;
+
+    background-color: @main_color;
+    border-radius: 2px;
+  }
+}
+/**
  * 添加新产品
  */
 .product-add-container{
   width: @global_width;
-  margin-top: @div_margin;
+
+  margin-top: 10px;
 
   border-radius: 1px;
   box-shadow: 0 0 2px lighten(@main_color,8%);

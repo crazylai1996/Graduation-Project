@@ -2,5 +2,6 @@
 laydate.render({
   elem: '.product-ttm',
   type: 'month',
-  format: 'yyyy年MM月'
+  format: 'yyyy年MM月',
+  theme: '#CC99CC'
 });
