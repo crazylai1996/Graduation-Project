@@ -64,6 +64,36 @@ body{
     }
   }
 }
+//当前位置
+.current-position(){
+  width: 100%;
+
+  font-size: 13px;
+
+  a {
+    color: @font_strong_color;
+    text-decoration: none;
+
+    transition: all ease-in-out 0.2s;
+
+    &:hover {
+      color: @main_color;
+      text-decoration: none;
+    }
+  }
+
+  .split-line {
+    &:before {
+      content: ">>";
+      margin: 0 2px;
+    }
+  }
+
+  .title {
+    color: @desc_strong_color;
+    font-weight: 500;
+  }
+}
 //输入框样式
 .purple_input_style(){
   outline: none;

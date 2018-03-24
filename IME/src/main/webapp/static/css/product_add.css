@@ -132,11 +132,15 @@ body {
 }
 .current-pos a:hover {
   color: #cc99cc;
-  text-decoration: underline;
+  text-decoration: none;
 }
 .current-pos .split-line:before {
   content: ">>";
   margin: 0 2px;
+}
+.current-pos .title {
+  color: #666666;
+  font-weight: 500;
 }
 /**
  *  快速获取按钮
