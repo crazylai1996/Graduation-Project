@@ -142,3 +142,39 @@ body {
   color: #666666;
   font-weight: 500;
 }
+/**
+ * 主-左
+ */
+.main-left {
+  width: 750px;
+  box-sizing: border-box;
+}
+/**
+ * 主-右
+ */
+.main-right {
+  width: 240px;
+  box-sizing: border-box;
+}
+/**
+ * 评论用户详情
+ */
+.comment-user {
+  width: 100%;
+  height: 230px;
+  margin-top: 26px;
+}
+/**
+ * 评论用户信息
+ */
+.user-info-wrapped {
+  width: 310px;
+  height: 100%;
+}
+/**
+ * 用户的更多心得
+ */
+.user-more-comments {
+  width: 440px;
+  height: 100%;
+}
