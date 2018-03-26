@@ -170,6 +170,39 @@ body {
 .user-info-wrapped {
   width: 310px;
   height: 100%;
+  background-color: #fff0f5;
+}
+.user-info-wrapped .user-info .info-left {
+  float: left;
+  width: 115px;
+  background-color: #ffffff;
+  box-shadow: 0 0 1px #e6e6e6;
+}
+.user-info-wrapped .user-info .info-left img {
+  width: 111px;
+  height: 111px;
+  margin-top: 2px;
+  margin-left: 2px;
+}
+.user-info-wrapped .user-info .info-right {
+  float: left;
+  width: 125px;
+  box-sizing: border-box;
+  padding-left: 10px;
+  font-size: 13px;
+  color: #666666;
+}
+.user-info-wrapped .user-info .info-right .user-name {
+  color: #cc99cc;
+  font-size: 14px;
+}
+.user-info-wrapped .user-info .info-right p {
+  margin: 5px 5px;
+}
+.user-info-wrapped .user-info .info-right a {
+  margin-left: 10px;
+  text-decoration: none;
+  color: #cc99cc;
 }
 /**
  * 用户的更多心得
