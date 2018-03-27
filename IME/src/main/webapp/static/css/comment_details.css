@@ -161,16 +161,27 @@ body {
  */
 .comment-user {
   width: 100%;
-  height: 230px;
+  height: 220px;
   margin-top: 26px;
 }
 /**
  * 评论用户信息
  */
 .user-info-wrapped {
+  position: relative;
   width: 310px;
   height: 100%;
   background-color: #fff0f5;
+}
+.user-info-wrapped .user-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 250px;
+  height: 120px;
+  margin: auto;
 }
 .user-info-wrapped .user-info .info-left {
   float: left;
@@ -195,6 +206,7 @@ body {
 .user-info-wrapped .user-info .info-right .user-name {
   color: #cc99cc;
   font-size: 14px;
+  font-weight: 600;
 }
 .user-info-wrapped .user-info .info-right p {
   margin: 5px 5px;

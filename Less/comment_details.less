@@ -33,7 +33,7 @@
  * 评论用户详情
  */
 .comment-user{
-  @_height: 230px;
+  @_height: 220px;
 
   width: 100%;
   height: @_height;
@@ -45,12 +45,24 @@
 .user-info-wrapped{
   @_width: 310px;
 
+  position:relative;
+
   width: @_width;
   height: 100%;
 
   background-color: @bg_color;
 
   .user-info{
+    @_width: 250px;
+    @_height: 120px;
+
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+
+    width: @_width;
+    height: @_height;
+    margin: auto;
+
     .info-left{
       @_width: 115px;
 
@@ -84,6 +96,7 @@
       .user-name{
         color: @main_color;
         font-size: 14px;
+        font-weight: 600;
       }
       p{
         margin: 5px 5px;
