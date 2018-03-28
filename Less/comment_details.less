@@ -33,7 +33,7 @@
  * 评论用户详情
  */
 .comment-user{
-  @_height: 220px;
+  @_height: 200px;
 
   width: 100%;
   height: @_height;
@@ -46,6 +46,7 @@
   @_width: 310px;
 
   position:relative;
+  float: left;
 
   width: @_width;
   height: 100%;
@@ -114,8 +115,75 @@
  * 用户的更多心得
  */
 .user-more-comments{
-  @_width: 440px;
+  @_width: 420px;
 
+  float: left;
+
+  display: inline-block;
   width: @_width;
   height: 100%;
+  margin-left: 20px;
+
+  //更多心得标题
+  .more-comment-label{
+    @_height: 30px;
+
+    height: @_height;
+    box-sizing: border-box;
+
+    color: @title_color;
+    font-size: 18px;
+    font-weight: 500;
+
+    border-bottom: 2px solid @border_color;
+
+    .her-more{
+      float: right;
+
+      display: inline-block;
+      box-sizing: border-box;
+      height: @_height;
+      padding-top: 10px;
+
+      text-decoration: none;
+      color: @main_color;
+      font-size: 12px;
+    }
+  }
+  .more-comment-list{
+    .horizontal_ul();
+
+    @_width: 115px;
+    @_height: 160px;
+
+    width: @_width;
+    height: @_height;
+    margin-top: 10px;
+
+    li{
+      .pic{
+        width: @_width;
+      }
+      .name{
+        margin: 0;
+        width: 100%;
+        height: 45px;
+
+        color: @desc_strong_color;
+        font-size: 12px;
+        font-weight: 500;
+        text-align: center;
+
+        a{
+          text-decoration: none;
+
+          transition: all .2s ease-in-out;
+
+          &:hover{
+            color: @main_color;
+          }
+        }
+      }
+    }
+  }
 }
