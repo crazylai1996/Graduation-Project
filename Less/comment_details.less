@@ -195,6 +195,15 @@
   }
 }
 /**
+ * 文章内容块
+ */
+.comment-details-container{
+  box-sizing: border-box;
+  margin-top: 2 * @div_margin;
+
+  border: solid .5px lighten(@border_color,8%);
+}
+/**
  * 产品简略信息
  */
 .product-info-wrapped{
@@ -221,7 +230,7 @@
 
     width: @_width;
 
-    border: solid .5px @border_color;
+    border: solid 1px @border_color;
 
     img{
       width: 100%;
@@ -259,8 +268,71 @@
     }
   }
 }
+/**
+ * 心得标题
+ */
 .comment-title{
+
+  @_height: 70px;
+
+  line-height: @_height;
+
   h1{
-    
+    display: inline-block;
+    padding-left: 5px;
+
+    color: @font_strong_color;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  span{
+    display: inline-block;
+  }
+}
+/**
+ *  心得内容
+ */
+.comment-details{
+  box-sizing: border-box;
+  padding: 10px 15px;
+
+  color: @font_color;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+.comment-btn{
+  padding: 10px 15px;
+
+  text-align: right;
+  a{
+    text-decoration: none;
+    color: @main_color;
+    font-size: 13px;
+    font-weight: 500;
+  }
+}
+/**
+ * 上一篇、下一篇操作
+ */
+.lr_comment{
+  padding-bottom: 10px;
+
+  color: @desc_color;
+  font-size: 13px;
+  text-align: center;
+
+  &>span{
+    margin: 0 10px;
+  }
+
+  a{
+    text-decoration: none;
+    color: @font_color;
+
+    &:hover{
+      color: @main_color;
+
+      transition: all .2s ease-in-out;
+    }
   }
 }
