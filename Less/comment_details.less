@@ -1,6 +1,12 @@
 @import "mixin_style.less";
 @import "global_style.less";
 
+//边框混合
+.border_shadow(){
+  border-radius: 1px;
+  box-shadow: 0 0 1px lighten(@main_color,8%);
+  background-color: @white_color;
+}
 /*
  *内容主体外层
  */
@@ -333,6 +339,214 @@
       color: @main_color;
 
       transition: all .2s ease-in-out;
+    }
+  }
+}
+/**
+ * 心得回复列表块
+ */
+.comment-reply-container{
+
+  .horizontal_ul();
+
+  width: 100%;
+  margin-top: 2 * @div_margin;
+  padding-bottom: 15px;
+
+  li{
+    height: 145px;
+    padding-left: 5px;
+  }
+}
+/**
+ * 心得回复列表项
+ */
+.reply-item{
+  width: 100%;
+
+  .left{
+    float: left;
+  }
+  .right{
+
+    @_height: 145px;
+
+    float: left;
+    position: relative;
+
+    height: @_height;
+    .border_shadow();
+  }
+}
+/**
+ * 回复用户头像
+ */
+ .portrait-wrapped{
+   @_width: 100px;
+   @child_width: 100px;
+   @child_height: 21px;
+
+   width: 145px;
+
+   img{
+     width: @_width;
+
+     border-radius: 2px;
+     border: solid 2px @border_color;
+   }
+   p{
+     .no_wrap_text();
+
+     width: @child_width;
+     height: @child_height;
+     margin: 0;
+     padding: 0;
+
+     line-height: @child_height;
+     text-align: center;
+     font-size: 12px;
+     color: @font_color;
+   }
+   font{
+     color: @main_color;
+   }
+ }
+ /*
+  *直角三角形
+  */
+ .triangle-pointer{
+   position: absolute;
+   z-index: 1;
+
+   left: -25px;
+   top: 10px;
+
+   .right-angled-triangle-left(25px,lighten(@main_color,15%));
+
+   .background{
+     position: absolute;
+     z-index: 2;
+
+     top: -24px;
+     left: -23px;
+
+     .right-angled-triangle-left(23px,@white_color);
+   }
+ }
+ /**
+  * 回复详情内容块
+  */
+ .reply-detail{
+   @_width: 600px;
+
+   width: @_width;
+
+   padding: 0 5px;
+}
+//评论用户
+.reply-user{
+  @_width: 550px;
+
+  width: @_width;
+  margin: 0 auto;
+  margin-top: 15px;
+  padding: 5px 10px;
+
+  font-size: 12px;
+  color: @desc_strong_color;
+
+  background-color: @bg_color;
+
+  a{
+    text-decoration: none;
+    color: @main_color;
+  }
+}
+//使用心得详情
+.reply-content{
+  height: 55px;
+  padding: 5px 8px;
+
+  font-size: 13px;
+  color: @font_color;
+}
+//评论时间
+.reply-time{
+  display: block;
+  width: 100%;
+  padding-right: 10px;
+
+  text-align: right;
+  font-size: 12px;
+  color: @desc_color;
+}
+hr{
+  margin: 0;
+  margin: 3px 0;
+
+  border: dashed .5px @border_color;
+}
+/**
+ * 添加回复框
+ */
+.reply-add-container{
+  margin-top: 2 * @div_margin;
+
+  .label{
+    @_height: 38px;
+
+    width: 100%;
+    height: @_height;
+
+    line-height: @_height;
+    font-size: 20px;
+    font-weight: 500;
+    color: @font_color;
+  }
+  hr{
+    margin: 0;
+    margin-bottom: @div_margin;
+
+    border: solid 1px @main_color;
+    background-color: @main_color;
+  }
+  textarea{
+    padding: 10px;
+    margin: 2px;
+    resize: none;
+
+    .purple_input_style();
+  }
+}
+/**
+ * 回复按钮
+ */
+.reply-add-btn{
+  @_height: 30px;
+
+  width: 100%;
+  height: @_height;
+  margin-top: @div_margin;
+  margin-bottom: @div_margin;
+  text-align: right;
+
+  .add-btn{
+    display: inline-block;
+    width: 105px;
+    height: @_height;
+
+    line-height: @_height;
+    text-align: center;
+    text-decoration: none;
+    color: @white_color;
+    font-size: 14px;
+    font-weight: 600;
+
+    border-radius: 1px;
+    background-color: @main_color;
+
+    &:hover{
+      background-color: @main_strong_color;
     }
   }
 }

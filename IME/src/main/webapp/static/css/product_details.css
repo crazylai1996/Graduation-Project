@@ -697,6 +697,9 @@ body {
 .comment-item .right {
   float: left;
   position: relative;
+  border-radius: 1px;
+  box-shadow: 0 0 2px #dab4da;
+  background-color: #ffffff;
 }
 /*
  *使用心得用户头像
@@ -768,9 +771,6 @@ body {
  */
 .comment-detail {
   width: 600px;
-  border-radius: 1px;
-  box-shadow: 0 0 2px #dab4da;
-  background-color: #ffffff;
   padding: 0 5px;
 }
 .comment-detail .comment-title {
@@ -840,6 +840,7 @@ body {
   margin: 0;
   margin-bottom: 13px;
   border: solid 1px #cc99cc;
+  background-color: #cc99cc;
 }
 .comment-add-container .title-input,
 .comment-add-container .rating-input,
@@ -955,6 +956,9 @@ body {
 .comment-add-container .comment-add-btn .add-btn:hover {
   background-color: #c388c3;
 }
+/**
+ * 同类推荐
+ */
 .same-class-rec .scr-title .see-more {
   float: right;
   margin-right: 10px;

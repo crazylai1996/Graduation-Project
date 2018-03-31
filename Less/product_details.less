@@ -692,6 +692,8 @@
   .right{
     float: left;
     position: relative;
+
+    .border_shadow();
   }
 }
 /*
@@ -773,7 +775,6 @@
 
   width: @_width;
 
-  .border_shadow();
   padding: 0 5px;
 
   //评论标题
@@ -863,6 +864,7 @@
     margin-bottom: @div_margin;
 
     border: solid 1px @main_color;
+    background-color: @main_color;
   }
   //评论标题输入
   .title-input{
@@ -1008,6 +1010,9 @@
     }
   }
 }
+/**
+ * 同类推荐
+ */
 .same-class-rec{
   .scr-title:extend(.analysis-title all){
     .scr-title-name:extend(.analysis-title .name){}
