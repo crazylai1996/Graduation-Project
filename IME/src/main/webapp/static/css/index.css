@@ -1377,7 +1377,7 @@ body {
   content: "\2606";
   font-size: 15px;
 }
-.mc-body .mc-body-ext .comment-sum::before {
+.mc-body .mc-body-ext .comment-sum:before {
   content: "\21C4";
   font-size: 15px;
 }
