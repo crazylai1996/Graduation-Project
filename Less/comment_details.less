@@ -21,7 +21,9 @@
  * 主-左
  */
 .main-left{
-  @_width: 750px;
+  @_width: 740px;
+
+  float: left;
 
   width: @_width;
   box-sizing: border-box;
@@ -32,7 +34,10 @@
 .main-right{
   @_width: 240px;
 
+  float: left;
+
   width: @_width;
+  margin-left: 20px;
   box-sizing: border-box;
 }
 /**
@@ -121,7 +126,7 @@
  * 用户的更多心得
  */
 .user-more-comments{
-  @_width: 420px;
+  @_width: 410px;
 
   float: left;
 
@@ -160,7 +165,7 @@
   .more-comment-list{
     .horizontal_ul();
 
-    @_width: 115px;
+    @_width: 112px;
     @_height: 160px;
 
     width: 100%;
@@ -437,7 +442,7 @@
   * 回复详情内容块
   */
  .reply-detail{
-   @_width: 600px;
+   @_width: 590px;
 
    width: @_width;
 
@@ -547,6 +552,92 @@ hr{
 
     &:hover{
       background-color: @main_strong_color;
+    }
+  }
+}
+/**
+ *当前产品信息块
+ */
+.current-product{
+  width: 100%;
+
+  text-align: center;
+
+  .current-label{
+    @_height: 45px;
+
+    display: inline-block;
+    width: 100%;
+    height: @_height;
+
+    color: @white_color;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: @_height;
+
+    background-color: @main_color;
+  }
+  .base-info{
+    background-color: @bg_color;
+  }
+  //产品名称
+  .name{
+    @_height: 60px;
+
+    display: inline-block;
+    width: 100%;
+    height: @_height;
+
+    a{
+      line-height: @_height;
+      color: @desc_strong_color;
+      font-size: 16px;
+      font-weight: 500;
+      text-decoration: none;
+
+      transition: all .2s ease-in-out;
+
+      &:hover{
+        color: @main_strong_color;
+      }
+    }
+  }
+  //产品图片
+  .pic-wrapped{
+    @_width: 105px;
+
+    width: @_width;
+    height: @_width;
+    box-sizing: border-box;
+    margin: 0 auto;
+
+    border: solid 1px @border_color;
+
+    img{
+      width: 100%;
+    }
+  }
+  //产品心得数量
+  .comment-sum{
+    display: block;
+    margin-top: 20px;
+
+    color: @desc_color;
+    font-size: 14px;
+
+    font{
+      color: @main_color;
+    }
+  }
+  //查看更多点评
+  .comment-more{
+    display: block;
+    margin-top: 10px;
+    padding-bottom: 20px;
+    a{
+      color: @main_color;
+      font-size: 12px;
+      text-decoration: none;
     }
   }
 }
