@@ -151,7 +151,7 @@ body {
   font-size: 12px;
 }
 .quick-get-info .pointer {
-  color: #c388c3;
+  color: #be7ebe;
   font-size: 14px;
   font-weight: bolder;
 }
@@ -161,7 +161,7 @@ body {
   margin-right: 8px;
   vertical-align: middle;
   outline: none;
-  border: solid 0.5px #e6cce6;
+  border: solid 1px #e6cce6;
 }
 .quick-get-info input:focus {
   border: solid 1px #cc99cc;
@@ -250,7 +250,7 @@ body {
   margin-top: 6px;
   resize: none;
   outline: none;
-  border: solid 0.5px #e6cce6;
+  border: solid 1px #e6cce6;
 }
 .input-list .vertical-top textarea:focus {
   border: solid 1px #cc99cc;
@@ -262,7 +262,7 @@ body {
   margin-right: 8px;
   vertical-align: middle;
   outline: none;
-  border: solid 0.5px #e6cce6;
+  border: solid 1px #e6cce6;
 }
 .input-list input[type='text']:focus,
 .input-list select:focus {
@@ -285,7 +285,7 @@ body {
 }
 .input-list .input-tips {
   padding-left: 15px;
-  color: #c388c3;
+  color: #be7ebe;
   font-size: 12px;
   vertical-align: middle;
 }
@@ -312,5 +312,5 @@ body {
   text-align: center;
 }
 .add-product-op .add-confirm:hover {
-  background-color: #c388c3;
+  background-color: #be7ebe;
 }

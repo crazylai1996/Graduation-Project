@@ -220,7 +220,7 @@ body {
   width: 0;
   height: 0;
   border: 8px solid transparent;
-  border-right-color: #c388c3;
+  border-right-color: #be7ebe;
 }
 .thumbnail-container .next-btn:before {
   content: "";
@@ -231,7 +231,7 @@ body {
   width: 0;
   height: 0;
   border: 8px solid transparent;
-  border-left-color: #c388c3;
+  border-left-color: #be7ebe;
 }
 /*
  *缩略图列表
@@ -257,7 +257,7 @@ body {
   vertical-align: middle;
 }
 .thumbnail-list .current-li {
-  border: solid #c388c3 0.5px;
+  border: solid #be7ebe 0.5px;
 }
 /*
  产品基本信息
@@ -362,7 +362,7 @@ body {
   width: 50px;
   height: 50px;
   line-height: 50px;
-  color: #c388c3;
+  color: #be7ebe;
   font-size: 30px;
 }
 .product-rating .rating-count .right {
@@ -389,7 +389,7 @@ body {
   background-color: #fff0f5;
 }
 .product-rating .rating-more hr {
-  border: dotted 0.5px #c388c3;
+  border: dotted 0.5px #be7ebe;
   opacity: 0.5;
   filter: alpha(opacity=50);
   -moz-opacity: 0.5;
@@ -581,7 +581,7 @@ body {
   box-sizing: border-box;
   padding-left: 15px;
   line-height: 25px;
-  color: #c388c3;
+  color: #be7ebe;
   font-size: 14px;
   font-weight: 600;
   border-radius: 6px;
@@ -858,7 +858,7 @@ body {
   width: 400px;
   line-height: 30px;
   outline: none;
-  border: solid 0.5px #e6cce6;
+  border: solid 1px #e6cce6;
 }
 .comment-add-container .title-input .comment-title:focus {
   border: solid 1px #cc99cc;
@@ -954,7 +954,7 @@ body {
   background-color: #cc99cc;
 }
 .comment-add-container .comment-add-btn .add-btn:hover {
-  background-color: #c388c3;
+  background-color: #be7ebe;
 }
 /**
  * 同类推荐

@@ -543,7 +543,7 @@ hr {
   margin: 2px;
   resize: none;
   outline: none;
-  border: solid 0.5px #e6cce6;
+  border: solid 1px #e6cce6;
 }
 .reply-add-container textarea:focus {
   border: solid 1px #cc99cc;
@@ -572,7 +572,7 @@ hr {
   background-color: #cc99cc;
 }
 .reply-add-btn .add-btn:hover {
-  background-color: #c388c3;
+  background-color: #be7ebe;
 }
 /**
  *当前产品信息块
@@ -608,7 +608,7 @@ hr {
   transition: all 0.2s ease-in-out;
 }
 .current-product .name a:hover {
-  color: #c388c3;
+  color: #be7ebe;
 }
 .current-product .pic-wrapped {
   width: 105px;

@@ -193,7 +193,7 @@ body {
  */
 .current-tab {
   color: #1a1a1a !important;
-  border-bottom: 3px #c388c3 solid;
+  border-bottom: 3px #be7ebe solid;
 }
 /*
  *表单项
@@ -217,7 +217,7 @@ body {
 }
 .form-item .current-label {
   top: -8px;
-  color: #c388c3;
+  color: #be7ebe;
 }
 .form-item .long-input {
   width: 100%;
@@ -235,7 +235,7 @@ body {
   transition: border-color ease-in-out 0.2s;
 }
 .form-item input:focus {
-  border: 1px solid #c388c3;
+  border: 1px solid #be7ebe;
 }
 .form-item img,
 .form-item .get-msg-captcha {
@@ -280,7 +280,7 @@ body {
   text-decoration: none;
 }
 .relative-op .select-login-style:hover {
-  color: #c388c3;
+  color: #be7ebe;
   text-decoration: none;
 }
 .relative-op label {
@@ -324,19 +324,19 @@ body {
   cursor: pointer;
   border: none;
   border-radius: 2px;
-  background-color: #c388c3;
-  background: -webkit-linear-gradient(#cc99cc, #c388c3);
-  background: -o-linear-gradient(#cc99cc, #c388c3);
-  background: -moz-linear-gradient(#cc99cc, #c388c3);
-  background: linear-gradient(#cc99cc, #c388c3);
+  background-color: #be7ebe;
+  background: -webkit-linear-gradient(#cc99cc, #be7ebe);
+  background: -o-linear-gradient(#cc99cc, #be7ebe);
+  background: -moz-linear-gradient(#cc99cc, #be7ebe);
+  background: linear-gradient(#cc99cc, #be7ebe);
 }
 .login-btn:hover,
 .register-btn:hover,
 .quick-login-btn:hover {
-  background: -webkit-linear-gradient(bottom, #cc99cc, #c388c3);
-  background: -o-linear-gradient(bottom, #cc99cc, #c388c3);
-  background: -moz-linear-gradient(bottom, #cc99cc, #c388c3);
-  background: linear-gradient(to top, #cc99cc, #c388c3);
+  background: -webkit-linear-gradient(bottom, #cc99cc, #be7ebe);
+  background: -o-linear-gradient(bottom, #cc99cc, #be7ebe);
+  background: -moz-linear-gradient(bottom, #cc99cc, #be7ebe);
+  background: linear-gradient(to top, #cc99cc, #be7ebe);
 }
 .phone-quick-login,
 .phone-register {

@@ -4,6 +4,7 @@
 @light_purple: #fff0f5;//淡紫色
 @bg_color: @light_purple;//背景
 @grey_bg_color: lighten(@desc_color,39%);
+@grey_bg_strong_color: lighten(@desc_color,35%);
 @border_color: lighten(@desc_color,20%);//边框
 @desc_color: #999999;//描述
 @desc_strong_color: #666666;//描述加强
@@ -14,7 +15,7 @@
 
 @link_color: #0092d2;//链接
 @main_color: #CC99CC;//主
-@main_strong_color: darken(@main_color,5%);//主强调
+@main_strong_color: darken(@main_color,8%);//主强调
 //@main_strong_color: #996699;//主强调
 @alert_color: #CC3333;//提醒，红色
 
@@ -97,7 +98,7 @@ body{
 //输入框样式
 .purple_input_style(){
   outline: none;
-  border: solid .5px lighten(@main_color,15%);
+  border: solid 1px lighten(@main_color,15%);
 
   &:focus{
     border: solid 1px @main_color;
