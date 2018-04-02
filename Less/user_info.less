@@ -148,7 +148,7 @@
     @_height: 36px;
 
     min-height: @_height;
-    margin: 5px auto;
+    margin: 10px auto;
 
     font-size: 13px;
 
@@ -170,12 +170,18 @@
       color: @desc_strong_color;
     }
 
+    //输入框
     input,select,textarea{
-      padding-left: 10px;
+      padding-left: 8px;
       color: @desc_strong_color;
       .purple_input_style();
     }
 
+    textarea{
+      padding: 10px 10px;
+    }
+
+    //下拉框
     select{
       @_width: 80px;
 
@@ -184,6 +190,7 @@
       margin-right: 10px;
     }
 
+    //昵称
     .nick-name{
       @_width: 170px;
 
@@ -194,5 +201,83 @@
     .label-top{
       vertical-align: top;
     }
+    //头像
+    .portrait-wrapped{
+      @_width: 110px;
+
+      position: relative;
+
+      display: inline-block;
+      width: @_width;
+
+      border: solid 2px lighten(@border_color,10%);;
+
+      img{
+        width: 100%;
+      }
+      .change-protrait{
+        @_height: 26px;
+
+        position: absolute;
+        left: 0;
+        bottom: 0;
+
+        display: none;
+        width: 100%;
+        height: @_height;
+
+        text-align: center;
+
+        background-color: @dark_color;
+        .opacity_mixin(0.5);
+
+        a{
+          line-height: @_height;
+          text-decoration: none;
+          font-size: 12px;
+          color: @white_color;
+
+          &:hover{
+            color: @main_color;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
   }
 }
+/**
+ * 更新按钮
+ */
+ /**
+  * 添加按钮
+  */
+ .info-ops{
+   width: 100%;
+   box-sizing: border-box;
+   margin-top: @div_margin;
+   padding-right: 15px;
+   padding-bottom: 10px;
+
+   text-align: right;
+
+   .update-confirm{
+     @_width: 105px;
+     @_height: 30px;
+
+     display: inline-block;
+     width: @_width;
+     height: @_height;
+     box-sizing: border-box;
+     color: @white_color;
+     background-color: @main_color;
+
+     line-height: @_height;
+     text-decoration: none;
+     text-align: center;
+
+     &:hover{
+       background-color: @main_strong_color;
+     }
+   }
+ }
