@@ -1,0 +1,31 @@
+@import "mixin_style.less";
+@import "global_style.less";
+
+/**
+ * 主右：内容
+ */
+.main-right{
+  @_width: 820px;
+
+  float: left;
+
+  width: @_width;
+  margin-left: 20px;
+  box-sizing: border-box;
+}
+/**
+ * 关注容器
+ */
+.follow-container{
+  margin-top: @div_margin;
+
+  .title{
+    color: @font_color;
+    font-size: 17px;
+    font-weight: 550;
+  }
+  .line{
+    border: solid 1px @main_color;
+    background-color: @main_color;
+  }
+}

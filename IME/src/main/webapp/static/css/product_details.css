@@ -114,9 +114,9 @@ body {
 .main-container hr {
   margin: 15px 0;
   border: solid 0.5px #e6cce6;
-  opacity: 0.4;
-  filter: alpha(opacity=40);
-  -moz-opacity: 0.4;
+  opacity: 0.75;
+  filter: alpha(opacity=75);
+  -moz-opacity: 0.75;
 }
 /*
  *当前位置
