@@ -181,6 +181,44 @@
       padding: 10px 10px;
     }
 
+    //单选框
+    input[type='radio']{
+      display: none;
+    }
+
+    //RADIO
+    .radio-label{
+      display: inline-block;
+      margin-right: 10px;
+
+      cursor: pointer;
+
+      &:before{
+        @_size: 14px;
+
+        content: "\a0";
+
+        display: inline-block;
+        width: @_size;
+        height: @_size;
+        margin-right: 4px;
+
+        vertical-align: middle;
+        line-height: @_size;
+
+        border-radius: 50%;
+        border: solid 1px @border_color;
+      }
+    }
+    //RADIO选中时
+    input[type='radio']:checked+label{
+      &:before{
+        background-color: @main_strong_color;
+        background-clip: content-box;
+        padding: 1.5px;
+      }
+    }
+
     //下拉框
     select{
       @_width: 80px;
@@ -189,6 +227,8 @@
       height: @_height - 7px;
       margin-right: 10px;
     }
+
+
 
     //昵称
     .nick-name{
@@ -203,7 +243,7 @@
     }
     //头像
     .portrait-wrapped{
-      @_width: 110px;
+      @_width: 120px;
 
       position: relative;
 

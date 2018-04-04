@@ -286,6 +286,30 @@ body {
 .info-detail .info-item textarea {
   padding: 10px 10px;
 }
+.info-detail .info-item input[type='radio'] {
+  display: none;
+}
+.info-detail .info-item .radio-label {
+  display: inline-block;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.info-detail .info-item .radio-label:before {
+  content: "\a0";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 4px;
+  vertical-align: middle;
+  line-height: 14px;
+  border-radius: 50%;
+  border: solid 1px #cccccc;
+}
+.info-detail .info-item input[type='radio']:checked + label:before {
+  background-color: #be7ebe;
+  background-clip: content-box;
+  padding: 1.5px;
+}
 .info-detail .info-item select {
   width: 80px;
   height: 29px;
@@ -301,7 +325,7 @@ body {
 .info-detail .info-item .portrait-wrapped {
   position: relative;
   display: inline-block;
-  width: 110px;
+  width: 120px;
   border: solid 2px #e6e6e6;
 }
 .info-detail .info-item .portrait-wrapped img {
