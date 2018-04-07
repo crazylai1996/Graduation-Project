@@ -29,3 +29,335 @@
     background-color: @main_color;
   }
 }
+/**
+ * 我的关注
+ */
+.follow-details{
+  .follow-title{
+    color: @font_color;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .title-line{
+    margin: 0;
+    margin: 10px auto;
+
+    border: solid .5px @border_color;
+
+    .opacity_mixin(0.5);
+  }
+}
+/**
+ * 关注的标签
+ */
+.followed-tag{
+  .tag-list{
+    width: 100%;
+
+    //标签样式
+    a{
+      @_height: 22px;
+
+      display: inline-block;
+      height: @_height;
+      padding-left: 5px;
+      margin-right: @div_margin;
+      margin-top: 10px;
+      box-sizing: border-box;
+
+      text-decoration: none;
+      font-size: 13px;
+
+      border: solid .5px lighten(@border_color,10%);
+
+      &:after{
+        content: "\2716";
+
+        display: inline-block;
+        width: @_height;
+        margin-left: 4px;
+
+        line-height: @_height;
+        font-size: 12px;
+        font-weight: 500;
+        text-align: center;
+      }
+
+      &:hover{
+        border-color: @main_color;
+        &:after{
+          color: @white_color;
+
+          background-color: @main_color;
+        }
+      }
+    }
+    .add-more-tag{
+      &:after{
+        content: "\271A";
+      }
+    }
+  }
+}
+/**
+ * 关注的用户
+ */
+.followed-user{
+  margin-top: @div_margin;
+
+  .user-list{
+    .horizontal_ul();
+
+    @_height:90px;
+
+    li{
+      width: 100%;
+      height: @_height + 20px;
+      padding: 10px;
+
+      border-bottom: solid .5px lighten(@border_color,10%);
+    }
+
+    //头像
+    .portrait-wrapped{
+      float: left;
+    }
+    .user-portrait{
+      height: @_height;
+
+      border-radius: @_height;
+    }
+    //用户信息
+    .user-info{
+      float: left;
+
+      height: @_height;
+      margin-left: 2 * @div_margin;
+
+      &>p{
+        width: 600px;
+        margin: 5px auto;
+      }
+      .user-introduction-p{
+        height: 36px;
+      }
+    }
+    //用户名
+    .user-name-p{
+      @_height: 30px;
+
+      position: relative;
+
+      display: inline-block;
+      width: auto;
+      height: @_height;
+    }
+    //鼠标悬停，显示用户更多信息
+    .more-info-down{
+      @_width: 365px;
+      @_height: 240px;
+
+      position: absolute;
+      left: -10px;
+      top: 28px;
+      z-index: 3;
+
+      display: none;
+      width: @_width;
+      height: @_height;
+
+      border: solid .5px lighten(@border_color,10%);
+      box-shadow: 0 0 3px lighten(@border_color,10%);
+      background-color: @white_color;
+
+      //指示三角形
+      .arrow{
+        .triangle(top,10px,lighten(@border_color,10%));
+
+        position: absolute;
+        top: -20px;
+        left: 20px;
+      }
+      .arrow-inner{
+        .triangle(top,9px,@white_color);
+
+        position: absolute;
+        top: -8px;
+        left: -8.5px;
+      }
+      //用户信息详情
+      .more-info-container{
+        @_width: 340px;
+        @_height: 210px;
+
+        position: absolute;
+        top: 0; left: 0; bottom: 0; right: 0;
+
+        width: @_width;
+        height: @_height;
+        margin: auto;
+      }
+    }
+    .user-name{
+      line-height: 1;
+      color: @font_strong_color;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+
+      transition: all .2s ease-in-out;
+
+      &:hover{
+        color: @main_color;
+      }
+    }
+    //用户简介
+    .user-introduction{
+      color: @desc_strong_color;
+      font-size: 12px;
+    }
+    //用户关注操作
+    .user-op{
+      float: right;
+
+      height: @_height;
+
+      line-height: @_height;
+    }
+    //用户关注按钮
+    .follow-ornot-btn{
+      @_height: 26px;
+
+      display: inline-block;
+      height: @_height;
+      padding-left: 8px;
+      padding-right: 8px;
+
+      line-height: @_height;
+      color: @desc_strong_color;
+      font-size: 13px;
+      text-decoration:none;
+      text-align: center;
+
+      border-radius: 2px;
+      background-color: @bg_color;
+
+      &:hover{
+        color: @main_color;
+      }
+    }
+    //鼠标悬停，用户更多信息
+    .more-info{
+      height: 100%;
+
+      .left{
+        @_width: 120px;
+
+        float: left;
+
+        width: @_width;
+        height: 100%;
+
+        text-align: center;
+
+        img{
+          width: 100%;
+        }
+
+        .more-name{
+          color: @font_color;
+          font-size: 14px;
+          font-weight: 550;
+          text-decoration: none;
+
+          transition: all .2s ease-in-out;
+
+          &:hover{
+            color: @main_color;
+          }
+        }
+        .second{
+          font-size: 12px;
+          color: @desc_strong_color;
+
+          span{
+            margin: 5px 2px;
+          }
+          a{
+            text-decoration: none;
+            color: @main_color;
+          }
+        }
+      }
+      .right{
+        @_width: 212px;
+
+        float: left;
+
+        width: @_width;
+        margin-left: 8px;
+
+        span{
+          font-size: 13px;
+          color: @desc_strong_color;
+        }
+
+        .first{
+          span{
+            margin-right: 5px;
+          }
+        }
+        .second{
+          @_height: 145px;
+
+          min-height: @_height / 2 ;
+          max-height: @_height;
+          margin-top: 10px;
+
+          span{
+            color: @desc_color;
+          }
+        }
+        .third{
+          margin-top: 10px;
+          a{
+            @_height: 24px;
+
+            display: inline-block;
+            height: @_height;
+            padding-left: 8px;
+            padding-right: 8px;
+
+            line-height: @_height;
+            color: @desc_strong_color;
+            font-size: 13px;
+            text-decoration:none;
+            text-align: center;
+
+            border: solid .5px lighten(@border_color,10%);
+            border-radius: 2px;
+            background-color: @bg_color;
+
+            transition: all .2s ease-in-out;
+
+            &:hover{
+              color: @main_color;
+
+              border-color: @main_color;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+/**
+ * 关注的产品
+ */
+.followed-product{
+  margin-top: @div_margin;
+
+  .product-list{
+    .horizontal_ul();
+  }
+}
