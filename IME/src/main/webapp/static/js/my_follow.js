@@ -13,3 +13,10 @@ $(".user-list").on("mouseleave",".user-name-p",function(){
 
   moreInfoDiv.hide();
 });
+//鼠标移入移出事件，隐藏或显示产品基本信息
+$(".product-list").on("mouseenter",".picture-container",function(){
+  $(this).find(".product-count").show();
+});
+$(".product-list").on("mouseleave",".picture-container",function(){
+  $(this).find(".product-count").hide();
+});
