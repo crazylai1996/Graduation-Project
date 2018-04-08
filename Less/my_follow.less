@@ -361,8 +361,18 @@
 .followed-product{
   margin-top: @div_margin;
 
+  font-size: 0;
+
   .product-list{
     .horizontal_ul();
+
+    overflow: hidden;
+
+    margin-right: -8px;
+  }
+
+  li{
+    margin-right: 8px;
   }
 
   .product-item{
@@ -371,8 +381,13 @@
     display: inline-block;
     width: 130px;
 
+    .picture-wrapped{
+      text-align: center;
+    }
     .picture-container{
       position: relative;
+
+      text-align: left;
     }
     .product-picture{
       width: @_width;
@@ -384,8 +399,6 @@
 
       width: 100%;
       height: @_height;
-
-      text-align: left;
     }
     .product-name{
       color: @font_strong_color;
@@ -414,7 +427,7 @@
 
       border-radius: 4px;
       background-color: @dark_color;
-      .opacity_mixin(0.6);
+      .opacity_mixin(0.55);
 
       a{
         color: @white_color;
