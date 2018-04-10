@@ -46,7 +46,7 @@
 		<!--configLocation属性指定mybatis的核心配置文件-->
 		<property name="configLocation" value="classpath:config/mybatis-config.xml" />
         <!-- 扫描entity包 使用别名 -->
-        <property name="typeAliasesPackage" value="gdou.laiminghai.imeili.entity"></property>
+        <property name="typeAliasesPackage" value="gdou.laiminghai.ime.entity"></property>
         <!-- 扫描sql配置文件:mapper需要的xml文件 -->
         <property name="mapperLocations" value="classpath:mapper/*Mapper.xml"></property>
 	</bean>
@@ -66,17 +66,17 @@
     <!-- 切面 -->
     <aop:config expose-proxy="true" proxy-target-class="true">
         <!-- 只对业务逻辑层实施事务 -->
-        <aop:pointcut id="txPointcut" expression="execution(* gdou.laiminghai.imeili.service..*+.*(..))"/>
+        <aop:pointcut id="txPointcut" expression="execution(* gdou.laiminghai.ime.service..*+.*(..))"/>
         <aop:advisor id="txAdvisor" advice-ref="txAdvice" pointcut-ref="txPointcut"/>
     </aop:config>
 	
 	<!-- 配置扫描Dao接口包，动态实现Dao接口，注入到spring容器中 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="gdou.laiminghai.imeili.dao" />
+		<property name="basePackage" value="gdou.laiminghai.ime.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 	
 	<!-- 扫描生成service组件 -->
-	<context:component-scan base-package="gdou.laiminghai.imeili.service.impl"/>
+	<context:component-scan base-package="gdou.laiminghai.ime.service.impl"/>
 	
 </beans>

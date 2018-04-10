@@ -24,7 +24,7 @@
 	</mvc:annotation-driven>
 	
 	<!-- 扫描生成controller组件 -->
-    <context:component-scan base-package="gdou.laiminghai.imeili.web.controller"/>
+    <context:component-scan base-package="gdou.laiminghai.ime.web.controller"/>
 	
 	<!-- 静态资源 -->
 	<mvc:resources location="/static/" mapping="/static/**"/>
