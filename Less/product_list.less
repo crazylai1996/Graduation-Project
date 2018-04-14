@@ -1,0 +1,30 @@
+@import "mixin_style.less";
+@import "global_style.less";
+
+/*
+ *内容主体外层
+ */
+.main_div();
+/**
+ * 主-左
+ */
+.main-left{
+  @_width: 740px;
+
+  float: left;
+
+  width: @_width;
+  box-sizing: border-box;
+}
+/**
+ * 主-右
+ */
+.main-right{
+  @_width: 240px;
+
+  float: left;
+
+  width: @_width;
+  margin-left: 20px;
+  box-sizing: border-box;
+}
