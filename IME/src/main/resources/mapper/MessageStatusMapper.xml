@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gdou.laiminghai.ime.mapper.MessageStatusMapper">
+  <resultMap id="BaseResultMap" type="MessageStatus">
+    <id column="lStatusId" jdbcType="BIGINT" property="statusId" />
+    <result column="bUserId" jdbcType="BIGINT" property="userId" />
+    <result column="lMessageId" jdbcType="BIGINT" property="messageId" />
+    <result column="cMessageStatus" jdbcType="CHAR" property="messageStatus" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from messagestatus
+    where lStatusId = #{statusId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="lStatusId" keyProperty="statusId" parameterType="MessageStatus" useGeneratedKeys="true">
+    insert into messagestatus (bUserId, lMessageId, cMessageStatus
+      )
+    values (#{userId,jdbcType=BIGINT}, #{messageId,jdbcType=BIGINT}, #{messageStatus,jdbcType=CHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="MessageStatus">
+    update messagestatus
+    set bUserId = #{userId,jdbcType=BIGINT},
+      lMessageId = #{messageId,jdbcType=BIGINT},
+      cMessageStatus = #{messageStatus,jdbcType=CHAR}
+    where lStatusId = #{statusId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select lStatusId, bUserId, lMessageId, cMessageStatus
+    from messagestatus
+    where lStatusId = #{statusId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select lStatusId, bUserId, lMessageId, cMessageStatus
+    from messagestatus
+  </select>
+</mapper>

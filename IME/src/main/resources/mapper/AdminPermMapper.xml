@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gdou.laiminghai.ime.mapper.AdminPermMapper">
+  <resultMap id="BaseResultMap" type="AdminPerm">
+    <id column="iPermId" jdbcType="INTEGER" property="permId" />
+    <result column="vPermName" jdbcType="VARCHAR" property="permName" />
+    <result column="vPermDesc" jdbcType="VARCHAR" property="permDesc" />
+    <result column="vPermCode" jdbcType="VARCHAR" property="permCode" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from adminperm
+    where iPermId = #{permId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="iPermId" keyProperty="permId" parameterType="AdminPerm" useGeneratedKeys="true">
+    insert into adminperm (vPermName, vPermDesc, vPermCode
+      )
+    values (#{permName,jdbcType=VARCHAR}, #{permDesc,jdbcType=VARCHAR}, #{permCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="AdminPerm">
+    update adminperm
+    set vPermName = #{permName,jdbcType=VARCHAR},
+      vPermDesc = #{permDesc,jdbcType=VARCHAR},
+      vPermCode = #{permCode,jdbcType=VARCHAR}
+    where iPermId = #{permId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select iPermId, vPermName, vPermDesc, vPermCode
+    from adminperm
+    where iPermId = #{permId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select iPermId, vPermName, vPermDesc, vPermCode
+    from adminperm
+  </select>
+</mapper>

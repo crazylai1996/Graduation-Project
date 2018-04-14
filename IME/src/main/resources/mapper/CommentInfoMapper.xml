@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gdou.laiminghai.ime.mapper.CommentInfoMapper">
+  <resultMap id="BaseResultMap" type="CommentInfo">
+    <id column="bCommentId" jdbcType="BIGINT" property="commentId" />
+    <result column="bUserId" jdbcType="BIGINT" property="userId" />
+    <result column="bProductId" jdbcType="BIGINT" property="productId" />
+    <result column="vArticleTitle" jdbcType="VARCHAR" property="articleTitle" />
+    <result column="vArticlaMark" jdbcType="VARCHAR" property="articlaMark" />
+    <result column="fWorthMark" jdbcType="REAL" property="worthMark" />
+    <result column="vBuyWay" jdbcType="VARCHAR" property="buyWay" />
+    <result column="dSendTime" jdbcType="TIMESTAMP" property="sendTime" />
+    <result column="iArticleState" jdbcType="INTEGER" property="articleState" />
+    <result column="iReadCount" jdbcType="INTEGER" property="readCount" />
+    <result column="iLoveCount" jdbcType="INTEGER" property="loveCount" />
+    <result column="iUpCount" jdbcType="INTEGER" property="upCount" />
+    <result column="tContent" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from commentinfo
+    where bCommentId = #{commentId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="bCommentId" keyProperty="commentId" parameterType="CommentInfo" useGeneratedKeys="true">
+    insert into commentinfo (bUserId, bProductId, vArticleTitle, 
+      vArticlaMark, fWorthMark, vBuyWay, 
+      dSendTime, iArticleState, iReadCount, 
+      iLoveCount, iUpCount, tContent
+      )
+    values (#{userId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{articleTitle,jdbcType=VARCHAR}, 
+      #{articlaMark,jdbcType=VARCHAR}, #{worthMark,jdbcType=REAL}, #{buyWay,jdbcType=VARCHAR}, 
+      #{sendTime,jdbcType=TIMESTAMP}, #{articleState,jdbcType=INTEGER}, #{readCount,jdbcType=INTEGER}, 
+      #{loveCount,jdbcType=INTEGER}, #{upCount,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="CommentInfo">
+    update commentinfo
+    set bUserId = #{userId,jdbcType=BIGINT},
+      bProductId = #{productId,jdbcType=BIGINT},
+      vArticleTitle = #{articleTitle,jdbcType=VARCHAR},
+      vArticlaMark = #{articlaMark,jdbcType=VARCHAR},
+      fWorthMark = #{worthMark,jdbcType=REAL},
+      vBuyWay = #{buyWay,jdbcType=VARCHAR},
+      dSendTime = #{sendTime,jdbcType=TIMESTAMP},
+      iArticleState = #{articleState,jdbcType=INTEGER},
+      iReadCount = #{readCount,jdbcType=INTEGER},
+      iLoveCount = #{loveCount,jdbcType=INTEGER},
+      iUpCount = #{upCount,jdbcType=INTEGER},
+      tContent = #{content,jdbcType=LONGVARCHAR}
+    where bCommentId = #{commentId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select bCommentId, bUserId, bProductId, vArticleTitle, vArticlaMark, fWorthMark, 
+    vBuyWay, dSendTime, iArticleState, iReadCount, iLoveCount, iUpCount, tContent
+    from commentinfo
+    where bCommentId = #{commentId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select bCommentId, bUserId, bProductId, vArticleTitle, vArticlaMark, fWorthMark, 
+    vBuyWay, dSendTime, iArticleState, iReadCount, iLoveCount, iUpCount, tContent
+    from commentinfo
+  </select>
+</mapper>

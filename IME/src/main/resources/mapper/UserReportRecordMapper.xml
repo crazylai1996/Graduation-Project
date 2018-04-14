@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gdou.laiminghai.ime.mapper.UserReportRecordMapper">
+  <resultMap id="BaseResultMap" type="UserReportRecord">
+    <id column="bReportId" jdbcType="BIGINT" property="reportId" />
+    <result column="bUserId" jdbcType="BIGINT" property="userId" />
+    <result column="bReportUserId" jdbcType="BIGINT" property="reportUserId" />
+    <result column="vReportDetail" jdbcType="VARCHAR" property="reportDetail" />
+    <result column="dReportTime" jdbcType="TIMESTAMP" property="reportTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from userreportrecord
+    where bReportId = #{reportId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="bReportId" keyProperty="reportId" parameterType="UserReportRecord" useGeneratedKeys="true">
+    insert into userreportrecord (bUserId, bReportUserId, vReportDetail, 
+      dReportTime)
+    values (#{userId,jdbcType=BIGINT}, #{reportUserId,jdbcType=BIGINT}, #{reportDetail,jdbcType=VARCHAR}, 
+      #{reportTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="UserReportRecord">
+    update userreportrecord
+    set bUserId = #{userId,jdbcType=BIGINT},
+      bReportUserId = #{reportUserId,jdbcType=BIGINT},
+      vReportDetail = #{reportDetail,jdbcType=VARCHAR},
+      dReportTime = #{reportTime,jdbcType=TIMESTAMP}
+    where bReportId = #{reportId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select bReportId, bUserId, bReportUserId, vReportDetail, dReportTime
+    from userreportrecord
+    where bReportId = #{reportId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select bReportId, bUserId, bReportUserId, vReportDetail, dReportTime
+    from userreportrecord
+  </select>
+</mapper>

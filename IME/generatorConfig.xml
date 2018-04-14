@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<context id="ime" targetRuntime="MyBatis3Simple">
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/ime?useUnicode=true&amp;characterEncoding=utf-8" 
+			userId="root"
+			password="123456">
+		</jdbcConnection> 
+
+		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和 
+			NUMERIC 类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- targetProject:生成PO类的位置 -->
+		<javaModelGenerator targetPackage="gdou.laiminghai.ime.model.entity"
+			targetProject="IME/src/main/java">
+			<!-- 自动为每一个生成的类创建一个构造方法，构造方法包含了所有的field；而不是使用setter； -->
+			<property name="constructorBased" value="false"/>
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+        <!-- targetProject:mapper映射文件生成的位置 -->
+		<sqlMapGenerator targetPackage="mapper" 
+			targetProject="IME/src/main/resources">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+		<!-- targetPackage：mapper接口生成的位置 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="gdou.laiminghai.ime.mapper" 
+			targetProject="IME/src/main/java">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+		<!-- =================================================== -->
+		<!-- 指定数据库表 -->
+		<!-- 管理员菜单 -->
+		<table tableName="AdminMenu" domainObjectName="AdminMenu">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="iMenuId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="iMenuId" property="menuId"/>
+			<columnOverride column="iPermId" property="permId"/>
+			<columnOverride column="vMenuName" property="menuName"/>
+			<columnOverride column="iIsRootNavi" property="isRootNavi"/>
+			<columnOverride column="iParentMenuId" property="parentMenuId"/>
+			<columnOverride column="vUrl" property="url"/>
+			<columnOverride column="iMenuOrder" property="menuOrder"/>
+		</table>
+		<!-- 管理员权限 -->
+		<table tableName="AdminPerm" domainObjectName="AdminPerm">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="iPermId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="iPermId" property="permId"/>
+			<columnOverride column="vPermName" property="permName"/>
+			<columnOverride column="vPermDesc" property="permDesc"/>
+			<columnOverride column="vPermCode" property="permCode"/>
+		</table>
+		<!-- 管理员角色 -->
+		<table tableName="AdminRole" domainObjectName="AdminRole">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="iRoleId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="iRoleId" property="roleId"/>
+			<columnOverride column="vRoleName" property="roleName"/>
+			<columnOverride column="vRoleDesc" property="roleDesc"/>
+			<columnOverride column="vRoleCode" property="roleCode"/>
+		</table>
+		<!-- 管理员角色权限 -->
+		<table tableName="AdminRolePerm" domainObjectName="AdminRolePerm">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="iRolePermId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="iRolePermId" property="rolePermId"/>
+			<columnOverride column="iRoleId" property="roleId"/>
+			<columnOverride column="iPermId" property="permId"/>
+		</table>
+		<!-- 管理员用户 -->
+		<table tableName="AdminUser" domainObjectName="AdminUser">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="vAdminUser" property="adminUser"/>
+			<columnOverride column="vAdminPassword" property="adminPassword"/>
+			<columnOverride column="cPasswordSalt" property="passwordSalt"/>
+			<columnOverride column="isSa" property="isSa"/>
+		</table>
+		<!-- 管理员用户角色 -->
+		<table tableName="AdminUserRole" domainObjectName="AdminUserRole">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="iUserRoleId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="iUserRoleId" property="userRoleId"/>
+			<columnOverride column="vAdminUser" property="adminUser"/>
+			<columnOverride column="iRoleId" property="roleId"/>
+		</table>
+		<!-- 地区 -->
+		<table tableName="Area" domainObjectName="Area">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="iAreaId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="iAreaId" property="areaId"/>
+			<columnOverride column="iParentAreaId" property="parentAreaId"/>
+			<columnOverride column="vAreaName" property="areaName"/>
+		</table>
+		<!-- 心得信息 -->
+		<table tableName="CommentInfo" domainObjectName="CommentInfo">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="bCommentId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="bCommentId" property="commentId"/>
+			<columnOverride column="bUserId" property="userId"/>
+			<columnOverride column="bProductId" property="productId"/>
+			<columnOverride column="vArticleTitle" property="articleTitle"/>
+			<columnOverride column="tContent" property="content"/>
+			<columnOverride column="vArticlaMark" property="articlaMark"/>
+			<columnOverride column="fWorthMark" property="worthMark"/>
+			<columnOverride column="vBuyWay" property="buyWay"/>
+			<columnOverride column="dSendTime" property="sendTime"/>
+			<columnOverride column="iArticleState" property="articleState"/>
+			<columnOverride column="iReadCount" property="readCount"/>
+			<columnOverride column="iLoveCount" property="loveCount"/>
+			<columnOverride column="iUpCount" property="upCount"/>
+		</table>
+		<!-- 心得回复 -->
+		<table tableName="CommentReply" domainObjectName="CommentReply">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="bReplyId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="bReplyId" property="replyId"/>
+			<columnOverride column="bArticleId" property="articleId"/>
+			<columnOverride column="bParentCommentId" property="parentCommentId"/>
+			<columnOverride column="bUserId" property="userId"/>
+			<columnOverride column="vReplyDetail" property="replyDetail"/>
+			<columnOverride column="dReplyTime" property="replyTime"/>
+			<columnOverride column="iReportCount" property="reportCount"/>
+		</table>
+		<!-- 心得举报记录 -->
+		<table tableName="CommentReportRecord" domainObjectName="CommentReportRecord">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="bReportRecordId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="bReportRecordId" property="reportRecordId"/>
+			<columnOverride column="bCommentId" property="commentId"/>
+			<columnOverride column="bUserId" property="userId"/>
+			<columnOverride column="vReportContent" property="reportContent"/>
+			<columnOverride column="dReportTime" property="reportTime"/>
+		</table>
+		<!-- 化妆品分类 -->
+		<table tableName="CosmeticClass" domainObjectName="CosmeticClass">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="bClassId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="bClassId" property="classId"/>
+			<columnOverride column="vClassName" property="className"/>
+		</table>
+		<!-- 消息详情 -->
+		<table tableName="MessageInfo" domainObjectName="MessageInfo">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="lMessageId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="lMessageId" property="reportRecordId"/>
+			<columnOverride column="bUserId" property="commentId"/>
+			<columnOverride column="vContent" property="userId"/>
+			<columnOverride column="cMessageType" property="reportContent"/>
+			<columnOverride column="dMessageTime" property="reportTime"/>
+		</table>
+		<!-- 消息状态 -->
+		<table tableName="MessageStatus" domainObjectName="MessageStatus">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="lStatusId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="lStatusId" property="statusId"/>
+			<columnOverride column="bUserId" property="userId"/>
+			<columnOverride column="lMessageId" property="messageId"/>
+			<columnOverride column="cMessageStatus" property="messageStatus"/>
+		</table>
+		<!-- 产品品牌 -->
+		<table tableName="ProductBrand" domainObjectName="ProductBrand">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="iBrandId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="iBrandId" property="brandId"/>
+			<columnOverride column="vBrandName" property="brandName"/>
+		</table>
+		<!-- 产品功效 -->
+		<table tableName="ProductEffect" domainObjectName="ProductEffect">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="iEffectId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="iEffectId" property="effectId"/>
+			<columnOverride column="vEffectName" property="effectName"/>
+		</table>
+		<!-- 产品信息 -->
+		<table tableName="ProductInfo" domainObjectName="ProductInfo">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="bProductId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="bProductId" property="productId"/>
+			<columnOverride column="vProductName" property="productName"/>
+			<columnOverride column="iBrand" property="brand"/>
+			<columnOverride column="iClassify" property="classify"/>
+			<columnOverride column="iProperty" property="property"/>
+			<columnOverride column="iEffect" property="effect"/>
+			<columnOverride column="vSpec" property="spec"/>
+			<columnOverride column="dComeInDate" property="comeInDate"/>
+			<columnOverride column="fReferencePrice" property="referencePrice"/>
+			<columnOverride column="tDesc" property="desc"/>
+			<columnOverride column="fWorthCount" property="worthCount"/>
+		</table>
+		<!-- 产品图片 -->
+		<table tableName="ProductPicture" domainObjectName="ProductPicture">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="bPicId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="bPicId" property="picId"/>
+			<columnOverride column="bProductId" property="productId"/>
+			<columnOverride column="vPictureUrl" property="pictureUrl"/>
+		</table>
+		<!-- 产品属性 -->
+		<table tableName="ProductProperty" domainObjectName="ProductProperty">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="iPropertyId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="iPropertyId" property="propertyId"/>
+			<columnOverride column="vPropertyName" property="propertyName"/>
+		</table>
+		<!-- 回复举报记录 -->
+		<table tableName="ReplyReportRecord" domainObjectName="ReplyReportRecord">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="bRecordId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="bRecordId" property="recordId"/>
+			<columnOverride column="bReplyId" property="replyId"/>
+			<columnOverride column="bUserId" property="userId"/>
+		</table>
+		<!-- 用户产品关注记录 -->
+		<table tableName="UserFollowClass" domainObjectName="UserFollowClass">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="bUserClassId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="bUserClassId" property="userClassId"/>
+			<columnOverride column="bClassId" property="classId"/>
+			<columnOverride column="bUserId" property="userId"/>
+		</table>
+		<!-- 用户产品分类关注记录 -->
+		<table tableName="UserFollowProduct" domainObjectName="UserFollowProduct">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="bUserProductId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="bUserProductId" property="userProductId"/>
+			<columnOverride column="bProductId" property="productId"/>
+			<columnOverride column="bUserId" property="userId"/>
+			<columnOverride column="dFollowTime" property="followTime"/>
+		</table>
+		<!-- 用户用户关注记录 -->
+		<table tableName="UserFollowUser" domainObjectName="UserFollowUser">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="bUserUserId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="bUserUserId" property="userUserId"/>
+			<columnOverride column="bUserId" property="userId"/>
+			<columnOverride column="bFollowedUserId" property="followedUserId"/>
+		</table>
+		<!-- 用户信息 -->
+		<table tableName="UserInfo" domainObjectName="UserInfo">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="bUserId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="bUserId" property="userId"/>
+			<columnOverride column="vUserName" property="userName"/>
+			<columnOverride column="vPassword" property="password"/>
+			<columnOverride column="cPasswordSalt" property="passwordSalt"/>
+			<columnOverride column="vNickname" property="nickname"/>
+			<columnOverride column="cGender" property="gender"/>
+			<columnOverride column="vSkinTexture" property="skinTexture"/>
+			<columnOverride column="iAge" property="age"/>
+			<columnOverride column="iAreaId" property="areaId"/>
+			<columnOverride column="vIntroduction" property="introduction"/>
+			<columnOverride column="vPortrait" property="portrait"/>
+			<columnOverride column="cPhone" property="phone"/>
+			<columnOverride column="vEmail" property="email"/>
+			<columnOverride column="cActivationCode" property="activationCode"/>
+			<columnOverride column="vUserState" property="userState"/>
+			<columnOverride column="iMembershipPoint" property="membershipPoint"/>
+			<columnOverride column="iMemberLevel" property="memberLevel"/>
+			<columnOverride column="dRegisterTime" property="registerTime"/>
+			<columnOverride column="dLastLoginTime" property="lastLoginTime"/>
+		</table>
+		<!-- 用户用户举报记录 -->
+		<table tableName="UserReportRecord" domainObjectName="UserReportRecord">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="bReportId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="bReportId" property="reportId"/>
+			<columnOverride column="bUserId" property="userId"/>
+			<columnOverride column="bReportUserId" property="reportUserId"/>
+			<columnOverride column="vReportDetail" property="reportDetail"/>
+			<columnOverride column="dReportTime" property="reportTime"/>
+		</table>
+		<!-- 用户心得点赞记录 -->
+		<table tableName="UserUpRecord" domainObjectName="UserUpRecord">
+			<!-- 如果设置为true，生成的model类会直接使用column本身的名字，而不会再使用驼峰命名方法，比如BORN_DATE，生成的属性名字就是BORN_DATE,而不会是bornDate -->
+        	<property name="useActualColumnNames" value="false"/>
+        	<!-- 生成主键的方法 -->
+			<generatedKey column="bLoveRecordId" sqlStatement="JDBC"/>
+			<!-- 修改列属性 -->
+			<columnOverride column="bUpRecordId" property="upRecordId"/>
+			<columnOverride column="bCommentId" property="commentId"/>
+			<columnOverride column="bUserId" property="userId"/>
+			<columnOverride column="dUpTime" property="upTime"/>
+		</table>
+	</context>
+</generatorConfiguration>

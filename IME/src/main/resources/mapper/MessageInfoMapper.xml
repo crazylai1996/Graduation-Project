@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gdou.laiminghai.ime.mapper.MessageInfoMapper">
+  <resultMap id="BaseResultMap" type="MessageInfo">
+    <id column="lMessageId" jdbcType="BIGINT" property="reportRecordId" />
+    <result column="bUserId" jdbcType="BIGINT" property="commentId" />
+    <result column="vContent" jdbcType="VARCHAR" property="userId" />
+    <result column="cMessageType" jdbcType="CHAR" property="reportContent" />
+    <result column="dMessageTime" jdbcType="TIMESTAMP" property="reportTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from messageinfo
+    where lMessageId = #{reportRecordId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="lMessageId" keyProperty="reportRecordId" parameterType="MessageInfo" useGeneratedKeys="true">
+    insert into messageinfo (bUserId, vContent, cMessageType, 
+      dMessageTime)
+    values (#{commentId,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{reportContent,jdbcType=CHAR}, 
+      #{reportTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="MessageInfo">
+    update messageinfo
+    set bUserId = #{commentId,jdbcType=BIGINT},
+      vContent = #{userId,jdbcType=VARCHAR},
+      cMessageType = #{reportContent,jdbcType=CHAR},
+      dMessageTime = #{reportTime,jdbcType=TIMESTAMP}
+    where lMessageId = #{reportRecordId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select lMessageId, bUserId, vContent, cMessageType, dMessageTime
+    from messageinfo
+    where lMessageId = #{reportRecordId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select lMessageId, bUserId, vContent, cMessageType, dMessageTime
+    from messageinfo
+  </select>
+</mapper>

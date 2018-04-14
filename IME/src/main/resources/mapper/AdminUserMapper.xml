@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gdou.laiminghai.ime.mapper.AdminUserMapper">
+  <resultMap id="BaseResultMap" type="AdminUser">
+    <id column="vAdminUser" jdbcType="VARCHAR" property="adminUser" />
+    <result column="vAdminPassword" jdbcType="VARCHAR" property="adminPassword" />
+    <result column="cPasswordSalt" jdbcType="CHAR" property="passwordSalt" />
+    <result column="isSa" jdbcType="INTEGER" property="isSa" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from adminuser
+    where vAdminUser = #{adminUser,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="AdminUser">
+    insert into adminuser (vAdminUser, vAdminPassword, cPasswordSalt, 
+      isSa)
+    values (#{adminUser,jdbcType=VARCHAR}, #{adminPassword,jdbcType=VARCHAR}, #{passwordSalt,jdbcType=CHAR}, 
+      #{isSa,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="AdminUser">
+    update adminuser
+    set vAdminPassword = #{adminPassword,jdbcType=VARCHAR},
+      cPasswordSalt = #{passwordSalt,jdbcType=CHAR},
+      isSa = #{isSa,jdbcType=INTEGER}
+    where vAdminUser = #{adminUser,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select vAdminUser, vAdminPassword, cPasswordSalt, isSa
+    from adminuser
+    where vAdminUser = #{adminUser,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select vAdminUser, vAdminPassword, cPasswordSalt, isSa
+    from adminuser
+  </select>
+</mapper>

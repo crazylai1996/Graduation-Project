@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gdou.laiminghai.ime.mapper.ReplyReportRecordMapper">
+  <resultMap id="BaseResultMap" type="ReplyReportRecord">
+    <id column="bRecordId" jdbcType="BIGINT" property="recordId" />
+    <result column="bReplyId" jdbcType="BIGINT" property="replyId" />
+    <result column="bUserId" jdbcType="BIGINT" property="userId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from replyreportrecord
+    where bRecordId = #{recordId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="bRecordId" keyProperty="recordId" parameterType="ReplyReportRecord" useGeneratedKeys="true">
+    insert into replyreportrecord (bReplyId, bUserId)
+    values (#{replyId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="ReplyReportRecord">
+    update replyreportrecord
+    set bReplyId = #{replyId,jdbcType=BIGINT},
+      bUserId = #{userId,jdbcType=BIGINT}
+    where bRecordId = #{recordId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select bRecordId, bReplyId, bUserId
+    from replyreportrecord
+    where bRecordId = #{recordId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select bRecordId, bReplyId, bUserId
+    from replyreportrecord
+  </select>
+</mapper>

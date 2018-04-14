@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gdou.laiminghai.ime.mapper.UserFollowProductMapper">
+  <resultMap id="BaseResultMap" type="UserFollowProduct">
+    <id column="bUserProductId" jdbcType="BIGINT" property="userProductId" />
+    <result column="bProductId" jdbcType="BIGINT" property="productId" />
+    <result column="bUserId" jdbcType="BIGINT" property="userId" />
+    <result column="dFollowTime" jdbcType="TIMESTAMP" property="followTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from userfollowproduct
+    where bUserProductId = #{userProductId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="bUserProductId" keyProperty="userProductId" parameterType="UserFollowProduct" useGeneratedKeys="true">
+    insert into userfollowproduct (bProductId, bUserId, dFollowTime
+      )
+    values (#{productId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{followTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="UserFollowProduct">
+    update userfollowproduct
+    set bProductId = #{productId,jdbcType=BIGINT},
+      bUserId = #{userId,jdbcType=BIGINT},
+      dFollowTime = #{followTime,jdbcType=TIMESTAMP}
+    where bUserProductId = #{userProductId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select bUserProductId, bProductId, bUserId, dFollowTime
+    from userfollowproduct
+    where bUserProductId = #{userProductId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select bUserProductId, bProductId, bUserId, dFollowTime
+    from userfollowproduct
+  </select>
+</mapper>

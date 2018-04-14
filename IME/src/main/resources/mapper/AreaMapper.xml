@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gdou.laiminghai.ime.mapper.AreaMapper">
+  <resultMap id="BaseResultMap" type="Area">
+    <id column="iAreaId" jdbcType="INTEGER" property="areaId" />
+    <result column="iParentAreaId" jdbcType="INTEGER" property="parentAreaId" />
+    <result column="vAreaName" jdbcType="VARCHAR" property="areaName" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from area
+    where iAreaId = #{areaId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="iAreaId" keyProperty="areaId" parameterType="Area" useGeneratedKeys="true">
+    insert into area (iParentAreaId, vAreaName)
+    values (#{parentAreaId,jdbcType=INTEGER}, #{areaName,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="Area">
+    update area
+    set iParentAreaId = #{parentAreaId,jdbcType=INTEGER},
+      vAreaName = #{areaName,jdbcType=VARCHAR}
+    where iAreaId = #{areaId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select iAreaId, iParentAreaId, vAreaName
+    from area
+    where iAreaId = #{areaId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select iAreaId, iParentAreaId, vAreaName
+    from area
+  </select>
+</mapper>

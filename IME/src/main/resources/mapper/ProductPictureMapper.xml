@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gdou.laiminghai.ime.mapper.ProductPictureMapper">
+  <resultMap id="BaseResultMap" type="ProductPicture">
+    <id column="bPicId" jdbcType="BIGINT" property="picId" />
+    <result column="bProductId" jdbcType="BIGINT" property="productId" />
+    <result column="vPictureUrl" jdbcType="VARCHAR" property="pictureUrl" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from productpicture
+    where bPicId = #{picId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="bPicId" keyProperty="picId" parameterType="ProductPicture" useGeneratedKeys="true">
+    insert into productpicture (bProductId, vPictureUrl)
+    values (#{productId,jdbcType=BIGINT}, #{pictureUrl,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="ProductPicture">
+    update productpicture
+    set bProductId = #{productId,jdbcType=BIGINT},
+      vPictureUrl = #{pictureUrl,jdbcType=VARCHAR}
+    where bPicId = #{picId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select bPicId, bProductId, vPictureUrl
+    from productpicture
+    where bPicId = #{picId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select bPicId, bProductId, vPictureUrl
+    from productpicture
+  </select>
+</mapper>

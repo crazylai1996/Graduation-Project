@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gdou.laiminghai.ime.mapper.AdminMenuMapper">
+  <resultMap id="BaseResultMap" type="AdminMenu">
+    <id column="iMenuId" jdbcType="INTEGER" property="menuId" />
+    <result column="iPermId" jdbcType="INTEGER" property="permId" />
+    <result column="vMenuName" jdbcType="VARCHAR" property="menuName" />
+    <result column="iIsRootNavi" jdbcType="INTEGER" property="isRootNavi" />
+    <result column="iParentMenuId" jdbcType="INTEGER" property="parentMenuId" />
+    <result column="vUrl" jdbcType="VARCHAR" property="url" />
+    <result column="iMenuOrder" jdbcType="INTEGER" property="menuOrder" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from adminmenu
+    where iMenuId = #{menuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="iMenuId" keyProperty="menuId" parameterType="AdminMenu" useGeneratedKeys="true">
+    insert into adminmenu (iPermId, vMenuName, iIsRootNavi, 
+      iParentMenuId, vUrl, iMenuOrder
+      )
+    values (#{permId,jdbcType=INTEGER}, #{menuName,jdbcType=VARCHAR}, #{isRootNavi,jdbcType=INTEGER}, 
+      #{parentMenuId,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{menuOrder,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="AdminMenu">
+    update adminmenu
+    set iPermId = #{permId,jdbcType=INTEGER},
+      vMenuName = #{menuName,jdbcType=VARCHAR},
+      iIsRootNavi = #{isRootNavi,jdbcType=INTEGER},
+      iParentMenuId = #{parentMenuId,jdbcType=INTEGER},
+      vUrl = #{url,jdbcType=VARCHAR},
+      iMenuOrder = #{menuOrder,jdbcType=INTEGER}
+    where iMenuId = #{menuId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select iMenuId, iPermId, vMenuName, iIsRootNavi, iParentMenuId, vUrl, iMenuOrder
+    from adminmenu
+    where iMenuId = #{menuId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select iMenuId, iPermId, vMenuName, iIsRootNavi, iParentMenuId, vUrl, iMenuOrder
+    from adminmenu
+  </select>
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gdou.laiminghai.ime.mapper.CommentReplyMapper">
+  <resultMap id="BaseResultMap" type="CommentReply">
+    <id column="bReplyId" jdbcType="BIGINT" property="replyId" />
+    <result column="bArticleId" jdbcType="BIGINT" property="articleId" />
+    <result column="bParentCommentId" jdbcType="BIGINT" property="parentCommentId" />
+    <result column="bUserId" jdbcType="BIGINT" property="userId" />
+    <result column="vReplyDetail" jdbcType="VARCHAR" property="replyDetail" />
+    <result column="dReplyTime" jdbcType="TIMESTAMP" property="replyTime" />
+    <result column="iReportCount" jdbcType="INTEGER" property="reportCount" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from commentreply
+    where bReplyId = #{replyId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="bReplyId" keyProperty="replyId" parameterType="CommentReply" useGeneratedKeys="true">
+    insert into commentreply (bArticleId, bParentCommentId, bUserId, 
+      vReplyDetail, dReplyTime, iReportCount
+      )
+    values (#{articleId,jdbcType=BIGINT}, #{parentCommentId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{replyDetail,jdbcType=VARCHAR}, #{replyTime,jdbcType=TIMESTAMP}, #{reportCount,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="CommentReply">
+    update commentreply
+    set bArticleId = #{articleId,jdbcType=BIGINT},
+      bParentCommentId = #{parentCommentId,jdbcType=BIGINT},
+      bUserId = #{userId,jdbcType=BIGINT},
+      vReplyDetail = #{replyDetail,jdbcType=VARCHAR},
+      dReplyTime = #{replyTime,jdbcType=TIMESTAMP},
+      iReportCount = #{reportCount,jdbcType=INTEGER}
+    where bReplyId = #{replyId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select bReplyId, bArticleId, bParentCommentId, bUserId, vReplyDetail, dReplyTime, 
+    iReportCount
+    from commentreply
+    where bReplyId = #{replyId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select bReplyId, bArticleId, bParentCommentId, bUserId, vReplyDetail, dReplyTime, 
+    iReportCount
+    from commentreply
+  </select>
+</mapper>

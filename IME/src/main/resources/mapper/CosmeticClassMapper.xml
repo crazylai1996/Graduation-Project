@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gdou.laiminghai.ime.mapper.CosmeticClassMapper">
+  <resultMap id="BaseResultMap" type="CosmeticClass">
+    <id column="bClassId" jdbcType="INTEGER" property="classId" />
+    <result column="vClassName" jdbcType="VARCHAR" property="className" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cosmeticclass
+    where bClassId = #{classId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="bClassId" keyProperty="classId" parameterType="CosmeticClass" useGeneratedKeys="true">
+    insert into cosmeticclass (vClassName)
+    values (#{className,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="CosmeticClass">
+    update cosmeticclass
+    set vClassName = #{className,jdbcType=VARCHAR}
+    where bClassId = #{classId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select bClassId, vClassName
+    from cosmeticclass
+    where bClassId = #{classId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select bClassId, vClassName
+    from cosmeticclass
+  </select>
+</mapper>

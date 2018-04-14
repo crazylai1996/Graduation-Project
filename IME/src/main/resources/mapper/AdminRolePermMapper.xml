@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gdou.laiminghai.ime.mapper.AdminRolePermMapper">
+  <resultMap id="BaseResultMap" type="AdminRolePerm">
+    <id column="iRolePermId" jdbcType="INTEGER" property="rolePermId" />
+    <result column="iRoleId" jdbcType="INTEGER" property="roleId" />
+    <result column="iPermId" jdbcType="INTEGER" property="permId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from adminroleperm
+    where iRolePermId = #{rolePermId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="iRolePermId" keyProperty="rolePermId" parameterType="AdminRolePerm" useGeneratedKeys="true">
+    insert into adminroleperm (iRoleId, iPermId)
+    values (#{roleId,jdbcType=INTEGER}, #{permId,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="AdminRolePerm">
+    update adminroleperm
+    set iRoleId = #{roleId,jdbcType=INTEGER},
+      iPermId = #{permId,jdbcType=INTEGER}
+    where iRolePermId = #{rolePermId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select iRolePermId, iRoleId, iPermId
+    from adminroleperm
+    where iRolePermId = #{rolePermId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select iRolePermId, iRoleId, iPermId
+    from adminroleperm
+  </select>
+</mapper>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gdou.laiminghai.ime.mapper.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="UserInfo">
+    <id column="bUserId" jdbcType="BIGINT" property="userId" />
+    <result column="vUserName" jdbcType="VARCHAR" property="userName" />
+    <result column="vPassword" jdbcType="VARCHAR" property="password" />
+    <result column="cPasswordSalt" jdbcType="CHAR" property="passwordSalt" />
+    <result column="vNickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="cGender" jdbcType="CHAR" property="gender" />
+    <result column="vSkinTexture" jdbcType="VARCHAR" property="skinTexture" />
+    <result column="iAge" jdbcType="INTEGER" property="age" />
+    <result column="iAreaId" jdbcType="INTEGER" property="areaId" />
+    <result column="vIntroduction" jdbcType="VARCHAR" property="introduction" />
+    <result column="vPortrait" jdbcType="VARCHAR" property="portrait" />
+    <result column="cPhone" jdbcType="CHAR" property="phone" />
+    <result column="vEmail" jdbcType="VARCHAR" property="email" />
+    <result column="cActivationCode" jdbcType="CHAR" property="activationCode" />
+    <result column="vUserState" jdbcType="VARCHAR" property="userState" />
+    <result column="iMembershipPoint" jdbcType="INTEGER" property="membershipPoint" />
+    <result column="iMemberLevel" jdbcType="INTEGER" property="memberLevel" />
+    <result column="dRegisterTime" jdbcType="TIMESTAMP" property="registerTime" />
+    <result column="dLastLoginTime" jdbcType="TIMESTAMP" property="lastLoginTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from userinfo
+    where bUserId = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="bUserId" keyProperty="userId" parameterType="UserInfo" useGeneratedKeys="true">
+    insert into userinfo (vUserName, vPassword, cPasswordSalt, 
+      vNickname, cGender, vSkinTexture, 
+      iAge, iAreaId, vIntroduction, 
+      vPortrait, cPhone, vEmail, 
+      cActivationCode, vUserState, iMembershipPoint, 
+      iMemberLevel, dRegisterTime, dLastLoginTime
+      )
+    values (#{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{passwordSalt,jdbcType=CHAR}, 
+      #{nickname,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, #{skinTexture,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{areaId,jdbcType=INTEGER}, #{introduction,jdbcType=VARCHAR}, 
+      #{portrait,jdbcType=VARCHAR}, #{phone,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, 
+      #{activationCode,jdbcType=CHAR}, #{userState,jdbcType=VARCHAR}, #{membershipPoint,jdbcType=INTEGER}, 
+      #{memberLevel,jdbcType=INTEGER}, #{registerTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="UserInfo">
+    update userinfo
+    set vUserName = #{userName,jdbcType=VARCHAR},
+      vPassword = #{password,jdbcType=VARCHAR},
+      cPasswordSalt = #{passwordSalt,jdbcType=CHAR},
+      vNickname = #{nickname,jdbcType=VARCHAR},
+      cGender = #{gender,jdbcType=CHAR},
+      vSkinTexture = #{skinTexture,jdbcType=VARCHAR},
+      iAge = #{age,jdbcType=INTEGER},
+      iAreaId = #{areaId,jdbcType=INTEGER},
+      vIntroduction = #{introduction,jdbcType=VARCHAR},
+      vPortrait = #{portrait,jdbcType=VARCHAR},
+      cPhone = #{phone,jdbcType=CHAR},
+      vEmail = #{email,jdbcType=VARCHAR},
+      cActivationCode = #{activationCode,jdbcType=CHAR},
+      vUserState = #{userState,jdbcType=VARCHAR},
+      iMembershipPoint = #{membershipPoint,jdbcType=INTEGER},
+      iMemberLevel = #{memberLevel,jdbcType=INTEGER},
+      dRegisterTime = #{registerTime,jdbcType=TIMESTAMP},
+      dLastLoginTime = #{lastLoginTime,jdbcType=TIMESTAMP}
+    where bUserId = #{userId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select bUserId, vUserName, vPassword, cPasswordSalt, vNickname, cGender, vSkinTexture, 
+    iAge, iAreaId, vIntroduction, vPortrait, cPhone, vEmail, cActivationCode, vUserState, 
+    iMembershipPoint, iMemberLevel, dRegisterTime, dLastLoginTime
+    from userinfo
+    where bUserId = #{userId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select bUserId, vUserName, vPassword, cPasswordSalt, vNickname, cGender, vSkinTexture, 
+    iAge, iAreaId, vIntroduction, vPortrait, cPhone, vEmail, cActivationCode, vUserState, 
+    iMembershipPoint, iMemberLevel, dRegisterTime, dLastLoginTime
+    from userinfo
+  </select>
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gdou.laiminghai.ime.mapper.UserFollowUserMapper">
+  <resultMap id="BaseResultMap" type="UserFollowUser">
+    <id column="bUserUserId" jdbcType="BIGINT" property="userUserId" />
+    <result column="bUserId" jdbcType="BIGINT" property="userId" />
+    <result column="bFollowedUserId" jdbcType="BIGINT" property="followedUserId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from userfollowuser
+    where bUserUserId = #{userUserId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="bUserUserId" keyProperty="userUserId" parameterType="UserFollowUser" useGeneratedKeys="true">
+    insert into userfollowuser (bUserId, bFollowedUserId)
+    values (#{userId,jdbcType=BIGINT}, #{followedUserId,jdbcType=BIGINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="UserFollowUser">
+    update userfollowuser
+    set bUserId = #{userId,jdbcType=BIGINT},
+      bFollowedUserId = #{followedUserId,jdbcType=BIGINT}
+    where bUserUserId = #{userUserId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select bUserUserId, bUserId, bFollowedUserId
+    from userfollowuser
+    where bUserUserId = #{userUserId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select bUserUserId, bUserId, bFollowedUserId
+    from userfollowuser
+  </select>
+</mapper>

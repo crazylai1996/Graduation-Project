@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gdou.laiminghai.ime.mapper.CommentReportRecordMapper">
+  <resultMap id="BaseResultMap" type="CommentReportRecord">
+    <id column="bReportRecordId" jdbcType="BIGINT" property="reportRecordId" />
+    <result column="bCommentId" jdbcType="BIGINT" property="commentId" />
+    <result column="bUserId" jdbcType="BIGINT" property="userId" />
+    <result column="vReportContent" jdbcType="VARCHAR" property="reportContent" />
+    <result column="dReportTime" jdbcType="TIMESTAMP" property="reportTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from commentreportrecord
+    where bReportRecordId = #{reportRecordId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="bReportRecordId" keyProperty="reportRecordId" parameterType="CommentReportRecord" useGeneratedKeys="true">
+    insert into commentreportrecord (bCommentId, bUserId, vReportContent, 
+      dReportTime)
+    values (#{commentId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{reportContent,jdbcType=VARCHAR}, 
+      #{reportTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="CommentReportRecord">
+    update commentreportrecord
+    set bCommentId = #{commentId,jdbcType=BIGINT},
+      bUserId = #{userId,jdbcType=BIGINT},
+      vReportContent = #{reportContent,jdbcType=VARCHAR},
+      dReportTime = #{reportTime,jdbcType=TIMESTAMP}
+    where bReportRecordId = #{reportRecordId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select bReportRecordId, bCommentId, bUserId, vReportContent, dReportTime
+    from commentreportrecord
+    where bReportRecordId = #{reportRecordId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select bReportRecordId, bCommentId, bUserId, vReportContent, dReportTime
+    from commentreportrecord
+  </select>
+</mapper>
