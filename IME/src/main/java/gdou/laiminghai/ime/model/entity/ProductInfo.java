@@ -14,6 +14,8 @@ public class ProductInfo {
     private Integer property;
 
     private Integer effect;
+    
+    private String skinTexture;
 
     private String spec;
 
@@ -73,7 +75,15 @@ public class ProductInfo {
         this.effect = effect;
     }
 
-    public String getSpec() {
+    public String getSkinTexture() {
+		return skinTexture;
+	}
+
+	public void setSkinTexture(String skinTexture) {
+		this.skinTexture = skinTexture == null ? null : skinTexture.trim();
+	}
+
+	public String getSpec() {
         return spec;
     }
 
