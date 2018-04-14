@@ -72,7 +72,7 @@
 	
 	<!-- 配置扫描Dao接口包，动态实现Dao接口，注入到spring容器中 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="gdou.laiminghai.ime.mapper" />
+		<property name="basePackage" value="gdou.laiminghai.ime.dao.mapper" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 	

@@ -1,4 +1,4 @@
-package gdou.laiminghai.ime.mapper;
+package gdou.laiminghai.ime.dao.mapper;
 
 import gdou.laiminghai.ime.model.entity.AdminMenu;
 import java.util.List;
