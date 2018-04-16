@@ -280,6 +280,7 @@ body {
   font-size: 14px;
   text-decoration: none;
   text-align: center;
+  transition: all 0.2s ease-in-out;
 }
 .order-navi li a:hover {
   color: #cc99cc;
