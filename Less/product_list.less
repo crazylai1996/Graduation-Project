@@ -21,6 +21,7 @@
 
   width: @_width;
   box-sizing: border-box;
+  margin-top: 2 * @div_margin;
 }
 /**
  * 主-右
@@ -33,6 +34,7 @@
   width: @_width;
   margin-left: 20px;
   box-sizing: border-box;
+  margin-top: 2 * @div_margin;
 }
 /*
  * 产品属性过滤标签
@@ -151,7 +153,6 @@
 
   width: 100%;
   height: @_height;
-  margin-top: 2 * @div_margin;
 
   font-size: 0;
 
@@ -189,7 +190,7 @@
       text-decoration: none;
       text-align: center;
 
-      transition: all .2s ease-in-out;
+      transition: color .2s ease-in-out;
 
       &:hover{
         color: @main_color;
@@ -206,6 +207,172 @@
           .triangle(top,6px,@main_color);
         }
       }
+    }
+  }
+}
+/**
+ * 产品列表
+ */
+.product-list{
+  .horizontal_ul();
+
+  li{
+    @_height: 180px;
+
+    height: @_height;
+    margin: 8px 0;
+    padding-bottom: 5px;
+
+    border-bottom: solid .5px lighten(@border_color,10%);
+  }
+}
+/**
+ * [产品列表项]
+ */
+.product-item{
+  width: 100%;
+
+  .left{
+    @_width: 220px;
+
+    float: left;
+
+    width: @_width;
+    height: 100%;
+  }
+  .right{
+    @_width: 505px;
+
+    float: left;
+
+    width: @_width;
+    height: 100%;
+    margin-left: 15px;
+
+    p{
+      margin: 5px 0;
+    }
+  }
+  //产品图片
+  .product-img-wrapped{
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    img{
+      @_width: 120px;
+
+      width: @_width;
+      margin: auto;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background-color: red;
+    }
+  }
+  //产品名称
+  .product-name{
+    color: @font_strong_color;
+    font-size: 16px;
+    text-decoration: none;
+
+    transition: all .2s ease-in-out;
+
+    &:hover{
+      color: @main_color;
+    }
+  }
+  //产品综合评分
+  .rating-p{
+    .rating-label{
+      font-size: 12px;
+      color: @font_strong_color;
+    }
+    .rating-wrapped{
+      display: inline-block;
+      padding-left: 10px;
+    }
+  }
+  .smaller-p{
+    font-size: 12px;
+    .p-label{
+      color: @desc_strong_color;
+    }
+    .p-value{
+      margin: 0 5px;
+      color: @main_color;
+    }
+  }
+  //产品描述
+  .product-desc{
+    padding: 5px;
+
+    line-height: 20px;
+    font-size: 12px;
+    color: @font_strong_color;
+
+    background-color: @grey_bg_strong_color;
+
+    a{
+      color: @desc_strong_color;
+      text-decoration: none;
+    }
+  }
+}
+/**
+ * [更多筛选条件]
+ */
+.comment-property-filter{
+  width: 100%;
+}
+/**
+ * [心得label]
+ */
+.comment-filter-label{
+  position: relative;
+  margin-top: 15px;
+
+  span{
+    @_height: 35px;
+
+    position: relative;
+    z-index: 2;
+    left: 80px;
+
+    display: inline-block;
+    width: 80px;
+    height: @_height;
+
+    line-height: @_height;
+    text-align: center;
+
+    background-color: @white_color;
+  }
+  &:before{
+    content: "";
+
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+
+    width: 100%;
+    height: 1.5px;
+
+    background-color: lighten(@border_color,8%);
+  }
+}
+/**
+ * [具体筛选项]
+ */
+.comment-filter-items{
+  .horizontal_ul();
+
+  width: 100%;
+  .item-list{
+    display: inline-block;
+
+    a-item{
+      float: left;
     }
   }
 }
