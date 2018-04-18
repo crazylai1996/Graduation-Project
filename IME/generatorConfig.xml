@@ -243,6 +243,7 @@
 			<columnOverride column="iClassify" property="classify"/>
 			<columnOverride column="iProperty" property="property"/>
 			<columnOverride column="iEffect" property="effect"/>
+			<columnOverride column="vSkinTexture" property="skinTexture"/>
 			<columnOverride column="vSpec" property="spec"/>
 			<columnOverride column="dComeInDate" property="comeInDate"/>
 			<columnOverride column="fReferencePrice" property="referencePrice"/>

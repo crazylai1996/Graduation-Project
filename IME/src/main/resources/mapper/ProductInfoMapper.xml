@@ -8,7 +8,7 @@
     <result column="iClassify" jdbcType="INTEGER" property="classify" />
     <result column="iProperty" jdbcType="INTEGER" property="property" />
     <result column="iEffect" jdbcType="INTEGER" property="effect" />
-    <result column="vSkinTexture" jdbcType="VARCHAR" property="vskintexture" />
+    <result column="vSkinTexture" jdbcType="VARCHAR" property="skinTexture" />
     <result column="vSpec" jdbcType="VARCHAR" property="spec" />
     <result column="dComeInDate" jdbcType="DATE" property="comeInDate" />
     <result column="fReferencePrice" jdbcType="REAL" property="referencePrice" />
@@ -29,7 +29,7 @@
       fWorthCount, bCommentCount, bBrowserCount, 
       bFollowCount, tDesc)
     values (#{productName,jdbcType=VARCHAR}, #{brand,jdbcType=INTEGER}, #{classify,jdbcType=INTEGER}, 
-      #{property,jdbcType=INTEGER}, #{effect,jdbcType=INTEGER}, #{vskintexture,jdbcType=VARCHAR}, 
+      #{property,jdbcType=INTEGER}, #{effect,jdbcType=INTEGER}, #{skinTexture,jdbcType=VARCHAR}, 
       #{spec,jdbcType=VARCHAR}, #{comeInDate,jdbcType=DATE}, #{referencePrice,jdbcType=REAL}, 
       #{worthCount,jdbcType=REAL}, #{commentCount,jdbcType=BIGINT}, #{browserCount,jdbcType=BIGINT}, 
       #{followCount,jdbcType=BIGINT}, #{desc,jdbcType=LONGVARCHAR})
@@ -41,7 +41,7 @@
       iClassify = #{classify,jdbcType=INTEGER},
       iProperty = #{property,jdbcType=INTEGER},
       iEffect = #{effect,jdbcType=INTEGER},
-      vSkinTexture = #{vskintexture,jdbcType=VARCHAR},
+      vSkinTexture = #{skinTexture,jdbcType=VARCHAR},
       vSpec = #{spec,jdbcType=VARCHAR},
       dComeInDate = #{comeInDate,jdbcType=DATE},
       fReferencePrice = #{referencePrice,jdbcType=REAL},

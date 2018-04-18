@@ -15,7 +15,7 @@ public class ProductInfo {
 
     private Integer effect;
 
-    private String vskintexture;
+    private String skinTexture;
 
     private String spec;
 
@@ -81,12 +81,12 @@ public class ProductInfo {
         this.effect = effect;
     }
 
-    public String getVskintexture() {
-        return vskintexture;
+    public String getSkintexture() {
+        return skinTexture;
     }
 
-    public void setVskintexture(String vskintexture) {
-        this.vskintexture = vskintexture == null ? null : vskintexture.trim();
+    public void setSkintexture(String skinTexture) {
+        this.skinTexture = skinTexture == null ? null : skinTexture.trim();
     }
 
     public String getSpec() {
