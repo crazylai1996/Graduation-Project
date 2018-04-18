@@ -368,11 +368,63 @@
   .horizontal_ul();
 
   width: 100%;
+  .title{
+    font-size: 14px;
+    color: @font_color;
+    text-align: center;
+  }
   .item-list{
     display: inline-block;
 
-    a-item{
+    dd{
       float: left;
+
+      width: 50%;
+    }
+    input[type='checkbox']{
+      margin-right: 5px;
+
+      vertical-align:  text-bottom;
+    }
+    a{
+      padding: 3px;
+
+      vertical-align: middle;
+      text-decoration: none;
+      color: @desc_color;
+
+      &:hover{
+        color: @white_color;
+
+        background-color: @main_color;
+      }
+    }
+  }
+}
+/**
+ * 筛选按钮
+ */
+.filter-btns{
+  margin-top: 8px;
+
+  text-align: center;
+
+  .filter-confirm-btn{
+    @_width: 120px;
+    @_height: 33px;
+
+    display: inline-block;
+    width: @_width;
+    height: @_height;
+
+    line-height: @_height;
+    text-decoration: none;
+    color: @white_color;
+
+    background-color: @font_strong_color;
+
+    &:hover{
+      background-color: @main_color;
     }
   }
 }

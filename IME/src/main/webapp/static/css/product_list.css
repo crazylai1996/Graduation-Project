@@ -427,9 +427,48 @@ body {
   list-style: none;
   width: 100%;
 }
+.comment-filter-items .title {
+  font-size: 14px;
+  color: #333333;
+  text-align: center;
+}
 .comment-filter-items .item-list {
   display: inline-block;
 }
-.comment-filter-items .item-list a-item {
+.comment-filter-items .item-list dd {
   float: left;
+  width: 50%;
+}
+.comment-filter-items .item-list input[type='checkbox'] {
+  margin-right: 5px;
+  vertical-align: text-bottom;
+}
+.comment-filter-items .item-list a {
+  padding: 3px;
+  vertical-align: middle;
+  text-decoration: none;
+  color: #999999;
+}
+.comment-filter-items .item-list a:hover {
+  color: #ffffff;
+  background-color: #cc99cc;
+}
+/**
+ * 筛选按钮
+ */
+.filter-btns {
+  margin-top: 8px;
+  text-align: center;
+}
+.filter-btns .filter-confirm-btn {
+  display: inline-block;
+  width: 120px;
+  height: 33px;
+  line-height: 33px;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #1a1a1a;
+}
+.filter-btns .filter-confirm-btn:hover {
+  background-color: #cc99cc;
 }
