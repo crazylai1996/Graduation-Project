@@ -23,7 +23,7 @@
 *.jar  
 *.rar  
 *.tar  
-*.zip  
+# *.zip  
 *.via
 *.tmp
 *.err 

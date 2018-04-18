@@ -1,0 +1,32 @@
+@import "mixin_style.less";
+@import "global_style.less";
+/*
+ *尾部
+ */
+.footer-wrapped{
+  @_height: 140px;
+  clear: both;
+
+  width: 100%;
+  height: @_height;
+}
+footer{
+  width: @global_width;
+  height: 100%;
+  margin: 0 auto;
+  padding-top: 10px;
+
+  text-align: center;
+  color: @desc_color;
+  font-size: 12px;
+
+  a{
+    padding: 0 4px;
+
+    color: @desc_strong_color;
+    font-size: 12px;
+    &:hover{
+      color: @main_strong_color;
+    }
+  }
+}

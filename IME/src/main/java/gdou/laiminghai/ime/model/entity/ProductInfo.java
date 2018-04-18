@@ -3,7 +3,7 @@ package gdou.laiminghai.ime.model.entity;
 import java.util.Date;
 
 public class ProductInfo {
-    private Long productId;
+	private Long productId;
 
     private String productName;
 
@@ -14,8 +14,8 @@ public class ProductInfo {
     private Integer property;
 
     private Integer effect;
-    
-    private String skinTexture;
+
+    private String vskintexture;
 
     private String spec;
 
@@ -24,6 +24,12 @@ public class ProductInfo {
     private Float referencePrice;
 
     private Float worthCount;
+
+    private Long commentCount;
+
+    private Long browserCount;
+
+    private Long followCount;
 
     private String desc;
 
@@ -75,15 +81,15 @@ public class ProductInfo {
         this.effect = effect;
     }
 
-    public String getSkinTexture() {
-		return skinTexture;
-	}
+    public String getVskintexture() {
+        return vskintexture;
+    }
 
-	public void setSkinTexture(String skinTexture) {
-		this.skinTexture = skinTexture == null ? null : skinTexture.trim();
-	}
+    public void setVskintexture(String vskintexture) {
+        this.vskintexture = vskintexture == null ? null : vskintexture.trim();
+    }
 
-	public String getSpec() {
+    public String getSpec() {
         return spec;
     }
 
@@ -113,6 +119,30 @@ public class ProductInfo {
 
     public void setWorthCount(Float worthCount) {
         this.worthCount = worthCount;
+    }
+
+    public Long getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Long commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    public Long getBrowserCount() {
+        return browserCount;
+    }
+
+    public void setBrowserCount(Long browserCount) {
+        this.browserCount = browserCount;
+    }
+
+    public Long getFollowCount() {
+        return followCount;
+    }
+
+    public void setFollowCount(Long followCount) {
+        this.followCount = followCount;
     }
 
     public String getDesc() {

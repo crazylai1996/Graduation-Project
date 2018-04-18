@@ -248,6 +248,9 @@
 			<columnOverride column="fReferencePrice" property="referencePrice"/>
 			<columnOverride column="tDesc" property="desc"/>
 			<columnOverride column="fWorthCount" property="worthCount"/>
+			<columnOverride column="bCommentCount" property="commentCount"/>
+			<columnOverride column="bBrowserCount" property="browserCount"/>
+			<columnOverride column="bFollowCount" property="followCount"/>
 		</table>
 		<!-- 产品图片 -->
 		<table tableName="ProductPicture" domainObjectName="ProductPicture">

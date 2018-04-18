@@ -8,11 +8,14 @@
     <result column="iClassify" jdbcType="INTEGER" property="classify" />
     <result column="iProperty" jdbcType="INTEGER" property="property" />
     <result column="iEffect" jdbcType="INTEGER" property="effect" />
-    <result column="vSkinTexture" jdbcType="VARCHAR" property="skinTexture"/>
+    <result column="vSkinTexture" jdbcType="VARCHAR" property="vskintexture" />
     <result column="vSpec" jdbcType="VARCHAR" property="spec" />
     <result column="dComeInDate" jdbcType="DATE" property="comeInDate" />
     <result column="fReferencePrice" jdbcType="REAL" property="referencePrice" />
     <result column="fWorthCount" jdbcType="REAL" property="worthCount" />
+    <result column="bCommentCount" jdbcType="BIGINT" property="commentCount" />
+    <result column="bBrowserCount" jdbcType="BIGINT" property="browserCount" />
+    <result column="bFollowCount" jdbcType="BIGINT" property="followCount" />
     <result column="tDesc" jdbcType="LONGVARCHAR" property="desc" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
@@ -21,13 +24,15 @@
   </delete>
   <insert id="insert" keyColumn="bProductId" keyProperty="productId" parameterType="ProductInfo" useGeneratedKeys="true">
     insert into productinfo (vProductName, iBrand, iClassify, 
-      iProperty, iEffect, vSkinTexture, vSpec, 
-      dComeInDate, fReferencePrice, fWorthCount, 
-      tDesc)
+      iProperty, iEffect, vSkinTexture, 
+      vSpec, dComeInDate, fReferencePrice, 
+      fWorthCount, bCommentCount, bBrowserCount, 
+      bFollowCount, tDesc)
     values (#{productName,jdbcType=VARCHAR}, #{brand,jdbcType=INTEGER}, #{classify,jdbcType=INTEGER}, 
-      #{property,jdbcType=INTEGER}, #{effect,jdbcType=INTEGER}, #{skinTexture,jdbcType=VARCHAR}, #{spec,jdbcType=VARCHAR}, 
-      #{comeInDate,jdbcType=DATE}, #{referencePrice,jdbcType=REAL}, #{worthCount,jdbcType=REAL}, 
-      #{desc,jdbcType=LONGVARCHAR})
+      #{property,jdbcType=INTEGER}, #{effect,jdbcType=INTEGER}, #{vskintexture,jdbcType=VARCHAR}, 
+      #{spec,jdbcType=VARCHAR}, #{comeInDate,jdbcType=DATE}, #{referencePrice,jdbcType=REAL}, 
+      #{worthCount,jdbcType=REAL}, #{commentCount,jdbcType=BIGINT}, #{browserCount,jdbcType=BIGINT}, 
+      #{followCount,jdbcType=BIGINT}, #{desc,jdbcType=LONGVARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="ProductInfo">
     update productinfo
@@ -36,23 +41,28 @@
       iClassify = #{classify,jdbcType=INTEGER},
       iProperty = #{property,jdbcType=INTEGER},
       iEffect = #{effect,jdbcType=INTEGER},
-      vSkinTexture = #{skinTexture,jdbcType=VARCHAR},
+      vSkinTexture = #{vskintexture,jdbcType=VARCHAR},
       vSpec = #{spec,jdbcType=VARCHAR},
       dComeInDate = #{comeInDate,jdbcType=DATE},
       fReferencePrice = #{referencePrice,jdbcType=REAL},
       fWorthCount = #{worthCount,jdbcType=REAL},
+      bCommentCount = #{commentCount,jdbcType=BIGINT},
+      bBrowserCount = #{browserCount,jdbcType=BIGINT},
+      bFollowCount = #{followCount,jdbcType=BIGINT},
       tDesc = #{desc,jdbcType=LONGVARCHAR}
     where bProductId = #{productId,jdbcType=BIGINT}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select bProductId, vProductName, iBrand, iClassify, iProperty, iEffect, vSkinTexture, vSpec, dComeInDate, 
-    fReferencePrice, fWorthCount, tDesc
+    select bProductId, vProductName, iBrand, iClassify, iProperty, iEffect, vSkinTexture, 
+    vSpec, dComeInDate, fReferencePrice, fWorthCount, bCommentCount, bBrowserCount, bFollowCount, 
+    tDesc
     from productinfo
     where bProductId = #{productId,jdbcType=BIGINT}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select bProductId, vProductName, iBrand, iClassify, iProperty, iEffect, vSkinTexture, vSpec, dComeInDate, 
-    fReferencePrice, fWorthCount, tDesc
+    select bProductId, vProductName, iBrand, iClassify, iProperty, iEffect, vSkinTexture, 
+    vSpec, dComeInDate, fReferencePrice, fWorthCount, bCommentCount, bBrowserCount, bFollowCount, 
+    tDesc
     from productinfo
   </select>
 </mapper>
