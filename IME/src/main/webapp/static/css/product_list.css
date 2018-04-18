@@ -391,6 +391,12 @@ body {
 .comment-property-filter {
   width: 100%;
 }
+.comment-property-filter .tips-p {
+  margin: 5px 0;
+  color: #999999;
+  font-size: 12px;
+  text-align: center;
+}
 /**
  * [心得label]
  */
@@ -405,6 +411,8 @@ body {
   display: inline-block;
   width: 80px;
   height: 35px;
+  font-size: 17px;
+  font-weight: bold;
   line-height: 35px;
   text-align: center;
   background-color: #ffffff;
@@ -444,10 +452,11 @@ body {
   vertical-align: text-bottom;
 }
 .comment-filter-items .item-list a {
-  padding: 3px;
+  padding: 4px;
   vertical-align: middle;
   text-decoration: none;
   color: #999999;
+  font-size: 12px;
 }
 .comment-filter-items .item-list a:hover {
   color: #ffffff;
