@@ -1,0 +1,457 @@
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+p,
+blockquote,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #fff;
+  color: #555;
+  font-size: 14px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+td,
+th,
+caption {
+  font-size: 14px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  font-size: 100%;
+}
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+  font-style: normal;
+  font-weight: normal;
+}
+a {
+  color: #555;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+img {
+  border: none;
+}
+ol,
+ul,
+li {
+  list-style: none;
+}
+input,
+textarea,
+select,
+button {
+  font: 14px Verdana, Helvetica, Arial, sans-serif;
+}
+table {
+  border-collapse: collapse;
+}
+html {
+  overflow-y: scroll;
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.clearfix {
+  *zoom: 1;
+}
+body {
+  font-family: "微软雅黑";
+}
+/**
+ * 主右：内容
+ */
+.main-right {
+  float: left;
+  width: 820px;
+  margin-left: 20px;
+  box-sizing: border-box;
+}
+/**
+ * 关注容器
+ */
+.follow-container {
+  margin-top: 13px;
+}
+.follow-container .title {
+  color: #333333;
+  font-size: 17px;
+  font-weight: 550;
+}
+.follow-container .line {
+  border: solid 1px #cc99cc;
+  background-color: #cc99cc;
+}
+/**
+ * 我的关注
+ */
+.follow-details .follow-title {
+  color: #333333;
+  font-size: 16px;
+  font-weight: 500;
+}
+.follow-details .title-line {
+  margin: 0;
+  margin: 10px auto;
+  border: solid 0.5px #cccccc;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  -moz-opacity: 0.5;
+}
+/**
+ * 关注的标签
+ */
+.followed-tag .tag-list {
+  width: 100%;
+}
+.followed-tag .tag-list a {
+  display: inline-block;
+  height: 22px;
+  padding-left: 5px;
+  margin-right: 13px;
+  margin-top: 10px;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-size: 13px;
+  border: solid 0.5px #e6e6e6;
+}
+.followed-tag .tag-list a:after {
+  content: "\2716";
+  display: inline-block;
+  width: 22px;
+  margin-left: 4px;
+  line-height: 22px;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+}
+.followed-tag .tag-list a:hover {
+  border-color: #cc99cc;
+}
+.followed-tag .tag-list a:hover:after {
+  color: #ffffff;
+  background-color: #cc99cc;
+}
+.followed-tag .tag-list .add-more-tag:after {
+  content: "\271A";
+}
+/**
+ * 关注的用户
+ */
+.followed-user {
+  margin-top: 13px;
+}
+.followed-user .user-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.followed-user .user-list li {
+  width: 100%;
+  height: 110px;
+  padding: 10px;
+  border-bottom: solid 0.5px #e6e6e6;
+}
+.followed-user .user-list .portrait-wrapped {
+  float: left;
+}
+.followed-user .user-list .user-portrait {
+  height: 90px;
+  border-radius: 90px;
+}
+.followed-user .user-list .user-info {
+  float: left;
+  height: 90px;
+  margin-left: 26px;
+}
+.followed-user .user-list .user-info > p {
+  width: 600px;
+  margin: 5px auto;
+}
+.followed-user .user-list .user-info .user-introduction-p {
+  height: 36px;
+}
+.followed-user .user-list .user-name-p {
+  position: relative;
+  display: inline-block;
+  width: auto;
+  height: 30px;
+}
+.followed-user .user-list .more-info-down {
+  position: absolute;
+  left: -10px;
+  top: 28px;
+  z-index: 3;
+  display: none;
+  width: 365px;
+  height: 240px;
+  border: solid 0.5px #e6e6e6;
+  box-shadow: 0 0 3px #e6e6e6;
+  background-color: #ffffff;
+}
+.followed-user .user-list .more-info-down .arrow {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-bottom-color: #e6e6e6;
+  position: absolute;
+  top: -20px;
+  left: 20px;
+}
+.followed-user .user-list .more-info-down .arrow-inner {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border: 9px solid transparent;
+  border-bottom-color: #ffffff;
+  position: absolute;
+  top: -8px;
+  left: -8.5px;
+}
+.followed-user .user-list .more-info-down .more-info-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 340px;
+  height: 210px;
+  margin: auto;
+}
+.followed-user .user-list .user-name {
+  display: inline-block;
+  height: 100%;
+  color: #1a1a1a;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+.followed-user .user-list .user-name:hover {
+  color: #cc99cc;
+}
+.followed-user .user-list .user-introduction {
+  color: #666666;
+  font-size: 12px;
+}
+.followed-user .user-list .user-op {
+  float: right;
+  height: 90px;
+  line-height: 90px;
+}
+.followed-user .user-list .follow-ornot-btn {
+  display: inline-block;
+  height: 26px;
+  padding-left: 8px;
+  padding-right: 8px;
+  line-height: 26px;
+  color: #666666;
+  font-size: 13px;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 2px;
+  background-color: #fff0f5;
+}
+.followed-user .user-list .follow-ornot-btn:hover {
+  color: #cc99cc;
+}
+.followed-user .user-list .more-info {
+  height: 100%;
+}
+.followed-user .user-list .more-info .left {
+  float: left;
+  width: 120px;
+  height: 100%;
+  text-align: center;
+}
+.followed-user .user-list .more-info .left img {
+  width: 100%;
+}
+.followed-user .user-list .more-info .left .more-name {
+  color: #333333;
+  font-size: 14px;
+  font-weight: 550;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+.followed-user .user-list .more-info .left .more-name:hover {
+  color: #cc99cc;
+}
+.followed-user .user-list .more-info .left .second {
+  font-size: 12px;
+  color: #666666;
+}
+.followed-user .user-list .more-info .left .second span {
+  margin: 5px 2px;
+}
+.followed-user .user-list .more-info .left .second a {
+  text-decoration: none;
+  color: #cc99cc;
+}
+.followed-user .user-list .more-info .right {
+  float: left;
+  width: 212px;
+  margin-left: 8px;
+}
+.followed-user .user-list .more-info .right span {
+  font-size: 13px;
+  color: #666666;
+}
+.followed-user .user-list .more-info .right .first span {
+  margin-right: 5px;
+}
+.followed-user .user-list .more-info .right .second {
+  min-height: 72.5px;
+  max-height: 145px;
+  margin-top: 10px;
+}
+.followed-user .user-list .more-info .right .second span {
+  color: #999999;
+}
+.followed-user .user-list .more-info .right .third {
+  margin-top: 10px;
+}
+.followed-user .user-list .more-info .right .third a {
+  display: inline-block;
+  height: 24px;
+  padding-left: 8px;
+  padding-right: 8px;
+  line-height: 24px;
+  color: #666666;
+  font-size: 13px;
+  text-decoration: none;
+  text-align: center;
+  border: solid 0.5px #e6e6e6;
+  border-radius: 2px;
+  background-color: #fff0f5;
+  transition: all 0.2s ease-in-out;
+}
+.followed-user .user-list .more-info .right .third a:hover {
+  color: #cc99cc;
+  border-color: #cc99cc;
+}
+/**
+ * 关注的产品
+ */
+.followed-product {
+  margin-top: 13px;
+  font-size: 0;
+}
+.followed-product .product-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  margin-right: -8px;
+}
+.followed-product li {
+  margin-right: 8px;
+}
+.followed-product .product-item {
+  display: inline-block;
+  width: 130px;
+}
+.followed-product .product-item .picture-wrapped {
+  text-align: center;
+}
+.followed-product .product-item .picture-container {
+  position: relative;
+  text-align: left;
+}
+.followed-product .product-item .product-picture {
+  width: 130px;
+  border-radius: 4px;
+}
+.followed-product .product-item .product-name-p {
+  width: 100%;
+  height: 34px;
+}
+.followed-product .product-item .product-name {
+  color: #1a1a1a;
+  font-size: 13px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+.followed-product .product-item .product-name:hover {
+  color: #cc99cc;
+}
+.followed-product .product-item .product-count {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+  width: 100%;
+  height: 130px;
+  padding-left: 15px;
+  padding-top: 65px;
+  color: #ffffff;
+  font-size: 12px;
+  border-radius: 4px;
+  background-color: #000000;
+  opacity: 0.55;
+  filter: alpha(opacity=55);
+  -moz-opacity: 0.55;
+}
+.followed-product .product-item .product-count a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+.followed-product .product-item .product-count a:hover {
+  color: #cc99cc;
+}
+.followed-product .product-item .follow-time {
+  font-size: 12px;
+  color: #999999;
+}
+.followed-product .product-item .cancel-love {
+  position: absolute;
+  right: 8px;
+  top: 100px;
+  font-size: 16px;
+}
+.followed-product .product-item .cancel-love:hover {
+  color: #be7ebe;
+}

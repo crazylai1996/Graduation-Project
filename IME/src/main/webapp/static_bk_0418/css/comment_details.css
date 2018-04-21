@@ -1,0 +1,641 @@
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+p,
+blockquote,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #fff;
+  color: #555;
+  font-size: 14px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+td,
+th,
+caption {
+  font-size: 14px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  font-size: 100%;
+}
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+  font-style: normal;
+  font-weight: normal;
+}
+a {
+  color: #555;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+img {
+  border: none;
+}
+ol,
+ul,
+li {
+  list-style: none;
+}
+input,
+textarea,
+select,
+button {
+  font: 14px Verdana, Helvetica, Arial, sans-serif;
+}
+table {
+  border-collapse: collapse;
+}
+html {
+  overflow-y: scroll;
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.clearfix {
+  *zoom: 1;
+}
+body {
+  font-family: "微软雅黑";
+}
+/*
+ *内容主体外层
+ */
+.main-wrapped {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #ffffff;
+}
+.main-container {
+  width: 1000px;
+  margin: 0 auto;
+}
+.main-container hr {
+  margin: 15px 0;
+  border: solid 0.5px #e6cce6;
+  opacity: 0.75;
+  filter: alpha(opacity=75);
+  -moz-opacity: 0.75;
+}
+/*
+ *当前位置
+ */
+.current-pos {
+  width: 100%;
+  font-size: 12px;
+}
+.current-pos a {
+  color: #1a1a1a;
+  text-decoration: none;
+  transition: all ease-in-out 0.2s;
+}
+.current-pos a:hover {
+  color: #cc99cc;
+  text-decoration: none;
+}
+.current-pos .split-line:before {
+  content: ">>";
+  margin: 0 2px;
+}
+.current-pos .title {
+  color: #666666;
+  font-weight: 500;
+}
+/**
+ * 主-左
+ */
+.main-left {
+  float: left;
+  width: 740px;
+  box-sizing: border-box;
+}
+/**
+ * 主-右
+ */
+.main-right {
+  float: left;
+  width: 240px;
+  margin-left: 20px;
+  box-sizing: border-box;
+}
+/**
+ * 评论用户详情
+ */
+.comment-user {
+  width: 100%;
+  height: 200px;
+  margin-top: 26px;
+}
+/**
+ * 评论用户信息
+ */
+.user-info-wrapped {
+  position: relative;
+  float: left;
+  width: 310px;
+  height: 100%;
+  background-color: #fff0f5;
+}
+.user-info-wrapped .user-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 250px;
+  height: 120px;
+  margin: auto;
+}
+.user-info-wrapped .user-info .info-left {
+  float: left;
+  width: 115px;
+  background-color: #ffffff;
+  box-shadow: 0 0 1px #e6e6e6;
+}
+.user-info-wrapped .user-info .info-left img {
+  width: 111px;
+  height: 111px;
+  margin-top: 2px;
+  margin-left: 2px;
+}
+.user-info-wrapped .user-info .info-right {
+  float: left;
+  width: 125px;
+  box-sizing: border-box;
+  padding-left: 10px;
+  font-size: 13px;
+  color: #666666;
+}
+.user-info-wrapped .user-info .info-right .user-name {
+  color: #cc99cc;
+  font-size: 14px;
+  font-weight: 600;
+}
+.user-info-wrapped .user-info .info-right p {
+  margin: 5px 5px;
+}
+.user-info-wrapped .user-info .info-right a {
+  margin-left: 10px;
+  text-decoration: none;
+  color: #cc99cc;
+}
+/**
+ * 用户的更多心得
+ */
+.user-more-comments {
+  float: left;
+  display: inline-block;
+  width: 410px;
+  height: 100%;
+  margin-left: 20px;
+}
+.user-more-comments .more-comment-label {
+  height: 30px;
+  box-sizing: border-box;
+  color: #000000;
+  font-size: 18px;
+  font-weight: 500;
+  border-bottom: 2px solid #cccccc;
+}
+.user-more-comments .more-comment-label .her-more {
+  float: right;
+  display: inline-block;
+  box-sizing: border-box;
+  height: 30px;
+  padding-top: 10px;
+  text-decoration: none;
+  color: #cc99cc;
+  font-size: 12px;
+}
+.user-more-comments .more-comment-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  height: 160px;
+  margin-top: 10px;
+  padding-left: 18px;
+}
+.user-more-comments .more-comment-list li {
+  display: inline-block;
+  width: 112px;
+  margin-right: 15px;
+}
+.user-more-comments .more-comment-list li .pic {
+  width: 112px;
+}
+.user-more-comments .more-comment-list li .name {
+  margin: 0;
+  width: 100%;
+  height: 45px;
+  color: #666666;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+}
+.user-more-comments .more-comment-list li .name a {
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+.user-more-comments .more-comment-list li .name a:hover {
+  color: #cc99cc;
+}
+/**
+ * 文章内容块
+ */
+.comment-details-container {
+  box-sizing: border-box;
+  margin-top: 26px;
+  border: solid 0.5px #e0e0e0;
+}
+/**
+ * 产品简略信息
+ */
+.product-info-wrapped {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  border-bottom: dashed 0.5px #e6e6e6;
+}
+.product-info {
+  width: 95%;
+  height: 65px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+.product-info .pi-left {
+  float: left;
+  width: 65px;
+  border: solid 1px #cccccc;
+}
+.product-info .pi-left img {
+  width: 100%;
+}
+.product-info .pi-right {
+  float: left;
+  box-sizing: border-box;
+  margin-top: 15px;
+  margin-left: 30px;
+}
+.product-info p {
+  margin: 2px;
+  color: #999999;
+  font-size: 0;
+}
+.product-info p a {
+  font-size: 14px;
+  text-decoration: none;
+}
+.product-info p a:hover {
+  color: #cc99cc;
+  transition: all 0.2s ease-in-out;
+}
+.product-info p .split-line:after {
+  content: "|";
+  margin: 0 4px;
+  font-size: 14px;
+}
+/**
+ * 心得标题
+ */
+.comment-title {
+  line-height: 70px;
+}
+.comment-title h1 {
+  display: inline-block;
+  padding-left: 5px;
+  color: #1a1a1a;
+  font-size: 18px;
+  font-weight: 500;
+}
+.comment-title span {
+  display: inline-block;
+}
+/**
+ *  心得内容
+ */
+.comment-details {
+  box-sizing: border-box;
+  padding: 10px 15px;
+  color: #333333;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+.comment-btn {
+  padding: 10px 15px;
+  text-align: right;
+}
+.comment-btn a {
+  text-decoration: none;
+  color: #cc99cc;
+  font-size: 13px;
+  font-weight: 500;
+}
+/**
+ * 上一篇、下一篇操作
+ */
+.lr_comment {
+  padding-bottom: 10px;
+  color: #999999;
+  font-size: 13px;
+  text-align: center;
+}
+.lr_comment > span {
+  margin: 0 10px;
+}
+.lr_comment a {
+  text-decoration: none;
+  color: #333333;
+}
+.lr_comment a:hover {
+  color: #cc99cc;
+  transition: all 0.2s ease-in-out;
+}
+/**
+ * 心得回复列表块
+ */
+.comment-reply-container {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  margin-top: 26px;
+  padding-bottom: 15px;
+}
+.comment-reply-container li {
+  height: 145px;
+  padding-left: 5px;
+}
+/**
+ * 心得回复列表项
+ */
+.reply-item {
+  width: 100%;
+}
+.reply-item .left {
+  float: left;
+}
+.reply-item .right {
+  float: left;
+  position: relative;
+  height: 145px;
+  border-radius: 1px;
+  box-shadow: 0 0 1px #dab4da;
+  background-color: #ffffff;
+}
+/**
+ * 回复用户头像
+ */
+.portrait-wrapped {
+  width: 145px;
+}
+.portrait-wrapped img {
+  width: 100px;
+  border-radius: 2px;
+  border: solid 2px #cccccc;
+}
+.portrait-wrapped p {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  width: 100px;
+  height: 21px;
+  margin: 0;
+  padding: 0;
+  line-height: 21px;
+  text-align: center;
+  font-size: 12px;
+  color: #333333;
+}
+.portrait-wrapped font {
+  color: #cc99cc;
+}
+/*
+  *直角三角形
+  */
+.triangle-pointer {
+  position: absolute;
+  z-index: 1;
+  left: -25px;
+  top: 10px;
+  width: 0;
+  height: 0;
+  border-top: 25px solid #e6cce6;
+  border-left: 25px solid transparent;
+}
+.triangle-pointer .background {
+  position: absolute;
+  z-index: 2;
+  top: -24px;
+  left: -23px;
+  width: 0;
+  height: 0;
+  border-top: 23px solid #ffffff;
+  border-left: 23px solid transparent;
+}
+/**
+  * 回复详情内容块
+  */
+.reply-detail {
+  width: 590px;
+  padding: 0 5px;
+}
+.reply-user {
+  width: 550px;
+  margin: 0 auto;
+  margin-top: 15px;
+  padding: 5px 10px;
+  font-size: 12px;
+  color: #666666;
+  background-color: #fff0f5;
+}
+.reply-user a {
+  text-decoration: none;
+  color: #cc99cc;
+}
+.reply-content {
+  height: 55px;
+  padding: 5px 8px;
+  font-size: 13px;
+  color: #333333;
+}
+.reply-time {
+  display: block;
+  width: 100%;
+  padding-right: 10px;
+  text-align: right;
+  font-size: 12px;
+  color: #999999;
+}
+hr {
+  margin: 0;
+  margin: 3px 0;
+  border: dashed 0.5px #cccccc;
+}
+/**
+ * 添加回复框
+ */
+.reply-add-container {
+  margin-top: 26px;
+}
+.reply-add-container .label {
+  width: 100%;
+  height: 38px;
+  line-height: 38px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #333333;
+}
+.reply-add-container hr {
+  margin: 0;
+  margin-bottom: 13px;
+  border: solid 1px #cc99cc;
+  background-color: #cc99cc;
+}
+.reply-add-container textarea {
+  padding: 10px;
+  margin: 2px;
+  resize: none;
+  outline: none;
+  border: solid 1px #e6cce6;
+}
+.reply-add-container textarea:focus {
+  border: solid 1px #cc99cc;
+}
+/**
+ * 回复按钮
+ */
+.reply-add-btn {
+  width: 100%;
+  height: 30px;
+  margin-top: 13px;
+  margin-bottom: 13px;
+  text-align: right;
+}
+.reply-add-btn .add-btn {
+  display: inline-block;
+  width: 105px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 1px;
+  background-color: #cc99cc;
+}
+.reply-add-btn .add-btn:hover {
+  background-color: #be7ebe;
+}
+/**
+ *当前产品信息块
+ */
+.current-product {
+  width: 100%;
+  text-align: center;
+}
+.current-product .current-label {
+  display: inline-block;
+  width: 100%;
+  height: 45px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 45px;
+  background-color: #cc99cc;
+}
+.current-product .base-info {
+  background-color: #fff0f5;
+}
+.current-product .name {
+  display: inline-block;
+  width: 100%;
+  height: 60px;
+}
+.current-product .name a {
+  line-height: 60px;
+  color: #666666;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+.current-product .name a:hover {
+  color: #be7ebe;
+}
+.current-product .pic-wrapped {
+  width: 105px;
+  height: 105px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  border: solid 1px #cccccc;
+}
+.current-product .pic-wrapped img {
+  width: 100%;
+}
+.current-product .comment-sum {
+  display: block;
+  margin-top: 20px;
+  color: #999999;
+  font-size: 14px;
+}
+.current-product .comment-sum font {
+  color: #cc99cc;
+}
+.current-product .comment-more {
+  display: block;
+  margin-top: 10px;
+  padding-bottom: 20px;
+}
+.current-product .comment-more a {
+  color: #cc99cc;
+  font-size: 12px;
+  text-decoration: none;
+}

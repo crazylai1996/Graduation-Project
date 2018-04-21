@@ -1,0 +1,316 @@
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+p,
+blockquote,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #fff;
+  color: #555;
+  font-size: 14px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+td,
+th,
+caption {
+  font-size: 14px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  font-size: 100%;
+}
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+  font-style: normal;
+  font-weight: normal;
+}
+a {
+  color: #555;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+img {
+  border: none;
+}
+ol,
+ul,
+li {
+  list-style: none;
+}
+input,
+textarea,
+select,
+button {
+  font: 14px Verdana, Helvetica, Arial, sans-serif;
+}
+table {
+  border-collapse: collapse;
+}
+html {
+  overflow-y: scroll;
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.clearfix {
+  *zoom: 1;
+}
+body {
+  font-family: "微软雅黑";
+}
+/*
+ *内容主体外层
+ */
+.main-wrapped {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #ffffff;
+}
+.main-container {
+  width: 1000px;
+  margin: 0 auto;
+}
+.main-container hr {
+  margin: 15px 0;
+  border: solid 0.5px #e6cce6;
+  opacity: 0.75;
+  filter: alpha(opacity=75);
+  -moz-opacity: 0.75;
+}
+/*
+ *当前位置
+ */
+.current-pos {
+  width: 100%;
+  font-size: 12px;
+}
+.current-pos a {
+  color: #1a1a1a;
+  text-decoration: none;
+  transition: all ease-in-out 0.2s;
+}
+.current-pos a:hover {
+  color: #cc99cc;
+  text-decoration: none;
+}
+.current-pos .split-line:before {
+  content: ">>";
+  margin: 0 2px;
+}
+.current-pos .title {
+  color: #666666;
+  font-weight: 500;
+}
+/**
+ *  快速获取按钮
+ */
+.quick-get-info {
+  height: 25px;
+  margin-top: 13px;
+  font-size: 12px;
+}
+.quick-get-info .pointer {
+  color: #be7ebe;
+  font-size: 14px;
+  font-weight: bolder;
+}
+.quick-get-info input {
+  height: 24px;
+  padding-left: 5px;
+  margin-right: 8px;
+  vertical-align: middle;
+  outline: none;
+  border: solid 1px #e6cce6;
+}
+.quick-get-info input:focus {
+  border: solid 1px #cc99cc;
+}
+.quick-get-info .get-btn {
+  display: inline-block;
+  width: 35px;
+  height: 20px;
+  line-height: 20px;
+  vertical-align: middle;
+  color: #ffffff;
+  font-size: 12px;
+  text-decoration: none;
+  text-align: center;
+  background-color: #cc99cc;
+  border-radius: 2px;
+}
+/**
+ * 添加新产品
+ */
+.product-add-container {
+  width: 1000px;
+  margin-top: 10px;
+  border-radius: 1px;
+  box-shadow: 0 0 2px #dab4da;
+  background-color: #ffffff;
+}
+/**
+ * 添加新产品标题
+ */
+.add-title-label {
+  width: 100%;
+  height: 35px;
+  border-bottom: 0.5px solid #e6e6e6;
+  background-color: #fcfcfc;
+}
+.add-title-label a {
+  display: inline-block;
+  height: 100%;
+  padding: 0 8px;
+  line-height: 35px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: #333333;
+  text-align: left;
+  border-left: 2px solid #cc99cc;
+}
+/**
+ * 添加新产品输入表单
+ */
+.product-form {
+  width: 1000px;
+}
+/**
+ * 表单项
+ */
+.input-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.input-list li {
+  min-height: 46px;
+  border-bottom: dotted 0.5px #cccccc;
+}
+.input-list .input-label {
+  display: inline-block;
+  width: 150px;
+  height: 45px;
+  margin-right: 10px;
+  line-height: 45px;
+  text-align: right;
+  font-size: 14px;
+  color: #333333;
+  background-color: #fff0f5;
+}
+.input-list .vertical-top {
+  height: 180px;
+}
+.input-list .vertical-top .input-label {
+  height: 100% !important;
+  vertical-align: top;
+}
+.input-list .vertical-top textarea {
+  margin-top: 6px;
+  resize: none;
+  outline: none;
+  border: solid 1px #e6cce6;
+}
+.input-list .vertical-top textarea:focus {
+  border: solid 1px #cc99cc;
+}
+.input-list input[type='text'],
+.input-list select {
+  height: 27px;
+  padding-left: 5px;
+  margin-right: 8px;
+  vertical-align: middle;
+  outline: none;
+  border: solid 1px #e6cce6;
+}
+.input-list input[type='text']:focus,
+.input-list select:focus {
+  border: solid 1px #cc99cc;
+}
+.input-list input[type='file'] {
+  display: inline-block;
+}
+.input-list .lg-input {
+  width: 300px;
+}
+.input-list .md-input {
+  width: 180px;
+}
+.input-list .sm-input {
+  width: 120px;
+}
+.input-list .xs-input {
+  width: 70px;
+}
+.input-list .input-tips {
+  padding-left: 15px;
+  color: #be7ebe;
+  font-size: 12px;
+  vertical-align: middle;
+}
+/**
+ * 添加按钮
+ */
+.add-product-op {
+  width: 1000px;
+  box-sizing: border-box;
+  margin-top: 13px;
+  padding-right: 15px;
+  padding-bottom: 10px;
+  text-align: right;
+}
+.add-product-op .add-confirm {
+  display: inline-block;
+  width: 105px;
+  height: 30px;
+  box-sizing: border-box;
+  color: #ffffff;
+  background-color: #cc99cc;
+  line-height: 30px;
+  text-decoration: none;
+  text-align: center;
+}
+.add-product-op .add-confirm:hover {
+  background-color: #be7ebe;
+}

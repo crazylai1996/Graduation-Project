@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018-4-18 ÐÇÆÚÈý 20:27:57                       */
+/* Created on:     2018-4-21 ÐÇÆÚÁù 13:35:04                       */
 /*==============================================================*/
 
 
@@ -363,7 +363,7 @@ create table UserInfo
    cPasswordSalt        char(5),
    vNickname            varchar(30),
    cGender              char(2),
-   vSkinTexture         varchar(10),
+   vSkinTexture         varchar(4),
    iAge                 int,
    iAreaId              int,
    vIntroduction        varchar(200),
@@ -371,7 +371,7 @@ create table UserInfo
    cPhone               char(11),
    vEmail               varchar(50),
    cActivationCode      char(32),
-   vUserState           varchar(2),
+   vUserState           varchar(4),
    iMembershipPoint     int,
    iMemberLevel         int,
    dRegisterTime        datetime,
