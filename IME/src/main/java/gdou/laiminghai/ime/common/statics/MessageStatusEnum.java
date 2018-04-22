@@ -3,6 +3,11 @@ package gdou.laiminghai.ime.common.statics;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 枚举：消息状态
+ * @author laiminghai
+ *
+ */
 public enum MessageStatusEnum implements BaseEnum<MessageStatusEnum, String> {
 	READ_STATUS("0001","已读"),
 	DELETED_STATUS("0010","删除");

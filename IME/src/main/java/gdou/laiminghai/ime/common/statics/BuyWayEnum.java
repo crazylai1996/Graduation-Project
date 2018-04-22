@@ -3,6 +3,11 @@ package gdou.laiminghai.ime.common.statics;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 枚举：购买方式
+ * @author laiminghai
+ *
+ */
 public enum BuyWayEnum implements BaseEnum<BuyWayEnum, String> {
 	TMALL_ONLINE("0000","天猫商城"),
 	JINGDONG_ONLINE("0001","京东商城"),

@@ -3,6 +3,11 @@ package gdou.laiminghai.ime.common.statics;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 枚举：用户状态
+ * @author laiminghai
+ *
+ */
 public enum UserStatusEnum implements BaseEnum<UserStatusEnum, String> {
 	NON_ACTIVATION("0000","未激活"),
 	FIRST_LOGIN("0001","第一次登录"),
