@@ -12,6 +12,9 @@
     
     <context:property-placeholder location="classpath*:properties/*.properties"/>
     
+    <!-- 应用Config -->
+	<bean scope="singleton" lazy-init="false" class="gdou.laiminghai.ime.common.config.Configuration" />
+    
     <!-- mysql数据库连接池 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="driverClassName" value="${mysql.driver}"/>
