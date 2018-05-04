@@ -338,6 +338,11 @@ body {
   background: -moz-linear-gradient(bottom, #cc99cc, #be7ebe);
   background: linear-gradient(to top, #cc99cc, #be7ebe);
 }
+.login-btn:hover,
+.register-btn:hover,
+.quick-login-btn:hover {
+  text-decoration: none;
+}
 .phone-quick-login,
 .phone-register {
   display: none;

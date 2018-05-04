@@ -465,6 +465,9 @@ body {
   text-align: center;
   text-decoration: none;
 }
+.navi-lv1 > a:hover {
+  text-decoration: none;
+}
 /*
  *可展开导航
  */

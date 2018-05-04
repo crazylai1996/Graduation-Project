@@ -16,7 +16,7 @@ popupObj.css("margin", marginVal);
 function hidePopup() {
   maskObj.hide();
   popupObj.hide();
-  $("body").css("overflow", "scroll");
+  $("body").css("overflow", "visiable");
 }
 var closeBtn = $(".popup-close-btn");
 closeBtn.click(function() {
