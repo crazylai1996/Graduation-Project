@@ -147,6 +147,7 @@ body {
 }
 .popup-close-btn:hover {
   color: #cc3333;
+  text-decoration: none;
 }
 .popup-close-btn:before {
   content: "\2716";

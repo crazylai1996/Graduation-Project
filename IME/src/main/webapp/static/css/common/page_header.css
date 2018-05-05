@@ -122,7 +122,6 @@ body {
  *未登录显示
  */
 .no-login-navi {
-  display: none;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -148,6 +147,7 @@ body {
 .user-navi > li > a:hover,
 .user-tools-box > li > a:hover {
   color: #cc99cc;
+  text-decoration: none;
 }
 /*
  *登录显示

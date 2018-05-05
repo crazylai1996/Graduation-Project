@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="base.jsp"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <base href="http://localhost:8080/IME/">
+  <base href="${basePath }">
   <title>爱美丽 - 化妆品导购与评价平台 - Header</title>
   <link rel="stylesheet" href="static\css\common\page_header.css" />
 </head>
@@ -20,11 +21,11 @@
       <div class="bar-right">
         <!-- 未登录显示 -->
         <ul class="no-login-navi">
-          <li><a href="javascript:void(0);">[登录]</a></li>
-          <li><a href="javascript:void(0);">[注册]</a></li>
+          <li><a class="gologin-btn" href="javascript:void(0);">[登录]</a></li>
+          <li><a class="gosignup-btn" href="javascript:void(0);">[注册]</a></li>
         </ul>
         <!-- 登录后显示 -->
-        <ul class="user-navi">
+        <ul class="user-navi" style="display:none;">
           <li class="message-btn">
             <a href="javascript:void(0);">消息中心</a>
             <div class="message-box more">
@@ -110,6 +111,9 @@
     </span>
   </div>
   
+  <script>
+  	var basePath = "${basePath}";
+  </script>
   <script src="static\js\jquery.js"></script>
   <script src="static\js\common\page_header.js"></script>
 </body>

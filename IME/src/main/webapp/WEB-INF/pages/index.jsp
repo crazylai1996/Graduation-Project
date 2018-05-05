@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="common/base.jsp"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <base href="http://localhost:8080/IME/">
+  <base href="${basePath }">
   <title>爱美丽 - 化妆品导购与评价平台</title>
   <link rel="stylesheet" href="static\css\index.css" />
 </head>
@@ -277,7 +278,6 @@
       </div>
     </div>
   </div>
-  
   <!-- 包含尾部 -->
   <jsp:include page="common/page_footer.jsp"/>
 

@@ -1,26 +1,36 @@
-//遮照层
-var maskObj = $(".popup-mask");
+$(document).ready(function(){
+	//遮照层
+	var maskObj = $(".popup-mask");
 
-maskObj.click(function() {
-  hidePopup();
-});
-// $("body").css("overflow","hidden");
-
-var popupObj = $(".popup-wrap");
-var marginVal = "-" + popupObj.height() / 2 + "px" + " 0 0 " + "-" + popupObj.width() / 2 + "px";
-popupObj.css("margin", marginVal);
-
-/**
- * [隐藏弹窗]
- */
-function hidePopup() {
-  maskObj.hide();
-  popupObj.hide();
-  $("body").css("overflow", "visiable");
-}
-var closeBtn = $(".popup-close-btn");
-closeBtn.click(function() {
-  hidePopup();
+	maskObj.click(function() {
+//	  hidePopup();
+		removePopup();
+	});
+	
+	var popupObj = $(".popup-wrap");
+	var marginVal = "-" + popupObj.height() / 2 + "px" + " 0 0 " + "-" + popupObj.width() / 2 + "px";
+	popupObj.css("margin", marginVal);
+	
+	/**
+	 * 隐藏弹窗
+	 */
+	function hidePopup() {
+	  maskObj.hide();
+	  popupObj.hide();
+	  $("body").css("overflow", "auto");
+	}
+	/**
+	 * 销毁弹窗
+	 */
+	function removePopup(){
+		$(".popup-container").remove();
+		$("html").css("overflow-y","auto");
+	}
+	var closeBtn = $(".popup-close-btn");
+	closeBtn.click(function() {
+//	  hidePopup();
+		removePopup();
+	});
 });
 
 /*
