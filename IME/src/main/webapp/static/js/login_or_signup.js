@@ -31,6 +31,16 @@ $(document).ready(function(){
 //	  hidePopup();
 		removePopup();
 	});
+	
+	/**
+	 * 初始化，显示对应表单
+	 */
+	$(function(){
+		var target = $(".target-window").val();
+		if(target == "signup"){
+			$(".navi-tab li:eq(1)").click();
+		}
+	});
 });
 
 /*

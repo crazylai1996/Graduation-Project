@@ -13,6 +13,7 @@
 </head>
 
 <body>
+  <input class="target-window" type="hidden" value="${param.target }">
   <!-- 遮罩层 -->
   <div class="popup-mask"></div>
   <!-- 弹出框 -->
