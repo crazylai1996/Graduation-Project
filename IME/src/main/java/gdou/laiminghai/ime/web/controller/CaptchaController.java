@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -19,6 +20,8 @@ import gdou.laiminghai.ime.common.util.CaptchaUtil;
  */
 @Controller
 public class CaptchaController {
+
+	private static Logger logger = Logger.getLogger(CaptchaController.class);
 	
 	/**
 	 * 获取登录验证码，返回验证码图片
@@ -31,6 +34,7 @@ public class CaptchaController {
 	public void getCaptchaImage(HttpServletResponse response,HttpSession session) {
 		//获取随机验证码
 		String captcha = CaptchaUtil.getRandomCodes(AppSetting.CAPTCHA_CODE_COUNT);
+		logger.debug(captcha);
 		//验证码存入session
 		session.setAttribute("captcha", captcha);
 		
@@ -45,7 +49,7 @@ public class CaptchaController {
 					AppSetting.CAPTCHA_IMAGE_WIDTH, AppSetting.CAPTCHA_IMAGE_HEIGHT, 
 					response.getOutputStream());
 		}catch(IOException e) {
-			
+			logger.error("获取验证码出错：",e);
 		}
 	}
 }
