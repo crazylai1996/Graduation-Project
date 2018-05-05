@@ -41,6 +41,17 @@ $(document).ready(function(){
 			$(".navi-tab li:eq(1)").click();
 		}
 	});
+	
+	/**
+	 * 图片验证码显示
+	 */
+	$(function(){
+		var catpchaUrl = basePath + "/security/getCaptchaImage.action";
+		$(".captcha-img").attr("src",catpchaUrl + "?timestamp="+new Date().getTime())
+	     .click(function(){
+	         $(this).attr("src",catpchaUrl + "?timestamp="+new Date().getTime());
+	     });
+	});
 });
 
 /*

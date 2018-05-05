@@ -47,7 +47,7 @@
               输入验证码
             </div>
             <input class="short-input" type="text" name="captcha" class="item-input" autocomplete="off" data-label="验证码">
-            <img src="" alt="看不清，换一张">
+            <img class="captcha-img" alt="看不清，换一张">
           </div>
           <!-- 其他操作 -->
           <div class="relative-op">

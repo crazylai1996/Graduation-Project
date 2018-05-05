@@ -242,9 +242,14 @@ body {
 .form-item .get-msg-captcha {
   float: right;
   width: 30%;
-  height: 35px;
+  height: 36px;
   font-size: 13px;
   vertical-align: bottom;
+}
+.form-item .captcha-img {
+  height: 34px;
+  border: 1px solid #cc99cc;
+  cursor: pointer;
 }
 .form-item .get-msg-captcha {
   display: inline-block;
