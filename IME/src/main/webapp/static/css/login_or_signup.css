@@ -261,6 +261,10 @@ body {
   border-radius: 4px;
   background-color: #0092d2;
 }
+.form-item .to-get-btn {
+  background-color: #cccccc;
+  pointer-events: none;
+}
 /*
  *表单操作选项
  */

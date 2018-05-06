@@ -21,7 +21,7 @@ import gdou.laiminghai.ime.common.util.CaptchaUtil;
 @Controller
 public class CaptchaController {
 
-	private static Logger logger = Logger.getLogger(CaptchaController.class);
+	private final static Logger logger = Logger.getLogger(CaptchaController.class);
 	
 	/**
 	 * 获取登录验证码，返回验证码图片
@@ -30,10 +30,10 @@ public class CaptchaController {
 	 * @author: laiminghai
 	 * @datetime: 2018年5月5日 下午6:57:43
 	 */
-	@RequestMapping("/security/getCaptchaImage.action")
+	@RequestMapping("/security/getCaptchaImage.do")
 	public void getCaptchaImage(HttpServletResponse response,HttpSession session) {
 		//获取随机验证码
-		String captcha = CaptchaUtil.getRandomCodes(AppSetting.CAPTCHA_CODE_COUNT);
+		String captcha = CaptchaUtil.getRandomCharCaptcha(AppSetting.CAPTCHA_LOGIN_CHAR_LENGTH);
 		logger.debug(captcha);
 		//验证码存入session
 		session.setAttribute("captcha", captcha);
@@ -46,7 +46,7 @@ public class CaptchaController {
 		
 		try {
 			CaptchaUtil.renderCaptchaImage(captcha, 
-					AppSetting.CAPTCHA_IMAGE_WIDTH, AppSetting.CAPTCHA_IMAGE_HEIGHT, 
+					AppSetting.CAPTCHA_LOGIN_IMAGE_WIDTH, AppSetting.CAPTCHA_LOGIN_IMAGE_HEIGHT, 
 					response.getOutputStream());
 		}catch(IOException e) {
 			logger.error("获取验证码出错：",e);

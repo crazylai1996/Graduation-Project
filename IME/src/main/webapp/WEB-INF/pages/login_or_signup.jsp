@@ -10,6 +10,7 @@
   <base href="${basePath }">
   <title>登录和注册</title>
   <link rel="stylesheet" href="static\css\login_or_signup.css" />
+  <link rel="stylesheet" href="static\plugins\BeAlert\BeAlert.css"/>
 </head>
 
 <body>
@@ -40,7 +41,7 @@
             <div class="item-label">
               密码
             </div>
-            <input class="long-input" type="text" name="password" class="item-input" autocomplete="off" data-label="密码">
+            <input class="long-input" type="password" name="password" class="item-input" autocomplete="off" data-label="密码">
           </div>
           <div class="form-item">
             <div class="item-label">
@@ -76,7 +77,7 @@
             <div class="item-label">
               输入验证码
             </div>
-            <input class="short-input" type="text" name="captcha" class="item-input" autocomplete="off" data-label="验证码">
+            <input class="short-input" type="text" name="smsCaptcha" class="item-input" autocomplete="off" data-label="验证码">
             <a class="get-msg-captcha" href="javascript:void(0);">获取短信验证码</a>
           </div>
           <div class="form-item">
@@ -131,6 +132,8 @@
 
   <!-- js脚本 -->
   <script src="static\js\jquery.js"></script>
+  <!-- 弹窗插件 -->
+  <script src="static\plugins\BeAlert\BeAlert.js"></script>
   <script src="static\js\login_or_signup.js"></script>
 </body>
 
