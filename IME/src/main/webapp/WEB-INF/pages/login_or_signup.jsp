@@ -110,7 +110,7 @@
             <div class="item-label">
               输入验证码
             </div>
-            <input class="short-input" type="text" name="captcha" class="item-input" autocomplete="off" data-label="验证码">
+            <input class="short-input" type="text" name="smsCaptcha" class="item-input" autocomplete="off" data-label="验证码">
             <a class="get-msg-captcha" href="javascript:void(0);">获取短信验证码</a>
           </div>
           <!-- 其他操作 -->

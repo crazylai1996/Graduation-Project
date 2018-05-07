@@ -11,6 +11,7 @@ public enum ServiceResultEnum {
 	USER_ACCOUNT_NAME_NOT_ALLOWED(203,"账号名非法"),
 	USER_ACCOUNT_PASSWORD_NOT_MATCH(204,"账号或密码输入错误"),
 	USER_NOT_EXIST(205,"用户不存在"),
+	USER_PHONE_INVALID(206,"手机号为空或无效"),
 	UNKONWN_ERROR(-1,"未知错误");
 	
 	private Integer code;//错误码

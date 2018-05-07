@@ -43,9 +43,9 @@ public class UserServiceImpl implements UserService {
 		Map<String,Object> map = new HashMap<String,Object>();
 		String phone = userVO.getPhone();
 		//注册手机号是否为空
-		if(StringUtils.isBlank(phone)) {
-			logger.warn("注册手机为空！");
-			return ;
+		if(StringUtils.isBlank(phone) || 
+				!RegexUtil.checkPhone(phone)) {
+			throw new ServiceException(ServiceResultEnum.USER_PHONE_INVALID);
 		}
 		//当前手机号是否已被注册
 		map.put("phone", phone);
@@ -96,5 +96,31 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException(ServiceResultEnum.USER_ACCOUNT_PASSWORD_NOT_MATCH);
 		}
 		return userInfo;
+	}
+
+	@Override
+	public UserInfo loginBySmsCaptcha(UserVO userVO) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		//用户手机号为空
+		if(StringUtils.isBlank(userVO.getPhone()) || 
+				!RegexUtil.checkPhone(userVO.getPhone())) {
+			throw new ServiceException(ServiceResultEnum.USER_PHONE_INVALID);
+		}
+		map.put("phone", userVO.getPhone());
+		// 查找用户信息
+		UserInfo userInfoPO = userInfoMapper.selectByCondition(map);
+		// 用户不存在，则自动注册
+		if (userInfoPO == null) {
+			userInfoPO = new UserInfo();
+			userInfoPO.setPhone(userVO.getPhone());
+			userInfoPO.setRegisterTime(new Date());
+			userInfoMapper.insert(userInfoPO);
+			//生成默认用户名
+			String defaultUserName = "IME用户"+userInfoPO.getUserId();
+			userInfoPO.setUserName(defaultUserName);
+			//更新用户名至数据库
+			userInfoMapper.updateByPrimaryKey(userInfoPO);
+		}
+		return userInfoPO;
 	}
 }

@@ -89,6 +89,15 @@ $(".get-msg-captcha").click(function(){
 	  data: {phone:phone},
 	  success: function(result){
 		  console.log(result);
+		  if(result.code == 206){
+			  alert("提示",
+						"请输入正确的手机号 ",
+						function(){
+							//确认按钮回调
+						},
+						{type:'warning',confirmButtonText: '好的'});
+			  return ;
+		  }
 		  //请求成功
 		  if("00000" == result.data.respCode){
 			  _this.addClass("to-get-btn");
@@ -298,16 +307,52 @@ function showTips(target, message) {
    * 登录按钮点击
    */
   $(".quick-login-btn").click(function() {
-    var phone = $(".normal-login input[name='phone']").val();
+    var phone = $(".phone-quick-login input[name='phone']").val();
 
+    //表单是否为空
     if (!checkEmpty($(".phone-quick-login"))) {
       return;
     }
+    //输入手机号是否正确
     if (!checkPhone(phone)) {
       showQuickTips("请填写正确的手机号");
-    } else {
-
+      return ;
     }
+    var loginUrl = basePath + "/user/phoneLogin.do";
+	$.ajax({
+	  	  url: loginUrl,
+	  	  type: "POST",
+	  	  data: $(".phone-quick-login").serialize(),
+	  	  dataType: "json",
+	  	  success: function(result){
+	  		  //登录成功
+	  		  if(result.code == 0){
+	  			  location.reload();
+	  		  }else{//登录失败
+	  			var title = "登录失败";
+	  			var tips = "";
+	  			if(result.code == 101){
+	  				tips = "短信验证码已失效，请重新获取";
+	  				$(".phone-quick-login input[name='smsCaptcha']").val("").blur();
+	  			}else if(result.code == 102){
+	  				tips = "短信验证码错误，请重新输入";
+	  				$(".phone-quick-login input[name='smsCaptcha']").val("").blur();
+	  			}else if(result.code == 103){
+	  				tips = "未获取短信验证码，请先获取";
+	  				$(".phone-quick-login input[name='smsCaptcha']").val("").blur();
+	  			}else if(result.code == 206){
+	  				tips = "手机号为空或无效";
+	  			}else{
+	  				tips = "未知错误";
+	  			}
+	  			alert(title,
+						tips,
+						function(){
+	  						//确认按钮回调
+						},
+						{type:'error',confirmButtonText: '好的'});
+	  		  }
+  		  }});
   });
 })();
 /*
@@ -371,7 +416,8 @@ function showTips(target, message) {
   				$(".phone-register input[name='smsCaptcha']").val("").blur();
   			}else if(result.code == 202){
   				tips = "该手机号已被注册";
-  				$(".phone-register input[name='phone']").val("").blur();
+  			}else if(result.code == 206){
+  				tips = "手机号为空或无效";
   			}else{
   				tips = "未知错误";
   			}

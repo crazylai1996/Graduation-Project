@@ -24,4 +24,11 @@ public interface UserService {
 	 * @datetime: 2018年5月7日 下午9:19:19
 	 */
 	UserInfo loginByAccount(UserVO userVO);
+	/**
+	 * 手机号快捷登录
+	 * @param userVO
+	 * @author: laiminghai
+	 * @datetime: 2018年5月8日 上午1:38:13
+	 */
+	UserInfo loginBySmsCaptcha(UserVO userVO);
 }
