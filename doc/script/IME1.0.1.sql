@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018-4-21 ÐÇÆÚÁù 13:35:04                       */
+/* Created on:     2018-05-07-ÐÇÆÚÒ» 12:37:52                      */
 /*==============================================================*/
 
 
@@ -360,7 +360,7 @@ create table UserInfo
    bUserId              bigint not null auto_increment,
    vUserName            varchar(20),
    vPassword            varchar(32),
-   cPasswordSalt        char(5),
+   cPasswordSalt        char(6),
    vNickname            varchar(30),
    cGender              char(2),
    vSkinTexture         varchar(4),
