@@ -340,7 +340,7 @@ body {
   top: 35px;
   z-index: 2;
   display: none;
-  border-width: 0 .5px .5px .5px;
+  border-width: 0 1px 1px 1px;
   border-color: #cccccc;
   border-style: solid;
   box-shadow: 0 0 1px #e6e6e6;

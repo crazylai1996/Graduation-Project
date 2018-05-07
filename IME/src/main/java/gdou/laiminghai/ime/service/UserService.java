@@ -1,5 +1,6 @@
 package gdou.laiminghai.ime.service;
 
+import gdou.laiminghai.ime.model.entity.UserInfo;
 import gdou.laiminghai.ime.model.vo.UserVO;
 
 /**
@@ -16,4 +17,11 @@ public interface UserService {
 	 * @datetime: 2018年5月7日 上午10:08:51
 	 */
 	void registerByPhone(UserVO userVO);
+	/**
+	 * 用户密码登录
+	 * @param userVO
+	 * @author: laiminghai
+	 * @datetime: 2018年5月7日 下午9:19:19
+	 */
+	UserInfo loginByAccount(UserVO userVO);
 }

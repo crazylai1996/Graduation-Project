@@ -65,6 +65,9 @@ $(".get-msg-captcha").click(function(){
 	if(!phone){
 		alert("提示",
 				"手机号不能为空 ",
+				function(){
+					//确认按钮回调
+				},
 				{type:'warning',confirmButtonText: '好的'});
 		return ;
 	}
@@ -72,6 +75,9 @@ $(".get-msg-captcha").click(function(){
 	if(!checkPhone(phone)){
 		alert("提示",
 				"请输入正确的手机号 ",
+				function(){
+					//确认按钮回调
+				},
 				{type:'warning',confirmButtonText: '好的'});
 		return ;
 	}
@@ -101,6 +107,9 @@ $(".get-msg-captcha").click(function(){
 		  }else{//请求失败
 			  alert("错误",
 						"获取验证码失败，请稍后重试 ",
+						function(){
+				  			//确认按钮回调
+						},
 						{type:'error',confirmButtonText: '好的'});
 		  }
 	  },
@@ -167,7 +176,7 @@ function checkEmpty(formObj) {
  * 手机号校验
  */
 function checkPhone(val) {
-  var phoneReg = /^[1][3,4,5,7,8][0-9]{9}$/;
+  var phoneReg = /^[1][3,4,5,6,7,8][0-9]{9}$/;
   if (!phoneReg.test(val)) {
     return false;
   }
@@ -218,17 +227,55 @@ function showTips(target, message) {
   function showLoginTips(message) {
     showTips($(".login-tips"), message);
   }
+  //账号密码登录按钮
   $(".login-btn").click(function() {
     var account = $(".normal-login input[name='account']").val();
     var password = $(".normal-login input[name='password']").val();
 
+    //校验表单是否为空
     if (!checkEmpty($(".normal-login"))) {
       return;
     }
+    //手机号或者邮箱号是否输入正确
     if (!checkPhone(account) && !checkEmail(account)) {
       showLoginTips("请填写正确的手机号或邮箱号");
     } else {
-
+    	var loginUrl = basePath + "/user/accountLogin.do";
+    	$.ajax({
+    	  	  url: loginUrl,
+    	  	  type: "POST",
+    	  	  data: $(".normal-login").serialize(),
+    	  	  dataType: "json",
+    	  	  success: function(result){
+    	  		  //登录成功
+    	  		  if(result.code == 0){
+    	  			  location.reload();
+    	  		  }else{//登录失败
+    	  			  var title = "登录失败";
+    	  			  var tips = "";
+    	  			  if(result.code == 104){
+    	  				  tips = "图片验证码输入不正确，请重新输入";
+    	  			  }else if(result.code == 203){
+    	  				  tips = "请输入正确的邮箱号或者手机号";
+    	  			  }else if(result.code == 204){
+    	  				  tips = "账号或密码输入错误，请重新输入";
+    	  			  }else if(result.code == 205){
+    	  				  tips = "用户不存在，请检查账号是否输入无误";
+    	  			  }else{
+    	  				  tips = "未知错误";
+    	  			  }
+    	  			  //清空验证码
+			  		  $(".normal-login input[name='imageCaptcha']").val("").blur();
+    	  			  alert(title,
+    	  					  tips,
+    	  					  function(){
+		    	  				  // 确认按钮回调
+    	  				  		  //刷新验证码
+    	  				  		  $(".captcha-img").click();
+		    	  			  },
+		    	  			  {type:'error',confirmButtonText: '好的'});
+    	  		  }
+    	  	  }});
     }
   });
 })();
@@ -305,6 +352,7 @@ function showTips(target, message) {
   			alert("注册成功",
   					"点击确认可切换到登录框 ",
   					function(){
+  						//确认按钮回调
   						$(".phone-register input").val("").blur();
   						$(".navi-tab li:eq(0)").click();
   					},
@@ -329,6 +377,9 @@ function showTips(target, message) {
   			}
   			alert(title,
 					tips,
+					function(){
+  						//确认按钮回调
+					},
 					{type:'error',confirmButtonText: '好的'});
   		  }
   	  },

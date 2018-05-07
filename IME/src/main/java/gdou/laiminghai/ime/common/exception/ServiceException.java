@@ -2,7 +2,7 @@ package gdou.laiminghai.ime.common.exception;
 
 /**
  * 
- * @ClassName: ServiceException.java
+ * @ClassName: ServiceException
  * @Description:  业务异常
  *
  * @author: laiminghai

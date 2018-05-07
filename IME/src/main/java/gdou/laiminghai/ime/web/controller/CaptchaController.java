@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import gdou.laiminghai.ime.common.setting.AppSetting;
+import gdou.laiminghai.ime.common.statics.Constant;
 import gdou.laiminghai.ime.common.util.CaptchaUtil;
 
 /**
@@ -34,9 +35,9 @@ public class CaptchaController {
 	public void getCaptchaImage(HttpServletResponse response,HttpSession session) {
 		//获取随机验证码
 		String captcha = CaptchaUtil.getRandomCharCaptcha(AppSetting.CAPTCHA_LOGIN_CHAR_LENGTH);
-		logger.debug(captcha);
+		logger.debug("生成的随机验证码为："+captcha);
 		//验证码存入session
-		session.setAttribute("captcha", captcha);
+		session.setAttribute(Constant.WEB_KEY_IMAGE_CAPTCHA, captcha);
 		
 		//不作缓存
 		response.setHeader("Expires", "-1");  

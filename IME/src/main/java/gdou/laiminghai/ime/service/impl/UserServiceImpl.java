@@ -1,5 +1,6 @@
 package gdou.laiminghai.ime.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import gdou.laiminghai.ime.common.exception.ServiceException;
 import gdou.laiminghai.ime.common.exception.ServiceResultEnum;
 import gdou.laiminghai.ime.common.setting.AppSetting;
 import gdou.laiminghai.ime.common.util.CaptchaUtil;
+import gdou.laiminghai.ime.common.util.RegexUtil;
 import gdou.laiminghai.ime.dao.mapper.UserInfoMapper;
 import gdou.laiminghai.ime.model.entity.UserInfo;
 import gdou.laiminghai.ime.model.vo.UserVO;
@@ -62,11 +64,37 @@ public class UserServiceImpl implements UserService {
 		userInfoPO.setPhone(phone);
 		userInfoPO.setPassword(passwordCodec);
 		userInfoPO.setPasswordSalt(passwrodSalt);
+		userInfoPO.setRegisterTime(new Date());
 		userInfoMapper.insert(userInfoPO);
 		//生成默认用户名
 		String defaultUserName = "IME用户"+userInfoPO.getUserId();
 		userInfoPO.setUserName(defaultUserName);
 		//更新用户名至数据库
 		userInfoMapper.updateByPrimaryKey(userInfoPO);
+	}
+
+	@Override
+	public UserInfo loginByAccount(UserVO userVO) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		//账号为手机号
+		if(RegexUtil.checkMobile(userVO.getAccount())) {
+			map.put("phone", userVO.getAccount());
+		}else if(RegexUtil.checkEmail(userVO.getAccount())) {//账号为邮箱
+			map.put("email", userVO.getAccount());
+		}else {
+			throw new ServiceException(ServiceResultEnum.USER_ACCOUNT_NAME_NOT_ALLOWED);
+		}
+		//查找用户信息
+		UserInfo userInfo = userInfoMapper.selectByCondition(map);
+		//用户不存在
+		if(userInfo == null) {
+			throw new ServiceException(ServiceResultEnum.USER_NOT_EXIST);
+		}
+		//用户密码校验
+		String password = DigestUtils.md5Hex(userVO.getPassword()+userInfo.getPasswordSalt());
+		if(!password.equals(userInfo.getPassword())) {
+			throw new ServiceException(ServiceResultEnum.USER_ACCOUNT_PASSWORD_NOT_MATCH);
+		}
+		return userInfo;
 	}
 }

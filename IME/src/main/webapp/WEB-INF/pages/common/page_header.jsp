@@ -21,39 +21,43 @@
       </div>
       <div class="bar-right">
         <!-- 未登录显示 -->
-        <ul class="no-login-navi">
-          <li><a class="gologin-btn" href="javascript:void(0);">[登录]</a></li>
-          <li><a class="gosignup-btn" href="javascript:void(0);">[注册]</a></li>
-        </ul>
+        <c:if test="${empty sessionScope.userInfo }">
+	        <ul class="no-login-navi">
+	          <li><a class="gologin-btn" href="javascript:void(0);">[登录]</a></li>
+	          <li><a class="gosignup-btn" href="javascript:void(0);">[注册]</a></li>
+	        </ul>
+        </c:if>
         <!-- 登录后显示 -->
-        <ul class="user-navi" style="display:none;">
-          <li class="message-btn">
-            <a href="javascript:void(0);">消息中心</a>
-            <div class="message-box more">
-              <div class="message-type">
-                <a class="first current" href="javascript:void(0);">系统</a>
-                <a class="middle" href="javascript:void(0);">互动</a>
-                <a class="last" href="javascript:void(0);">私信</a>
-              </div>
-              <ul class="message-items">
-                <li><p>新MV！王菲刚刚发布了新MV《将爱》，马上来看！</p></li>
-              </ul>
-              <a class="read-more-btn" href="javascript:void(0);">查看更多</a>
-            </div>
-          </li>
-          <li class="userinfo-btn">
-            <a href="javascript:void(0);">姓赖的先生</a>
-            <ul class="user-tools-box more">
-              <li><a href="javascript:void(0);">个人中心</a></li>
-
-              <li><a href="javascript:void(0);">我的评价</a></li>
-              <li><a href="javascript:void(0);">我的文章</a></li>
-              <li><a href="javascript:void(0);">我的消息</a></li>
-
-              <li><a href="javascript:void(0);">退出登录</a></li>
-            </ul>
-          </li>
-        </ul>
+        <c:if test="${!empty sessionScope.userInfo }">
+	        <ul class="user-navi">
+	          <li class="message-btn">
+	            <a href="javascript:void(0);">消息中心</a>
+	            <div class="message-box more">
+	              <div class="message-type">
+	                <a class="first current" href="javascript:void(0);">系统</a>
+	                <a class="middle" href="javascript:void(0);">互动</a>
+	                <a class="last" href="javascript:void(0);">私信</a>
+	              </div>
+	              <ul class="message-items">
+	                <li><p>新MV！王菲刚刚发布了新MV《将爱》，马上来看！</p></li>
+	              </ul>
+	              <a class="read-more-btn" href="javascript:void(0);">查看更多</a>
+	            </div>
+	          </li>
+	          <li class="userinfo-btn">
+	            <a href="javascript:void(0);">${userInfo.userName }</a>
+	            <ul class="user-tools-box more">
+	              <li><a href="javascript:void(0);">个人中心</a></li>
+	
+	              <li><a href="javascript:void(0);">我的评价</a></li>
+	              <li><a href="javascript:void(0);">我的文章</a></li>
+	              <li><a href="javascript:void(0);">我的消息</a></li>
+	
+	              <li><a href="user/logout">退出登录</a></li>
+	            </ul>
+	          </li>
+	        </ul>
+        </c:if>
       </div>
     </div>
   </div>

@@ -20,7 +20,8 @@ $(".s-type-slector a").click(function(){
  * 跳转到登录页面
  */
 $(".gologin-btn").click(function(){
-	$.get(basePath+"/user/login",{target:"login"},function(data,status){
+	var redirectUrl = window.location.href;
+	$.get(basePath+"/user/login",{target:"login",redirectUrl:redirectUrl},function(data,status){
 		$(document.body).append("<div class='popup-container'>"+data+"</div>");
 		$("html").css("overflow-y","hidden");
 	});
@@ -29,7 +30,8 @@ $(".gologin-btn").click(function(){
  * 跳转到注册页面
  */
 $(".gosignup-btn").click(function(){
-	$.get(basePath+"/user/login",{target:"signup"},function(data,status){
+	var redirectUrl = window.location.href;
+	$.get(basePath+"/user/login",{target:"signup",redirectUrl:redirectUrl},function(data,status){
 		$(document.body).append("<div class='popup-container'>"+data+"</div>");
 		$("html").css("overflow-y","hidden");
 	});

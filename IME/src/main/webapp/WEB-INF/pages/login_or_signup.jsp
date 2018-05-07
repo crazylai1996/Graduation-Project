@@ -29,7 +29,8 @@
       </ul>
       <div class="form-container">
         <!-- 账号登录表单 -->
-        <form class="normal-login">
+        <form class="normal-login" method="POST">
+          <input type="hidden" name="redirectUrl" value="${param.redirectUrl }">
           <div class="form-item">
             <div class="item-label">
               手机号/邮箱
@@ -46,7 +47,7 @@
             <div class="item-label">
               输入验证码
             </div>
-            <input class="short-input" type="text" name="captcha" class="item-input" autocomplete="off" data-label="验证码">
+            <input class="short-input" type="text" name="imageCaptcha" class="item-input" autocomplete="off" data-label="验证码">
             <img class="captcha-img" alt="看不清，换一张">
           </div>
           <!-- 其他操作 -->
@@ -98,6 +99,7 @@
         </form>
         <!-- 手机号快速登录表单 -->
         <form class="phone-quick-login">
+          <input type="hidden" name="redirectUrl" value="${param.redirectUrl }">
           <div class="form-item">
             <div class="item-label">
               手机号
@@ -130,6 +132,9 @@
   </div>
 
   <!-- js脚本 -->
+  <script>
+  	var basePath = "${basePath}";
+  </script>
   <script src="static\js\jquery.js"></script>
   <!-- 弹窗插件 -->
   <script src="static\plugins\BeAlert\BeAlert.js"></script>
