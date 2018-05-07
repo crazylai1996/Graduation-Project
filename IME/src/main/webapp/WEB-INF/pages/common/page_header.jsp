@@ -9,6 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <base href="${basePath }">
   <title>爱美丽 - 化妆品导购与评价平台 - Header</title>
+  <link rel="stylesheet" href="static\css\login_or_signup.css" />
   <link rel="stylesheet" href="static\css\common\page_header.css" />
 </head>
 <body>

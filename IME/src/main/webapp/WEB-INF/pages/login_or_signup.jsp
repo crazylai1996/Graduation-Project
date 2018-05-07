@@ -9,7 +9,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <base href="${basePath }">
   <title>登录和注册</title>
-  <link rel="stylesheet" href="static\css\login_or_signup.css" />
   <link rel="stylesheet" href="static\plugins\BeAlert\BeAlert.css"/>
 </head>
 
