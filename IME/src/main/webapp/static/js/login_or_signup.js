@@ -310,8 +310,25 @@ function showTips(target, message) {
   					},
   					{type:'success',confirmButtonText: '好的'});
   		  }else{
-  			alert("注册失败",
-					result.message+",请稍后重试",
+  			var title = "注册失败";
+  			var tips = "";
+  			if(result.code == 101){
+  				tips = "短信验证码已失效，请重新获取";
+  				$(".phone-register input[name='smsCaptcha']").val("").blur();
+  			}else if(result.code == 102){
+  				tips = "短信验证码错误，请重新输入";
+  				$(".phone-register input[name='smsCaptcha']").val("").blur();
+  			}else if(result.code == 103){
+  				tips = "未获取短信验证码，请先获取";
+  				$(".phone-register input[name='smsCaptcha']").val("").blur();
+  			}else if(result.code == 202){
+  				tips = "该手机号已被注册";
+  				$(".phone-register input[name='phone']").val("").blur();
+  			}else{
+  				tips = "未知错误";
+  			}
+  			alert(title,
+					tips,
 					{type:'error',confirmButtonText: '好的'});
   		  }
   	  },

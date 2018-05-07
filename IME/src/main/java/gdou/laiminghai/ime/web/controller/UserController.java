@@ -94,10 +94,14 @@ public class UserController {
 	@RequestMapping("/phoneRegister.do")
 	public ResultDTO phoneRegister(UserVO userVO) {
 		logger.debug(userVO.toString());
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
 		// 验证码
 		String smsCaptcha = (String) session.
 				getAttribute("smsCaptcha-" + userVO.getPhone());
+		//验证码未获取
+		if(StringUtils.isEmpty(smsCaptcha)) {
+			throw new ServiceException(ServiceResultEnum.CAPTCHA_SMS_NOT_EXIST);
+		}
 		// 验证码生成时间
 		long smsCaptchaTime = (long) session.
 				getAttribute("smsCaptcha-time-" + userVO.getPhone());
@@ -107,9 +111,8 @@ public class UserController {
 		if (distanceTime > AppSetting.CAPTCHA_SMS_TIMEOUT) {
 			throw new ServiceException(ServiceResultEnum.CAPTCHA_SMS_TIMEOUT);
 		}
-		//验证码为空或不匹配
-		if(StringUtils.isBlank(userVO.getSmsCaptcha()) || 
-				!userVO.getSmsCaptcha().equals(smsCaptcha)) {
+		//验证码不匹配
+		if(StringUtils.isBlank(userVO.getSmsCaptcha()) || !userVO.getSmsCaptcha().equals(smsCaptcha)) {
 			throw new ServiceException(ServiceResultEnum.CAPTCHA_SMS_NOT_MATCH);
 		}
 		//注册
