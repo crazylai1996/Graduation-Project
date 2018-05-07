@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="gdou.laiminghai.ime.mapper.CommentInfoMapper">
+<mapper namespace="gdou.laiminghai.ime.dao.mapper.CommentInfoMapper">
   <resultMap id="BaseResultMap" type="CommentInfo">
     <id column="bCommentId" jdbcType="BIGINT" property="commentId" />
     <result column="bUserId" jdbcType="BIGINT" property="userId" />

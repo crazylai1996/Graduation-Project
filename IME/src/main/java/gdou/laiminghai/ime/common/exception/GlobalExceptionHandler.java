@@ -16,6 +16,9 @@ import gdou.laiminghai.ime.common.util.AjaxUtil;
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends BaseExceptionHandler{
+	/**
+	 * 日志记录
+	 */
 	private final static Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 	
 	/**
@@ -38,6 +41,7 @@ public class GlobalExceptionHandler extends BaseExceptionHandler{
 				ServiceException servicException = (ServiceException)e;
 				return handleAjaxException(response, servicException.getCode(), servicException.getMessage());
 			} else {//处理其他异常
+				logger.error("未知错误：",e);
 				return handleAjaxException(response, 
 						ServiceResultEnum.UNKONWN_ERROR.getCode(), ServiceResultEnum.UNKONWN_ERROR.getMessage());
 			}
@@ -45,6 +49,7 @@ public class GlobalExceptionHandler extends BaseExceptionHandler{
 			if(e instanceof ServiceException) {
 				return handleViewException(request.getRequestURL().toString(), e.getMessage(), "");
 			}else {
+				logger.error("未知错误：",e);
 				return handleViewException(request.getRequestURL().toString(),  ServiceResultEnum.UNKONWN_ERROR.getMessage(), "");
 			}
 		}

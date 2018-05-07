@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="gdou.laiminghai.ime.mapper.ProductPropertyMapper">
+<mapper namespace="gdou.laiminghai.ime.dao.mapper.ProductPropertyMapper">
   <resultMap id="BaseResultMap" type="ProductProperty">
     <id column="iPropertyId" jdbcType="INTEGER" property="propertyId" />
     <result column="vPropertyName" jdbcType="VARCHAR" property="propertyName" />

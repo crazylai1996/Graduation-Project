@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="gdou.laiminghai.ime.mapper.CosmeticClassMapper">
+<mapper namespace="gdou.laiminghai.ime.dao.mapper.CosmeticClassMapper">
   <resultMap id="BaseResultMap" type="CosmeticClass">
     <id column="bClassId" jdbcType="INTEGER" property="classId" />
     <result column="vClassName" jdbcType="VARCHAR" property="className" />

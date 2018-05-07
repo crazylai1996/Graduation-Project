@@ -44,4 +44,6 @@
     <bean id="exceptionHandlerExceptionResolver" class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver">
     </bean>
     
+    <!-- 自定义异常处理 -->
+    <bean class="gdou.laiminghai.ime.common.exception.GlobalExceptionHandler"/>
 </beans>

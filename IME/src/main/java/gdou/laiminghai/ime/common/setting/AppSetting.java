@@ -48,6 +48,10 @@ public class AppSetting {
 	 * 秒滴短信模板ID
 	 */
 	public static String MIAODI_SMS_TEMPLATE_ID;
+	/**
+	 * 用户密码加密盐长度
+	 */
+	public static int USER_PASSWORD_SALT_LENGTH;
 
 	@Value("${captcha.login.char.length}")
 	public void setCaptchaLoginCodeCount(int captchaLength) {
@@ -94,4 +98,8 @@ public class AppSetting {
 		AppSetting.MIAODI_SMS_TEMPLATE_ID = smsTemplateId;
 	}
 
+	@Value("${user.password.salt.length}")
+	public void setUserPasswordSaltLength(int passwordSaltLength) {
+		AppSetting.USER_PASSWORD_SALT_LENGTH = passwordSaltLength;
+	}
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="gdou.laiminghai.ime.mapper.ProductBrandMapper">
+<mapper namespace="gdou.laiminghai.ime.dao.mapper.ProductBrandMapper">
   <resultMap id="BaseResultMap" type="ProductBrand">
     <id column="iBrandId" jdbcType="INTEGER" property="brandId" />
     <result column="vBrandName" jdbcType="VARCHAR" property="brandName" />

@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import gdou.laiminghai.ime.common.exception.ServiceException;
+import gdou.laiminghai.ime.common.exception.ServiceResultEnum;
 import gdou.laiminghai.ime.common.setting.AppSetting;
 import gdou.laiminghai.ime.common.util.CaptchaUtil;
 import gdou.laiminghai.ime.common.util.ResultDTOUtil;
 import gdou.laiminghai.ime.model.dto.ResultDTO;
 import gdou.laiminghai.ime.model.dto.SmsCaptchaResponseDTO;
 import gdou.laiminghai.ime.model.vo.UserVO;
+import gdou.laiminghai.ime.service.UserService;
 
 /**
  * 用户控制器
@@ -32,11 +35,16 @@ import gdou.laiminghai.ime.model.vo.UserVO;
 @RequestMapping("/user")
 public class UserController {
 
-	// 日志记录
+	/**
+	 *  日志记录
+	 */
 	private final static Logger logger = Logger.getLogger(UserController.class);
 
 	@Autowired
 	private HttpServletRequest request;
+	
+	@Autowired
+	private UserService userServie;
 
 	/**
 	 * 跳转到用户登录页面
@@ -88,17 +96,24 @@ public class UserController {
 		logger.debug(userVO.toString());
 		HttpSession session = request.getSession(false);
 		// 验证码
-		String smsCaptcha = (String) session.getAttribute("smsCaptcha-" + userVO.getPhone());
+		String smsCaptcha = (String) session.
+				getAttribute("smsCaptcha-" + userVO.getPhone());
 		// 验证码生成时间
-		long smsCaptchaTime = (long) session.getAttribute("smsCaptcha-time-" + userVO.getPhone());
+		long smsCaptchaTime = (long) session.
+				getAttribute("smsCaptcha-time-" + userVO.getPhone());
 		// 验证码生成时隔
 		long distanceTime = new Date().getTime() - smsCaptchaTime;
-		//判断验证码是否失效
-		if (distanceTime <= AppSetting.CAPTCHA_SMS_TIMEOUT) {
-			
-		}else {
-			
+		//验证码失效
+		if (distanceTime > AppSetting.CAPTCHA_SMS_TIMEOUT) {
+			throw new ServiceException(ServiceResultEnum.CAPTCHA_SMS_TIMEOUT);
 		}
+		//验证码为空或不匹配
+		if(StringUtils.isBlank(userVO.getSmsCaptcha()) || 
+				!userVO.getSmsCaptcha().equals(smsCaptcha)) {
+			throw new ServiceException(ServiceResultEnum.CAPTCHA_SMS_NOT_MATCH);
+		}
+		//注册
+		userServie.registerByPhone(userVO);
 		return ResultDTOUtil.success(null);
 	}
 }

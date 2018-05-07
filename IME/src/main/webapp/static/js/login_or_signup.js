@@ -87,7 +87,7 @@ $(".get-msg-captcha").click(function(){
 		  if("00000" == result.data.respCode){
 			  _this.addClass("to-get-btn");
 				
-			  var timeout = 5;
+			  var timeout = 60;
 			  _this.text(timeout+"秒后重新获取");
 			  var timer = setInterval(function(){
 				  timeout--;
@@ -247,6 +247,9 @@ function showTips(target, message) {
     showTips($(".quick-login-tips"), message);
   }
 
+  /**
+   * 登录按钮点击
+   */
   $(".quick-login-btn").click(function() {
     var phone = $(".normal-login input[name='phone']").val();
 
@@ -280,10 +283,11 @@ function showTips(target, message) {
    */
   $(".register-btn").click(function() {
     var phone = $(".phone-register input[name='phone']").val();
-
+    //表单是否为空
     if (!checkEmpty($(".phone-register"))) {
       return;
     }
+    //手机号是否输入正确
     if (!checkPhone(phone)) {
       showRegisterTips("请填写正确的手机号");
       return;
@@ -291,12 +295,25 @@ function showTips(target, message) {
     
     //手机号注册地址
     var registerUrl = basePath + "/user/phoneRegister.do";
+    //注册请求
     $.ajax({
   	  url: registerUrl,
   	  type: "POST",
   	  data: $(".phone-register").serialize(),
-  	  success: function(data){
-  		  console.log(data);
+  	  success: function(result){
+  		  if(result.success){
+  			alert("注册成功",
+  					"点击确认可切换到登录框 ",
+  					function(){
+  						$(".phone-register input").val("").blur();
+  						$(".navi-tab li:eq(0)").click();
+  					},
+  					{type:'success',confirmButtonText: '好的'});
+  		  }else{
+  			alert("注册失败",
+					result.message+",请稍后重试",
+					{type:'error',confirmButtonText: '好的'});
+  		  }
   	  },
   	  dataType: "json"
   	});

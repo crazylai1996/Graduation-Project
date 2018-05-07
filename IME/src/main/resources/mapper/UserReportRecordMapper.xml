@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="gdou.laiminghai.ime.mapper.UserReportRecordMapper">
+<mapper namespace="gdou.laiminghai.ime.dao.mapper.UserReportRecordMapper">
   <resultMap id="BaseResultMap" type="UserReportRecord">
     <id column="bReportId" jdbcType="BIGINT" property="reportId" />
     <result column="bUserId" jdbcType="BIGINT" property="userId" />
