@@ -352,7 +352,7 @@ body {
 }
 .info-detail .info-item .portrait-wrapped .change-protrait a:hover {
   color: #cc99cc;
-  text-decoration: underline;
+  text-decoration: none;
 }
 /**
  * 更新按钮
@@ -381,4 +381,102 @@ body {
 }
 .info-ops .update-confirm:hover {
   background-color: #be7ebe;
+}
+/**
+  * 图片裁剪
+  */
+.portrait-clip-container .upload-portrait-mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  display: none;
+  background-color: #000;
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+  -moz-opacity: 0.6;
+}
+.portrait-clip-container .upload-dialog {
+  position: fixed;
+  z-index: 2;
+  display: none;
+  width: 600px;
+  padding-left: 15px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  border-radius: 4px;
+  background-color: #ffffff;
+}
+.portrait-clip-container .upload-dialog hr {
+  margin: 0;
+  margin-bottom: 10px;
+  border: solid 1px #cccccc;
+}
+.portrait-clip-container .upload-dialog-header {
+  display: inline-block;
+  width: 100%;
+  height: 35px;
+  line-height: 35px;
+  cursor: move;
+}
+.portrait-clip-container .upload-dialog-header .title-label {
+  float: left;
+  font-size: 16px;
+  font-weight: 550;
+}
+.portrait-clip-container .upload-dialog-header .close-dialog-btn {
+  float: right;
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  font-size: 16px;
+  color: #999999;
+  text-align: center;
+  text-decoration: none;
+  background-color: #fff;
+  border-radius: 50%;
+}
+.portrait-clip-container .upload-dialog-header .close-dialog-btn:hover {
+  color: #cc3333;
+  text-decoration: none;
+}
+.portrait-clip-container .upload-dialog-header .close-dialog-btn:before {
+  content: "\2716";
+  vertical-align: middle;
+}
+.portrait-clip-container .clip-container {
+  float: left;
+  display: inline-block;
+  width: 260px;
+  margin-top: 10px;
+  vertical-align: top;
+}
+.portrait-clip-container .target-image-container {
+  float: left;
+  display: inline-block;
+  width: 300px;
+  min-height: 150px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.portrait-clip-container .portrait-pre-show {
+  display: none;
+}
+.portrait-clip-container .upload-btn {
+  display: none;
+  width: 42px;
+  height: 25px;
+  line-height: 25px;
+  color: #ffffff;
+  font-size: 14px;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 2px;
+  background-color: #cc99cc;
+}
+.portrait-clip-container .upload-btn:hover {
+  background-color: #be7ebe;
+}
+.portrait-clip-container .upload-btn-show {
+  display: inline-block;
 }

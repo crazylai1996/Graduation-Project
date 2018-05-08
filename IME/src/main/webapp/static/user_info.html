@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <title>用户中心 - 爱美丽</title>
     <link rel="stylesheet" href="css\bootstrap.min.css">
+    <link rel="stylesheet" href="plugins\Jcrop\jquery.Jcrop.min.css">
     <link rel="stylesheet" href="css\user_info.css">
   </head>
   <body>
@@ -114,6 +115,27 @@
               <div class="info-ops">
                 <a href="javascript:void(0);" class="update-confirm">更新</a>
               </div>
+              <!-- 头像选择框 -->
+              <div class="portrait-clip-container">
+                <div class="upload-portrait-mask"></div>
+                <div class="upload-dialog">
+               	  <span class="upload-dialog-header">
+                  	<span class="title-label" onselectstart="return   false">选择头像</span>
+                    <a class="close-dialog-btn" href="javascript:void(0);"></a>
+                  </span>
+                  <hr/>
+               	  <input type="file" class="src-portrait-input"/>
+                	<div class="portrait-clip-box">
+                      <div class="clip-container">
+                        <img class="portrait-show" src=" "/>
+                      </div>
+                      <div class="target-image-container">
+                        <canvas class="portrait-pre-show" width="300px" height="300px"></canvas>
+                        <a class="upload-btn" href="javascript:void(0);">上传</a>
+                      </div>
+                	</div>
+               </div>
+              </div>
             </div>
           </div>
         </div>
@@ -122,6 +144,7 @@
     </div>
 
   <script src="js\jquery.js"></script>
+  <script src="plugins\Jcrop\jquery.Jcrop.min.js"></script>
   <script src="js\user_info.js"></script>
   </body>
 </html>

@@ -228,8 +228,6 @@
       margin-right: 10px;
     }
 
-
-
     //昵称
     .nick-name{
       @_width: 170px;
@@ -279,7 +277,7 @@
 
           &:hover{
             color: @main_color;
-            text-decoration: underline;
+            text-decoration: none;
           }
         }
       }
@@ -321,3 +319,129 @@
      }
    }
  }
+ /**
+  * 图片裁剪
+  */
+.portrait-clip-container{
+  .upload-portrait-mask{
+    position:absolute;
+    left:0;
+    top:0;
+    z-index:1;
+
+    display:none;
+
+    background-color: #000;
+    .opacity_mixin(0.60);
+  }
+  .upload-dialog{
+    position:fixed;
+    // left:50%;
+    // top:50%;
+    z-index:2;
+
+    display:none;
+    width:600px;
+    padding-left:15px;
+    padding-right:10px;
+    padding-bottom:10px;
+
+    border-radius: 4px;
+    background-color:@white_color;
+
+    hr{
+      margin: 0;
+      margin-bottom: 10px;
+
+      border:solid 1px @border_color;
+    }
+  }
+   .upload-dialog-header{
+      @_height: 35px;
+
+     	display:inline-block;
+     	width:100%;
+      height: @_height;
+
+     	line-height:@_height;
+
+      cursor: move;
+      .title-label{
+         float:left;
+
+        font-size: 16px;
+        font-weight: 550;
+      }
+      .close-dialog-btn{
+         float:right;
+
+         display:inline-block;
+         width: @_height;
+         height: @_height;
+
+         font-size: 16px;
+         color: @desc_color;
+         text-align: center;
+         text-decoration: none;
+
+         background-color: #fff;
+         border-radius: 50%;
+
+         &:hover{
+           color: @alert_color;
+           text-decoration: none;
+         }
+         &:before{
+           content: "\2716";
+
+           vertical-align: middle;
+         }
+      }
+   }
+   .clip-container{
+      float: left;
+
+     	display:inline-block;
+      width: 260px;
+     	margin-top:10px;
+
+     	vertical-align:top;
+   }
+
+   .target-image-container{
+    float: left;
+
+   	display:inline-block;
+    width: 300px;
+    min-height: 150px;
+   	margin-top:10px;
+   	margin-left:10px;
+   }
+   .portrait-pre-show{
+     display: none;
+   }
+   .upload-btn{
+     @_width: 42px;
+      @_height: 25px;
+
+     display: none;
+     width: @_width;
+     height: @_height;
+
+     line-height: @_height;
+     color: @white_color;
+     font-size: 14px;
+     text-decoration: none;
+     text-align: center;
+
+     border-radius: 2px;
+     background-color: @main_color;
+
+     &:hover{
+       background-color: @main_strong_color;
+     }
+   }
+   .upload-btn-show{
+     display: inline-block;
+   }
+}
