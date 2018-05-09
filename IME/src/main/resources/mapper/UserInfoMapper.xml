@@ -9,8 +9,8 @@
     <result column="vNickname" jdbcType="VARCHAR" property="nickname" />
     <result column="cGender" jdbcType="CHAR" property="gender" />
     <result column="vSkinTexture" jdbcType="VARCHAR" property="skinTexture" />
-    <result column="iAge" jdbcType="INTEGER" property="age" />
-    <result column="iAreaId" jdbcType="INTEGER" property="areaId" />
+    <result column="iBornYear" jdbcType="INTEGER" property="bornYear" />
+    <result column="iUserAreaId" jdbcType="INTEGER" property="areaId" />
     <result column="vIntroduction" jdbcType="VARCHAR" property="introduction" />
     <result column="vPortrait" jdbcType="VARCHAR" property="portrait" />
     <result column="cPhone" jdbcType="CHAR" property="phone" />
@@ -22,9 +22,15 @@
     <result column="dRegisterTime" jdbcType="TIMESTAMP" property="registerTime" />
     <result column="dLastLoginTime" jdbcType="TIMESTAMP" property="lastLoginTime" />
   </resultMap>
+  <!-- 关联查询  -->
+  <resultMap type="UserInfo" id="UserInfoResultMap" extends="BaseResultMap">
+  	<!-- 所在地区关联 -->
+  	<association property="area" column="iUserAreaId" 
+  		javaType="Area" resultMap="gdou.laiminghai.ime.dao.mapper.AreaMapper.BaseResultMap"/>
+  </resultMap>
   <sql id="UserInfoColumns">
   	bUserId, vUserName, vPassword, cPasswordSalt, vNickname, cGender, vSkinTexture, 
-    iAge, iAreaId, vIntroduction, vPortrait, cPhone, vEmail, cActivationCode, vUserState, 
+    iBornYear, iUserAreaId, vIntroduction, vPortrait, cPhone, vEmail, cActivationCode, vUserState, 
     iMembershipPoint, iMemberLevel, dRegisterTime, dLastLoginTime
   </sql>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
@@ -34,14 +40,14 @@
   <insert id="insert" keyColumn="bUserId" keyProperty="userId" parameterType="UserInfo" useGeneratedKeys="true">
     insert into userinfo (vUserName, vPassword, cPasswordSalt, 
       vNickname, cGender, vSkinTexture, 
-      iAge, iAreaId, vIntroduction, 
+      iBornYear, iUserAreaId, vIntroduction, 
       vPortrait, cPhone, vEmail, 
       cActivationCode, vUserState, iMembershipPoint, 
       iMemberLevel, dRegisterTime, dLastLoginTime
       )
     values (#{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{passwordSalt,jdbcType=CHAR}, 
       #{nickname,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, #{skinTexture,jdbcType=VARCHAR}, 
-      #{age,jdbcType=INTEGER}, #{areaId,jdbcType=INTEGER}, #{introduction,jdbcType=VARCHAR}, 
+      #{bornYear,jdbcType=INTEGER}, #{areaId,jdbcType=INTEGER}, #{introduction,jdbcType=VARCHAR}, 
       #{portrait,jdbcType=VARCHAR}, #{phone,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, 
       #{activationCode,jdbcType=CHAR}, #{userState,jdbcType=VARCHAR}, #{membershipPoint,jdbcType=INTEGER}, 
       #{memberLevel,jdbcType=INTEGER}, #{registerTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}
@@ -55,8 +61,8 @@
       vNickname = #{nickname,jdbcType=VARCHAR},
       cGender = #{gender,jdbcType=CHAR},
       vSkinTexture = #{skinTexture,jdbcType=VARCHAR},
-      iAge = #{age,jdbcType=INTEGER},
-      iAreaId = #{areaId,jdbcType=INTEGER},
+      iBornYear = #{bornYear,jdbcType=INTEGER},
+      iUserAreaId = #{areaId,jdbcType=INTEGER},
       vIntroduction = #{introduction,jdbcType=VARCHAR},
       vPortrait = #{portrait,jdbcType=VARCHAR},
       cPhone = #{phone,jdbcType=CHAR},
@@ -82,19 +88,22 @@
   <!-- 我是分割线 -->
   <sql id="selectByCondition_Condition">
   	<where>
+  		<if test="userId != null">
+  			and u.bUserId = #{userId,jdbcType=BIGINT}
+  		</if>
   		<if test="phone != null">
-  			and u.cPhone = #{phone}
+  			and u.cPhone = #{phone,jdbcType=CHAR}
   		</if>
   		<if test="email != null">
-  			and u.vEmail = #{email}
+  			and u.vEmail = #{email,jdbcType=VARCHAR}
   		</if>
   	</where>
   </sql>
   <!-- 条件查询用户信息 -->
   <select id="selectByCondition" 
-  	parameterType="map" resultMap="BaseResultMap">
-  	select <include refid="UserInfoColumns"/> 
-  	from userinfo u
+  	parameterType="map" resultMap="UserInfoResultMap">
+  	select <include refid="UserInfoColumns"/>,a.*
+  	from userinfo u left join area a on u.iUserAreaId = a.iAreaId
   	<include refid="selectByCondition_Condition"/>
   </select>
 </mapper>

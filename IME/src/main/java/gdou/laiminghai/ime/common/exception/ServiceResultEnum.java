@@ -12,6 +12,9 @@ public enum ServiceResultEnum {
 	USER_ACCOUNT_PASSWORD_NOT_MATCH(204,"账号或密码输入错误"),
 	USER_NOT_EXIST(205,"用户不存在"),
 	USER_PHONE_INVALID(206,"手机号为空或无效"),
+	USER_SESSION_TIMEOUT(207,"用户SESSION失效过期"),
+	USER_INVALID_ACTION(208,"非法请求或操作"),
+	USER_PORTRAIT_UPDATE_ERROR(209,"用户头像保存失败"),
 	UNKONWN_ERROR(-1,"未知错误");
 	
 	private Integer code;//错误码

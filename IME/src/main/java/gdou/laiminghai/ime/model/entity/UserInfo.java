@@ -17,7 +17,7 @@ public class UserInfo {
 
     private String skinTexture;
 
-    private Integer age;
+    private Integer bornYear;
 
     private Integer areaId;
 
@@ -40,6 +40,9 @@ public class UserInfo {
     private Date registerTime;
 
     private Date lastLoginTime;
+    
+    /*关联属性*/
+    private Area area;
 
     public Long getUserId() {
         return userId;
@@ -96,16 +99,16 @@ public class UserInfo {
     public void setSkinTexture(String skinTexture) {
         this.skinTexture = skinTexture == null ? null : skinTexture.trim();
     }
+   
+    public Integer getBornYear() {
+		return bornYear;
+	}
 
-    public Integer getAge() {
-        return age;
-    }
+	public void setBornYear(Integer bornYear) {
+		this.bornYear = bornYear;
+	}
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public Integer getAreaId() {
+	public Integer getAreaId() {
         return areaId;
     }
 
@@ -192,4 +195,12 @@ public class UserInfo {
     public void setLastLoginTime(Date lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
     }
+
+	public Area getArea() {
+		return area;
+	}
+
+	public void setArea(Area area) {
+		this.area = area;
+	}
 }

@@ -13,4 +13,6 @@ public interface AreaMapper {
     List<Area> selectAll();
 
     int updateByPrimaryKey(Area record);
+    
+    List<Area> selectChildNodes(Integer parentAreaId);
 }

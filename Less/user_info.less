@@ -161,7 +161,6 @@
 
       line-height: @_height;
       text-align: right;
-      vertical-align: middle;
       color: @desc_strong_color;
     }
 
@@ -203,7 +202,6 @@
         height: @_size;
         margin-right: 4px;
 
-        vertical-align: middle;
         line-height: @_size;
 
         border-radius: 50%;
@@ -215,7 +213,7 @@
       &:before{
         background-color: @main_strong_color;
         background-clip: content-box;
-        padding: 1.5px;
+        padding: 1px;
       }
     }
 
@@ -329,7 +327,7 @@
     top:0;
     z-index:1;
 
-    display:none;
+    display:block;
 
     background-color: #000;
     .opacity_mixin(0.60);
@@ -340,7 +338,7 @@
     // top:50%;
     z-index:2;
 
-    display:none;
+    display:block;
     width:600px;
     padding-left:15px;
     padding-right:10px;

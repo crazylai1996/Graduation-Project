@@ -21,8 +21,8 @@ $(".s-type-slector a").click(function(){
  */
 $(".gologin-btn").click(function(){
 	var redirectUrl = window.location.href;
-	$.get(basePath+"/user/login",{target:"login",redirectUrl:redirectUrl},function(data,status){
-		$(document.body).append("<div class='popup-container'>"+data+"</div>");
+	$.get(basePath+"user/login",{target:"login",redirectUrl:redirectUrl},function(data,status){
+		$(document.body).append("<div class='login-popup-container'>"+data+"</div>");
 		$("html").css("overflow-y","hidden");
 	});
 });
@@ -31,8 +31,8 @@ $(".gologin-btn").click(function(){
  */
 $(".gosignup-btn").click(function(){
 	var redirectUrl = window.location.href;
-	$.get(basePath+"/user/login",{target:"signup",redirectUrl:redirectUrl},function(data,status){
-		$(document.body).append("<div class='popup-container'>"+data+"</div>");
+	$.get(basePath+"user/login",{target:"signup",redirectUrl:redirectUrl},function(data,status){
+		$(document.body).append("<div class='login-popup-container'>"+data+"</div>");
 		$("html").css("overflow-y","hidden");
 	});
 });

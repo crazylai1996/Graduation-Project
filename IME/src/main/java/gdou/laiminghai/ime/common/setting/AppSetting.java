@@ -52,6 +52,10 @@ public class AppSetting {
 	 * 用户密码加密盐长度
 	 */
 	public static int USER_PASSWORD_SALT_LENGTH;
+	/**
+	 * 用户头像保存地址
+	 */
+	public static String PORTRAIT_SAVED_PATH;
 
 	@Value("${captcha.login.char.length}")
 	public void setCaptchaLoginCodeCount(int captchaLength) {
@@ -101,5 +105,10 @@ public class AppSetting {
 	@Value("${user.password.salt.length}")
 	public void setUserPasswordSaltLength(int passwordSaltLength) {
 		AppSetting.USER_PASSWORD_SALT_LENGTH = passwordSaltLength;
+	}
+	
+	@Value("${user.portrait.saved.path}")
+	public void setPortraitSavedPath(String savedPath) {
+		AppSetting.PORTRAIT_SAVED_PATH = savedPath;
 	}
 }

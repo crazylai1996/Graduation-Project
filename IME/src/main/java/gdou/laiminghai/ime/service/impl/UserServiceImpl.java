@@ -1,23 +1,32 @@
 package gdou.laiminghai.ime.service.impl;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.apache.catalina.User;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import gdou.laiminghai.ime.common.exception.ServiceException;
 import gdou.laiminghai.ime.common.exception.ServiceResultEnum;
 import gdou.laiminghai.ime.common.setting.AppSetting;
+import gdou.laiminghai.ime.common.statics.SkinTextureEnum;
 import gdou.laiminghai.ime.common.util.CaptchaUtil;
 import gdou.laiminghai.ime.common.util.RegexUtil;
 import gdou.laiminghai.ime.dao.mapper.UserInfoMapper;
 import gdou.laiminghai.ime.model.entity.UserInfo;
+import gdou.laiminghai.ime.model.vo.UserInfoVO;
 import gdou.laiminghai.ime.model.vo.UserVO;
 import gdou.laiminghai.ime.service.UserService;
 
@@ -74,7 +83,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserInfo loginByAccount(UserVO userVO) {
+	public UserInfoVO loginByAccount(UserVO userVO) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		//账号为手机号
 		if(RegexUtil.checkMobile(userVO.getAccount())) {
@@ -95,11 +104,11 @@ public class UserServiceImpl implements UserService {
 		if(!password.equals(userInfo.getPassword())) {
 			throw new ServiceException(ServiceResultEnum.USER_ACCOUNT_PASSWORD_NOT_MATCH);
 		}
-		return userInfo;
+		return userInfo2UserInfoVO(userInfo);
 	}
 
 	@Override
-	public UserInfo loginBySmsCaptcha(UserVO userVO) {
+	public UserInfoVO loginBySmsCaptcha(UserVO userVO) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		//用户手机号为空
 		if(StringUtils.isBlank(userVO.getPhone()) || 
@@ -121,6 +130,129 @@ public class UserServiceImpl implements UserService {
 			//更新用户名至数据库
 			userInfoMapper.updateByPrimaryKey(userInfoPO);
 		}
-		return userInfoPO;
+		return userInfo2UserInfoVO(userInfoPO);
+	}
+	
+	@Override
+	public UserInfoVO getUserInfoById(Long userId) {
+		//构造查询参数
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		// 查找用户信息
+		UserInfo userInfoPO = userInfoMapper.selectByCondition(map);
+		//用户不存在
+		if(userInfoPO == null) {
+			throw new ServiceException(ServiceResultEnum.USER_NOT_EXIST);
+		}
+		return userInfo2UserInfoVO(userInfoPO);
+	}
+
+	@Override
+	public void updateUserInfo(UserInfoVO userInfoVO) {
+		//无效动作
+		if(userInfoVO == null || 
+				userInfoVO.getUserId() == null) {
+			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);
+		}
+		UserInfo userInfoPO = userInfoMapper.selectByPrimaryKey(userInfoVO.getUserId());
+		//用户不存在
+		if(userInfoPO == null) {
+			throw new ServiceException(ServiceResultEnum.USER_NOT_EXIST);
+		}
+		//设置新值
+		userInfoPO.setNickname(userInfoVO.getNickname());
+		userInfoPO.setGender(userInfoVO.getGender());
+		userInfoPO.setIntroduction(userInfoVO.getIntroduction());
+		if(userInfoVO.getArea() != null) {
+			userInfoPO.setAreaId(userInfoVO.getArea().getAreaId());
+		}
+		//更新至数据库
+		userInfoMapper.updateByPrimaryKey(userInfoPO);
+	}
+
+	@Override
+	public String updateUserPortrait(Long userId , MultipartFile portrait, String savedPath) {
+		logger.debug("头像保存的路径："+savedPath);
+		//生成随机文件名
+		String fileName = UUID.randomUUID().toString() + ".png";
+		File targetFile = new File(savedPath, fileName);
+		//父目录是否存在，不存在则创建
+		if (!targetFile.getParentFile().exists()) {
+			targetFile.getParentFile().mkdir();
+		}
+		FileOutputStream out = null;
+		InputStream in = null;
+		try {
+			out = new FileOutputStream(targetFile);
+			in = portrait.getInputStream();
+			byte[] buff = new byte[1024];
+			int len = 0;
+			while (-1 != (len = in.read(buff))) {
+				out.write(buff, 0, len);
+			}
+		} catch (Exception e) {
+			logger.error("保存头像文件异常：",e);
+			throw new ServiceException(ServiceResultEnum.USER_PORTRAIT_UPDATE_ERROR);
+		} finally {
+			try {
+				if (in != null) {
+					in.close();
+				}
+				if (out != null) {
+					out.close();
+				}
+			} catch (Exception e) {
+				logger.error("关闭文件流异常：", e);
+				throw new ServiceException(ServiceResultEnum.USER_PORTRAIT_UPDATE_ERROR);
+			}
+		}
+		//更新用户头像地址
+		String portraitPath = AppSetting.PORTRAIT_SAVED_PATH + fileName;
+		UserInfo userInfoPO = userInfoMapper.selectByPrimaryKey(userId);
+		String oldPortraitName = userInfoPO.getPortrait();
+		userInfoPO.setPortrait(fileName);
+		userInfoMapper.updateByPrimaryKey(userInfoPO);
+		//从磁盘删除旧头像
+		File oldFile = new File(savedPath,oldPortraitName);
+		if(oldFile.exists()) {
+			oldFile.delete();
+		}
+		return portraitPath;
+	}
+
+	/**
+	 * PO转VO
+	 * @param userInfo
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月9日 上午10:07:57
+	 */
+	private UserInfoVO userInfo2UserInfoVO(UserInfo userInfo) {
+		UserInfoVO userInfoVO = new UserInfoVO();
+		userInfoVO.setUserId(userInfo.getUserId());
+		userInfoVO.setUserName(userInfo.getUserName());
+		userInfoVO.setNickname(userInfo.getNickname());
+		userInfoVO.setGender(userInfo.getGender());
+		//获取用户肤质
+		if(StringUtils.isNotBlank(userInfo.getSkinTexture())) {
+			SkinTextureEnum skinTexture = SkinTextureEnum.valueOf(userInfo.getSkinTexture());
+			if(skinTexture != null) {
+				userInfoVO.setSkinTexture(skinTexture.getName());
+			}
+		}
+		//获取用户年龄
+		if(userInfo.getBornYear() != null) {
+			userInfoVO.setAge(Calendar.getInstance().
+				get(Calendar.YEAR)-userInfo.getBornYear());
+		}
+		
+		userInfoVO.setIntroduction(userInfo.getIntroduction());
+		userInfoVO.setPortrait(AppSetting.PORTRAIT_SAVED_PATH+userInfo.getPortrait());
+		userInfoVO.setPhone(userInfo.getPhone());
+		userInfoVO.setEmail(userInfo.getEmail());
+		userInfoVO.setMembershipPoint(userInfo.getMembershipPoint());
+		userInfoVO.setMemberLevel(userInfo.getMemberLevel());
+		userInfoVO.setArea(userInfo.getArea());
+		return userInfoVO;
 	}
 }

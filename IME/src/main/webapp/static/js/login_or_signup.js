@@ -1,6 +1,8 @@
 $(document).ready(function(){
 	// 遮照层
 	var maskObj = $(".popup-mask");
+	maskObj.width($(document).width());
+	maskObj.height($(document).height())
 
 	maskObj.click(function() {
 // hidePopup();
@@ -23,7 +25,7 @@ $(document).ready(function(){
 	 * 销毁弹窗
 	 */
 	function removePopup(){
-		$(".popup-container").remove();
+		$(".login-popup-container").remove();
 		$("html").css("overflow-y","auto");
 	}
 	var closeBtn = $(".popup-close-btn");

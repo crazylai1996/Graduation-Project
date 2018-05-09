@@ -29,4 +29,17 @@
     select iAreaId, iParentAreaId, vAreaName
     from area
   </select>
+  <select id="selectChildNodes" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select iAreaId, iParentAreaId, vAreaName 
+  	from area 
+  	where 
+  	<choose>
+  		<when test="_parameter != null">
+  			iParentAreaId = #{parentAreaId,jdbcType=INTEGER}
+  		</when>
+  		<otherwise>
+  			iParentAreaId is null
+  		</otherwise>
+  	</choose>
+  </select>
 </mapper>

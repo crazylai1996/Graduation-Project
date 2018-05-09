@@ -1,15 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@include file="common/base.jsp"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <base href="${basePath }">
     <title>用户中心 - 爱美丽</title>
-    <link rel="stylesheet" href="css\bootstrap.min.css">
-    <link rel="stylesheet" href="plugins\Jcrop\jquery.Jcrop.min.css">
-    <link rel="stylesheet" href="css\user_info.css">
+    <link rel="stylesheet" href="static\css\bootstrap.min.css">
+    <link rel="stylesheet" href="static\plugins\Jcrop\jquery.Jcrop.min.css">
+    <link rel="stylesheet" href="static\plugins\BeAlert\BeAlert.css"/>
+    <link rel="stylesheet" href="static\css\user_info.css">
   </head>
   <body>
+	<!-- 头部包含 -->
+  	<jsp:include page="common/page_header.jsp"/>
 
     <div class="main-wrapped">
       <div class="main-container">
@@ -55,18 +62,19 @@
               <h1 class="title">基本信息</h1>
               <hr class="line">
               <div class="info-detail">
+              <form class="userinfo-form">
                 <p class="info-item">
                   <span class="item-label">
                     用户名：
                   </span>
                   <span class="final-val item-val">
-                    crazylai1996
+                    ${userInfoVO.userName }
                   </span>
                 </p>
                 <p class="info-item portrait-container">
                   <span class="item-label label-top">头像：</span>
                   <span class="portrait-wrapped">
-                    <img src="img\portrait_test.jpg">
+                    <img class="portrait-img" src="${userInfoVO.portrait }">
                     <span class="change-protrait">
                       <a href="javascript:void(0);">更换头像</a>
                     </span>
@@ -77,22 +85,37 @@
                   <span class="item-label">
                     昵称：
                   </span>
-                  <input class="item-value nick-name item-val" type="text" name="">
+                  <input class="item-value nick-name item-val" type="text" name="nickname" value="${userInfoVO.nickname }">
                 </p>
                 <p class="info-item">
                   <span class="item-label">
                     性别：
                   </span>
                   <span class="item-val">
-                    <input id="female" type="radio" name="gender" checked><label class="radio-label" for="female">女</label>
-                    <input id="male" type="radio" name="gender" ><label class="radio-label" for="male">男</label>
+	                  <c:forEach items="${genderList }" var="gender">
+	                  	<c:choose>
+	                  		<c:when test="${gender.code == userInfoVO.gender}">
+	                  			<input id="gender${gender.code }" type="radio" name="gender" value="${gender.code }" checked>
+	                  		</c:when>
+	                  		<c:otherwise>
+	                  			<input id="gender${gender.code }" type="radio" name="gender" value="${gender.code }">
+	                  		</c:otherwise>
+	                  	</c:choose>
+	                  	<label class="radio-label" for="gender${gender.code }">${gender.name }</label>
+	                  </c:forEach>
                   </span>
+                </p>
+                <p class="info-item">
+                  <span class="item-label">
+                    年龄：
+                  </span>
+                  <span class="final-val item-val">${userInfoVO.age }</span>
                 </p>
                 <p class="info-item">
                   <span class="item-label">
                     肤质：
                   </span>
-                  <span class="final-val item-val">中性</span>
+                  <span class="final-val item-val">${userInfoVO.skinTexture }</span>
                 </p>
                 <p class="info-item">
                   <span class="item-label">
@@ -100,51 +123,56 @@
                   </span>
                   <span class="item-val">
                     <select class="province-selector" name="">
-                      <option value="">广东省</option>
+                      <c:forEach items="${provinceList }" var="province">
+                      	<c:choose>
+                      		<c:when test="${province.areaId == userInfoVO.area.parentAreaId }">
+                      			<option value="${province.areaId }" selected>${province.areaName }</option>
+                      		</c:when>
+                      		<c:otherwise>
+                      			<option value="${province.areaId }">${province.areaName }</option>
+                      		</c:otherwise>
+                      	</c:choose>
+                      </c:forEach>
                     </select>
-                    <select class="city-selector" name="">
-                      <option value="">广州市</option>
+                    <select class="city-selector" name="area.areaId">
+                      <c:forEach items="${cityList }" var="city">
+                      	<c:choose>
+                      		<c:when test="${city.areaId == userInfoVO.area.areaId }">
+                      			<option value="${city.areaId }" selected>${city.areaName }</option>
+                      		</c:when>
+                      		<c:otherwise>
+                      			<option value="${city.areaId }">${city.areaName }</option>
+                      		</c:otherwise>
+                      	</c:choose>
+                      </c:forEach>
                     </select>
                   </span>
                 </p>
                 <p class="info-item">
                   <span class="item-label label-top">个人简介</span>
-                  <textarea class="item-val" name="name" rows="9" cols="87"></textarea>
+                  <textarea class="item-val" name="introduction" rows="9" cols="87">${userInfoVO.introduction }</textarea>
                 </p>
+                </form>
               </div>
               <div class="info-ops">
                 <a href="javascript:void(0);" class="update-confirm">更新</a>
               </div>
-              <!-- 头像选择框 -->
-              <div class="portrait-clip-container">
-                <div class="upload-portrait-mask"></div>
-                <div class="upload-dialog">
-               	  <span class="upload-dialog-header">
-                  	<span class="title-label" onselectstart="return   false">选择头像</span>
-                    <a class="close-dialog-btn" href="javascript:void(0);"></a>
-                  </span>
-                  <hr/>
-               	  <input type="file" class="src-portrait-input"/>
-                	<div class="portrait-clip-box">
-                      <div class="clip-container">
-                        <img class="portrait-show" src=" "/>
-                      </div>
-                      <div class="target-image-container">
-                        <canvas class="portrait-pre-show" width="300px" height="300px"></canvas>
-                        <a class="upload-btn" href="javascript:void(0);">上传</a>
-                      </div>
-                	</div>
-               </div>
-              </div>
+              
             </div>
           </div>
         </div>
         <!-- 主体内容结束 -->
       </div>
     </div>
+    <!-- 包含尾部 -->
+  	<jsp:include page="common/page_footer.jsp"/>
 
-  <script src="js\jquery.js"></script>
-  <script src="plugins\Jcrop\jquery.Jcrop.min.js"></script>
-  <script src="js\user_info.js"></script>
+  <script>
+  	var basePath = "${basePath}";
+  </script>
+  <script src="static\js\jquery.js"></script>
+  <script src="static\plugins\Jcrop\jquery.Jcrop.min.js"></script>
+  <script src="static\plugins\BeAlert\BeAlert.js"></script>
+  <script src="static\js\user_info.js"></script>
   </body>
 </html>

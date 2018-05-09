@@ -213,9 +213,9 @@ body {
 .message-box {
   position: absolute;
   left: -30px;
+  z-index: 2;
   display: none;
   width: 310px;
-  height: 320px;
   border-radius: 2px;
   box-shadow: 0 0 6px #a6a6a6;
   background-color: #ffffff;

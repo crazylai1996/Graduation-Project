@@ -30,4 +30,10 @@ public class Area {
     public void setAreaName(String areaName) {
         this.areaName = areaName == null ? null : areaName.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Area [areaId=" + areaId + ", parentAreaId=" + parentAreaId + ", areaName=" + areaName + "]";
+	}
+    
 }
