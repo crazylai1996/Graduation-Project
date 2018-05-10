@@ -845,11 +845,3 @@ body {
 .mc-body .mc-body-ext a:hover {
   color: #cc99cc;
 }
-.mc-body .mc-body-ext .love-sum:before {
-  content: "\2606";
-  font-size: 15px;
-}
-.mc-body .mc-body-ext .comment-sum:before {
-  content: "\21C4";
-  font-size: 15px;
-}

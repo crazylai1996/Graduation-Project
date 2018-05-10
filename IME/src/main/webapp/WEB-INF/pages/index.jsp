@@ -9,6 +9,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <base href="${basePath }">
   <title>爱美丽 - 化妆品导购与评价平台</title>
+  <link rel="stylesheet" href="plugins\layui\css\layui.css"/>
+  <script type="text/javascript" src="plugins\layui\layui.js"></script>
   <link rel="stylesheet" href="static\css\index.css" />
 </head>
 
@@ -98,7 +100,7 @@
       <!-- 用户操作 -->
       <div class="user-ops">
         <a href="javascript:void(0);">&#10010;添加评价</a>
-        <a href="javascript:void(0);">&#10084;我的关注</a>
+        <a href="javascript:void(0);"><i class="layui-icon layui-icon-star"></i> 我的关注</a>
       </div>
       <!-- 公告 -->
       <div class="notice-wrapped">
@@ -226,7 +228,8 @@
             <div class="mc-body-right">
               <a class="mc-body-title" href="#">欧植萃 天然玫瑰保湿护手霜欧植萃 天然玫瑰保玫瑰保湿玫瑰保湿湿玫瑰保湿护手霜</a>
               <div class="mc-body-ext">
-                <span class="love-sum">49</span><a href="#" class="comment-sum">11</a>
+                <span class="love-sum"><i class="layui-icon layui-icon-reply-fill"></i>49</span>
+                <a href="#" class="comment-sum"><i class="layui-icon layui-icon-star-fill"></i>11</a>
               </div>
             </div>
           </li>
