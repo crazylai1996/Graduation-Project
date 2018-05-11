@@ -9,8 +9,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <base href="${basePath }">
   <title>爱美丽 - 化妆品导购与评价平台</title>
-  <link rel="stylesheet" href="plugins\layui\css\layui.css"/>
-  <script type="text/javascript" src="plugins\layui\layui.js"></script>
+  <link rel="stylesheet" href="static\plugins\layui\css\layui.css"/>
+  <script type="text/javascript" src="static\plugins\layui\layui.js"></script>
   <link rel="stylesheet" href="static\css\index.css" />
 </head>
 

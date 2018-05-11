@@ -123,6 +123,7 @@ body {
  */
 .current-pos {
   width: 100%;
+  margin-top: 10px;
   font-size: 12px;
   margin-bottom: 13px;
 }

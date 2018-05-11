@@ -7,7 +7,8 @@
   <title>添加新产品 - 爱美丽</title>
   <link rel="stylesheet" href="css\bootstrap.min.css">
   <link rel="stylesheet" href="plugins\layui\css\layui.css"/>
-  <script type="text/javascript" src="plugins\layui\layui.js"></script>
+  <script type="text/javascript" src="plugins\layui\layui.all.js"></script>
+  <link rel="stylesheet" href="plugins\BeAlert\BeAlert.css"/>
   <link rel="stylesheet" href="css\product_add.css">
 </head>
 
@@ -31,94 +32,132 @@
         <div class="add-title-label">
           <a href="#">商品信息</a>
         </div>
-        <div class="product-form">
+        <div class="product-form-div">
           <ul class="input-list">
-            <form class="" action="" method="post">
+            <form class="product-form" action="" method="post">
               <li class="input-item">
                 <div class="input-label">
                   品牌名称：
                 </div>
-                <input class="lg-input" type="text" name="">
-                <span class="input-tips">*必填</span>
+                <div class="input-contents">
+                  <input class="lg-input" type="text" name="">
+                  <span class="input-tips">*必填</span>
+                </div>
               </li>
               <li class="input-item">
                 <div class="input-label">
                   化妆品名称：
                 </div>
-                <input class="lg-input" type="text" name="">
-                <span class="input-tips">*必填</span>
+                <div class="input-contents">
+                  <input class="lg-input" type="text" name="">
+                  <span class="input-tips">*必填</span>
+                </div>
               </li>
               <li class="input-item">
                 <div class="input-label">
                   产品上市年月：
                 </div>
-                <input class="md-input product-ttm" type="text" name="">
+                <div class="input-contents">
+                  <input class="md-input product-ttm" type="text" name="">
+                </div>
               </li>
               <li class="input-item">
                 <div class="input-label">
                   产品规格：
                 </div>
-                <input class="xs-input" type="text" name="">
-                <select class="xs-input">
-                  <option value="">g</option>
-                  <option value="">ml</option>
-                </select>
+                <div class="input-contents">
+                  <input class="xs-input" type="text" name="">
+                  <select class="xs-input">
+                    <option value="">g</option>
+                    <option value="">ml</option>
+                  </select>
+                </div>
               </li>
               <li class="input-item">
                 <div class="input-label">
                   参考价格：
                 </div>
-                <input class="xs-input" type="text" name="">元
+                <div class="input-contents">
+                  <input class="xs-input" type="text" name="">元
+                </div>
               </li>
               <li class="input-item">
                 <div class="input-label">
                   产品种类：
                 </div>
-                <select class="sm-input">
-                  <option value="">面部护肤</option>
-                  <option value="">魅力彩妆</option>
-                </select>
-                <select class="sm-input">
-                  <option value="">脸部保养</option>
-                  <option value="">卸妆产品</option>
-                </select>
+                <div class="input-contents">
+                  <select class="sm-input">
+                    <option value="">面部护肤</option>
+                    <option value="">魅力彩妆</option>
+                  </select>
+                  <select class="sm-input">
+                    <option value="">脸部保养</option>
+                    <option value="">卸妆产品</option>
+                  </select>
+                </div>
               </li>
               <li class="input-item">
                 <div class="input-label">
                   产品属性：
                 </div>
-                <input class="sm-input" type="text" name="" value="">
+                <div class="input-contents">
+                  <input class="sm-input" type="text" name="" value="">
+                </div>
               </li>
               <li class="input-item">
                 <div class="input-label">
                   产品功效：
                 </div>
-                <input class="sm-input" type="text" name="" value="">
+                <div class="input-contents">
+                  <input class="sm-input" type="text" name="" value="">
+                </div>
               </li>
               <li class="input-item">
                 <div class="input-label">
                   适用肤质：
                 </div>
-                <select class="sm-input">
-                  <option value="">中性</option>
-                  <option value="">干性</option>
-                  <option value="">油性</option>
-                  <option value="">混合</option>
-                  <option value="">敏感</option>
-                  <option value="" selected>所有肤质</option>
-                </select>
+                <div class="input-contents">
+                  <select class="sm-input">
+                    <option value="">中性</option>
+                    <option value="">干性</option>
+                    <option value="">油性</option>
+                    <option value="">混合</option>
+                    <option value="">敏感</option>
+                    <option value="" selected>所有肤质</option>
+                  </select>
+                </div>
+              </li>
+              <li class="input-item">
+                <div class="input-label">
+                  封面图片上传：
+                </div>
+                <div class="input-contents">
+                  <div><a class="select-cover" href="javascript:void(0)">封面选择</a></div>
+                  <div class="pre-show-container cover-pre-show">
+
+                  </div>
+                </div>
               </li>
               <li class="input-item">
                 <div class="input-label">
                   产品图片上传：
                 </div>
-                <input type="file" name="" value="" multiple>
+                <div class="input-contents">
+                  <a href="javascript:void(0);" class="product-img-input-wrapped">
+                    产品选择<input class="product-img-input" type="file" name="" value="" multiple>
+                  </a>
+                  <div class="pre-show-container product-pre-show">
+
+                  </div>
+                </div>
               </li>
               <li class="input-item vertical-top">
                 <div class="input-label ">
                   产品介绍：
                 </div>
-                <textarea name="name" rows="10" cols="101"></textarea>
+                <div class="input-contents">
+                  <textarea name="name" rows="10" cols="101"></textarea>
+                </div>
               </li>
             </form>
           </ul>
@@ -131,6 +170,7 @@
   </div>
 
 <script src="js\jquery.js"></script>
+<script type="text/javascript" src="plugins\BeAlert\BeAlert.js"></script>
 <script type="text/javascript" src="js\product_add.js"></script>
 </body>
 

@@ -123,6 +123,7 @@ body {
  */
 .current-pos {
   width: 100%;
+  margin-top: 10px;
   font-size: 12px;
 }
 .current-pos a {
@@ -213,7 +214,7 @@ body {
 /**
  * 添加新产品输入表单
  */
-.product-form {
+.product-form-div {
   width: 1000px;
 }
 /**
@@ -226,18 +227,68 @@ body {
 }
 .input-list li {
   min-height: 46px;
+  padding-bottom: .5px;
   border-bottom: dotted 0.5px #cccccc;
+  background-color: #fff0f5;
 }
 .input-list .input-label {
+  float: left;
   display: inline-block;
   width: 150px;
-  height: 45px;
   margin-right: 10px;
   line-height: 45px;
   text-align: right;
   font-size: 14px;
   color: #333333;
-  background-color: #fff0f5;
+}
+.input-list .input-contents {
+  display: inline-block;
+  width: 840px;
+  min-height: 42px;
+  padding-left: 5px;
+  line-height: 45px;
+  background-color: #ffffff;
+}
+.input-list .select-cover,
+.input-list .product-img-input-wrapped {
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 30px;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 2px;
+  background-color: #cc99cc;
+}
+.input-list .select-cover:hover,
+.input-list .product-img-input-wrapped:hover {
+  text-decoration: none;
+  background-color: #be7ebe;
+}
+.input-list .product-img-input-wrapped {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+.input-list .product-img-input-wrapped input {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 60px;
+  height: 30px;
+  font-size: 0;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+}
+.input-list .pre-show-container img {
+  height: 120px;
+  box-sizing: border-box;
+  border: solid 1px #cc99cc;
 }
 .input-list .vertical-top {
   height: 180px;

@@ -63,8 +63,6 @@
 }
 .BeAlert_box .BeAlert_button button {
     display: none;
-	width: 60px;
-	height: 30px;
     background-color: #8CD4F5;
     color: #fff;
     border: none;

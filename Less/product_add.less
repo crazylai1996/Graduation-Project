@@ -98,7 +98,7 @@
 /**
  * 添加新产品输入表单
  */
-.product-form{
+.product-form-div{
   width: @global_width;
 }
 /**
@@ -110,25 +110,94 @@
   li{
     @_height: 46px;
 
+    // min-height: @_height;
     min-height: @_height;
+    padding-bottom: .5px;
+
     border-bottom: dotted .5px @border_color;
+    background-color: @bg_color;
   }
   .input-label{
     @_width: 150px;
     @_height: 45px;
 
+    float: left;
+
     display: inline-block;
     width: @_width;
-    height: @_height;
     margin-right: 10px;
 
     line-height: @_height;
     text-align:right;
     font-size: 14px;
     color: @font_color;
-
-    background-color: @bg_color;
   }
+  .input-contents{
+    display: inline-block;
+    width: 840px;
+    min-height: 42px;
+    padding-left: 5px;
+
+    line-height: 45px;
+
+    background-color: @white_color;
+  }
+  //封面选择按钮
+  .select-cover{
+    @_width: 60px;
+    @_height: 30px;
+
+    display: inline-block;
+    width: @_width;
+    height: @_height;
+
+    color: @white_color;
+    font-size: 12px;
+    line-height: @_height;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+
+    border-radius: 2px;
+    background-color: @main_color;
+    &:hover{
+      text-decoration: none;
+      background-color: @main_strong_color;
+    }
+  }
+  .product-img-input-wrapped:extend(.input-list .select-cover all){
+    @_width: 60px;
+    @_height: 30px;
+
+    position: relative;
+
+    display: inline-block;
+
+    overflow: hidden;
+
+    input{
+      position: absolute;
+      right: 0;
+      top: 0;
+
+      width: @_width;
+      height: @_height;
+
+      font-size: 0;
+      cursor: pointer;
+
+      .opacity_mixin(0);
+    }
+  }
+  .pre-show-container img{
+    @_size:120px;
+
+    height: @_size;
+    box-sizing: border-box;
+
+    border: solid 1px @main_color;
+  }
+
   .vertical-top{
     @_height: 180px;
     height: @_height;
