@@ -12,7 +12,7 @@
   left: 0;
   z-index: 10;
 
-  display: block; 
+  display: block;
 
   background-color: #000;
   .opacity_mixin(0.60);
@@ -227,6 +227,7 @@
     font-size: 12px;
     color: @font_strong_color;
     text-decoration: none;
+    vertical-align: middle;
 
     &:hover{
       color: @link_color;
@@ -241,8 +242,11 @@
     }
   }
   label{
+    margin-bottom: 0;
+
     font-size: 12px;
     color: @font_color;
+    vertical-align: middle;
 
     cursor: pointer;
   }
