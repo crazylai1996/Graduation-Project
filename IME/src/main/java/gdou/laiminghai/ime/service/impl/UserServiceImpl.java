@@ -93,6 +93,10 @@ public class UserServiceImpl implements UserService {
 		}else {
 			throw new ServiceException(ServiceResultEnum.USER_ACCOUNT_NAME_NOT_ALLOWED);
 		}
+		//用户密码为空
+		if(StringUtils.isBlank(userVO.getPassword())) {
+			throw new ServiceException(ServiceResultEnum.USER_PASSWORD_EMPTY);
+		}
 		//查找用户信息
 		UserInfo userInfo = userInfoMapper.selectByCondition(map);
 		//用户不存在

@@ -14,22 +14,24 @@
 
 <body>
 	<!-- 头像选择框 -->
-	<div class="portrait-clip-container">
-		<div class="upload-portrait-mask"></div>
+	<div class="image-clip-container">
+		<div class="upload-picture-mask"></div>
 		<div class="upload-dialog">
 			<span class="upload-dialog-header"> <span class="title-label"
-				onselectstart="return   false">选择头像</span> <a
+				onselectstart="return   false">图片裁剪</span> <a
 				class="close-dialog-btn" href="javascript:void(0);"></a>
 			</span>
 			<hr />
-			<input type="file" class="src-portrait-input" />
-			<div class="portrait-clip-box">
+			<a href="javascript:void(0);" class="img-input-wrapped">
+				选择图片<input type="file" class="src-picture-input" />
+			</a>
+			<div class="picture-clip-box">
 				<div class="clip-container">
-					<img class="portrait-show" src=" " />
+					<img class="picture-show" src=" " />
 				</div>
 				<div class="target-image-container">
-					<canvas class="portrait-pre-show" width="300px" height="300px"></canvas>
-					<a class="upload-btn" href="javascript:void(0);">上传</a>
+					<canvas class="picture-pre-show" width="300px" height="300px"></canvas>
+					<a class="confirm-btn" href="javascript:void(0);">上传</a>
 				</div>
 			</div>
 		</div>
@@ -43,6 +45,7 @@
 	<!-- 弹窗插件 -->
 	<script src="static\plugins\BeAlert\BeAlert.js"></script>
 	<script src="static\plugins\Jcrop\jquery.Jcrop.min.js"></script>
+	<script src="static\js\picture_clip.js"></script>
 	<script src="static\js\update_portrait.js"></script>
 </body>
 

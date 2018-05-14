@@ -6,7 +6,7 @@ $(".portrait-wrapped").hover(function() {
 //点击更换头像
 $(".change-protrait a").click(function() {
 	$.get(basePath+"user/updatePortrait",function(data,status){
-		$(document.body).append("<div class='portrait-popup-container'>"+data+"</div>");
+		$(document.body).append("<div class='picture-clip-popup-container'>"+data+"</div>");
 	});
 });
 //省份城市联动
@@ -49,7 +49,7 @@ $(".update-confirm").click(function(){
 				var title = "更新失败";
 	  			var tips = "";
 	  			var callback = function(){
-	  				
+
 	  			};
 	  			if(result.code == 207){
 	  				tips = "登录失效，请重新登录";

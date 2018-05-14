@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="static\plugins\Jcrop\jquery.Jcrop.min.css">
     <link rel="stylesheet" href="static\plugins\BeAlert\BeAlert.css"/>
     <link rel="stylesheet" href="static\css\user_info.css">
+    <link rel="stylesheet" href="static\css\picture_clip.css">
   </head>
   <body>
 	<!-- 头部包含 -->

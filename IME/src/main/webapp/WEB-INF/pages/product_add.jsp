@@ -47,7 +47,8 @@
                   品牌名称：
                 </div>
                 <div class="input-contents">
-                  <input class="lg-input" type="text" name="">
+                  <input class="lg-input" type="text" name="brandName">
+                  <input type="hidden" name="brand">
                   <span class="input-tips">*必填</span>
                 </div>
               </li>
@@ -56,7 +57,7 @@
                   化妆品名称：
                 </div>
                 <div class="input-contents">
-                  <input class="lg-input" type="text" name="">
+                  <input class="lg-input" type="text" name="productName">
                   <span class="input-tips">*必填</span>
                 </div>
               </li>
@@ -65,7 +66,7 @@
                   产品上市年月：
                 </div>
                 <div class="input-contents">
-                  <input class="md-input product-ttm" type="text" name="">
+                  <input class="md-input product-ttm" type="text" name="comeInDate">
                 </div>
               </li>
               <li class="input-item">
@@ -73,8 +74,8 @@
                   产品规格：
                 </div>
                 <div class="input-contents">
-                  <input class="xs-input" type="text" name="">
-                  <select class="xs-input">
+                  <input class="xs-input" type="text" name="spec">
+                  <select class="xs-input spec-unit">
                     <option value="">g</option>
                     <option value="">ml</option>
                   </select>
@@ -85,7 +86,7 @@
                   参考价格：
                 </div>
                 <div class="input-contents">
-                  <input class="xs-input" type="text" name="">元
+                  <input class="xs-input" type="text" name="referencePrice">元
                 </div>
               </li>
               <li class="input-item">
@@ -93,11 +94,11 @@
                   产品种类：
                 </div>
                 <div class="input-contents">
-                  <select class="sm-input">
+                  <select class="sm-input classify-1st">
                     <option value="">面部护肤</option>
                     <option value="">魅力彩妆</option>
                   </select>
-                  <select class="sm-input">
+                  <select class="sm-input" name="classify">
                     <option value="">脸部保养</option>
                     <option value="">卸妆产品</option>
                   </select>
@@ -108,7 +109,8 @@
                   产品属性：
                 </div>
                 <div class="input-contents">
-                  <input class="sm-input" type="text" name="" value="">
+                  <input class="sm-input" type="text" name="propertyName" value="">
+                  <input type="hidden" name="property">
                 </div>
               </li>
               <li class="input-item">
@@ -116,7 +118,8 @@
                   产品功效：
                 </div>
                 <div class="input-contents">
-                  <input class="sm-input" type="text" name="" value="">
+                  <input class="sm-input" type="text" name="effectName" value="">
+                  <input name="effect">
                 </div>
               </li>
               <li class="input-item">
@@ -130,7 +133,7 @@
                     <option value="">油性</option>
                     <option value="">混合</option>
                     <option value="">敏感</option>
-                    <option value="" selected>所有肤质</option>
+                    <option value="1111" selected>所有肤质</option>
                   </select>
                 </div>
               </li>
@@ -151,7 +154,7 @@
                 </div>
                 <div class="input-contents">
                   <a href="javascript:void(0);" class="product-img-input-wrapped">
-                    	产品选择<input class="product-img-input" type="file" name="" value="" multiple>
+                    	图片选择<input class="product-img-input" type="file" name="" value="" multiple>
                   </a>
                   <div class="pre-show-container product-pre-show">
 
