@@ -598,7 +598,12 @@ body {
 /*
  *搜索按钮
  */
-.search-btn {
+.search-container {
+  /*
+ *热门搜索
+ */
+}
+.search-container .search-btn {
   display: inline-block;
   width: 65px;
   margin-left: 5px;
@@ -612,20 +617,16 @@ body {
   box-shadow: 0 0 2px #cc99cc;
   background-color: #be7ebe;
 }
-/*
- *热门搜索
- */
-.hot-search {
+.search-container .hot-search {
   padding-right: 8px;
   overflow: hidden;
 }
-.hot-search span,
-.hot-search a {
+.search-container .hot-search span {
   line-height: 28px;
   font-size: 14px;
   color: #999999;
 }
-.hot-search a {
+.search-container .hot-search a {
   padding: 0 3px;
   font-size: 12px;
   color: #333333;

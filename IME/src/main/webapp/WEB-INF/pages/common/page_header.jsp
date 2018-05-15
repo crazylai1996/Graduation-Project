@@ -11,6 +11,8 @@
   <title>爱美丽 - 化妆品导购与评价平台 - Header</title>
   <link rel="stylesheet" href="static\css\login_or_signup.css" />
   <link rel="stylesheet" href="static\css\common\page_header.css" />
+  <link rel="stylesheet" href="static\plugins\layui\css\layui.css"/>
+  <script type="text/javascript" src="static\plugins\layui\layui.all.js"></script>
 </head>
 <body>
 	<!-- 顶部栏 -->

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -97,5 +98,18 @@ public class ProductController {
 				coverFile, productFiles, 
 				coverSavedPath, picturesSavedPath);
 		return ResultDTOUtil.success(null);
+	}
+	
+	/**
+	 * 查看产品详情
+	 * @param productId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月15日 下午7:17:06
+	 */
+	@RequestMapping("/info/{productId}")
+	public ModelAndView goProductDetails(@PathVariable("productId") Long productId) {
+		ModelAndView mav = new ModelAndView("product_details");
+		return mav;
 	}
 }

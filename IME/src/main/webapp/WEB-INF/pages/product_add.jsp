@@ -87,7 +87,8 @@
                   参考价格：
                 </div>
                 <div class="input-contents">
-                  <input class="xs-input" type="text" name="referencePrice">元
+                  <input class="xs-input" type="text" name="referencePrice" required="required">元
+                  <span class="input-tips">*必填</span>
                 </div>
               </li>
               <li class="input-item">

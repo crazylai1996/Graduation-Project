@@ -1,3 +1,4 @@
+var laydate = layui.laydate, layer = layui.layer;
 $(document).ready(function(){
 	// 遮照层
 	var maskObj = $(".popup-mask");
@@ -65,22 +66,12 @@ $(".get-msg-captcha").click(function(){
 	// 校验手机号
 	//是否为空
 	if(!phone){
-		alert("提示",
-				"手机号不能为空 ",
-				function(){
-					//确认按钮回调
-				},
-				{type:'warning',confirmButtonText: '好的'});
+		layer.msg("请输入手机号");
 		return ;
 	}
 	//输入是否为手机号
 	if(!checkPhone(phone)){
-		alert("提示",
-				"请输入正确的手机号 ",
-				function(){
-					//确认按钮回调
-				},
-				{type:'warning',confirmButtonText: '好的'});
+		layer.msg("请输入正确的手机号");
 		return ;
 	}
 	var getUrl = basePath + "/user/getSmsCaptcha.do";
