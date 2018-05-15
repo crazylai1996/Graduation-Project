@@ -10,6 +10,7 @@
 <base href="${basePath }">
 <title>头像更新</title>
 <link rel="stylesheet" href="static\plugins\BeAlert\BeAlert.css" />
+<link rel="stylesheet" href="static\plugins\Jcrop\jquery.Jcrop.min.css">
 </head>
 
 <body>

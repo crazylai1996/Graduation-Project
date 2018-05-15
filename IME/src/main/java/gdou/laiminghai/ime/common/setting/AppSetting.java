@@ -56,6 +56,14 @@ public class AppSetting {
 	 * 用户头像保存地址
 	 */
 	public static String PORTRAIT_SAVED_PATH;
+	/**
+	 * 商品封面保存地址
+	 */
+	public static String PRODUCT_COVER_SAVED_PATH;
+	/**
+	 * 商品图片保存地址
+	 */
+	public static String PRODUCT_PICTURES_SAVED_PATH;
 
 	@Value("${captcha.login.char.length}")
 	public void setCaptchaLoginCodeCount(int captchaLength) {
@@ -110,5 +118,15 @@ public class AppSetting {
 	@Value("${user.portrait.saved.path}")
 	public void setPortraitSavedPath(String savedPath) {
 		AppSetting.PORTRAIT_SAVED_PATH = savedPath;
+	}
+	
+	@Value("${product.cover.saved.path}")
+	public void setProductCoverSavedPath(String savedPath) {
+		AppSetting.PRODUCT_COVER_SAVED_PATH = savedPath;
+	}
+	
+	@Value("${product.picture.saved.path}")
+	public void setProductPictureSavedPath(String savedPath) {
+		AppSetting.PRODUCT_PICTURES_SAVED_PATH = savedPath;
 	}
 }

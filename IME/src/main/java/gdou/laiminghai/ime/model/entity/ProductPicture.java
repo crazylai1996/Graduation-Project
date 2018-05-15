@@ -7,6 +7,15 @@ public class ProductPicture {
 
     private String pictureUrl;
 
+    public ProductPicture(){
+    	
+    }
+    
+    public ProductPicture(Long productId,String pictureUrl) {
+    	this.productId = productId;
+    	this.pictureUrl = pictureUrl;
+    }
+    
     public Long getPicId() {
         return picId;
     }

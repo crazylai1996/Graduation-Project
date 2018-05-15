@@ -12,7 +12,7 @@ import java.util.List;
 public class ProductInfoVO {
 	private String productName;
 	private Integer brand;
-	private Date comeInDate;
+	private String comeInDate;
 	private String spec;
 	private Float referencePrice;
 	private Integer classify;
@@ -40,10 +40,10 @@ public class ProductInfoVO {
 	public void setBrand(Integer brand) {
 		this.brand = brand;
 	}
-	public Date getComeInDate() {
+	public String getComeInDate() {
 		return comeInDate;
 	}
-	public void setComeInDate(Date comeInDate) {
+	public void setComeInDate(String comeInDate) {
 		this.comeInDate = comeInDate;
 	}
 	public String getSpec() {

@@ -16,6 +16,8 @@ public enum ServiceResultEnum {
 	USER_INVALID_ACTION(208,"非法请求或操作"),
 	USER_PORTRAIT_UPDATE_ERROR(209,"用户头像保存失败"),
 	USER_PASSWORD_EMPTY(210,"密码为空"),
+	PRODUCT_FORM_IMCOMPLETE(301,"表单必填信息未提供"),
+	PRODUCT_PICTURE_SAVE_FAILURE(302,"商品图片文件保存失败"),
 	UNKONWN_ERROR(-1,"未知错误");
 	
 	private Integer code;//错误码

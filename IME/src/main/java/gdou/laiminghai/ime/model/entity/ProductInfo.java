@@ -32,6 +32,8 @@ public class ProductInfo {
     private Long followCount;
 
     private String desc;
+    
+    private String cover;
 
     public Long getProductId() {
         return productId;
@@ -81,7 +83,15 @@ public class ProductInfo {
         this.effect = effect;
     }
 
-    public String getSkintexture() {
+    public String getSkinTexture() {
+		return skinTexture;
+	}
+
+	public void setSkinTexture(String skinTexture) {
+		this.skinTexture = skinTexture;
+	}
+
+	public String getSkintexture() {
         return skinTexture;
     }
 
@@ -152,4 +162,12 @@ public class ProductInfo {
     public void setDesc(String desc) {
         this.desc = desc == null ? null : desc.trim();
     }
+
+	public String getCover() {
+		return cover;
+	}
+
+	public void setCover(String cover) {
+		this.cover = cover;
+	}
 }

@@ -23,6 +23,7 @@ import gdou.laiminghai.ime.common.exception.ServiceResultEnum;
 import gdou.laiminghai.ime.common.setting.AppSetting;
 import gdou.laiminghai.ime.common.statics.SkinTextureEnum;
 import gdou.laiminghai.ime.common.util.CaptchaUtil;
+import gdou.laiminghai.ime.common.util.FileUtil;
 import gdou.laiminghai.ime.common.util.RegexUtil;
 import gdou.laiminghai.ime.dao.mapper.UserInfoMapper;
 import gdou.laiminghai.ime.model.entity.UserInfo;
@@ -178,37 +179,12 @@ public class UserServiceImpl implements UserService {
 	public String updateUserPortrait(Long userId , MultipartFile portrait, String savedPath) {
 		logger.debug("头像保存的路径："+savedPath);
 		//生成随机文件名
-		String fileName = UUID.randomUUID().toString() + ".png";
-		File targetFile = new File(savedPath, fileName);
-		//父目录是否存在，不存在则创建
-		if (!targetFile.getParentFile().exists()) {
-			targetFile.getParentFile().mkdir();
-		}
-		FileOutputStream out = null;
-		InputStream in = null;
-		try {
-			out = new FileOutputStream(targetFile);
-			in = portrait.getInputStream();
-			byte[] buff = new byte[1024];
-			int len = 0;
-			while (-1 != (len = in.read(buff))) {
-				out.write(buff, 0, len);
-			}
-		} catch (Exception e) {
-			logger.error("保存头像文件异常：",e);
+		String fileName = UUID.randomUUID().toString().replaceAll("-", "") + ".png";
+		//保存图片
+		boolean success = FileUtil.save(portrait, savedPath, fileName);
+		//保存失败
+		if(!success) {
 			throw new ServiceException(ServiceResultEnum.USER_PORTRAIT_UPDATE_ERROR);
-		} finally {
-			try {
-				if (in != null) {
-					in.close();
-				}
-				if (out != null) {
-					out.close();
-				}
-			} catch (Exception e) {
-				logger.error("关闭文件流异常：", e);
-				throw new ServiceException(ServiceResultEnum.USER_PORTRAIT_UPDATE_ERROR);
-			}
 		}
 		//更新用户头像地址
 		String portraitPath = AppSetting.PORTRAIT_SAVED_PATH + fileName;
@@ -217,9 +193,8 @@ public class UserServiceImpl implements UserService {
 		userInfoPO.setPortrait(fileName);
 		userInfoMapper.updateByPrimaryKey(userInfoPO);
 		//从磁盘删除旧头像
-		File oldFile = new File(savedPath,oldPortraitName);
-		if(oldFile.exists()) {
-			oldFile.delete();
+		if(StringUtils.isNotBlank(oldPortraitName)) {
+			FileUtil.delete(savedPath, oldPortraitName);
 		}
 		return portraitPath;
 	}

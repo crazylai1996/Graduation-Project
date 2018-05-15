@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018-05-09-星期三 20:43:31                      */
+/* Created on:     2018-05-15-星期二 01:19:37                      */
 /*==============================================================*/
 
 
@@ -272,6 +272,7 @@ create table ProductInfo
    dComeInDate          date,
    fReferencePrice      float,
    tDesc                text,
+   vCover               varchar(50),
    fWorthCount          float,
    bCommentCount        bigint,
    bBrowserCount        bigint,

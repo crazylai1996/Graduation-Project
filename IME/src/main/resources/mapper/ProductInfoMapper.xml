@@ -17,7 +17,13 @@
     <result column="bBrowserCount" jdbcType="BIGINT" property="browserCount" />
     <result column="bFollowCount" jdbcType="BIGINT" property="followCount" />
     <result column="tDesc" jdbcType="LONGVARCHAR" property="desc" />
+    <result column="vCover" jdbcType="VARCHAR" property="cover"/>
   </resultMap>
+  <sql id="ProductInfoColumns">
+  	bProductId, vProductName, iBrand, iClassify, iProperty, iEffect, vSkinTexture, 
+    vSpec, dComeInDate, fReferencePrice, fWorthCount, bCommentCount, bBrowserCount, bFollowCount, 
+    tDesc,vCover
+  </sql>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from productinfo
     where bProductId = #{productId,jdbcType=BIGINT}
@@ -27,12 +33,12 @@
       iProperty, iEffect, vSkinTexture, 
       vSpec, dComeInDate, fReferencePrice, 
       fWorthCount, bCommentCount, bBrowserCount, 
-      bFollowCount, tDesc)
+      bFollowCount, tDesc,vCover)
     values (#{productName,jdbcType=VARCHAR}, #{brand,jdbcType=INTEGER}, #{classify,jdbcType=INTEGER}, 
       #{property,jdbcType=INTEGER}, #{effect,jdbcType=INTEGER}, #{skinTexture,jdbcType=VARCHAR}, 
       #{spec,jdbcType=VARCHAR}, #{comeInDate,jdbcType=DATE}, #{referencePrice,jdbcType=REAL}, 
       #{worthCount,jdbcType=REAL}, #{commentCount,jdbcType=BIGINT}, #{browserCount,jdbcType=BIGINT}, 
-      #{followCount,jdbcType=BIGINT}, #{desc,jdbcType=LONGVARCHAR})
+      #{followCount,jdbcType=BIGINT}, #{desc,jdbcType=LONGVARCHAR},#{cover,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="ProductInfo">
     update productinfo
@@ -49,20 +55,17 @@
       bCommentCount = #{commentCount,jdbcType=BIGINT},
       bBrowserCount = #{browserCount,jdbcType=BIGINT},
       bFollowCount = #{followCount,jdbcType=BIGINT},
-      tDesc = #{desc,jdbcType=LONGVARCHAR}
+      tDesc = #{desc,jdbcType=LONGVARCHAR},
+      vCover = #{cover,jdbcType=VARCHAR}
     where bProductId = #{productId,jdbcType=BIGINT}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select bProductId, vProductName, iBrand, iClassify, iProperty, iEffect, vSkinTexture, 
-    vSpec, dComeInDate, fReferencePrice, fWorthCount, bCommentCount, bBrowserCount, bFollowCount, 
-    tDesc
+    select <include refid="ProductInfoColumns"/>
     from productinfo
     where bProductId = #{productId,jdbcType=BIGINT}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select bProductId, vProductName, iBrand, iClassify, iProperty, iEffect, vSkinTexture, 
-    vSpec, dComeInDate, fReferencePrice, fWorthCount, bCommentCount, bBrowserCount, bFollowCount, 
-    tDesc
+    select <include refid="ProductInfoColumns"/>
     from productinfo
   </select>
 </mapper>

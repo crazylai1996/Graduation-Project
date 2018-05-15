@@ -14,6 +14,7 @@
   <script type="text/javascript" src="static\plugins\layui\layui.all.js"></script>
   <link rel="stylesheet" href="static\plugins\BeAlert\BeAlert.css"/>
   <link rel="stylesheet" href="static\css\product_add.css">
+  <link rel="stylesheet" href="static\css\picture_clip.css">
 </head>
 
 <body>
@@ -41,13 +42,13 @@
         </div>
         <div class="product-form-div">
           <ul class="input-list">
-            <form class="product-form" action="" method="post">
+            <form class="product-form">
               <li class="input-item">
                 <div class="input-label">
                   品牌名称：
                 </div>
                 <div class="input-contents">
-                  <input class="lg-input" type="text" name="brandName">
+                  <input class="lg-input" type="text" name="brandName" required="required">
                   <input type="hidden" name="brand">
                   <span class="input-tips">*必填</span>
                 </div>
@@ -57,7 +58,7 @@
                   化妆品名称：
                 </div>
                 <div class="input-contents">
-                  <input class="lg-input" type="text" name="productName">
+                  <input class="lg-input" type="text" name="productName" required="required">
                   <span class="input-tips">*必填</span>
                 </div>
               </li>
@@ -102,6 +103,7 @@
                     <option value="">脸部保养</option>
                     <option value="">卸妆产品</option>
                   </select>
+                  <span class="input-tips">*必填</span>
                 </div>
               </li>
               <li class="input-item">
@@ -110,7 +112,8 @@
                 </div>
                 <div class="input-contents">
                   <input class="sm-input" type="text" name="propertyName" value="">
-                  <input type="hidden" name="property">
+                  <input type="hidden" name="property" required="required">
+                  <span class="input-tips">*必填</span>
                 </div>
               </li>
               <li class="input-item">
@@ -119,7 +122,8 @@
                 </div>
                 <div class="input-contents">
                   <input class="sm-input" type="text" name="effectName" value="">
-                  <input name="effect">
+                  <input type="hidden" name="effect" required="required">
+                  <span class="input-tips">*必填</span>
                 </div>
               </li>
               <li class="input-item">
@@ -135,6 +139,7 @@
                     <option value="">敏感</option>
                     <option value="1111" selected>所有肤质</option>
                   </select>
+                  <span class="input-tips">*必填</span>
                 </div>
               </li>
               <li class="input-item">
@@ -144,7 +149,7 @@
                 <div class="input-contents">
                   <div><a class="select-cover" href="javascript:void(0)">封面选择</a></div>
                   <div class="pre-show-container cover-pre-show">
-
+					
                   </div>
                 </div>
               </li>
@@ -166,7 +171,7 @@
                   产品介绍：
                 </div>
                 <div class="input-contents">
-                  <textarea name="name" rows="10" cols="101"></textarea>
+                  <textarea name="desc" rows="10" cols="101"></textarea>
                 </div>
               </li>
             </form>
