@@ -70,6 +70,99 @@ $(".select-cover").click(function() {
 	});
 });
 /**
+ * 产品品牌选择
+ */
+$(".product-brand-input").click(function(){
+	var _this = $(this);
+	var getUrl = basePath + "productBrand/getAll";
+	layer.open({
+	  type: 2, 
+	  title: "选择产品属性",
+	  content: [getUrl, 'yes'],
+	  area: ["400px"],
+	  btn: ['确定', '取消'],
+	  yes: function(index, layero){
+	    //按钮【按钮一】的回调
+		  var iframeWin = window[layero.find('iframe')[0]['name']];
+		  var selectedOption = iframeWin.selectedOption;
+		  if(selectedOption == null){
+			  layer.msg("未选中任何产品品牌，请选择");
+			  return ;
+		  }
+		  _this.val(selectedOption.name);
+		  $(".product-brand-id-input").val(selectedOption.value);
+		  //关闭弹窗
+		  layer.close(index);
+	  },
+	  cancel: function(){ 
+	    //右上角关闭回调
+	    
+	  }
+	});
+});
+/**
+ * 产品属性选择
+ */
+$(".product-property-input").click(function(){
+	var _this = $(this);
+	var getUrl = basePath + "productProperty/getAll";
+	layer.open({
+	  type: 2, 
+	  title: "选择产品属性",
+	  content: [getUrl, 'yes'],
+	  area: ["400px"],
+	  btn: ['确定', '取消'],
+	  yes: function(index, layero){
+	    //按钮【按钮一】的回调
+		  var iframeWin = window[layero.find('iframe')[0]['name']];
+		  var selectedOption = iframeWin.selectedOption;
+		  if(selectedOption == null){
+			  layer.msg("未选中任何产品属性，请选择");
+			  return ;
+		  }
+		  _this.val(selectedOption.name);
+		  $(".product-property-id-input").val(selectedOption.value);
+		  //关闭弹窗
+		  layer.close(index);
+	  },
+	  cancel: function(){ 
+	    //右上角关闭回调
+	    
+	  }
+	});
+});
+/**
+ * 产品功效选择
+ */
+$(".product-effect-input").click(function(){
+	var _this = $(this);
+	var getUrl = basePath + "productEffect/getAll";
+	layer.open({
+	  type: 2, 
+	  title: "选择产品属性",
+	  content: [getUrl, 'yes'],
+	  area: ["400px"],
+	  btn: ['确定', '取消'],
+	  yes: function(index, layero){
+	    //按钮【按钮一】的回调
+		  var iframeWin = window[layero.find('iframe')[0]['name']];
+		  var selectedOption = iframeWin.selectedOption;
+		  if(selectedOption == null){
+			  layer.msg("未选中任何产品属性，请选择");
+			  return ;
+		  }
+		  _this.val(selectedOption.name);
+		  $(".product-effect-id-input").val(selectedOption.value);
+		  //关闭弹窗
+		  layer.close(index);
+	  },
+	  cancel: function(){ 
+	    //右上角关闭回调
+	    
+	  }
+	});
+});
+/**
  * 添加按钮监听
  */
 $(".add-confirm").click(function(){

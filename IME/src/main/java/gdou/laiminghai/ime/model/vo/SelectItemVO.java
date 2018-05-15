@@ -9,6 +9,10 @@ public class SelectItemVO {
 	private String code;
 	private String name;
 	
+	public SelectItemVO() {
+		
+	}
+	
 	public SelectItemVO(String code, String name) {
 		super();
 		this.code = code;

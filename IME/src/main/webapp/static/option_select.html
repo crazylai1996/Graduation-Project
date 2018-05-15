@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title></title>
+    <link rel="stylesheet" href="css\option_select.css">
+  </head>
+  <body>
+    <ul class="option-list">
+      <li><a class="selected-option" href="javascript:void(0);">塑身</a></li>
+      <li><a href="javascript:void(0);">淡化黑眼圈</a></li>
+      <li><a href="javascript:void(0);">塑身</a></li>
+      <li><a href="javascript:void(0);">淡化黑眼圈</a></li>
+      <li><a href="javascript:void(0);">塑身</a></li>
+      <li><a href="javascript:void(0);">淡化黑眼圈</a></li>
+      <li><a href="javascript:void(0);">塑身</a></li>
+      <li><a href="javascript:void(0);">淡化黑眼圈</a></li>
+    </ul>
+
+    <script src="js\jquery.js"></script>
+    <script type="text/javascript">
+      $(".option-list a").click(function(){
+        $(".option-list a").removeClass("selected-option");
+        $(this).addClass("selected-option");
+      });
+    </script>
+  </body>
+</html>

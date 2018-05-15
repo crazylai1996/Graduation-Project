@@ -48,8 +48,8 @@
                   品牌名称：
                 </div>
                 <div class="input-contents">
-                  <input class="lg-input" type="text" name="brandName" required="required">
-                  <input type="hidden" name="brand">
+                  <input class="lg-input product-brand-input" type="text" name="brandName" required="required" readonly="readonly">
+                  <input type="hidden" class="product-brand-id-input" name="brand">
                   <span class="input-tips">*必填</span>
                 </div>
               </li>
@@ -111,8 +111,8 @@
                   产品属性：
                 </div>
                 <div class="input-contents">
-                  <input class="sm-input" type="text" name="propertyName" value="">
-                  <input type="hidden" name="property" required="required">
+                  <input class="sm-input product-property-input" type="text" name="propertyName" value="" readonly="readonly">
+                  <input type="hidden" class="product-property-id-input" name="property" required="required">
                   <span class="input-tips">*必填</span>
                 </div>
               </li>
@@ -121,8 +121,8 @@
                   产品功效：
                 </div>
                 <div class="input-contents">
-                  <input class="sm-input" type="text" name="effectName" value="">
-                  <input type="hidden" name="effect" required="required">
+                  <input class="sm-input product-effect-input" type="text" name="effectName" value="" readonly="readonly">
+                  <input type="hidden" class="product-effect-id-input" name="effect" required="required">
                   <span class="input-tips">*必填</span>
                 </div>
               </li>
