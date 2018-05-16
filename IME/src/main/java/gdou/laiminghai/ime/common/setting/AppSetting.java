@@ -13,6 +13,10 @@ import org.springframework.stereotype.Component;
 public class AppSetting {
 
 	/**
+	 * 项目根路径
+	 */
+	public static String APP_ROOT;
+	/**
 	 * 登录验证码长度
 	 */
 	public static int CAPTCHA_LOGIN_CHAR_LENGTH;
@@ -64,7 +68,27 @@ public class AppSetting {
 	 * 商品图片保存地址
 	 */
 	public static String PRODUCT_PICTURES_SAVED_PATH;
+	/**
+	 * 使用心得图片临时存放目录
+	 */
+	public static String COMMENT_PICTURE_TMP_PATH;
+	/**
+	 * 使用心得图片存放目录
+	 */
+	public static String COMMENT_PICTURE_SAVED_PATH;
+	/**
+	 * 使用心得图片上传格式限制 
+	 */
+	public static String COMMENT_PICTURE_FORMAT;
+	/**
+	 * 单张图片大小限制
+	 */
+	public static Long COMMENT_PICTURE_SIZE;
 
+	@Value("${app.root}")
+	public void setAppRoot(String appRoot) {
+		AppSetting.APP_ROOT = appRoot;
+	}
 	@Value("${captcha.login.char.length}")
 	public void setCaptchaLoginCodeCount(int captchaLength) {
 		AppSetting.CAPTCHA_LOGIN_CHAR_LENGTH = captchaLength;
@@ -128,5 +152,25 @@ public class AppSetting {
 	@Value("${product.picture.saved.path}")
 	public void setProductPictureSavedPath(String savedPath) {
 		AppSetting.PRODUCT_PICTURES_SAVED_PATH = savedPath;
+	}
+	
+	@Value("${comment.picture.tmp.path}")
+	public void setCommentPictureTmpPath(String tmpPath) {
+		AppSetting.COMMENT_PICTURE_TMP_PATH = tmpPath;
+	}
+	
+	@Value("${comment.picture.saved.path}")
+	public void setCommentPictureSavedPath(String savedPath) {
+		AppSetting.COMMENT_PICTURE_SAVED_PATH = savedPath;
+	}
+	
+	@Value("${comment.picture.format}")
+	public void setCommentPictureFormat(String format) {
+		AppSetting.COMMENT_PICTURE_FORMAT = format;
+	}
+	
+	@Value("${comment.picture.size}")
+	public void setCommentPictureSize(Long size) {
+		AppSetting.COMMENT_PICTURE_SIZE = size;
 	}
 }

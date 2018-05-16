@@ -12,8 +12,8 @@ $(document).ready(function() {
   var imgCount = imgDivs.length;
 
   /**
-   * [设置图片高度，使其适应外层div]
-   */
+	 * [设置图片高度，使其适应外层div]
+	 */
   function initImgDisplay() {
     for (var i = 0; i < imgsDisplay.length; i++) {
       var imgObj = imgsDisplay.eq(i);
@@ -47,8 +47,8 @@ $(document).ready(function() {
   var speed = oneDistance / (moveTime / moveInterval);
 
   /**
-   * [设置缩略图图片高度适应外层div]
-   */
+	 * [设置缩略图图片高度适应外层div]
+	 */
   function initLiImgs() {
     for (var i = 0; i < liImgs.length; i++) {
       var liImgObj = liImgs.eq(i);
@@ -61,6 +61,7 @@ $(document).ready(function() {
       }
     }
     imgSelectors.hover(function() {
+    	clearTimeout(autoTimer);
       var index = $(this).index();
       mouseTimer = setTimeout(function() {
         currentImg = index;
@@ -72,8 +73,8 @@ $(document).ready(function() {
   }
 
   /**
-   * [缩略图跳到上一页]
-   */
+	 * [缩略图跳到上一页]
+	 */
   function switchToLastPage(targetPosition) {
     if (timeOut) {
       return;
@@ -91,8 +92,8 @@ $(document).ready(function() {
   }
 
   /**
-   * [缩略图跳到下一页]
-   */
+	 * [缩略图跳到下一页]
+	 */
   function switchToNextPage(targetPosition) {
     if (timeOut) {
       return;
@@ -110,8 +111,8 @@ $(document).ready(function() {
   }
 
   /**
-   * [添加按钮点击事件]
-   */
+	 * [添加按钮点击事件]
+	 */
   function initBtns() {
     $(".previous-btn").click(function() {
       if (currentPage == 0 || !timeOut) {
@@ -132,9 +133,11 @@ $(document).ready(function() {
   }
 
   /**
-   * [显示第几张图片]
-   * @param  {[type]} index [第几张]
-   */
+	 * [显示第几张图片]
+	 * 
+	 * @param {[type]}
+	 *            index [第几张]
+	 */
   function showImg(index) {
     clearTimeout(autoTimer);
     imgDivs.removeClass();
@@ -146,8 +149,8 @@ $(document).ready(function() {
   }
 
   /**
-   * [自动播放]
-   */
+	 * [自动播放]
+	 */
   function autoPlay() {
     autoTimer = setTimeout(function() {
       currentImg++;
@@ -159,8 +162,8 @@ $(document).ready(function() {
   }
 
   /**
-   * [启动产品图片轮播]
-   */
+	 * [启动产品图片轮播]
+	 */
   $(function(){
     initImgDisplay();
     initLiImgs();
@@ -169,26 +172,29 @@ $(document).ready(function() {
   });
 
   /**
-   * [加载评分插件]
-   */
+	 * [加载评分插件]
+	 */
   var $input = $('input.rating'), count = Object.keys($input).length;
   if (count > 0) {
       $input.rating();
   }
+  $('input.rating').on('rating.change', function(event, value, caption) {
+	    $(".product-rating").val(value);
+	});
   /**
-   * [显示图形统计]
-   */
+	 * [显示图形统计]
+	 */
   function showPower(power) {
     var powerClassName = $(power).attr("class")+"-wrapped";
     var powerWidth = parseInt($("."+powerClassName).css("max-width"));
     $(power).width(powerWidth * parseFloat($(power).data("power")));
   }
-  //评分占比评论心得分析
+  // 评分占比评论心得分析
   showPower($(".rating-power,.item-power"));
 
   /**
-   * 购买方式选择
-   */
+	 * 购买方式选择
+	 */
   $(".buy-way-title").click(function(e){
     $(this).siblings(".buy-way-sel").toggle();
     e.stopPropagation();
@@ -200,4 +206,57 @@ $(document).ready(function() {
   $(document).click(function(){
     $(".more-sel").hide();
   });
+  
+  /**
+   * 加载富文本编辑器
+   */
+  KindEditor.ready(function(K) {
+	  var uploadPictureUrl = basePath + "/comment/pictureUpload.do";
+      window.editor = K.create('#comment-input', {
+          themeType: "simple",
+          uploadJson: uploadPictureUrl,
+          resizeType: 0,
+          pasteType: 2,
+          syncType: "",
+          filterMode: true,
+          allowPreviewEmoticons: false,
+          fullscreenShortcut: true,
+          items: [
+            'source', 'undo', 'redo', 'plainpaste', 'wordpaste', 'clearhtml', 'quickformat',
+            'selectall', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor',
+            'bold', 'italic', 'underline', 'hr', 'removeformat', '|', 'justifyleft', 'justifycenter',
+            'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'link', 'image',
+            'unlink', 'emoticons', '|','fullscreen'
+          ],
+          afterCreate: function() {
+            this.sync();
+          },
+          afterBlur: function() {
+            this.sync();
+          },
+          afterChange: function() {
+            //富文本输入区域的改变事件，一般用来编写统计字数等判断
+//             K('.word_count1').html("最多20000个字符,已输入" + this.count() + "个字符");
+          },
+          afterUpload: function(url) {
+            //上传图片后的代码
+        	this.sync();
+          },
+          allowFileManager: false,
+          allowFlashUpload: false,
+          allowMediaUpload: false,
+          allowFileUpload: false
+        });
+  });
+  
+  /**
+	 * 添加按钮
+	 */
+  $(".add-btn").click(function(){
+	  var count = editor.count('text');
+	  var contentHtml = editor.html();
+	  var contentText = editor.text();
+	  var productRating = $(".product-rating").val();
+  });
+ 
 });

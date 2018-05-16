@@ -14,8 +14,13 @@
     <result column="iReadCount" jdbcType="INTEGER" property="readCount" />
     <result column="iLoveCount" jdbcType="INTEGER" property="loveCount" />
     <result column="iUpCount" jdbcType="INTEGER" property="upCount" />
-    <result column="tContent" jdbcType="LONGVARCHAR" property="content" />
+    <result column="tContentText" jdbcType="LONGVARCHAR" property="contentText" />
+    <result column="tContentHtml" jdbcType="LONGVARCHAR" property="contentHtml" />
   </resultMap>
+  <sql id="CommentInfoColumns">
+  	bCommentId, bUserId, bProductId, vArticleTitle, vArticlaMark, fWorthMark, 
+    vBuyWay, dSendTime, iArticleState, iReadCount, iLoveCount, iUpCount, tContentText,tContentHtml
+  </sql>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from commentinfo
     where bCommentId = #{commentId,jdbcType=BIGINT}
@@ -24,12 +29,13 @@
     insert into commentinfo (bUserId, bProductId, vArticleTitle, 
       vArticlaMark, fWorthMark, vBuyWay, 
       dSendTime, iArticleState, iReadCount, 
-      iLoveCount, iUpCount, tContent
+      iLoveCount, iUpCount, tContentText,tContentHtml
       )
     values (#{userId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{articleTitle,jdbcType=VARCHAR}, 
       #{articlaMark,jdbcType=VARCHAR}, #{worthMark,jdbcType=REAL}, #{buyWay,jdbcType=VARCHAR}, 
       #{sendTime,jdbcType=TIMESTAMP}, #{articleState,jdbcType=INTEGER}, #{readCount,jdbcType=INTEGER}, 
-      #{loveCount,jdbcType=INTEGER}, #{upCount,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
+      #{loveCount,jdbcType=INTEGER}, #{upCount,jdbcType=INTEGER}, #{contentText,jdbcType=LONGVARCHAR},
+      #{contentHtml,jdbcType=LONGVARCHAR}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="CommentInfo">
@@ -45,18 +51,17 @@
       iReadCount = #{readCount,jdbcType=INTEGER},
       iLoveCount = #{loveCount,jdbcType=INTEGER},
       iUpCount = #{upCount,jdbcType=INTEGER},
-      tContent = #{content,jdbcType=LONGVARCHAR}
+      tContentText = #{contentText,jdbcType=LONGVARCHAR},
+      tContentHtml = #{contentHtml,jdbcType=LONGVARCHAR}
     where bCommentId = #{commentId,jdbcType=BIGINT}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select bCommentId, bUserId, bProductId, vArticleTitle, vArticlaMark, fWorthMark, 
-    vBuyWay, dSendTime, iArticleState, iReadCount, iLoveCount, iUpCount, tContent
+    select <include refid="CommentInfoColumns"/>
     from commentinfo
     where bCommentId = #{commentId,jdbcType=BIGINT}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select bCommentId, bUserId, bProductId, vArticleTitle, vArticlaMark, fWorthMark, 
-    vBuyWay, dSendTime, iArticleState, iReadCount, iLoveCount, iUpCount, tContent
+    select <include refid="CommentInfoColumns"/>
     from commentinfo
   </select>
 </mapper>

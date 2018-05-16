@@ -27,7 +27,9 @@ public class CommentInfo {
 
     private Integer upCount;
 
-    private String content;
+    private String contentText;
+    
+    private String contentHtml;
 
     public Long getCommentId() {
         return commentId;
@@ -125,11 +127,19 @@ public class CommentInfo {
         this.upCount = upCount;
     }
 
-    public String getContent() {
-        return content;
-    }
+	public String getContentText() {
+		return contentText;
+	}
 
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
+	public void setContentText(String contentText) {
+		this.contentText = contentText;
+	}
+
+	public String getContentHtml() {
+		return contentHtml;
+	}
+
+	public void setContentHtml(String contentHtml) {
+		this.contentHtml = contentHtml;
+	}
 }
