@@ -1,5 +1,7 @@
 package gdou.laiminghai.ime.service.impl;
 
+import static org.hamcrest.CoreMatchers.endsWith;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import gdou.laiminghai.ime.common.exception.ServiceException;
 import gdou.laiminghai.ime.common.exception.ServiceResultEnum;
+import gdou.laiminghai.ime.common.setting.AppSetting;
+import gdou.laiminghai.ime.common.statics.SkinTextureEnum;
 import gdou.laiminghai.ime.common.util.FileUtil;
 import gdou.laiminghai.ime.dao.mapper.ProductInfoMapper;
 import gdou.laiminghai.ime.model.entity.ProductInfo;
@@ -81,6 +85,16 @@ public class ProductServiceImpl implements ProductService {
 		logger.debug("添加新产品成功！");
 	}
 	
+	@Override
+	public ProductInfoVO getProductInfo(Long productId) {
+		ProductInfo productInfoPO = productInfoMapper.findProductInfoById(productId);
+		//产品不存在
+		if(productInfoPO == null) {
+			throw new ServiceException(ServiceResultEnum.PRODUCT_NOT_FOUND);
+		}
+		return productInfoPO2productInfoVO(productInfoPO);
+	}
+
 	/**
 	 * VO=>PO
 	 * @param productInfoVO
@@ -112,4 +126,52 @@ public class ProductServiceImpl implements ProductService {
 		return productInfoPO;
 	}
 	
+	/**
+	 * PO=>VO
+	 * @param productInfoPO
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月16日 下午12:17:49
+	 */
+	private ProductInfoVO productInfoPO2productInfoVO(ProductInfo productInfoPO) {
+		ProductInfoVO productInfoVO = new ProductInfoVO();
+		productInfoVO.setProductId(productInfoPO.getProductId());
+		productInfoVO.setProductName(productInfoPO.getProductName());
+		productInfoVO.setBrand(productInfoPO.getBrand());
+		productInfoVO.setBrandName(productInfoPO.getProductBrand().getBrandName());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月");
+		//时间转换
+		Date comeInDate = productInfoPO.getComeInDate();
+		if(comeInDate != null) {
+			String dateText = sdf.format(comeInDate);
+			productInfoVO.setComeInDate(dateText);
+		}
+		
+		productInfoVO.setSpec(productInfoPO.getSpec());
+		productInfoVO.setReferencePrice(productInfoPO.getReferencePrice());
+		productInfoVO.setClassify(productInfoPO.getClassify());
+		productInfoVO.setClassifyName(productInfoPO.getProductClass().getClassName());
+		productInfoVO.setProperty(productInfoPO.getProperty());
+		productInfoVO.setPropertyName(productInfoPO.getProductProperty().getPropertyName());
+		productInfoVO.setEffect(productInfoPO.getEffect());
+		productInfoVO.setEffectName(productInfoPO.getProductEffect().getEffectName());
+		productInfoVO.setDesc(productInfoPO.getDesc());
+		//肤质
+		if(StringUtils.isNotBlank(productInfoPO.getSkinTexture())) {
+			SkinTextureEnum skinTexture = SkinTextureEnum.of(productInfoPO.getSkinTexture());
+			if(skinTexture != null) {
+				productInfoVO.setSkinTexture(skinTexture.getName());
+			}
+		}
+		//封面图片地址
+		productInfoVO.setCoverImage(AppSetting.PRODUCT_COVER_SAVED_PATH+productInfoPO.getCover());
+		//产品图片地址
+		List<ProductPicture> pictures = productInfoPO.getPictures();
+		List<String> pictrueUrls = new ArrayList<>();
+		for (ProductPicture productPicture : pictures) {
+			pictrueUrls.add(AppSetting.PRODUCT_PICTURES_SAVED_PATH + productPicture.getPictureUrl());
+		}
+		productInfoVO.setProductImages(pictrueUrls);
+		return productInfoVO;
+	}
 }

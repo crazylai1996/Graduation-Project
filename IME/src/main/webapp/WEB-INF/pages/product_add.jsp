@@ -138,13 +138,15 @@
                   适用肤质：
                 </div>
                 <div class="input-contents">
-                  <select class="sm-input">
-                    <option value="">中性</option>
+                  <select class="sm-input" name="skinTexture">
+                    <!--  <option value="">中性</option>
                     <option value="">干性</option>
                     <option value="">油性</option>
                     <option value="">混合</option>
-                    <option value="">敏感</option>
-                    <option value="1111" selected>所有肤质</option>
+                    <option value="">敏感</option>-->
+                    <c:forEach items="${skinTextures }" var="skinTexture">
+                    	<option value="${skinTexture.code }">${skinTexture.name }</option>-->
+                    </c:forEach>
                   </select>
                   <span class="input-tips">*必填</span>
                 </div>

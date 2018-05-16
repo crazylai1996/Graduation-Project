@@ -13,7 +13,8 @@ public enum SkinTextureEnum implements BaseEnum<SkinTextureEnum, String>{
 	DRY_SKIN("0001","干性肤质"),
 	OILY_SKIN("0010","油性肤质"),
 	MIXED_SKIN("0011","混合性肤质"),
-	SENSITIVE_SKIN("0100","敏感性肤质");
+	SENSITIVE_SKIN("0100","敏感性肤质"),
+	IGNORE_SKIN("1111","所有肤质");
 	
 	static Map<String, SkinTextureEnum> enumMap = new HashMap<>();
 
@@ -41,9 +42,8 @@ public enum SkinTextureEnum implements BaseEnum<SkinTextureEnum, String>{
 	public String getName() {
 		return this.name;
 	}
-
-	@Override
-	public SkinTextureEnum of(String code) {
+	
+	public static SkinTextureEnum of(String code) {
 		return enumMap.get(code);
 	}
 }

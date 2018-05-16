@@ -18,6 +18,7 @@ public enum ServiceResultEnum {
 	USER_PASSWORD_EMPTY(210,"密码为空"),
 	PRODUCT_FORM_IMCOMPLETE(301,"表单必填信息未提供"),
 	PRODUCT_PICTURE_SAVE_FAILURE(302,"商品图片文件保存失败"),
+	PRODUCT_NOT_FOUND(303,"产品不存在"),
 	UNKONWN_ERROR(-1,"未知错误");
 	
 	private Integer code;//错误码

@@ -41,8 +41,7 @@ public enum BuyWayEnum implements BaseEnum<BuyWayEnum, String> {
 		return this.name;
 	}
 
-	@Override
-	public BuyWayEnum of(String code) {
+	public static BuyWayEnum of(String code) {
 		return enumMap.get(code);
 	}
 

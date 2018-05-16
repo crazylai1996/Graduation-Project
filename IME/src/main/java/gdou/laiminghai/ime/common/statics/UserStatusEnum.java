@@ -42,8 +42,7 @@ public enum UserStatusEnum implements BaseEnum<UserStatusEnum, String> {
 		return this.name;
 	}
 
-	@Override
-	public UserStatusEnum of(String code) {
+	public static UserStatusEnum of(String code) {
 		return enumMap.get(code);
 	}
 }

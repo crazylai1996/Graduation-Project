@@ -10,6 +10,7 @@ import java.util.List;
  * @datetime: 2018年5月14日 上午1:29:06
  */
 public class ProductInfoVO {
+	private Long productId;
 	private String productName;
 	private Integer brand;
 	private String comeInDate;
@@ -28,6 +29,12 @@ public class ProductInfoVO {
     private String propertyName;
     private String effectName;
     
+	public Long getProductId() {
+		return productId;
+	}
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
 	public String getProductName() {
 		return productName;
 	}

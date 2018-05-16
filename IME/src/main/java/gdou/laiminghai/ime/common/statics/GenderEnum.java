@@ -39,8 +39,7 @@ public enum GenderEnum implements BaseEnum<GenderEnum, String> {
 		return this.name;
 	}
 
-	@Override
-	public GenderEnum of(String code) {
+	public static GenderEnum of(String code) {
 		return enumMap.get(code);
 	}
 	

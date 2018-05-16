@@ -1,6 +1,7 @@
 package gdou.laiminghai.ime.model.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class ProductInfo {
 	private Long productId;
@@ -34,6 +35,19 @@ public class ProductInfo {
     private String desc;
     
     private String cover;
+    
+    //我是分割线
+    //关联属性
+    //产品品牌
+    private ProductBrand productBrand;
+    //产品分类
+    private CosmeticClass productClass;
+    //产品属性
+    private ProductProperty productProperty;
+    //产品功效
+    private ProductEffect productEffect;
+    //产品图片
+    private List<ProductPicture> pictures;
 
     public Long getProductId() {
         return productId;
@@ -90,14 +104,6 @@ public class ProductInfo {
 	public void setSkinTexture(String skinTexture) {
 		this.skinTexture = skinTexture;
 	}
-
-	public String getSkintexture() {
-        return skinTexture;
-    }
-
-    public void setSkintexture(String skinTexture) {
-        this.skinTexture = skinTexture == null ? null : skinTexture.trim();
-    }
 
     public String getSpec() {
         return spec;
@@ -169,5 +175,45 @@ public class ProductInfo {
 
 	public void setCover(String cover) {
 		this.cover = cover;
+	}
+
+	public ProductBrand getProductBrand() {
+		return productBrand;
+	}
+
+	public void setProductBrand(ProductBrand productBrand) {
+		this.productBrand = productBrand;
+	}
+
+	public CosmeticClass getProductClass() {
+		return productClass;
+	}
+
+	public void setProductClass(CosmeticClass productClass) {
+		this.productClass = productClass;
+	}
+
+	public ProductProperty getProductProperty() {
+		return productProperty;
+	}
+
+	public void setProductProperty(ProductProperty productProperty) {
+		this.productProperty = productProperty;
+	}
+
+	public ProductEffect getProductEffect() {
+		return productEffect;
+	}
+
+	public void setProductEffect(ProductEffect productEffect) {
+		this.productEffect = productEffect;
+	}
+
+	public List<ProductPicture> getPictures() {
+		return pictures;
+	}
+
+	public void setPictures(List<ProductPicture> pictures) {
+		this.pictures = pictures;
 	}
 }

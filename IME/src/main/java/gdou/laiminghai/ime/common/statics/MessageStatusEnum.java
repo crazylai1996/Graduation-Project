@@ -39,8 +39,7 @@ public enum MessageStatusEnum implements BaseEnum<MessageStatusEnum, String> {
 		return this.name;
 	}
 
-	@Override
-	public MessageStatusEnum of(String code) {
+	public static MessageStatusEnum of(String code) {
 		return enumMap.get(code);
 	}
 }

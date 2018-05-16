@@ -13,4 +13,8 @@ public interface ProductInfoMapper {
     List<ProductInfo> selectAll();
 
     int updateByPrimaryKey(ProductInfo record);
+    
+    //我是分割线
+    //根据ID查找产品详情信息
+    ProductInfo findProductInfoById(Long productId);
 }

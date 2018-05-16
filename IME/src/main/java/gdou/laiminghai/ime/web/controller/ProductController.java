@@ -19,10 +19,13 @@ import org.springframework.web.servlet.ModelAndView;
 import gdou.laiminghai.ime.common.exception.ServiceException;
 import gdou.laiminghai.ime.common.exception.ServiceResultEnum;
 import gdou.laiminghai.ime.common.setting.AppSetting;
+import gdou.laiminghai.ime.common.statics.SkinTextureEnum;
+import gdou.laiminghai.ime.common.util.EnumUtil;
 import gdou.laiminghai.ime.common.util.ResultDTOUtil;
 import gdou.laiminghai.ime.model.dto.ResultDTO;
 import gdou.laiminghai.ime.model.entity.CosmeticClass;
 import gdou.laiminghai.ime.model.vo.ProductInfoVO;
+import gdou.laiminghai.ime.model.vo.SelectItemVO;
 import gdou.laiminghai.ime.service.CosmeticClassService;
 import gdou.laiminghai.ime.service.ProductService;
 
@@ -59,8 +62,12 @@ public class ProductController {
 	@RequestMapping("/new")
 	public ModelAndView goAddProduct() {
 		ModelAndView mav = new ModelAndView("product_add");
+		//化妆品品类
 		List<CosmeticClass> cosmeticClasses = cosmeticClassService.findAllClass();
+		//肤质列表
+		List<SelectItemVO> skinTextures = EnumUtil.toList(SkinTextureEnum.class);
 		mav.addObject("cosmeticClasses", cosmeticClasses);
+		mav.addObject("skinTextures", skinTextures);
 		return mav;
 	}
 
@@ -118,6 +125,9 @@ public class ProductController {
 	@RequestMapping("/info/{productId}")
 	public ModelAndView goProductDetails(@PathVariable("productId") Long productId) {
 		ModelAndView mav = new ModelAndView("product_details");
+		ProductInfoVO productInfoVO = productService.getProductInfo(productId);
+		logger.debug(productInfoVO.toString());
+		mav.addObject("productInfoVO", productInfoVO);
 		return mav;
 	}
 }

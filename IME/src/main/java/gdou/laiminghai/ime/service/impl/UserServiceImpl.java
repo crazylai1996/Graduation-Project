@@ -214,7 +214,7 @@ public class UserServiceImpl implements UserService {
 		userInfoVO.setGender(userInfo.getGender());
 		//获取用户肤质
 		if(StringUtils.isNotBlank(userInfo.getSkinTexture())) {
-			SkinTextureEnum skinTexture = SkinTextureEnum.valueOf(userInfo.getSkinTexture());
+			SkinTextureEnum skinTexture = SkinTextureEnum.of(userInfo.getSkinTexture());
 			if(skinTexture != null) {
 				userInfoVO.setSkinTexture(skinTexture.getName());
 			}

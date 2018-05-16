@@ -24,4 +24,12 @@ public interface ProductService {
 	void addNewProduct(ProductInfoVO productInfoVO,
 			MultipartFile coverFile,MultipartFile[] productFiles,
 			String coverSavedPath,String picturesSavedPath);
+	/**
+	 * 获取化妆品详情信息
+	 * @param productId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月16日 上午10:12:37
+	 */
+	ProductInfoVO getProductInfo(Long productId);
 }

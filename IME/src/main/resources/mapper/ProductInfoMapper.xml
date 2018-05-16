@@ -4,10 +4,10 @@
   <resultMap id="BaseResultMap" type="ProductInfo">
     <id column="bProductId" jdbcType="BIGINT" property="productId" />
     <result column="vProductName" jdbcType="VARCHAR" property="productName" />
-    <result column="iBrand" jdbcType="INTEGER" property="brand" />
-    <result column="iClassify" jdbcType="INTEGER" property="classify" />
-    <result column="iProperty" jdbcType="INTEGER" property="property" />
-    <result column="iEffect" jdbcType="INTEGER" property="effect" />
+    <result column="iProductBrand" jdbcType="INTEGER" property="brand" />
+    <result column="iProductClassify" jdbcType="INTEGER" property="classify" />
+    <result column="iProductProperty" jdbcType="INTEGER" property="property" />
+    <result column="iProductEffect" jdbcType="INTEGER" property="effect" />
     <result column="vSkinTexture" jdbcType="VARCHAR" property="skinTexture" />
     <result column="vSpec" jdbcType="VARCHAR" property="spec" />
     <result column="dComeInDate" jdbcType="DATE" property="comeInDate" />
@@ -20,7 +20,8 @@
     <result column="vCover" jdbcType="VARCHAR" property="cover"/>
   </resultMap>
   <sql id="ProductInfoColumns">
-  	bProductId, vProductName, iBrand, iClassify, iProperty, iEffect, vSkinTexture, 
+  	p.bProductId, vProductName, p.iBrand iProductBrand, p.iClassify iProductClassify, 
+  	p.iProperty iProductProperty, p.iEffect iProductEffect, vSkinTexture, 
     vSpec, dComeInDate, fReferencePrice, fWorthCount, bCommentCount, bBrowserCount, bFollowCount, 
     tDesc,vCover
   </sql>
@@ -61,11 +62,39 @@
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select <include refid="ProductInfoColumns"/>
-    from productinfo
+    from productinfo p
     where bProductId = #{productId,jdbcType=BIGINT}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select <include refid="ProductInfoColumns"/>
-    from productinfo
+    from productinfo p
   </select>
+  <!-- 我是分割线 -->
+  <resultMap type="ProductInfo" id="ProductInfoResult" extends="BaseResultMap">
+  	<!-- 产品品牌 -->
+  	<association property="productBrand" column="iProductBrand" 
+  		javaType="ProductBrand" resultMap="gdou.laiminghai.ime.dao.mapper.ProductBrandMapper.BaseResultMap"/>
+  	<!-- 产品分类 -->
+  	<association property="productClass" column="iProductClassify" 
+  		javaType="CosmeticClass" resultMap="gdou.laiminghai.ime.dao.mapper.CosmeticClassMapper.BaseResultMap"/>
+ 	<!-- 产品属性 -->
+ 	<association property="productProperty" column="iProductProperty" 
+ 		javaType="ProductProperty" resultMap="gdou.laiminghai.ime.dao.mapper.ProductPropertyMapper.BaseResultMap"/>
+ 	<!-- 产品功效 -->
+ 	<association property="productEffect" column="iProductEffect" 
+ 		javaType="ProductEffect" resultMap="gdou.laiminghai.ime.dao.mapper.ProductEffectMapper.BaseResultMap"/>
+  	<!-- 产品图片 -->
+  	<collection property="pictures" ofType="ProductPicture"
+  		 resultMap="gdou.laiminghai.ime.dao.mapper.ProductPictureMapper.BaseResultMap"/>
+  </resultMap>
+  <!-- 根据ID查找产品详情信息 -->
+  <select id="findProductInfoById" parameterType="java.lang.Long" resultMap="ProductInfoResult">
+  	select <include refid="ProductInfoColumns"/>,pb.*,cc.*,pp.*,pe.*,ppe.vPictureUrl
+  	from productinfo p left join productbrand pb on p.iBrand = pb.iBrandId 
+  		left join cosmeticclass cc on p.iClassify = cc.bClassId
+  		left join productproperty pp on p.iProperty = pp.iPropertyId 
+  		left join producteffect pe on p.iEffect = pe.iEffectId 
+  		left join productpicture ppe on p.bProductId = ppe.bProductId
+  	where p.bProductId = #{productId}
+   </select>
 </mapper>

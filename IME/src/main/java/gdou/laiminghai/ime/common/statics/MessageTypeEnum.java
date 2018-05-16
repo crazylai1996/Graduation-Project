@@ -40,8 +40,7 @@ public enum MessageTypeEnum implements BaseEnum<MessageTypeEnum, String>{
 		return this.name;
 	}
 
-	@Override
-	public MessageTypeEnum of(String code) {
+	public static MessageTypeEnum of(String code) {
 		return enumMap.get(code);
 	}
 

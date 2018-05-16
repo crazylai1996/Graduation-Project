@@ -24,8 +24,8 @@
       <!-- 当前位置 -->
       <div class="current-pos">
         <a href="#">首页</a><span class="split-line"></span>
-        <a href="#">Green Skin格润丝</a><span class="split-line"></span>
-        <sapn class="title">Green Skin格润丝 花青素明眸眼霜</span>
+        <a href="#">${productInfoVO.brandName }</a><span class="split-line"></span>
+        <sapn class="title">${productInfoVO.productName }</span>
       </div>
       <hr>
       <!-- 产品信息 -->
@@ -33,31 +33,47 @@
         <!-- 产品图片展示 -->
         <div class="product-images-container">
           <div class="image-display">
-            <div class="current-img"><span><img src="static\img\commodity_test.jpg"/></span></div>
+          	<c:forEach items="${productInfoVO.productImages }" var="imageUrl" varStatus="status">
+          		<c:if test="${status.index == 0}">
+          			<div class="current-img"><span><img src="${imageUrl }"/></span></div>
+          		</c:if>
+              	<c:if test="${status.index != 0}">
+          			<div><span><img src="${imageUrl }"/></span></div>
+          		</c:if>
+              </c:forEach>
+            <!-- <div class="current-img"><span><img src="static\img\commodity_test.jpg"/></span></div>
             <div><span><img src="static\img\commodity_test.jpg"/></span></div>
-            <div><span><img src="static\img\commodity_test.jpg"/></span></div>
+            <div><span><img src="static\img\commodity_test.jpg"/></span></div>-->
           </div>
           <div class="thumbnail-container">
             <span class="previous-btn"></span>
             <div class="thumbnail-list">
-              <a class="current-li"><img src="static\img\commodity_test.jpg"/></a>
+              <c:forEach items="${productInfoVO.productImages }" var="imageUrl" varStatus="status">
+              	<c:if test="${status.index == 0}">
+          			<a class="current-li"><img src="${imageUrl }"/></a>
+          		</c:if>
+          		<c:if test="${status.index != 0}">
+          			<a><img src="${imageUrl }"/></a>
+          		</c:if>
+              </c:forEach>
+              <!-- <a class="current-li"><img src="static\img\commodity_test.jpg"/></a>
               <a><img src="static\img\commodity_test.jpg"/></a>
-              <a><img src="static\img\commodity_test.jpg"/></a>
+              <a><img src="static\img\commodity_test.jpg"/></a>-->
             </div>
             <span class="next-btn"></span>
           </div>
         </div>
         <!-- 产品基本信息 -->
         <div class="product-base-info">
-          <h1><a href="#">法国希思黎植物养护精华卷翘睫毛膏</a></h1>
-          <p>参考价格：<span class="price">198.00元</span></p>
-          <p>产品规格：<span class="spec">常规</span></p>
-          <p>产品种类：<a href="#">睫毛膏</a><span></span>产品功效：<a href="#">滋润</a></p>
-          <p>适用肤质：<a href="#">所有肤质</a></p>
-          <p>购买来源：<a href="#">天猫</a></p>
+          <h1><a href="#">${productInfoVO.productName }</a></h1>
+          <p>参考价格：<span class="price">${productInfoVO.referencePrice }元</span></p>
+          <p>产品规格：<span class="spec">${productInfoVO.spec }</span></p>
+          <p>产品种类：<a href="#">${productInfoVO.classifyName }</a><span></span>产品功效：<a href="#">${productInfoVO.effectName }</a></p>
+          <p>适用肤质：<a href="#">${productInfoVO.skinTexture }</a></p>
+          <p>品牌：<a href="#">${productInfoVO.brandName }</a></p>
           <div class="product-details">
             <span>产品信息：</span>
-            <p>#1经典黑 #2深邃棕 #3深海蓝 融合了睫毛养护液的保养成分，深入睫毛根部强健睫毛，让睫毛从根部
+            <p>${productInfoVO.desc }
               <a href="#" class="show-more">展开&gt;&gt;</a>
             </p>
           </div>
