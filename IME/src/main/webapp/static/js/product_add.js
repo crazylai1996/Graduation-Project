@@ -59,6 +59,31 @@ $(function() {
 	}
 });
 /**
+ * 化妆品分类联动
+ * @returns
+ */
+$(".classify-1st").change(function(){
+	var parentClassId = $(this).children('option:selected').val();
+	$.ajax({
+		url: basePath + "cosmeticClass/getChildCosmeticClasses.do",
+		type: "GET",
+		data: {parentClassId:parentClassId},
+		dataType: 'json',
+		success: function(result){
+			if(result.success){
+				$(".classify-2nd").empty();
+				$.each(result.data,function(){
+					$(".classify-2nd").append("<option value="+
+							this.classId+">"+
+							this.className+
+							"</option>");
+				});
+			}
+		}
+	});
+});
+
+/**
  * 封面选择弹框
  * 
  * @returns
@@ -179,6 +204,8 @@ $(".add-confirm").click(function(){
 		return ;
 	}
 	var fd=new FormData($(".product-form")[0]);
+	//产品规格
+	fd.append("spec",$(".spec-val").val()+$(".spec-unit").val());
 	if(isBlank(cover)){
 		layer.msg("商品封面未选择");
 		return ;
@@ -201,10 +228,11 @@ $(".add-confirm").click(function(){
 		contentType: false,
 		success:function(result){
 			if(result.success){
-				alert("更新成功",
+				alert("添加成功",
 	  					"",
 	  					function(){
 	  						//确认按钮回调
+							location.reload();
 	  					},
 	  					{type:'success',confirmButtonText: '好的'});
 			}else{

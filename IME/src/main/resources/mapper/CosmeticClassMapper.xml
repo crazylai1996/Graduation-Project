@@ -3,28 +3,49 @@
 <mapper namespace="gdou.laiminghai.ime.dao.mapper.CosmeticClassMapper">
   <resultMap id="BaseResultMap" type="CosmeticClass">
     <id column="bClassId" jdbcType="INTEGER" property="classId" />
+    <result column="bParentClass" jdbcType="INTEGER" property="parentClassId"/>
     <result column="vClassName" jdbcType="VARCHAR" property="className" />
   </resultMap>
+  <sql id="CosmeticClassColumns">
+  	bClassId,bParentClass, vClassName
+  </sql>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from cosmeticclass
     where bClassId = #{classId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="bClassId" keyProperty="classId" parameterType="CosmeticClass" useGeneratedKeys="true">
-    insert into cosmeticclass (vClassName)
-    values (#{className,jdbcType=VARCHAR})
+    insert into cosmeticclass (bParentClass,vClassName)
+    values (#{parentClassId,jdbcType=INTEGER},#{className,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="CosmeticClass">
     update cosmeticclass
-    set vClassName = #{className,jdbcType=VARCHAR}
+    set bParentClass = #{#{parentClassId,jdbcType=INTEGER},
+    vClassName = #{className,jdbcType=VARCHAR}
     where bClassId = #{classId,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select bClassId, vClassName
+    select <include refid="CosmeticClassColumns"/>
     from cosmeticclass
     where bClassId = #{classId,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select bClassId, vClassName
+    select <include refid="CosmeticClassColumns"/>
     from cosmeticclass
+  </select>
+  <!-- 我是分割线 -->
+  <resultMap type="CosmeticClass" id="CosmeticClassResult" extends="BaseResultMap">
+  	<collection property="childClasses" ofType="CosmeticClass" select="getChildCosmeticClasses" column="bClassId"/>
+  </resultMap>
+  <!-- 查找子分类,只存在二级分类，更多时使用CosmeticClassResult递归查询 -->
+  <select id="getChildCosmeticClasses" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  	select * 
+  	from cosmeticclass 
+  	where bParentClass = #{_parameter}
+  </select>
+  <!-- 查找一级分类，及关联二级分类 -->
+  <select id="getAllCosmeticClasses" resultMap="CosmeticClassResult">
+  	select * 
+  	from cosmeticclass 
+  	where bParentClass is NULL
   </select>
 </mapper>

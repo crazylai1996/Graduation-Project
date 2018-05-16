@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018-05-15-星期二 01:19:37                      */
+/* Created on:     2018-05-15-星期二 22:50:18                      */
 /*==============================================================*/
 
 
@@ -202,6 +202,7 @@ auto_increment = 1;
 create table CosmeticClass
 (
    bClassId             int not null auto_increment,
+   bParentClass         int,
    vClassName           varchar(30),
    primary key (bClassId)
 )

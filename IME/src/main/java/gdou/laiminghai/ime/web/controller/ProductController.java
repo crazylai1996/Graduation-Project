@@ -1,5 +1,6 @@
 package gdou.laiminghai.ime.web.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,9 @@ import gdou.laiminghai.ime.common.exception.ServiceResultEnum;
 import gdou.laiminghai.ime.common.setting.AppSetting;
 import gdou.laiminghai.ime.common.util.ResultDTOUtil;
 import gdou.laiminghai.ime.model.dto.ResultDTO;
+import gdou.laiminghai.ime.model.entity.CosmeticClass;
 import gdou.laiminghai.ime.model.vo.ProductInfoVO;
+import gdou.laiminghai.ime.service.CosmeticClassService;
 import gdou.laiminghai.ime.service.ProductService;
 
 /**
@@ -42,6 +45,9 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private CosmeticClassService cosmeticClassService;
 
 	/**
 	 * 跳转到添加新商品页面
@@ -53,6 +59,8 @@ public class ProductController {
 	@RequestMapping("/new")
 	public ModelAndView goAddProduct() {
 		ModelAndView mav = new ModelAndView("product_add");
+		List<CosmeticClass> cosmeticClasses = cosmeticClassService.findAllClass();
+		mav.addObject("cosmeticClasses", cosmeticClasses);
 		return mav;
 	}
 

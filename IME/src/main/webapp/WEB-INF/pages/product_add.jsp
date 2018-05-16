@@ -75,10 +75,10 @@
                   产品规格：
                 </div>
                 <div class="input-contents">
-                  <input class="xs-input" type="text" name="spec">
+                  <input class="xs-input spec-val" type="text" name="">
                   <select class="xs-input spec-unit">
-                    <option value="">g</option>
-                    <option value="">ml</option>
+                    <option value="g">g</option>
+                    <option value="ml">ml</option>
                   </select>
                 </div>
               </li>
@@ -97,12 +97,18 @@
                 </div>
                 <div class="input-contents">
                   <select class="sm-input classify-1st">
-                    <option value="">面部护肤</option>
-                    <option value="">魅力彩妆</option>
+                    <!-- <option value="">面部护肤</option>
+                    <option value="">魅力彩妆</option>-->
+                    <c:forEach items="${cosmeticClasses }" var="cosmeticClass">
+                    	<option value="${cosmeticClass.classId }">${cosmeticClass.className }</option>
+                    </c:forEach>
                   </select>
-                  <select class="sm-input" name="classify">
-                    <option value="">脸部保养</option>
-                    <option value="">卸妆产品</option>
+                  <select class="sm-input classify-2nd" name="classify">
+                    <!--  <option value="">脸部保养</option>
+                    <option value="">卸妆产品</option>-->
+                    <c:forEach items="${cosmeticClasses.get(0).childClasses }" var="cosmeticClass">
+                    	<option value="${cosmeticClass.classId }">${cosmeticClass.className }</option>
+                    </c:forEach>
                   </select>
                   <span class="input-tips">*必填</span>
                 </div>

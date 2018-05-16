@@ -13,4 +13,21 @@ public interface CosmeticClassMapper {
     List<CosmeticClass> selectAll();
 
     int updateByPrimaryKey(CosmeticClass record);
+    
+    //我是分割线
+    /**
+     * 递归查找所有化妆品品类
+     * @return
+     * @author: laiminghai
+     * @datetime: 2018年5月16日 上午8:40:19
+     */
+    List<CosmeticClass> getAllCosmeticClasses();
+    /**
+     * 查找子分类
+     * @param parentId
+     * @return
+     * @author: laiminghai
+     * @datetime: 2018年5月16日 上午8:42:32
+     */
+    List<CosmeticClass> getChildCosmeticClasses(Integer parentId);
 }
