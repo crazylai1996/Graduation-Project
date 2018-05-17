@@ -95,6 +95,22 @@ public class ProductServiceImpl implements ProductService {
 		return productInfoPO2productInfoVO(productInfoPO);
 	}
 
+	@Override
+	public boolean productIsExist(Long productId) {
+		ProductInfo productInfo = productInfoMapper.selectByPrimaryKey(productId);
+		return productInfo != null;
+	}
+
+	@Override
+	public List<ProductInfoVO> findMoreProductInfo(List<Long> productIds) {
+		List<ProductInfoVO> productInfoVOs = new ArrayList<>();
+		List<ProductInfo> productInfoPOs =  productInfoMapper.findMoreProductInfoByIds(productIds);
+		for (ProductInfo productInfo : productInfoPOs) {
+			productInfoVOs.add(productInfoPO2productInfoVO(productInfo));
+		}
+		return productInfoVOs;
+	}
+
 	/**
 	 * VO=>PO
 	 * @param productInfoVO
@@ -138,7 +154,9 @@ public class ProductServiceImpl implements ProductService {
 		productInfoVO.setProductId(productInfoPO.getProductId());
 		productInfoVO.setProductName(productInfoPO.getProductName());
 		productInfoVO.setBrand(productInfoPO.getBrand());
-		productInfoVO.setBrandName(productInfoPO.getProductBrand().getBrandName());
+		if(productInfoPO.getProductBrand() != null) {
+			productInfoVO.setBrandName(productInfoPO.getProductBrand().getBrandName());
+		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月");
 		//时间转换
 		Date comeInDate = productInfoPO.getComeInDate();
@@ -150,11 +168,17 @@ public class ProductServiceImpl implements ProductService {
 		productInfoVO.setSpec(productInfoPO.getSpec());
 		productInfoVO.setReferencePrice(productInfoPO.getReferencePrice());
 		productInfoVO.setClassify(productInfoPO.getClassify());
-		productInfoVO.setClassifyName(productInfoPO.getProductClass().getClassName());
+		if(productInfoPO.getProductClass() != null) {
+			productInfoVO.setClassifyName(productInfoPO.getProductClass().getClassName());
+		}
 		productInfoVO.setProperty(productInfoPO.getProperty());
-		productInfoVO.setPropertyName(productInfoPO.getProductProperty().getPropertyName());
+		if(productInfoPO.getProductProperty() != null) {
+			productInfoVO.setPropertyName(productInfoPO.getProductProperty().getPropertyName());
+		}
 		productInfoVO.setEffect(productInfoPO.getEffect());
-		productInfoVO.setEffectName(productInfoPO.getProductEffect().getEffectName());
+		if(productInfoPO.getProductEffect() != null) {
+			productInfoVO.setEffectName(productInfoPO.getProductEffect().getEffectName());
+		}
 		productInfoVO.setDesc(productInfoPO.getDesc());
 		//肤质
 		if(StringUtils.isNotBlank(productInfoPO.getSkinTexture())) {
@@ -164,20 +188,16 @@ public class ProductServiceImpl implements ProductService {
 			}
 		}
 		//封面图片地址
-		productInfoVO.setCoverImage(AppSetting.PRODUCT_COVER_SAVED_PATH+productInfoPO.getCover());
+		productInfoVO.setCoverImage(AppSetting.APP_ROOT+AppSetting.PRODUCT_COVER_SAVED_PATH+productInfoPO.getCover());
 		//产品图片地址
 		List<ProductPicture> pictures = productInfoPO.getPictures();
 		List<String> pictrueUrls = new ArrayList<>();
-		for (ProductPicture productPicture : pictures) {
-			pictrueUrls.add(AppSetting.PRODUCT_PICTURES_SAVED_PATH + productPicture.getPictureUrl());
+		if(pictures != null) {
+			for (ProductPicture productPicture : pictures) {
+				pictrueUrls.add(AppSetting.APP_ROOT+AppSetting.PRODUCT_PICTURES_SAVED_PATH + productPicture.getPictureUrl());
+			}
 		}
 		productInfoVO.setProductImages(pictrueUrls);
 		return productInfoVO;
-	}
-
-	@Override
-	public boolean productIsExist(Long productId) {
-		ProductInfo productInfo = productInfoMapper.selectByPrimaryKey(productId);
-		return productInfo != null;
 	}
 }

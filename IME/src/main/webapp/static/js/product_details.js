@@ -46,6 +46,7 @@ $(document).ready(function() {
   var moveTime = 500;
   var moveInterval = 20;
   var speed = oneDistance / (moveTime / moveInterval);
+  var pause = false;
 
   /**
 	 * [设置缩略图图片高度适应外层div]
@@ -62,13 +63,17 @@ $(document).ready(function() {
       }
     }
     imgSelectors.hover(function() {
+	  clearTimeout(autoTimer);
       clearTimeout(mouseTimer);
+      pause = true;
       var index = $(this).index();
       mouseTimer = setTimeout(function() {
         currentImg = index;
         showImg(index);
       }, 1000);
     }, function() {
+      pause = false;
+      autoPlay();
       clearTimeout(mouseTimer);
     });
   }
@@ -140,7 +145,6 @@ $(document).ready(function() {
 	 *            index [第几张]
 	 */
   function showImg(index) {
-    clearTimeout(autoTimer);
     imgDivs.removeClass();
     imgDivs.eq(index).addClass("current-img");
     imgSelectors.removeClass();
@@ -153,6 +157,9 @@ $(document).ready(function() {
 	 * [自动播放]
 	 */
   function autoPlay() {
+	if(pause){
+		return;
+	}
     autoTimer = setTimeout(function() {
       currentImg++;
       if (currentImg >= imgCount) {

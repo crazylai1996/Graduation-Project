@@ -15,6 +15,20 @@ public interface ProductInfoMapper {
     int updateByPrimaryKey(ProductInfo record);
     
     //我是分割线
-    //根据ID查找产品详情信息
+    /**
+     * 根据ID查找产品详情信息
+     * @param productId
+     * @return
+     * @author: laiminghai
+     * @datetime: 2018年5月17日 下午10:32:16
+     */
     ProductInfo findProductInfoById(Long productId);
+    /**
+     * 
+     * @param productIds
+     * @return
+     * @author: laiminghai
+     * @datetime: 2018年5月17日 下午10:32:03
+     */
+    List<ProductInfo> findMoreProductInfoByIds(List<Long> productIds);
 }

@@ -226,7 +226,7 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		userInfoVO.setIntroduction(userInfo.getIntroduction());
-		userInfoVO.setPortrait(AppSetting.PORTRAIT_SAVED_PATH+userInfo.getPortrait());
+		userInfoVO.setPortrait(AppSetting.APP_ROOT+AppSetting.PORTRAIT_SAVED_PATH+userInfo.getPortrait());
 		userInfoVO.setPhone(userInfo.getPhone());
 		userInfoVO.setEmail(userInfo.getEmail());
 		userInfoVO.setMembershipPoint(userInfo.getMembershipPoint());

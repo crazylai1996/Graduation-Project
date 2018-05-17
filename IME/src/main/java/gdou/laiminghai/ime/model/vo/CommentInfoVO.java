@@ -1,6 +1,7 @@
 package gdou.laiminghai.ime.model.vo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 评论心得VO类
@@ -9,6 +10,10 @@ import java.util.Date;
  * @datetime: 2018年5月17日 上午10:19:36
  */
 public class CommentInfoVO {
+	/**
+	 * 心得编号 
+	 */
+	private Long commentId;
 	/**
 	 * 用户ID
 	 */
@@ -44,6 +49,26 @@ public class CommentInfoVO {
     
     //我是分割线，下面是拓展属性
     /**
+     * 上一篇心得ID
+     */
+    private Long lastCommentId;
+    /**
+     * 上一篇心得标题
+     */
+    private String lastCommentTitle;
+    /**
+     * 下一篇心得ID
+     */
+    private Long nextCommentId;
+    /**
+     * 下一篇心得标题
+     */
+    private String nextCommentTitle;
+    /**
+     * 用户最近三条心得记录
+     */
+    private List<ProductInfoVO> productInfoVOs;
+    /**
      * 点击量
      */
     private Integer readCount;
@@ -52,6 +77,12 @@ public class CommentInfoVO {
      */
     private Integer upCount;
     
+	public Long getCommentId() {
+		return commentId;
+	}
+	public void setCommentId(Long commentId) {
+		this.commentId = commentId;
+	}
 	public Long getUserId() {
 		return userId;
 	}
@@ -100,6 +131,36 @@ public class CommentInfoVO {
 	public void setContentHtml(String contentHtml) {
 		this.contentHtml = contentHtml;
 	}
+	public Long getLastCommentId() {
+		return lastCommentId;
+	}
+	public void setLastCommentId(Long lastCommentId) {
+		this.lastCommentId = lastCommentId;
+	}
+	public String getLastCommentTitle() {
+		return lastCommentTitle;
+	}
+	public void setLastCommentTitle(String lastCommentTitle) {
+		this.lastCommentTitle = lastCommentTitle;
+	}
+	public Long getNextCommentId() {
+		return nextCommentId;
+	}
+	public void setNextCommentId(Long nextCommentId) {
+		this.nextCommentId = nextCommentId;
+	}
+	public String getNextCommentTitle() {
+		return nextCommentTitle;
+	}
+	public void setNextCommentTitle(String nextCommentTitle) {
+		this.nextCommentTitle = nextCommentTitle;
+	}
+	public List<ProductInfoVO> getProductInfoVOs() {
+		return productInfoVOs;
+	}
+	public void setProductInfoVOs(List<ProductInfoVO> productInfoVOs) {
+		this.productInfoVOs = productInfoVOs;
+	}
 	public Integer getReadCount() {
 		return readCount;
 	}
@@ -115,9 +176,12 @@ public class CommentInfoVO {
 	
 	@Override
 	public String toString() {
-		return "CommentInfoVO [userId=" + userId + ", productId=" + productId + ", articleTitle=" + articleTitle
-				+ ", worthMark=" + worthMark + ", buyWay=" + buyWay + ", sendTime=" + sendTime + ", contentText="
-				+ contentText + ", contentHtml=" + contentHtml + ", readCount=" + readCount + ", upCount=" + upCount
-				+ "]";
+		return "CommentInfoVO [commentId=" + commentId + ", userId=" + userId + ", productId=" + productId
+				+ ", articleTitle=" + articleTitle + ", worthMark=" + worthMark + ", buyWay=" + buyWay + ", sendTime="
+				+ sendTime + ", contentText=" + contentText + ", contentHtml=" + contentHtml + ", lastCommentId="
+				+ lastCommentId + ", lastCommentTitle=" + lastCommentTitle + ", nextCommentId=" + nextCommentId
+				+ ", nextCommentTitle=" + nextCommentTitle + ", productInfoVOs=" + productInfoVOs + ", readCount="
+				+ readCount + ", upCount=" + upCount + "]";
 	}
+	
 }

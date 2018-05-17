@@ -32,4 +32,16 @@
     select <include refid="CommentPictureColumns"/>
     from commentpicture
   </select>
+  <!-- 根据心得ID删除图片关联 -->
+  <delete id="deleteByCommentId" parameterType="java.lang.Long">
+  	delete from commentpicture
+    where bCommentId = #{commentId,jdbcType=BIGINT}
+  </delete>
+  <!-- 根据心得ID查找图片关联 -->
+  <select id="selectByCommentId" parameterType="java.lang.Long" 
+  	resultMap="BaseResultMap">
+  	select <include refid="CommentPictureColumns"/>
+    from commentpicture
+    where bCommentId = #{commentId,jdbcType=BIGINT}
+  </select>
 </mapper>

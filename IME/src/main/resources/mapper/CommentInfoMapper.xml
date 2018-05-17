@@ -64,4 +64,28 @@
     select <include refid="CommentInfoColumns"/>
     from commentinfo
   </select>
+  <!-- 查找 用户上一篇心得 -->
+  <select id="findLastComment" parameterType="map" 
+  	resultMap="BaseResultMap">
+  	select bCommentId,vArticleTitle 
+  	from commentinfo 
+  	where bCommentId &lt; #{commentId} and bUserId = #{userId}
+  	order by bCommentId desc limit 1
+  </select>
+  <!-- 查找用户下一篇心得 -->
+  <select id="findNextComment" parameterType="map" 
+  	resultMap="BaseResultMap">
+  	select bCommentId,vArticleTitle 
+  	from commentinfo 
+  	where bCommentId &gt; #{commentId} and bUserId = #{userId}
+  	order by bCommentId asc limit 1
+  </select>
+  <!-- 查找 用户最近3个点评记录 -->
+  <select id="findThreeLastestCommentRecords" parameterType="map" 
+  	resultType="java.lang.Long">
+  	select distinct bProductId 
+  	from commentinfo 
+  	where bProductId != #{productId} and bUserId = #{userId}
+  	group by dSendTime desc limit 3
+  </select>
 </mapper>

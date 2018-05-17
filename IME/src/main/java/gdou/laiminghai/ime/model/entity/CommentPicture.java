@@ -6,6 +6,15 @@ public class CommentPicture {
     private Long commentId;
 
     private String pictureUrl;
+    
+    public CommentPicture() {
+    	
+    }
+    
+    public CommentPicture(Long commentId,String pictureUrl) {
+    	this.commentId = commentId;
+    	this.pictureUrl = pictureUrl;
+    }
 
     public Long getPictureId() {
         return pictureId;

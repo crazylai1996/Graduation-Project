@@ -1,5 +1,7 @@
 package gdou.laiminghai.ime.service;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import gdou.laiminghai.ime.model.vo.ProductInfoVO;
@@ -40,4 +42,12 @@ public interface ProductService {
 	 * @datetime: 2018年5月17日 下午3:26:55
 	 */
 	boolean productIsExist(Long productId);
+	/**
+	 * 查找多个化妆品信息
+	 * @param productIds
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月17日 下午10:29:24
+	 */
+	List<ProductInfoVO> findMoreProductInfo(List<Long> productIds);
 }

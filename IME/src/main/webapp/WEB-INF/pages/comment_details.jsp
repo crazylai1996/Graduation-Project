@@ -26,10 +26,10 @@
       <div class="main-container">
         <div class="current-pos">
           <a href="#">首页</a><span class="split-line"></span>
-          <a href="#">Green Skin格润丝</a><span class="split-line"></span>
-          <a href="#">Green Skin格润丝 花青素明眸眼霜</a><span class="split-line"></span>
+          <a href="#">${productInfoVO.brandName }</a><span class="split-line"></span>
+          <a href="#">${productInfoVO.productName }</a><span class="split-line"></span>
           <a href="#">全部点评</a><span class="split-line"></span>
-          <sapn class="title">【素】纯净呵护，告别冬日“高敏肌”</span>
+          <sapn class="title">${commentInfoVO.articleTitle }</span>
         </div>
         <div class="main-contents">
           <div class="main-left">
@@ -38,12 +38,12 @@
               <div class="user-info-wrapped">
                 <div class="user-info">
                   <div class="info-left">
-                    <a href="javascript:void(0);"><img src="static\img\portrait_test.jpg"></a>
+                    <a href="javascript:void(0);"><img src="${userInfoVO.portrait }"></a>
                   </div>
                   <div class="info-right">
-                    <p class="user-name">素颜暖笑0288</p>
-                    <p class="skin-type">肤质<a class="val" href="javascript:void(0);">中性</a></p>
-                    <p class="user-age">年龄<a class="val" href="javascript:void(0);">22</a></p>
+                    <p class="user-name">${userInfoVO.nickname }</p>
+                    <p class="skin-type">肤质<a class="val" href="javascript:void(0);">${userInfoVO.skinTexture }</a></p>
+                    <p class="user-age">年龄<a class="val" href="javascript:void(0);">${userInfoVO.age }</a></p>
                     <p class="comment-sum">点评<a class="val" href="javascript:void(0);">999</a></p>
                     <p class="user-love">关注<a class="val" href="javascript:void(0);">0</a></p>
                   </div>
@@ -54,7 +54,20 @@
                   TA的其它点评<a href="javascript:void(0);" class="her-more">更多点评&gt;&gt;</a>
                 </div>
                 <ul class="more-comment-list">
-                  <li>
+                  <c:choose>
+                  	<c:when test="${ commentInfoVO.productInfoVOs !=null and commentInfoVO.productInfoVOs.size()>0 }">
+                  		<c:forEach items="${commentInfoVO.productInfoVOs }" var="productInfoVO">
+                  			<li>
+			                    <img class="pic" src="${productInfoVO.coverImage }">
+			                    <p class="name"><a href="/IME/product/info/${productInfoVO.productId }.html">${productInfoVO.productName }</a></p>
+			                  </li>
+                  		</c:forEach>
+                  	</c:when>
+                  	<c:otherwise>
+                  		<span class="no-more-products">找不到TA的更多点评</span> 
+                  	</c:otherwise>
+                  </c:choose>
+                  <!-- <li>
                     <img class="pic" src="img\commodity_test.jpg">
                     <p class="name"><a href="javascript:void(0);">御泥坊美白嫩肤面膜(第四代升级版)</a></p>
                   </li>
@@ -65,7 +78,7 @@
                   <li>
                     <img class="pic" src="img\commodity_test.jpg">
                     <p class="name"><a href="javascript:void(0);">御泥坊美白嫩肤面膜(第四代升级版)</a></p>
-                  </li>
+                  </li>-->
                 </ul>
               </div>
             </div>
@@ -76,14 +89,14 @@
               <div class="product-info-wrapped">
                 <div class="product-info">
                   <div class="pi-left">
-                    <img src="img\commodity_test.jpg">
+                    <img src="${productInfoVO.coverImage }">
                   </div>
                   <div class="pi-right">
-                    <p><a href="javascript:void(0);">雅漾舒护活泉喷雾</a></p>
+                    <p><a href="javascript:void(0);">${productInfoVO.productName }</a></p>
                     <p>
-                      <a href="javascript:void(0);">122-185元</a><span class="split-line"></span>
-                      <a href="javascript:void(0);">150ml-300ml</a><span class="split-line"></span>
-                      <a href="javascript:void(0);">品牌专区</a>
+                      <a href="javascript:void(0);">${productInfoVO.referencePrice }元</a><span class="split-line"></span>
+                      <a href="javascript:void(0);">${productInfoVO.spec }</a><span class="split-line"></span>
+                      <a href="javascript:void(0);">${productInfoVO.brandName }</a>
                     </p>
                   </div>
                 </div>
@@ -91,9 +104,9 @@
               <!-- 产品信息结束 -->
               <!-- 心得标题开始 -->
               <div class="comment-title">
-                <h1>【素】纯净呵护，告别冬日“高敏肌”</h1>
+                <h1>${commentInfoVO.articleTitle }</h1>
                 <span>
-                  <input value="4" type="number"
+                  <input value="${commentInfoVO.worthMark }" type="number"
                      class="rating" min=0 max=5
                      step=0.5 data-size="xxs"
                     data-only-show="true" data-symbol="&#xe005;">
@@ -102,11 +115,12 @@
               <!-- 心得标题结束 -->
               <!-- 心得详情开始 -->
               <div class="comment-details">
-                <p>空气污染，生活压力，
+                <!-- <p>空气污染，生活压力，
 日光侵害，种种城市问题导致肌肤敏感情况愈演愈烈。
 敏感肌护肤专家雅漾，携手中国医师协会皮肤科医师分会（CDA），
 深入中国三大城市，对近5800名女性和近4400名男性进行敏感肌专业调查，
-发现46%的女性和31%的男性有肌肤敏感问题，盲目选择护肤品会让本就脆弱的肌肤受到添加剂（如防腐剂）的二次刺激。</p>
+发现46%的女性和31%的男性有肌肤敏感问题，盲目选择护肤品会让本就脆弱的肌肤受到添加剂（如防腐剂）的二次刺激。</p>-->
+				<p>${commentInfoVO.contentHtml }</p>
               </div>
               <!-- 心得详情结束 -->
               <!-- 心得操作 -->
@@ -117,10 +131,26 @@
               <!-- 上一篇、下一篇开始 -->
               <div class="lr_comment">
                 <span class="l_comment">
-                  上一篇：<a href="javascript:void(0);">雅漾舒护活泉喷雾</a>
+                  上一篇：<!-- <a href="javascript:void(0);">雅漾舒护活泉喷雾</a> -->
+                  <c:choose>
+                  	<c:when test="${!empty commentInfoVO.lastCommentId }">
+                  		<a href="/IME/comment/info/${commentInfoVO.lastCommentId }.html">${commentInfoVO.lastCommentTitle }</a>
+                  	</c:when>
+                  	<c:otherwise>
+                  		<a href="javascript:void(0);">(暂无上一篇)</a>
+                  	</c:otherwise>
+                  </c:choose>
                 </span>
                 <span class="r_comment">
-                  下一篇：<a href="javascript:void(0);">敏感和晒红的时候喷</a>
+                  下一篇：<!-- <a href="javascript:void(0);">敏感和晒红的时候喷</a> -->
+                  <c:choose>
+                  	<c:when test="${!empty commentInfoVO.nextCommentId }">
+                  		<a href="/IME/comment/info/${commentInfoVO.nextCommentId }.html">${commentInfoVO.nextCommentTitle }</a>
+                  	</c:when>
+                  	<c:otherwise>
+                  		<a href="javascript:void(0);">(暂无下一篇)</a>
+                  	</c:otherwise>
+                  </c:choose>
                 </span>
               </div>
               <!-- 上一篇、下一篇结束 -->
@@ -175,10 +205,10 @@
               <span class="current-label">当前点评的产品</span>
               <div class="base-info">
                 <h1 class="name">
-                  <a href="javascript:void(0);">雅漾舒护活泉喷雾</a>
+                  <a href="javascript:void(0);">${productInfoVO.productName }</a>
                 </h1>
                 <div class="pic-wrapped">
-                  <img src="img\commodity_test.jpg">
+                  <img src="${productInfoVO.coverImage }">
                 </div>
                 <span class="comment-sum">
                   共<font>12805</font>条点评

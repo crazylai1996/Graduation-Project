@@ -97,4 +97,16 @@
   		left join productpicture ppe on p.bProductId = ppe.bProductId
   	where p.bProductId = #{productId}
    </select>
+   <!-- 根据ID查找多个产品信息 -->
+   <select id="findMoreProductInfoByIds" resultMap="BaseResultMap">
+   	select p.bProductId,p.vProductName,p.vCover 
+   	from productinfo p 
+   	<if test="list != null and list.size > 0"> 
+   		where p.bProductId in 
+   		<foreach collection="list" item="productId" 
+   			open="(" close=")" separator=",">
+   			#{productId}
+   		</foreach>
+   	</if>
+   </select>
 </mapper>

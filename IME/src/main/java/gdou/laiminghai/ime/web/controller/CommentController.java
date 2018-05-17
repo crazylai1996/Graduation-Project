@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,7 +27,11 @@ import gdou.laiminghai.ime.common.setting.AppSetting;
 import gdou.laiminghai.ime.common.util.ResultDTOUtil;
 import gdou.laiminghai.ime.model.dto.ResultDTO;
 import gdou.laiminghai.ime.model.vo.CommentInfoVO;
+import gdou.laiminghai.ime.model.vo.ProductInfoVO;
+import gdou.laiminghai.ime.model.vo.UserInfoVO;
 import gdou.laiminghai.ime.service.CommentService;
+import gdou.laiminghai.ime.service.ProductService;
+import gdou.laiminghai.ime.service.UserService;
 
 /**
  * 使用心得控制器
@@ -47,6 +52,12 @@ public class CommentController {
 
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private ProductService productService;
+	
+	@Autowired
+	private UserService userService;
 
 	/**
 	 * 评论心得图片上传
@@ -154,8 +165,17 @@ public class CommentController {
 	 * @datetime: 2018年5月17日 下午4:20:58
 	 */
 	@RequestMapping("/info/{commentId}")
-	public ModelAndView getCommentDetails(Long commentId) {
+	public ModelAndView getCommentDetails(@PathVariable("commentId")Long commentId) {
 		ModelAndView mav = new ModelAndView("comment_details");
+		//心得详情
+		CommentInfoVO commentInfoVO = commentService.getCommentInfo(commentId);
+		mav.addObject("commentInfoVO", commentInfoVO);
+		//产品详情
+		ProductInfoVO productInfoVO = productService.getProductInfo(commentInfoVO.getProductId());
+		mav.addObject("productInfoVO",productInfoVO);
+		//心得用户详情
+		UserInfoVO userInfoVO = userService.getUserInfoById(commentInfoVO.getUserId());
+		mav.addObject("userInfoVO",userInfoVO);
 		return mav;
 	}
 }

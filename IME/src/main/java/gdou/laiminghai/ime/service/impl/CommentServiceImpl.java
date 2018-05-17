@@ -4,7 +4,9 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 
 import java.io.File;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
@@ -18,7 +20,10 @@ import gdou.laiminghai.ime.common.setting.AppSetting;
 import gdou.laiminghai.ime.common.util.FileUtil;
 import gdou.laiminghai.ime.dao.mapper.CommentInfoMapper;
 import gdou.laiminghai.ime.model.entity.CommentInfo;
+import gdou.laiminghai.ime.model.entity.CommentPicture;
 import gdou.laiminghai.ime.model.vo.CommentInfoVO;
+import gdou.laiminghai.ime.model.vo.ProductInfoVO;
+import gdou.laiminghai.ime.service.CommentPictureService;
 import gdou.laiminghai.ime.service.CommentService;
 import gdou.laiminghai.ime.service.ProductService;
 import net.coobird.thumbnailator.Thumbnails;
@@ -34,6 +39,9 @@ public class CommentServiceImpl implements CommentService {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private CommentPictureService commentPictureService;
 
 	@Override
 	public String saveCommentPicture(MultipartFile imgFile, String savedPath) {
@@ -84,14 +92,44 @@ public class CommentServiceImpl implements CommentService {
 		for (String pictureName : commentPictures) {
 			if (contentText.contains(pictureName)) {
 				FileUtil.moveFile(new File(tmpPath, pictureName), new File(savedPath, pictureName));
+				commentPictureService.addNewCommentPicture(
+						new CommentPicture(commentInfoPO.getCommentId(),pictureName));
 			}
 		}
 
 	}
 
+	@Override
+	public CommentInfoVO getCommentInfo(Long commentId) {
+		CommentInfo commentInfoPO = commentInfoMapper.selectByPrimaryKey(commentId);
+		CommentInfoVO commentInfoVO = commentInfoPO2CommentInfoVO(commentInfoPO);
+		//查找用户上一篇心得
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("commentId", commentInfoVO.getCommentId());
+		map.put("userId", commentInfoVO.getUserId());
+		CommentInfo lastCommentInfo = commentInfoMapper.findLastComment(map);
+		if(lastCommentInfo != null) {
+			commentInfoVO.setLastCommentId(lastCommentInfo.getCommentId());
+			commentInfoVO.setLastCommentTitle(lastCommentInfo.getArticleTitle());
+		}
+		//查找用户下一篇心得
+		CommentInfo nextCommentInfo = commentInfoMapper.findNextComment(map);
+		if(nextCommentInfo != null) {
+			commentInfoVO.setNextCommentId(nextCommentInfo.getCommentId());
+			commentInfoVO.setNextCommentTitle(nextCommentInfo.getArticleTitle());
+		}
+		//查找用户最近三个心得记录
+		map.put("productId", commentInfoVO.getProductId());
+		List<Long> productIds = commentInfoMapper.findThreeLastestCommentRecords(map);
+		if(productIds.size() > 0) {
+			List<ProductInfoVO> productInfoVOs = productService.findMoreProductInfo(productIds);
+			commentInfoVO.setProductInfoVOs(productInfoVOs);
+		}
+		return commentInfoVO;
+	}
+
 	/**
 	 * VO=>PO
-	 * 
 	 * @param commentInfoVO
 	 * @return
 	 * @author: laiminghai
@@ -106,5 +144,25 @@ public class CommentServiceImpl implements CommentService {
 		commentInfoPO.setBuyWay(commentInfoVO.getBuyWay());
 		commentInfoPO.setSendTime(new Date());
 		return commentInfoPO;
+	}
+	
+	/**
+	 * PO=>VO
+	 * @param commentInfoPO
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月17日 下午7:49:34
+	 */
+	private CommentInfoVO commentInfoPO2CommentInfoVO(CommentInfo commentInfoPO) {
+		CommentInfoVO commentInfoVO = new CommentInfoVO();
+		commentInfoVO.setUserId(commentInfoPO.getUserId());
+		commentInfoVO.setCommentId(commentInfoPO.getCommentId());
+		commentInfoVO.setProductId(commentInfoPO.getProductId());
+		commentInfoVO.setArticleTitle(commentInfoPO.getArticleTitle());
+		commentInfoVO.setWorthMark(commentInfoPO.getWorthMark());
+		commentInfoVO.setBuyWay(commentInfoPO.getBuyWay());
+		commentInfoVO.setSendTime(commentInfoPO.getSendTime());
+		commentInfoVO.setContentHtml(commentInfoPO.getContentHtml());
+		return commentInfoVO;
 	}
 }

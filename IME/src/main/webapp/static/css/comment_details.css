@@ -258,6 +258,16 @@ body {
   margin-top: 10px;
   padding-left: 18px;
 }
+.user-more-comments .more-comment-list .no-more-products {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  line-height: 160px;
+  text-align: center;
+  color: #999999;
+  font-size: 15px;
+  font-weight: bold;
+}
 .user-more-comments .more-comment-list li {
   display: inline-block;
   width: 112px;
