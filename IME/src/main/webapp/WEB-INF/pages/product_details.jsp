@@ -376,8 +376,8 @@
 					<div class="label">我来点评</div>
 					<hr>
 					<div class="title-input">
-						<span class="comment-title-label">标题：</span> <input
-							class="comment-title" type="text" name="">
+						<span class="comment-title-label">标题：</span> 
+						<input class="comment-title comment-title-input" type="text" name="">
 					</div>
 					<div class="rating-input">
 						<input type="hidden" class="product-rating">
@@ -452,6 +452,7 @@
 	</div>
 	<!-- 包含尾部 -->
 	<jsp:include page="common/page_footer.jsp" />
+	
 	<script type="text/javascript">
 		var basePath = "${basePath}";
 	</script>

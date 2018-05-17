@@ -82,6 +82,13 @@ public class FileUtil {
 		}
 	}
 	
+	/**
+	 * 移动文件
+	 * @param srcFile
+	 * @param destFile
+	 * @author: laiminghai
+	 * @datetime: 2018年5月17日 下午4:13:11
+	 */
 	public static void moveFile(File srcFile,File destFile) {
 		//目录不存在则创建
 		if (!destFile.getParentFile().exists()) {

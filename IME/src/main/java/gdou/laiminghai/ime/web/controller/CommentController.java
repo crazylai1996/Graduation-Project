@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -143,5 +144,18 @@ public class CommentController {
 		List<String> commentPictures = (List<String>)session.getAttribute("uploadPictures");
 		commentService.addNewComment(commentInfoVO, commentPictures, tmpPath, savedPath);
 		return ResultDTOUtil.success(null);
+	}
+	
+	/**
+	 * 获取使用心得详情信息
+	 * @param commentId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月17日 下午4:20:58
+	 */
+	@RequestMapping("/info/{commentId}")
+	public ModelAndView getCommentDetails(Long commentId) {
+		ModelAndView mav = new ModelAndView("comment_details");
+		return mav;
 	}
 }

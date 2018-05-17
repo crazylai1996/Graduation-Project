@@ -257,6 +257,7 @@ $(document).ready(function() {
   $(".add-btn").click(function(){
 	  var productId = $(".product-id").val();
 	  var count = editor.count('text');
+	  var articleTitle = $(".comment-title-input").val();
 	  var buyWay = $(".buy-way-input").val();
 	  var contentHtml = editor.html();
 	  var contentText = editor.text();
@@ -270,6 +271,10 @@ $(document).ready(function() {
 		  layer.msg("请输入20-500个字");
 		  return ;
 	  }
+	  if(articleTitle == ""){
+		  layer.msg("请填写心得标题");
+		  return ;
+	  }
 	  if(buyWay == ""){
 		  layer.msg("请选择购买方式");
 		  return ;
@@ -280,11 +285,11 @@ $(document).ready(function() {
 	  }
 	  var param = new Object();
 	  param.productId = productId;
+	  param.articleTitle = articleTitle;
 	  param.worthMark = productRating;
 	  param.buyWay = buyWay;
 	  param.contentText = contentText;
 	  param.contentHtml = contentHtml;
-	  
 	  var postUrl = basePath + "comment/new.do";
 	  $.ajax({
 		  url: postUrl,
