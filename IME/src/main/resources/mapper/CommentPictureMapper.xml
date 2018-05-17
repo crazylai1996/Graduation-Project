@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gdou.laiminghai.ime.dao.mapper.CommentPictureMapper">
+  <resultMap id="BaseResultMap" type="CommentPicture">
+    <id column="lCommentPictureId" jdbcType="BIGINT" property="pictureId" />
+    <result column="bCommentId" jdbcType="BIGINT" property="commentId" />
+    <result column="vCommentPictureUrl" jdbcType="VARCHAR" property="pictureUrl" />
+  </resultMap>
+  <sql id="CommentPictureColumns">lCommentPictureId, bCommentId, vCommentPictureUrl</sql>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from commentpicture
+    where lCommentPictureId = #{pictureId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="CommentPicture">
+    insert into commentpicture (lCommentPictureId, bCommentId, vCommentPictureUrl
+      )
+    values (#{pictureId,jdbcType=BIGINT}, #{commentId,jdbcType=BIGINT}, #{pictureUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="CommentPicture">
+    update commentpicture
+    set bCommentId = #{commentId,jdbcType=BIGINT},
+      vCommentPictureUrl = #{pictureUrl,jdbcType=VARCHAR}
+    where lCommentPictureId = #{pictureId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select <include refid="CommentPictureColumns"/>
+    from commentpicture
+    where lCommentPictureId = #{pictureId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="CommentPictureColumns"/>
+    from commentpicture
+  </select>
+</mapper>
