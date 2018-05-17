@@ -3,6 +3,7 @@ package gdou.laiminghai.ime.web.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,7 +19,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
 
+import gdou.laiminghai.ime.common.exception.ServiceException;
+import gdou.laiminghai.ime.common.exception.ServiceResultEnum;
 import gdou.laiminghai.ime.common.setting.AppSetting;
+import gdou.laiminghai.ime.common.util.ResultDTOUtil;
+import gdou.laiminghai.ime.model.dto.ResultDTO;
+import gdou.laiminghai.ime.model.vo.CommentInfoVO;
 import gdou.laiminghai.ime.service.CommentService;
 
 /**
@@ -56,13 +62,20 @@ public class CommentController {
 		HttpSession session = request.getSession();
 		String savedPath = session.getServletContext().getRealPath("/" + AppSetting.COMMENT_PICTURE_TMP_PATH);
 		JSONObject resultJSON = new JSONObject();
+		String message = "";
+		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
+		// 登录失效
+		if (userInfoMap == null) {
+			resultJSON.put("error", 1);
+			resultJSON.put("message", "未登录，请先登录");
+			return resultJSON;
+		}
 		//允许的上传格式
 		List<String> extList = Arrays.asList(AppSetting.COMMENT_PICTURE_FORMAT.split(","));
 		//上传的文件格式
 		String originalFilename = imgFile.getOriginalFilename();
 		String extName = originalFilename.substring(originalFilename.lastIndexOf(".") + 1).toLowerCase();
 		Long fileSize = imgFile.getSize();
-		String message = "";
 		//文件格式限制 
 		if(!extList.contains(extName)) {
 			resultJSON.put("error", 1);
@@ -98,5 +111,37 @@ public class CommentController {
 			resultJSON.put("message", message);
 		}
 		return resultJSON;
+	}
+	
+	/**
+	 * 添加使用心得
+	 * @param commentInfoVO
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月17日 上午10:33:39
+	 */
+	@ResponseBody
+	@RequestMapping("/new.do")
+	public ResultDTO addComment(CommentInfoVO commentInfoVO) {
+		logger.debug("添加使用心得表单参数："+commentInfoVO.toString());
+		// 获取用户登录信息
+		HttpSession session = request.getSession();
+		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
+		// 登录失效
+		if (userInfoMap == null) {
+			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+		}
+		//表单信息未提供
+		if(commentInfoVO == null || commentInfoVO.getProductId() == null) {
+			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);
+		}
+		String tmpPath = session.getServletContext().getRealPath("/" + AppSetting.COMMENT_PICTURE_TMP_PATH);
+		String savedPath = session.getServletContext().getRealPath("/" + AppSetting.COMMENT_PICTURE_SAVED_PATH);
+		//获取用户ID
+		Long userId = (Long)userInfoMap.get("userId");
+		commentInfoVO.setUserId(userId);
+		List<String> commentPictures = (List<String>)session.getAttribute("uploadPictures");
+		commentService.addNewComment(commentInfoVO, commentPictures, tmpPath, savedPath);
+		return ResultDTOUtil.success(null);
 	}
 }

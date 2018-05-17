@@ -32,4 +32,12 @@ public interface ProductService {
 	 * @datetime: 2018年5月16日 上午10:12:37
 	 */
 	ProductInfoVO getProductInfo(Long productId);
+	/**
+	 * 判断产品是否存在
+	 * @param productId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月17日 下午3:26:55
+	 */
+	boolean productIsExist(Long productId);
 }

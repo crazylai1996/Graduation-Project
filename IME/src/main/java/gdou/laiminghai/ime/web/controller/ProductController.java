@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import gdou.laiminghai.ime.common.exception.ServiceException;
 import gdou.laiminghai.ime.common.exception.ServiceResultEnum;
 import gdou.laiminghai.ime.common.setting.AppSetting;
+import gdou.laiminghai.ime.common.statics.BuyWayEnum;
 import gdou.laiminghai.ime.common.statics.SkinTextureEnum;
 import gdou.laiminghai.ime.common.util.EnumUtil;
 import gdou.laiminghai.ime.common.util.ResultDTOUtil;
@@ -128,6 +129,9 @@ public class ProductController {
 		ProductInfoVO productInfoVO = productService.getProductInfo(productId);
 		logger.debug(productInfoVO.toString());
 		mav.addObject("productInfoVO", productInfoVO);
+		//购买方式
+		List<SelectItemVO> buyWays = EnumUtil.toList(BuyWayEnum.class);
+		mav.addObject("buyWays",buyWays);
 		return mav;
 	}
 }

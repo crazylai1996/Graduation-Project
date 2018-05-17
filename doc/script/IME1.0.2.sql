@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018-05-15-星期二 22:50:18                      */
+/* Created on:     2018-05-17-星期四 00:32:49                      */
 /*==============================================================*/
 
 
@@ -153,7 +153,8 @@ create table CommentInfo
    bUserId              bigint,
    bProductId           bigint,
    vArticleTitle        varchar(100),
-   tContent             text,
+   tContentText         text,
+   tContentHtml         text,
    vArticlaMark         varchar(50),
    fWorthMark           float,
    vBuyWay              varchar(4),

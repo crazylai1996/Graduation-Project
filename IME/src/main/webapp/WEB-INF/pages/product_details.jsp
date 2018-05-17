@@ -12,6 +12,9 @@
 <link rel="stylesheet" href="static\plugins\star-rating\star-rating.css">
 <link rel="stylesheet" href="static\css\product_details.css" />
 <link rel="stylesheet" href="static\css\bootstrap.min.css">
+<link rel="stylesheet" href="static\plugins\layui\css\layui.css"/>
+<script type="text/javascript" src="static\plugins\layui\layui.all.js"></script>
+<link rel="stylesheet" href="static\plugins\BeAlert\BeAlert.css"/>
 <link rel="stylesheet"
 	href="static\plugins\kindeditor\themes\default\default.css">
 </head>
@@ -31,6 +34,7 @@
 			<hr>
 			<!-- 产品信息 -->
 			<div class="product-container">
+				<input class="product-id" type="hidden" value="${productInfoVO.productId }">
 				<!-- 产品图片展示 -->
 				<div class="product-images-container">
 					<div class="image-display">
@@ -378,14 +382,18 @@
 					<div class="rating-input">
 						<input type="hidden" class="product-rating">
 						<span class="comment-rating-label">性价评分：</span> <input value="0"
-							type="number" class="rating" min=0 max=5 step=0.5 data-size="xs"
+							type="number" class="rating product-rating-input" min=0 max=5 step=1 data-size="xs"
 							data-symbol="&#xe005;">
 						<div class="buy-way">
+							<input type="hidden" class="buy-way-input">
 							<span class="buy-way-title">购买方式</span>
 							<ul class="buy-way-sel more-sel">
-								<li>天猫商城</li>
+								<c:forEach items="${buyWays }" var="buyWay">
+									<li data-code="${buyWay.code }">${buyWay.name }</li>
+								</c:forEach>
+								<!-- <li>天猫商城</li>
 								<li>京东商城</li>
-								<li>其他方式</li>
+								<li>其他方式</li> -->
 							</ul>
 						</div>
 					</div>
@@ -396,7 +404,7 @@
           </textarea>
 					<!-- 评论添加按钮 -->
 					<div class="comment-add-btn">
-						<a href="javascript:void(0);" class="add-btn">写好了</a>
+						<span class="word-count-wrapped">当前字数：<span class="word-count">0</span></span><a href="javascript:void(0);" class="add-btn">写好了</a>
 					</div>
 				</div>
 			</div>
@@ -453,6 +461,7 @@
 		src="static\plugins\kindeditor\kindeditor-all-min.js"></script>
 	<script type="text/javascript"
 		src="static\plugins\kindeditor\lang\zh-CN.js"></script>
+	<script type="text/javascript" src="static\plugins\BeAlert\BeAlert.js"></script>
 	<script src="static\js\product_details.js"></script>
 </body>
 

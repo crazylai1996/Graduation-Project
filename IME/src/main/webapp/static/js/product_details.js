@@ -1,3 +1,4 @@
+var laydate = layui.laydate, layer = layui.layer;
 $(document).ready(function() {
   var currentImg = 0;
   var mouseTimer;
@@ -61,7 +62,7 @@ $(document).ready(function() {
       }
     }
     imgSelectors.hover(function() {
-    	clearTimeout(autoTimer);
+      clearTimeout(mouseTimer);
       var index = $(this).index();
       mouseTimer = setTimeout(function() {
         currentImg = index;
@@ -134,7 +135,7 @@ $(document).ready(function() {
 
   /**
 	 * [显示第几张图片]
-	 * 
+	 *
 	 * @param {[type]}
 	 *            index [第几张]
 	 */
@@ -158,7 +159,7 @@ $(document).ready(function() {
         currentImg = 0;
       }
       showImg(currentImg);
-    }, 4000);
+    }, 5000);
   }
 
   /**
@@ -200,13 +201,14 @@ $(document).ready(function() {
     e.stopPropagation();
   });
   $(".buy-way-sel li").click(function(){
+	$(".buy-way-input").val($(this).data("code"));
     $(".buy-way-title").html($(this).text());
   });
 
   $(document).click(function(){
     $(".more-sel").hide();
   });
-  
+
   /**
    * 加载富文本编辑器
    */
@@ -222,7 +224,7 @@ $(document).ready(function() {
           allowPreviewEmoticons: false,
           fullscreenShortcut: true,
           items: [
-            'source', 'undo', 'redo', 'plainpaste', 'wordpaste', 'clearhtml', 'quickformat',
+            'undo', 'redo', 'plainpaste', 'wordpaste', 'clearhtml', 'quickformat',
             'selectall', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor',
             'bold', 'italic', 'underline', 'hr', 'removeformat', '|', 'justifyleft', 'justifycenter',
             'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'link', 'image',
@@ -236,7 +238,7 @@ $(document).ready(function() {
           },
           afterChange: function() {
             //富文本输入区域的改变事件，一般用来编写统计字数等判断
-//             K('.word_count1').html("最多20000个字符,已输入" + this.count() + "个字符");
+             $(".word-count").html(this.count('text'));
           },
           afterUpload: function(url) {
             //上传图片后的代码
@@ -248,15 +250,86 @@ $(document).ready(function() {
           allowFileUpload: false
         });
   });
-  
+
   /**
 	 * 添加按钮
 	 */
   $(".add-btn").click(function(){
+	  var productId = $(".product-id").val();
 	  var count = editor.count('text');
+	  var buyWay = $(".buy-way-input").val();
 	  var contentHtml = editor.html();
 	  var contentText = editor.text();
 	  var productRating = $(".product-rating").val();
+	  //字数判断 
+	  if(count <= 0){
+		  layer.msg("请填写心得内容");
+		  return ;
+	  }
+	  if(count <20 || count > 800){
+		  layer.msg("请输入20-500个字");
+		  return ;
+	  }
+	  if(buyWay == ""){
+		  layer.msg("请选择购买方式");
+		  return ;
+	  }
+	  if(productRating == ""){
+		  layer.msg("请选择你的性价评分");
+		  return ;
+	  }
+	  var param = new Object();
+	  param.productId = productId;
+	  param.worthMark = productRating;
+	  param.buyWay = buyWay;
+	  param.contentText = contentText;
+	  param.contentHtml = contentHtml;
+	  
+	  var postUrl = basePath + "comment/new.do";
+	  $.ajax({
+		  url: postUrl,
+		  data: param,
+		  type: "POST",
+		  dataType: "json",
+		  success: function(result){
+			  console.log(JSON.stringify(result));
+			  if(result.success){
+					alert("发表成功",
+		  					"",
+		  					function(){
+		  						//确认按钮回调
+								location.reload();
+		  					},
+		  					{type:'success',confirmButtonText: '好的'});
+				}else{
+					var title = "发表失败";
+		  			var tips = "";
+		  			var callback = function(){
+
+		  			};
+		  			if(result.code == 207){
+		  				tips = "登录失效，请重新登录";
+		  				callback = function(){
+		  					var redirectUrl = window.location.href;
+		  					$.get(basePath+"user/login",{target:"login",redirectUrl:redirectUrl},function(data,status){
+		  						$(document.body).append("<div class='login-popup-container'>"+data+"</div>");
+		  						$("html").css("overflow-y","hidden");
+		  					});
+		  				}
+		  			}else if(result.code == 208){
+		  				tips = "非法请求";
+		  			}else if(result.code == 303){
+		  				tips = "产品不存在或已下架";
+		  			}else{
+		  				tips = "未知错误";
+		  			}
+		  			alert(title,
+							tips,
+							callback,
+							{type:'error',confirmButtonText: '好的'});
+				}
+		  }
+	  });
   });
- 
+
 });

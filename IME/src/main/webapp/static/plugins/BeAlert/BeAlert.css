@@ -17,9 +17,10 @@
     top: 50%;
     left: 50%;
     background-color: #fff;
+    border: .5px solid #e6cce6;
     border-radius: 5px;
     padding: 20px;
-    z-index: 10000;
+    z-index: 811214;
     font-family: 微软雅黑;
     font-size: 12px;
     text-align: center;

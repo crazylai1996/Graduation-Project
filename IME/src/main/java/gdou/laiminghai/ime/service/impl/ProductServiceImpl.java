@@ -174,4 +174,10 @@ public class ProductServiceImpl implements ProductService {
 		productInfoVO.setProductImages(pictrueUrls);
 		return productInfoVO;
 	}
+
+	@Override
+	public boolean productIsExist(Long productId) {
+		ProductInfo productInfo = productInfoMapper.selectByPrimaryKey(productId);
+		return productInfo != null;
+	}
 }

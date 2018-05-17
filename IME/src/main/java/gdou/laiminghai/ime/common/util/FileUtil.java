@@ -81,4 +81,14 @@ public class FileUtil {
 			oldFile.delete();
 		}
 	}
+	
+	public static void moveFile(File srcFile,File destFile) {
+		//目录不存在则创建
+		if (!destFile.getParentFile().exists()) {
+			destFile.getParentFile().mkdirs();
+		}
+		if(!srcFile.renameTo(destFile)) {
+			logger.error("文件移动出错："+srcFile.getAbsolutePath()+"=>"+destFile.getAbsolutePath());
+		}
+	}
 }

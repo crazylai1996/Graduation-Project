@@ -2,6 +2,12 @@ package gdou.laiminghai.ime.model.vo;
 
 import gdou.laiminghai.ime.model.entity.Area;
 
+/**
+ * 用户信息VO类
+ * @ClassName: UserInfoVO
+ * @author: laiminghai
+ * @datetime: 2018年5月17日 上午10:19:19
+ */
 public class UserInfoVO {
 	private Long userId;
 
