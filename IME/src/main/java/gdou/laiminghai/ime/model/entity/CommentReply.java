@@ -16,6 +16,9 @@ public class CommentReply {
     private Date replyTime;
 
     private Integer reportCount;
+    
+    //我是分割线，下面是关联属性
+    private UserInfo userInfo;
 
     public Long getReplyId() {
         return replyId;
@@ -72,4 +75,12 @@ public class CommentReply {
     public void setReportCount(Integer reportCount) {
         this.reportCount = reportCount;
     }
+
+	public UserInfo getUserInfo() {
+		return userInfo;
+	}
+
+	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
+	}
 }

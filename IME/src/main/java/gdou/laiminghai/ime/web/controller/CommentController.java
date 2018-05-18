@@ -166,7 +166,7 @@ public class CommentController {
 	 */
 	@RequestMapping("/info/{commentId}")
 	public ModelAndView getCommentDetails(@PathVariable("commentId")Long commentId) {
-		ModelAndView mav = new ModelAndView("comment_details");
+		ModelAndView mav = new ModelAndView("comment/comment_details");
 		//心得详情
 		CommentInfoVO commentInfoVO = commentService.getCommentInfo(commentId);
 		mav.addObject("commentInfoVO", commentInfoVO);

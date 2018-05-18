@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="common/base.jsp"%>
+<%@include file="../common/base.jsp"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -20,7 +20,7 @@
   <body>
   
   	<!-- 头部包含 -->
-	<jsp:include page="common/page_header.jsp" />
+	<jsp:include page="../common/page_header.jsp" />
 
     <div class="main-wrapped">
       <div class="main-container">
@@ -158,7 +158,8 @@
             <!-- 心得详情结束 -->
             <!-- 心得回复开始 -->
             <ul class="comment-reply-container">
-              <li class="reply-item">
+            	<%@include file="reply_fragment.jsp"%>
+              <!-- <li class="reply-item">
                 <div class="left">
                   <div class="portrait-wrapped">
                     <img src="img\portrait_test.jpg">
@@ -182,20 +183,24 @@
                     <hr>
                   </div>
                 </div>
-              </li>
+              </li>-->
             </ul>
             <!-- 心得回复结束 -->
             <!-- 心得回复框开始 -->
             <div class="reply-add-container">
-              <div class="label">
-                添加回复
-              </div>
-              <hr>
-              <textarea name="" rows="10" cols="88"></textarea>
-              <!-- 回复添加按钮 -->
-              <div class="reply-add-btn">
-                <a href="#" class="add-btn">写好了</a>
-              </div>
+              <form class="reply-form">
+	              <input name="articleId" type="hidden" class="comment-id" value="${commentInfoVO.commentId }">
+	              <input name="parentCommentId" type="hidden" class="parent-comment-id">
+	              <div class="label">
+	                添加回复
+	              </div>
+	              <hr>
+	              <textarea class="reply-detail-textarea" name="replyDetail" rows="10" cols="88"></textarea>
+	              <!-- 回复添加按钮 -->
+	              <div class="reply-add-btn">
+	                <a href="javascript:void(0);" class="add-btn">写好了</a>
+	              </div>
+              </form>
             </div>
             <!-- 心得回复框结束 -->
           </div>
@@ -227,7 +232,7 @@
       </div>
     </div>
 	<!-- 包含尾部 -->
-	<jsp:include page="common/page_footer.jsp" />
+	<jsp:include page="../common/page_footer.jsp" />
     <script src="static\js\jquery.js"></script>
     <script src="static\plugins\star-rating\star-rating.js"></script>
     <script type="text/javascript" src="static\plugins\BeAlert\BeAlert.js"></script>
