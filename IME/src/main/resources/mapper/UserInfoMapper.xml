@@ -29,7 +29,7 @@
   		javaType="Area" resultMap="gdou.laiminghai.ime.dao.mapper.AreaMapper.BaseResultMap"/>
   </resultMap>
   <sql id="UserInfoColumns">
-  	bUserId, vUserName, vPassword, cPasswordSalt, vNickname, cGender, vSkinTexture, 
+  	u.bUserId, vUserName, vPassword, cPasswordSalt, vNickname, cGender, vSkinTexture, 
     iBornYear, iUserAreaId, vIntroduction, vPortrait, cPhone, vEmail, cActivationCode, vUserState, 
     iMembershipPoint, iMemberLevel, dRegisterTime, dLastLoginTime
   </sql>
@@ -77,12 +77,12 @@
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select <include refid="UserInfoColumns"/>
-    from userinfo
+    from userinfo u
     where bUserId = #{userId,jdbcType=BIGINT}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select <include refid="UserInfoColumns"/>
-    from userinfo
+    from userinfo u
   </select>
   
   <!-- 我是分割线 -->

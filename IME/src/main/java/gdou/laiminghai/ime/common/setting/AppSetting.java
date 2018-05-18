@@ -84,6 +84,10 @@ public class AppSetting {
 	 * 单张图片大小限制
 	 */
 	public static Long COMMENT_PICTURE_SIZE;
+	/**
+	 * 分页查询每页记录数
+	 */
+	public static Integer NUMBER_PER_PAGE;
 
 	@Value("${app.root}")
 	public void setAppRoot(String appRoot) {
@@ -172,5 +176,10 @@ public class AppSetting {
 	@Value("${comment.picture.size}")
 	public void setCommentPictureSize(Long size) {
 		AppSetting.COMMENT_PICTURE_SIZE = size;
+	}
+	
+	@Value("${number.per.page}")
+	public void setNuberPerPage(Integer number) {
+		AppSetting.NUMBER_PER_PAGE = number;
 	}
 }

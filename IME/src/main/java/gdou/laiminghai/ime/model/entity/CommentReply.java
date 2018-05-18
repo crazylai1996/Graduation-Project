@@ -83,4 +83,12 @@ public class CommentReply {
 	public void setUserInfo(UserInfo userInfo) {
 		this.userInfo = userInfo;
 	}
+
+	@Override
+	public String toString() {
+		return "CommentReply [replyId=" + replyId + ", articleId=" + articleId + ", parentCommentId=" + parentCommentId
+				+ ", userId=" + userId + ", replyDetail=" + replyDetail + ", replyTime=" + replyTime + ", reportCount="
+				+ reportCount + ", userInfo=" + userInfo + "]";
+	}
+	
 }

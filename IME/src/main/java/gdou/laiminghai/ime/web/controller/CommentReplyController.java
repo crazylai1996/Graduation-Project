@@ -1,5 +1,6 @@
 package gdou.laiminghai.ime.web.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import gdou.laiminghai.ime.common.exception.ServiceException;
 import gdou.laiminghai.ime.common.exception.ServiceResultEnum;
 import gdou.laiminghai.ime.common.util.ResultDTOUtil;
+import gdou.laiminghai.ime.model.dto.PageResult;
 import gdou.laiminghai.ime.model.dto.ResultDTO;
 import gdou.laiminghai.ime.model.entity.CommentReplyVO;
 import gdou.laiminghai.ime.service.CommentReplyService;
@@ -63,5 +65,26 @@ public class CommentReplyController {
 		commentReplyVO.setUserId(userId);
 		CommentReplyVO commentReplyVO2 = commentReplyService.addNewCommentReply(commentReplyVO);
 		return ResultDTOUtil.success(commentReplyVO2);
+	}
+	
+	/**
+	 * 分页查询心得回复
+	 * @param pageNum
+	 * @param commentId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月18日 下午10:22:57
+	 */
+	@RequestMapping("/loadMoreReply.do")
+	public ModelAndView getCommentReplyByPage(Integer pageNum,Long commentId) {
+		ModelAndView mav = new ModelAndView("comment/reply_fragment");
+		// 查询心得评论
+		Map<String, Object> map = new HashMap<>();
+		map.put("pageNum", pageNum);
+		map.put("commentId", commentId);
+		PageResult<CommentReplyVO> pageResult = commentReplyService.findCommentReplyList(map);
+		logger.debug("分页查询到的心得回复："+pageResult.toString());
+		mav.addObject("pageResult", pageResult);
+		return mav;
 	}
 }

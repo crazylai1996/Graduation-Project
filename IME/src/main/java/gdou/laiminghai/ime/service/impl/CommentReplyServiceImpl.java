@@ -1,17 +1,25 @@
 package gdou.laiminghai.ime.service.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import gdou.laiminghai.ime.common.setting.AppSetting;
 import gdou.laiminghai.ime.common.statics.SkinTextureEnum;
 import gdou.laiminghai.ime.dao.mapper.CommentReplyMapper;
+import gdou.laiminghai.ime.model.dto.PageResult;
 import gdou.laiminghai.ime.model.entity.CommentReply;
 import gdou.laiminghai.ime.model.entity.CommentReplyVO;
 import gdou.laiminghai.ime.model.entity.UserInfo;
@@ -54,6 +62,22 @@ public class CommentReplyServiceImpl implements CommentReplyService {
 		return commentReplyVO2;
 	}
 
+	@Override
+	public PageResult<CommentReplyVO> findCommentReplyList(Map<String, Object> map) {
+		Integer pageNum = (Integer)map.get("pageNum");
+		PageHelper.startPage(pageNum, AppSetting.NUMBER_PER_PAGE);
+		List<CommentReply> commentReplyList = commentReplyMapper.selectByCondition(map);
+		PageInfo<CommentReply> pageInfo = new PageInfo<CommentReply>(commentReplyList);
+		List<CommentReplyVO> commentReplyVOList = new ArrayList<CommentReplyVO>();
+		for (CommentReply commentReply : commentReplyList) {
+			logger.debug(commentReply.toString());
+			commentReplyVOList.add(commentReplyPO2CommentReplyVO(commentReply));
+		}
+		PageResult<CommentReplyVO> pageResult = new PageResult<CommentReplyVO>(commentReplyVOList);
+		pageResult.setPages(pageInfo.getPages());
+		return pageResult;
+	}
+
 	/**
 	 * PO=>VO
 	 * @param commentReplyPO
@@ -61,7 +85,7 @@ public class CommentReplyServiceImpl implements CommentReplyService {
 	 * @author: laiminghai
 	 * @datetime: 2018年5月18日 下午12:21:38
 	 */
-	private CommentReplyVO commentReplyPO2CommentReplyVO(CommentReply commentReplyPO) {
+	public CommentReplyVO commentReplyPO2CommentReplyVO(CommentReply commentReplyPO) {
 		CommentReplyVO commentReplyVO = new CommentReplyVO();
 		commentReplyVO.setReplyId(commentReplyPO.getReplyId());
 		commentReplyVO.setArticleId(commentReplyPO.getArticleId());

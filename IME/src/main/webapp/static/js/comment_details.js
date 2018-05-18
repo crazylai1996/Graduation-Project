@@ -8,6 +8,24 @@ $(document).ready(function() {
       $input.rating();
   }
   
+  //加载更多回复
+  $(".load-more-btn").click(function(){
+	  var commentId = $(".comment-id").val();
+	  var pageNum = $(".comment-reply-container").data("pageNum") + 1;
+	  var pages = $(".comment-reply-container").data("pages");
+	  $(".comment-reply-container").data("pageNum",pageNum);
+	  var getUrl = basePath + "commentReply/loadMoreReply.do" + "?pageNum="+pageNum+"&commentId="+commentId;
+	  var index = layer.load(0, {shade: false});
+	  $.get(getUrl,function(result){
+		  $(".comment-reply-container").append(result);
+		  layer.close(index);
+		  if(pageNum == pages){
+			  $(".load-more-wrapped").html('<span class="no-more-load">没有更多了</span>');
+		  }
+	  });
+  });
+ 
+  
   //回复添加按钮
   $(".add-btn").click(function(){
 	  var replyDetail = $(".reply-detail-textarea").val();
@@ -15,8 +33,8 @@ $(document).ready(function() {
 		  layer.msg("回复内容不能留空");
 		  return ;
 	  }
-	  if(replyDetail.length < 10 || replyDetail.length > 200){
-		  layer.msg("请输入10-200个字");
+	  if(replyDetail.length < 10 || replyDetail.length > 150){
+		  layer.msg("请输入10-150个字");
 		  return ;
 	  }
 	  

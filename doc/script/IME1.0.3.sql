@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2018-05-17-星期四 17:50:33                      */
+/* Created on:     2018-05-18-星期五 23:26:00                      */
 /*==============================================================*/
 
 
@@ -19,8 +19,6 @@ drop table if exists AdminUserRole;
 drop table if exists Area;
 
 drop table if exists CommentInfo;
-
-drop table if exists CommentPicture;
 
 drop table if exists CommentReply;
 
@@ -170,18 +168,6 @@ create table CommentInfo
 auto_increment = 1;
 
 /*==============================================================*/
-/* Table: CommentPicture                                        */
-/*==============================================================*/
-create table CommentPicture
-(
-   lCommentPictureId    bigint not null auto_increment,
-   bCommentId           bigint,
-   vCommentPictureUrl   varchar(50),
-   primary key (lCommentPictureId)
-)
-auto_increment = 1;
-
-/*==============================================================*/
 /* Table: CommentReply                                          */
 /*==============================================================*/
 create table CommentReply
@@ -190,7 +176,7 @@ create table CommentReply
    bArticleId           bigint,
    bParentCommentId     bigint,
    bUserId              bigint,
-   vReplyDetail         varchar(200),
+   vReplyDetail         varchar(150),
    dReplyTime           datetime,
    iReportCount         int,
    primary key (bReplyId)

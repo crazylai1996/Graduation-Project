@@ -5,11 +5,19 @@
     <id column="bReplyId" jdbcType="BIGINT" property="replyId" />
     <result column="bArticleId" jdbcType="BIGINT" property="articleId" />
     <result column="bParentCommentId" jdbcType="BIGINT" property="parentCommentId" />
-    <result column="bUserId" jdbcType="BIGINT" property="userId" />
+    <result column="bReplyUserId" jdbcType="BIGINT" property="userId" />
     <result column="vReplyDetail" jdbcType="VARCHAR" property="replyDetail" />
     <result column="dReplyTime" jdbcType="TIMESTAMP" property="replyTime" />
     <result column="iReportCount" jdbcType="INTEGER" property="reportCount" />
   </resultMap>
+  <resultMap type="CommentReply" id="CommentReplyResult" extends="BaseResultMap">
+  	<association property="userInfo" column="bReplyUserId" 
+  		javaType="UserInfo" resultMap="gdou.laiminghai.ime.dao.mapper.UserInfoMapper.BaseResultMap"/>
+  </resultMap>
+  <sql id="CommentReplyColumns">
+  	bReplyId, bArticleId, bParentCommentId, cr.bUserId bReplyUserId, vReplyDetail, dReplyTime, 
+    iReportCount
+  </sql>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from commentreply
     where bReplyId = #{replyId,jdbcType=BIGINT}
@@ -33,14 +41,27 @@
     where bReplyId = #{replyId,jdbcType=BIGINT}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select bReplyId, bArticleId, bParentCommentId, bUserId, vReplyDetail, dReplyTime, 
-    iReportCount
-    from commentreply
+    select <include refid="CommentReplyColumns"/>
+    from commentreply cr
     where bReplyId = #{replyId,jdbcType=BIGINT}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select bReplyId, bArticleId, bParentCommentId, bUserId, vReplyDetail, dReplyTime, 
-    iReportCount
-    from commentreply
+    select <include refid="CommentReplyColumns"/>
+    from commentreply cr
   </select>
+  <sql id="selectByCondition_Condition">
+  	<where>
+  		<if test="commentId != null">
+  			cr.bArticleId = #{commentId}
+  		</if>
+  	</where>
+  </sql>
+  <!-- 条件查询心得回复 -->
+  <select id="selectByCondition" resultMap="CommentReplyResult" 
+  	parameterType="map">
+  	select <include refid="CommentReplyColumns"/>,
+  		<include refid="gdou.laiminghai.ime.dao.mapper.UserInfoMapper.UserInfoColumns"/>
+  	from commentreply cr left join userinfo u on cr.bUserId = u.bUserId  
+  	<include refid="selectByCondition_Condition"/> order by cr.dReplyTime desc
+ </select>
 </mapper>

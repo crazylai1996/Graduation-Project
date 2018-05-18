@@ -157,8 +157,8 @@
             </div>
             <!-- 心得详情结束 -->
             <!-- 心得回复开始 -->
-            <ul class="comment-reply-container">
-            	<%@include file="reply_fragment.jsp"%>
+            <ul class="comment-reply-container" data-page-num="1" data-pages="${pageResult.pages }">
+            	<jsp:include page="reply_fragment.jsp"/>
               <!-- <li class="reply-item">
                 <div class="left">
                   <div class="portrait-wrapped">
@@ -185,6 +185,17 @@
                 </div>
               </li>-->
             </ul>
+            <!-- 加载更多 -->
+            <div class="load-more-wrapped">
+            	<c:choose>
+            		<c:when test="${pageResult.pages > 1 }">
+            			<a class="load-more-btn" href="javascript:void(0);">加载更多</a>
+            		</c:when>
+            		<c:otherwise>
+            			<span class="no-more-load">没有更多了</span>
+            		</c:otherwise>
+            	</c:choose>
+            </div>
             <!-- 心得回复结束 -->
             <!-- 心得回复框开始 -->
             <div class="reply-add-container">

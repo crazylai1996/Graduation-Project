@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<c:forEach items="${commentReplyVOList }" var="commentReplyVO">
+<%@include file="../common/base.jsp"%>
+<c:forEach items="${pageResult.list }" var="commentReplyVO">
 	<li class="reply-item">
 		<div class="left">
 			<div class="portrait-wrapped">
