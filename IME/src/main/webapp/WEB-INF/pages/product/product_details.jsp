@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="common/base.jsp"%>
+<%@include file="../common/base.jsp"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -21,7 +21,7 @@
 
 <body>
 	<!-- 头部包含 -->
-	<jsp:include page="common/page_header.jsp" />
+	<jsp:include page="../common/page_header.jsp" />
 
 	<div class="main-wrapped">
 		<div class="main-container">
@@ -172,7 +172,7 @@
 							<hr>
 							<div class="product-ops">
 								<div class="btn-wrapped">
-									<a href="#" class="reply-btn">发表使用心得</a>
+									<a href="/IME/product/info/${productInfoVO.productId }.html#addComment" class="reply-btn">发表使用心得</a>
 								</div>
 								<div class="btn-wrapped">
 									<a href="#" class="love-btn"> <font>&#10010;关注&nbsp;&nbsp;</font>|&nbsp;&nbsp;0人
@@ -296,8 +296,9 @@
 						</span> <a href="#" class="search-btn">搜索</a>
 					</div>
 					<!-- 使用心得列表 -->
-					<ul class="comment-list">
-						<li class="comment-item">
+					<ul class="comment-list" data-page-num="1" data-pages="${pageResult.pages }">
+						<jsp:include page="../comment/comment_fragment.jsp"/>
+						<!-- <li class="comment-item">
 							<div class="left">
 								<div class="portrait-wrapped">
 									<img src="static\img\portrait_test.jpg">
@@ -369,10 +370,22 @@
 								</div>
 							</div>
 						</li>
+						<hr>-->
 					</ul>
+					<!-- 加载更多 -->
+		            <div class="load-more-wrapped">
+		            	<c:choose>
+		            		<c:when test="${pageResult.pages > 1 }">
+		            			<a class="load-more-btn" href="javascript:void(0);">加载更多</a>
+		            		</c:when>
+		            		<c:otherwise>
+		            			<span class="no-more-load">没有更多了</span>
+		            		</c:otherwise>
+		            	</c:choose>
+		            </div>
 				</div>
 				<!-- 评论框 -->
-				<div class="comment-add-container">
+				<div id="addComment" class="comment-add-container">
 					<div class="label">我来点评</div>
 					<hr>
 					<div class="title-input">
@@ -451,7 +464,7 @@
 		</div>
 	</div>
 	<!-- 包含尾部 -->
-	<jsp:include page="common/page_footer.jsp" />
+	<jsp:include page="../common/page_footer.jsp" />
 	
 	<script type="text/javascript">
 		var basePath = "${basePath}";

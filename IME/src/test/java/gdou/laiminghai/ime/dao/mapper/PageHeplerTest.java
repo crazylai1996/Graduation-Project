@@ -51,4 +51,10 @@ public class PageHeplerTest {
 		PageInfo<CommentReplyVO> pageInfo = new PageInfo<CommentReplyVO>(list2);
 		System.out.println(pageInfo.toString());
 	}
+	
+	@Test
+	public void testStringSub() {
+		String str = "中文";
+		System.out.println(str.substring(0, 1));
+	}
 }

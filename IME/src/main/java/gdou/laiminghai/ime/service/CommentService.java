@@ -1,9 +1,11 @@
 package gdou.laiminghai.ime.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import gdou.laiminghai.ime.model.dto.PageResult;
 import gdou.laiminghai.ime.model.vo.CommentInfoVO;
 
 /**
@@ -41,4 +43,12 @@ public interface CommentService {
 	 * @datetime: 2018年5月17日 下午7:07:29
 	 */
 	CommentInfoVO getCommentInfo(Long commentId);
+	/**
+	 * 条件查询心得列表
+	 * @param map
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月19日 上午12:43:05
+	 */
+	PageResult<CommentInfoVO> findCommentList(Map<String,Object> map);
 }

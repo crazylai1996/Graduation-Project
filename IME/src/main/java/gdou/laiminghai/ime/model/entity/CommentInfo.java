@@ -30,6 +30,9 @@ public class CommentInfo {
     private String contentText;
     
     private String contentHtml;
+    
+    //我是分割线，下面是关联属性
+    private UserInfo userInfo;
 
     public Long getCommentId() {
         return commentId;
@@ -141,5 +144,13 @@ public class CommentInfo {
 
 	public void setContentHtml(String contentHtml) {
 		this.contentHtml = contentHtml;
+	}
+
+	public UserInfo getUserInfo() {
+		return userInfo;
+	}
+
+	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
 	}
 }

@@ -182,10 +182,13 @@ $(document).ready(function() {
   /**
 	 * [加载评分插件]
 	 */
-  var $input = $('input.rating'), count = Object.keys($input).length;
-  if (count > 0) {
-      $input.rating();
+  function loadRating(){
+	  var $input = $('input.rating'), count = Object.keys($input).length;
+	  if (count > 0) {
+	      $input.rating();
+	  }
   }
+  loadRating();
   $('input.rating').on('rating.change', function(event, value, caption) {
 	    $(".product-rating").val(value);
 	});
@@ -258,6 +261,31 @@ $(document).ready(function() {
         });
   });
 
+  /**
+   * 加载更多
+   */
+  $(".load-more-btn").click(function(){
+	  var productId = $(".product-id").val();
+	  var pageNum = $(".comment-list").data("pageNum") + 1;
+	  var pages = $(".comment-list").data("pages");
+	  $(".comment-list").data("pageNum",pageNum);
+	  var getUrl = basePath + "comment/loadMoreComments.do" + "?pageNum="+pageNum+"&productId="+productId;
+	  if(pageNum > pages){
+		  layer.msg("没有更多啦")
+		  return ;
+	  }
+	  var index = layer.load(0, {shade: false});
+	  $.get(getUrl,function(result){
+		  $(".comment-list").append(result);
+		  loadRating();
+		  layer.close(index);
+		  if(pageNum >= pages){
+			  $(".load-more-wrapped").html('<span class="no-more-load">我是有底线的</span>');
+		  }
+	  });
+  });
+ 
+  
   /**
 	 * 添加按钮
 	 */

@@ -37,7 +37,7 @@ public class CommentInfoVO {
     /**
      * 发表时间
      */
-    private Date sendTime;
+    private String sendTime;
     /**
      * 纯文本内容
      */
@@ -48,6 +48,14 @@ public class CommentInfoVO {
     private String contentHtml;
     
     //我是分割线，下面是拓展属性
+    /**
+     * 心得用户信息
+     */
+    private UserInfoVO userInfo;
+    /**
+     * 购买方式描述
+     */
+    private String buyWayName;
     /**
      * 上一篇心得ID
      */
@@ -113,10 +121,10 @@ public class CommentInfoVO {
 	public void setBuyWay(String buyWay) {
 		this.buyWay = buyWay;
 	}
-	public Date getSendTime() {
+	public String getSendTime() {
 		return sendTime;
 	}
-	public void setSendTime(Date sendTime) {
+	public void setSendTime(String sendTime) {
 		this.sendTime = sendTime;
 	}
 	public String getContentText() {
@@ -130,6 +138,18 @@ public class CommentInfoVO {
 	}
 	public void setContentHtml(String contentHtml) {
 		this.contentHtml = contentHtml;
+	}
+	public UserInfoVO getUserInfo() {
+		return userInfo;
+	}
+	public void setUserInfo(UserInfoVO userInfo) {
+		this.userInfo = userInfo;
+	}
+	public String getBuyWayName() {
+		return buyWayName;
+	}
+	public void setBuyWayName(String buyWayName) {
+		this.buyWayName = buyWayName;
 	}
 	public Long getLastCommentId() {
 		return lastCommentId;
@@ -178,10 +198,10 @@ public class CommentInfoVO {
 	public String toString() {
 		return "CommentInfoVO [commentId=" + commentId + ", userId=" + userId + ", productId=" + productId
 				+ ", articleTitle=" + articleTitle + ", worthMark=" + worthMark + ", buyWay=" + buyWay + ", sendTime="
-				+ sendTime + ", contentText=" + contentText + ", contentHtml=" + contentHtml + ", lastCommentId="
-				+ lastCommentId + ", lastCommentTitle=" + lastCommentTitle + ", nextCommentId=" + nextCommentId
-				+ ", nextCommentTitle=" + nextCommentTitle + ", productInfoVOs=" + productInfoVOs + ", readCount="
-				+ readCount + ", upCount=" + upCount + "]";
+				+ sendTime + ", contentText=" + contentText + ", contentHtml=" + contentHtml + ", userInfo=" + userInfo
+				+ ", buyWayName=" + buyWayName + ", lastCommentId=" + lastCommentId + ", lastCommentTitle="
+				+ lastCommentTitle + ", nextCommentId=" + nextCommentId + ", nextCommentTitle=" + nextCommentTitle
+				+ ", productInfoVOs=" + productInfoVOs + ", readCount=" + readCount + ", upCount=" + upCount + "]";
 	}
 	
 }

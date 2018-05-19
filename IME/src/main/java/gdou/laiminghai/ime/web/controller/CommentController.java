@@ -197,4 +197,25 @@ public class CommentController {
 		mav.addObject("pageResult", pageResult);
 		return mav;
 	}
+	
+	/**
+	 * 分页查询产品使用心得
+	 * @param pageNum
+	 * @param productId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月19日 上午9:51:29
+	 */
+	@RequestMapping("/loadMoreComments.do")
+	public ModelAndView getCommentByPage(Integer pageNum,Long productId) {
+		ModelAndView mav = new ModelAndView("comment/comment_fragment");
+		//条件查询使用心得
+		Map<String, Object> map = new HashMap<>();
+		map.put("pageNum", pageNum);
+		map.put("commentId", productId);
+		PageResult<CommentInfoVO> pageResult = commentService.findCommentList(map);
+		logger.debug("分页查询到的心得回复："+pageResult.toString());
+		mav.addObject("pageResult", pageResult);
+		return mav;
+	}
 }

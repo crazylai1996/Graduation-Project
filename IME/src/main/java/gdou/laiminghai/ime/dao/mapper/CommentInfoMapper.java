@@ -40,4 +40,12 @@ public interface CommentInfoMapper {
      * @datetime: 2018年5月17日 下午10:22:12
      */
     List<Long> findThreeLastestCommentRecords(Map<String, Object> map);
+    /**
+     * 根据条件查询心得列表
+     * @param map
+     * @return
+     * @author: laiminghai
+     * @datetime: 2018年5月19日 上午12:46:20
+     */
+    List<CommentInfo> selectByCondition(Map<String,Object> map);
 }

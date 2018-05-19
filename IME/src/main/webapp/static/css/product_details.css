@@ -630,6 +630,7 @@ body {
  */
 .comment-contents {
   margin-top: 13px;
+  padding-bottom: 8px;
 }
 .comment-search-wrapped {
   width: 100%;
@@ -680,11 +681,15 @@ body {
   list-style: none;
   width: 100%;
   margin-top: 10px;
-  padding-bottom: 15px;
+  padding-bottom: 5px;
 }
 .comment-list li {
   height: 198px;
   padding-left: 5px;
+}
+.comment-list .show-details {
+  font-size: 12px;
+  color: #0092d2;
 }
 /*
  *使用心得条目
@@ -1023,4 +1028,29 @@ body {
 .same-class-rec .scr-item .count a {
   text-decoration: none;
   color: #cc99cc;
+}
+.load-more-wrapped {
+  width: 100%;
+  height: 28px;
+  text-align: center;
+  font-size: 13px;
+}
+.load-more-wrapped .load-more-btn {
+  display: inline-block;
+  width: 62px;
+  height: 28px;
+  line-height: 28px;
+  vertical-align: middle;
+  color: #ffffff;
+  font-weight: 550;
+  text-decoration: none;
+  background-color: #cc99cc;
+  border-radius: 2px;
+}
+.load-more-wrapped .load-more-btn:hover {
+  background-color: #be7ebe;
+}
+.load-more-wrapped .no-more-load {
+  line-height: 28px;
+  color: #999999;
 }

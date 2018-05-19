@@ -14,13 +14,17 @@ $(document).ready(function() {
 	  var pageNum = $(".comment-reply-container").data("pageNum") + 1;
 	  var pages = $(".comment-reply-container").data("pages");
 	  $(".comment-reply-container").data("pageNum",pageNum);
+	  if(pageNum > pages){
+		  layer.msg("没有更多啦")
+		  return ;
+	  }
 	  var getUrl = basePath + "commentReply/loadMoreReply.do" + "?pageNum="+pageNum+"&commentId="+commentId;
 	  var index = layer.load(0, {shade: false});
 	  $.get(getUrl,function(result){
 		  $(".comment-reply-container").append(result);
 		  layer.close(index);
 		  if(pageNum == pages){
-			  $(".load-more-wrapped").html('<span class="no-more-load">没有更多了</span>');
+			  $(".load-more-wrapped").html('<span class="no-more-load">我是有底线的</span>');
 		  }
 	  });
   });

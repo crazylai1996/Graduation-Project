@@ -1,5 +1,6 @@
 package gdou.laiminghai.ime.web.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,10 +24,13 @@ import gdou.laiminghai.ime.common.statics.BuyWayEnum;
 import gdou.laiminghai.ime.common.statics.SkinTextureEnum;
 import gdou.laiminghai.ime.common.util.EnumUtil;
 import gdou.laiminghai.ime.common.util.ResultDTOUtil;
+import gdou.laiminghai.ime.model.dto.PageResult;
 import gdou.laiminghai.ime.model.dto.ResultDTO;
 import gdou.laiminghai.ime.model.entity.CosmeticClass;
+import gdou.laiminghai.ime.model.vo.CommentInfoVO;
 import gdou.laiminghai.ime.model.vo.ProductInfoVO;
 import gdou.laiminghai.ime.model.vo.SelectItemVO;
+import gdou.laiminghai.ime.service.CommentService;
 import gdou.laiminghai.ime.service.CosmeticClassService;
 import gdou.laiminghai.ime.service.ProductService;
 
@@ -52,6 +56,9 @@ public class ProductController {
 	
 	@Autowired
 	private CosmeticClassService cosmeticClassService;
+	
+	@Autowired
+	private CommentService commentService;
 
 	/**
 	 * 跳转到添加新商品页面
@@ -62,7 +69,7 @@ public class ProductController {
 	 */
 	@RequestMapping("/new")
 	public ModelAndView goAddProduct() {
-		ModelAndView mav = new ModelAndView("product_add");
+		ModelAndView mav = new ModelAndView("product/product_add");
 		//化妆品品类
 		List<CosmeticClass> cosmeticClasses = cosmeticClassService.findAllClass();
 		//肤质列表
@@ -81,7 +88,7 @@ public class ProductController {
 	 */
 	@RequestMapping("/coverSelect")
 	public ModelAndView goCoverSelect() {
-		ModelAndView mav = new ModelAndView("cover_select");
+		ModelAndView mav = new ModelAndView("product/cover_select");
 		return mav;
 	}
 
@@ -125,13 +132,20 @@ public class ProductController {
 	 */
 	@RequestMapping("/info/{productId}")
 	public ModelAndView goProductDetails(@PathVariable("productId") Long productId) {
-		ModelAndView mav = new ModelAndView("product_details");
+		ModelAndView mav = new ModelAndView("product/product_details");
 		ProductInfoVO productInfoVO = productService.getProductInfo(productId);
 		logger.debug(productInfoVO.toString());
 		mav.addObject("productInfoVO", productInfoVO);
-		//购买方式
+		// 购买方式
 		List<SelectItemVO> buyWays = EnumUtil.toList(BuyWayEnum.class);
-		mav.addObject("buyWays",buyWays);
+		mav.addObject("buyWays", buyWays);
+		// 查询产品相关使用心得
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("productId", productId);
+		map.put("pageNum", 1);
+		PageResult<CommentInfoVO> pageResult = commentService.findCommentList(map);
+		System.out.println("分页结果："+pageResult.toString());
+		mav.addObject("pageResult", pageResult);
 		return mav;
 	}
 }

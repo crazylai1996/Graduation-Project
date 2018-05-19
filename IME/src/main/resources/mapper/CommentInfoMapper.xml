@@ -3,7 +3,7 @@
 <mapper namespace="gdou.laiminghai.ime.dao.mapper.CommentInfoMapper">
   <resultMap id="BaseResultMap" type="CommentInfo">
     <id column="bCommentId" jdbcType="BIGINT" property="commentId" />
-    <result column="bUserId" jdbcType="BIGINT" property="userId" />
+    <result column="bCommentUserId" jdbcType="BIGINT" property="userId" />
     <result column="bProductId" jdbcType="BIGINT" property="productId" />
     <result column="vArticleTitle" jdbcType="VARCHAR" property="articleTitle" />
     <result column="vArticlaMark" jdbcType="VARCHAR" property="articlaMark" />
@@ -17,8 +17,12 @@
     <result column="tContentText" jdbcType="LONGVARCHAR" property="contentText" />
     <result column="tContentHtml" jdbcType="LONGVARCHAR" property="contentHtml" />
   </resultMap>
+  <resultMap type="CommentInfo" id="CommentInfoResult" extends="BaseResultMap">
+  	<association property="userInfo" column="bCommentUserId" 
+  		javaType="UserInfo" resultMap="gdou.laiminghai.ime.dao.mapper.UserInfoMapper.BaseResultMap"/>
+  </resultMap>
   <sql id="CommentInfoColumns">
-  	bCommentId, bUserId, bProductId, vArticleTitle, vArticlaMark, fWorthMark, 
+  	bCommentId, ci.bUserId bCommentUserId, bProductId, vArticleTitle, vArticlaMark, fWorthMark, 
     vBuyWay, dSendTime, iArticleState, iReadCount, iLoveCount, iUpCount, tContentText,tContentHtml
   </sql>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
@@ -57,12 +61,12 @@
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select <include refid="CommentInfoColumns"/>
-    from commentinfo
+    from commentinfo ci
     where bCommentId = #{commentId,jdbcType=BIGINT}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select <include refid="CommentInfoColumns"/>
-    from commentinfo
+    from commentinfo ci
   </select>
   <!-- 查找 用户上一篇心得 -->
   <select id="findLastComment" parameterType="map" 
@@ -87,5 +91,20 @@
   	from commentinfo 
   	where bProductId != #{productId} and bUserId = #{userId}
   	group by dSendTime desc limit 3
+  </select>
+  <sql id="selectByCondition_Condition">
+  	<where>
+  		<if test="productId != null">
+  			ci.bProductId = #{productId}
+  		</if>
+  	</where>
+  </sql>
+  <!-- 根据条件查询使用心得列表 -->
+  <select id="selectByCondition" parameterType="map" 
+  	resultMap="CommentInfoResult">
+  	select <include refid="CommentInfoColumns"/> ,
+  		<include refid="gdou.laiminghai.ime.dao.mapper.UserInfoMapper.UserInfoColumns"/>
+  	from commentinfo ci left join userinfo u on ci.bUserId = u.bUserId 
+  	<include refid="selectByCondition_Condition"/> order by ci.dSendTime desc
   </select>
 </mapper>

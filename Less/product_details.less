@@ -609,6 +609,7 @@
  */
 .comment-contents:extend(.comment-analysis){
   margin-top: @div_margin;
+  padding-bottom: 8px;
 }
 .comment-list-title:extend(.analysis-title all){}
 .comment-search-wrapped{
@@ -673,11 +674,16 @@
 
   width: 100%;
   margin-top: 10px;
-  padding-bottom: 15px;
+  padding-bottom: 5px;
 
   li{
     height: 198px;
     padding-left: 5px;
+  }
+
+  .show-details{
+    font-size: 12px;
+    color: @link_color;
   }
 }
 /*
@@ -1099,5 +1105,39 @@
         color: @main_color;
       }
     }
+  }
+}
+.load-more-wrapped{
+  @_height: 28px;
+
+  width: 100%;
+  height: @_height;
+
+  text-align:center;
+  font-size: 13px;
+
+  .load-more-btn{
+    @_width: 62px;
+
+    display: inline-block;
+    width: @_width;
+    height: @_height;
+
+    line-height: @_height;
+    vertical-align: middle;
+    color: @white_color;
+    font-weight: 550;
+    text-decoration: none;
+
+    background-color: @main_color;
+    border-radius: 2px;
+
+    &:hover{
+      background-color: @main_strong_color;
+    }
+  }
+  .no-more-load{
+    line-height: @_height;
+    color: @desc_color;
   }
 }

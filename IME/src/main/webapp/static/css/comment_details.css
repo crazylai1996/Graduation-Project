@@ -417,7 +417,7 @@ body {
   list-style: none;
   width: 100%;
   margin-top: 26px;
-  padding-bottom: 15px;
+  padding-bottom: 5px;
 }
 .comment-reply-container li {
   height: 145px;
@@ -538,7 +538,7 @@ hr {
  * 添加回复框
  */
 .reply-add-container {
-  margin-top: 26px;
+  margin-top: 8px;
 }
 .reply-add-container .label {
   width: 100%;

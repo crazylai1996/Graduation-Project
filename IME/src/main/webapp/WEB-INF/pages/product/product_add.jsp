@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="common/base.jsp"%>
+<%@include file="../common/base.jsp"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -19,7 +19,7 @@
 
 <body>
   <!-- 头部包含 -->
-  <jsp:include page="common/page_header.jsp"/>
+  <jsp:include page="../common/page_header.jsp"/>
   
   <div class="main-wrapped">
     <div class="main-container">
@@ -193,7 +193,7 @@
     </div>
   </div>
 	<!-- 包含尾部 -->
- 	<jsp:include page="common/page_footer.jsp"/>
+ 	<jsp:include page="../common/page_footer.jsp"/>
 
  <script>
  	var basePath = "${basePath}";
