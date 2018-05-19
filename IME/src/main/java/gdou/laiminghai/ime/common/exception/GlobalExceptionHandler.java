@@ -47,7 +47,7 @@ public class GlobalExceptionHandler extends BaseExceptionHandler{
 			}
 		}else {//页面请求异常
 			if(e instanceof ServiceException) {
-				return handleViewException(request.getRequestURL().toString(), e.getMessage(), "");
+				return handleViewException(request.getRequestURL().toString(), e.getMessage(), "error/service_error");
 			}else {
 				logger.error("未知错误：",e);
 				return handleViewException(request.getRequestURL().toString(),  ServiceResultEnum.UNKONWN_ERROR.getMessage(), "");
@@ -68,7 +68,7 @@ public class GlobalExceptionHandler extends BaseExceptionHandler{
 	@ExceptionHandler(NoHandlerFoundException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public ModelAndView handle404Error(Exception e) {
-		 return new ModelAndView("");
+		 return new ModelAndView("error/404");
 	}
 	
 	

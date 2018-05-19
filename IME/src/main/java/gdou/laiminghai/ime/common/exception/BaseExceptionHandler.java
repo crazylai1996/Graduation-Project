@@ -31,7 +31,7 @@ public class BaseExceptionHandler {
 	protected ModelAndView handleViewException(String url, String errorMessage, String viewName) {        
         ModelAndView mav = new ModelAndView();       
         mav.addObject("url", url);     
-        mav.addObject("message", errorMessage);  
+        mav.addObject("errorMessage", errorMessage);  
         mav.setViewName(viewName);    
         
         return mav;   

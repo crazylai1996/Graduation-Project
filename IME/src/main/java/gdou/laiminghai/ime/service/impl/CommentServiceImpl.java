@@ -116,6 +116,10 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public CommentInfoVO getCommentInfo(Long commentId) {
 		CommentInfo commentInfoPO = commentInfoMapper.selectByPrimaryKey(commentId);
+		//心得不存在
+		if(commentInfoPO == null) {
+			throw new ServiceException(ServiceResultEnum.COMMENT_NOT_FOUND);
+		}
 		CommentInfoVO commentInfoVO = commentInfoPO2CommentInfoVO(commentInfoPO);
 		//查找用户上一篇心得
 		Map<String,Object> map = new HashMap<String,Object>();
