@@ -68,7 +68,7 @@ a:hover {
 	<div class="wrap">
 		<table>
 			<tr>
-				<td rowspan="7" class="error-ico"><img
+				<td rowspan="8" class="error-ico"><img
 					src="static/img/error.png" alt="又一个极简的错误页面"></td>
 				<td class="header">出错啦！当前页面找不到了</td>
 			</tr>
@@ -82,13 +82,16 @@ a:hover {
 				<td>敲错了网址；</td>
 			</tr>
 			<tr>
-				<td>没有访问权限；</td>
+				<td>或者没有访问权限；</td>
+			</tr>
+			<tr>
+				<td>当然，也可能是我们的错；</td>
 			</tr>
 			<tr>
 				<td class="op-tips">你可以：</td>
 			</tr>
 			<tr>
-				<td class="op-tips-a"><a href="${url }">重试</a>，或者回到<a href="/IME/">主页</a></td>
+				<td class="op-tips-a"><a href="${url }">重试</a>，或者不想试了，回到<a href="/IME/">主页</a></td>
 			</tr>
 		</table>
 	</div>

@@ -50,7 +50,7 @@ public class GlobalExceptionHandler extends BaseExceptionHandler{
 				return handleViewException(request.getRequestURL().toString(), e.getMessage(), "error/service_error");
 			}else {
 				logger.error("未知错误：",e);
-				return handleViewException(request.getRequestURL().toString(),  ServiceResultEnum.UNKONWN_ERROR.getMessage(), "");
+				return handleViewException(request.getRequestURL().toString(),  ServiceResultEnum.UNKONWN_ERROR.getMessage(), "error/service_error");
 			}
 		}
 		

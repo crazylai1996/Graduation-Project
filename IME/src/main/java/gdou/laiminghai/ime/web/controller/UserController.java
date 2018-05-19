@@ -60,15 +60,63 @@ public class UserController {
 	private AreaService areaService;
 
 	/**
-	 * 跳转到用户登录页面
+	 * ajax返回用户登录页面
 	 * 
 	 * @return
 	 * @author: laiminghai
 	 * @datetime: 2018年5月4日 下午8:42:59
 	 */
 	@RequestMapping("/login")
-	public ModelAndView goLogin() {
-		ModelAndView mav = new ModelAndView("login_or_signup");
+	public ModelAndView goAjaxLogin() {
+		ModelAndView mav = new ModelAndView("user/login_or_signup");
+		return mav;
+	}
+	
+	/**
+	 * 跳转到登录页面
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月19日 下午7:15:53
+	 */
+	@RequestMapping("/page/login")
+	public ModelAndView goPageLogin() {
+		ModelAndView mav = new ModelAndView("user/login");
+		return mav;
+	}
+	
+	/**
+	 * 跳转到注册页面
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月19日 下午7:53:25
+	 */
+	@RequestMapping("/page/register")
+	public ModelAndView goPageRegister() {
+		ModelAndView mav = new ModelAndView("user/register");
+		return mav;
+	}
+	
+	/**
+	 * 跳转到忘记密码页面
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月19日 下午10:25:12
+	 */
+	@RequestMapping("/page/forgetPssword")
+	public ModelAndView goForgetPassword() {
+		ModelAndView mav = new ModelAndView("user/forget_password");
+		return mav;
+	}
+	
+	/**
+	 * 忘记密码更改密码
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月19日 下午10:27:41
+	 */
+	@RequestMapping("/page/forgetPssword/updatePassword")
+	public ModelAndView goForgetPasswordStep2() {
+		ModelAndView mav = new ModelAndView("user/forget_password_step2");
 		return mav;
 	}
 
@@ -234,7 +282,7 @@ public class UserController {
 	 */
 	@RequestMapping("/updatePortrait")
 	public ModelAndView goUpdatePortrait() {
-		ModelAndView mav = new ModelAndView("update_portrait");
+		ModelAndView mav = new ModelAndView("user/update_portrait");
 		return mav;
 	}
 	
@@ -273,7 +321,7 @@ public class UserController {
 	 */
 	@RequestMapping("/info")
 	public ModelAndView getUserInfo() {
-		ModelAndView mav = new ModelAndView("user_info");
+		ModelAndView mav = new ModelAndView("user/user_info");
 		//获取用户登录信息
 		HttpSession session = request.getSession();
 		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");

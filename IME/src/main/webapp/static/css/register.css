@@ -1,0 +1,344 @@
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+p,
+blockquote,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #fff;
+  color: #555;
+  font-size: 14px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+td,
+th,
+caption {
+  font-size: 14px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  font-size: 100%;
+}
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+  font-style: normal;
+  font-weight: normal;
+}
+a {
+  color: #555;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+img {
+  border: none;
+}
+ol,
+ul,
+li {
+  list-style: none;
+}
+input,
+textarea,
+select,
+button {
+  font: 14px Verdana, Helvetica, Arial, sans-serif;
+}
+table {
+  border-collapse: collapse;
+}
+html {
+  overflow-y: scroll;
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.clearfix {
+  *zoom: 1;
+}
+body {
+  font-family: "微软雅黑";
+}
+.register-container {
+  position: relative;
+  width: 1000px;
+  height: 550px;
+  margin: 0 auto;
+}
+.register-label {
+  position: relative;
+  width: 100%;
+  height: 60px;
+}
+.register-label .logo-title img {
+  float: left;
+  height: 60px;
+}
+.register-label .left {
+  float: left;
+  line-height: 60px;
+  font-size: 24px;
+  font-weight: 500;
+  color: #1a1a1a;
+  vertical-align: middle;
+}
+.register-label .right {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  line-height: 60px;
+  font-size: 12px;
+  color: #0092d2;
+  text-decoration: none;
+}
+.register-label .right:hover {
+  text-decoration: underline;
+}
+/*
+ *弹出框
+ */
+.popup-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 450px;
+  height: 360px;
+  margin: auto;
+  background-color: #fff;
+}
+/*
+ *弹出表单
+ */
+.popup-contents {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 300px;
+  height: 310px;
+  margin: auto;
+}
+/*
+ *导航tab
+ */
+.navi-tab {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-bottom: 24px;
+  text-align: center;
+}
+.navi-tab li {
+  display: inline-block;
+  margin: 0 8px;
+  line-height: 23px;
+  text-align: center;
+}
+.navi-tab a {
+  line-height: 20px;
+  font-size: 18px;
+  color: #333333;
+  text-decoration: none;
+}
+/*
+ *当前选中
+ */
+.current-tab {
+  color: #1a1a1a !important;
+  border-bottom: 3px #be7ebe solid;
+}
+/*
+ *表单项
+ */
+.form-item {
+  position: relative;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.form-item .item-label {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  z-index: 12;
+  display: block;
+  padding: 0 3px;
+  font-size: 12px;
+  color: #333333;
+  background-color: #fff;
+  transition: all linear .2s;
+}
+.form-item .current-label {
+  top: -8px;
+  color: #be7ebe;
+}
+.form-item .long-input {
+  width: 100%;
+}
+.form-item .short-input {
+  width: 35%;
+}
+.form-item input {
+  padding: 9px 10px;
+  font-size: 13px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #cc99cc;
+  outline: none;
+  transition: border-color ease-in-out 0.2s;
+}
+.form-item input:focus {
+  border: 1px solid #be7ebe;
+}
+.form-item img,
+.form-item .get-msg-captcha {
+  float: right;
+  width: 30%;
+  height: 36px;
+  font-size: 13px;
+  vertical-align: bottom;
+}
+.form-item .captcha-img {
+  height: 34px;
+  border: 1px solid #cc99cc;
+  cursor: pointer;
+}
+.form-item .get-msg-captcha {
+  display: inline-block;
+  line-height: 35px;
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  background-color: #0092d2;
+}
+.form-item .to-get-btn {
+  background-color: #cccccc;
+  pointer-events: none;
+}
+/*
+ *表单操作选项
+ */
+.relative-op {
+  width: 100%;
+}
+.relative-op .op-left {
+  float: left;
+}
+.relative-op .op-right {
+  float: right;
+}
+.relative-op a {
+  font-size: 12px;
+  color: #1a1a1a;
+  text-decoration: none;
+  vertical-align: middle;
+}
+.relative-op a:hover {
+  color: #0092d2;
+  text-decoration: underline;
+}
+.relative-op .select-login-style {
+  text-decoration: none;
+}
+.relative-op .select-login-style:hover {
+  color: #be7ebe;
+  text-decoration: none;
+}
+.relative-op label {
+  margin-bottom: 0;
+  font-size: 12px;
+  color: #333333;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.relative-op input {
+  vertical-align: middle;
+  margin-right: 5px;
+  color: #1a1a1a;
+}
+/*
+ *登录提示
+ */
+.register-tips {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  clear: both;
+  color: #cc3333;
+  font-size: 12px;
+}
+/*
+ *登录按钮
+ */
+.register-btn {
+  width: 100%;
+  display: inline-block;
+  margin-top: 10px;
+  line-height: 40px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 2px;
+  background-color: #be7ebe;
+  background: -webkit-linear-gradient(#cc99cc, #be7ebe);
+  background: -o-linear-gradient(#cc99cc, #be7ebe);
+  background: -moz-linear-gradient(#cc99cc, #be7ebe);
+  background: linear-gradient(#cc99cc, #be7ebe);
+}
+.register-btn:hover {
+  background: -webkit-linear-gradient(bottom, #cc99cc, #be7ebe);
+  background: -o-linear-gradient(bottom, #cc99cc, #be7ebe);
+  background: -moz-linear-gradient(bottom, #cc99cc, #be7ebe);
+  background: linear-gradient(to top, #cc99cc, #be7ebe);
+}
+.register-btn:hover {
+  text-decoration: none;
+}
