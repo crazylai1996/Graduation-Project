@@ -13,67 +13,64 @@ $(document).ready(
 											+ "?timestamp="
 											+ new Date().getTime());});
 			});
+			var errorMessage = $(".error-tips").html();
+			if(errorMessage != ""){
+				$(".error-tips").css("opacity",1);
+			}
+			if($(".account-input").val() != ""){
+				toggleGetMsgButton();
+			}
+			
 		});
+function toggleGetMsgButton(){
+	$(".get-msg-captcha").addClass("to-get-btn");
+	var timeout = 60;
+	var text = $(".get-msg-captcha").text();
+	$(".get-msg-captcha").text(timeout + "秒后重新获取");
+	var timer = setInterval(function() {
+		timeout--;
+		$(".get-msg-captcha").text(timeout + "秒后重新获取");
+		if (timeout == 0) {
+			clearInterval(timer);
+			$(".get-msg-captcha").text(text);
+			$(".get-msg-captcha").removeClass("to-get-btn");
+		}
+	}, 1000);
+}
 
 // 短信验证码获取
 $(".get-msg-captcha").click(function() {
-	var _this = $(this);
-	var text = _this.text();
-
-	var phone = _this.parents("form").find("input[name='phone']").val();
-	// 校验手机号
+	var account = $(".account-input").val();
+	
 	// 是否为空
-	if (!phone) {
-		layer.msg("请输入手机号");
+	if (!account) {
+		layer.msg("手机号/邮箱号为空，请返回上一步重试");
 		return;
 	}
-	// 输入是否为手机号
-	if (!checkPhone(phone)) {
-		layer.msg("请输入正确的手机号");
-		return;
-	}
-	var getUrl = basePath + "/user/getSmsCaptcha.do";
+	var postUrl = basePath + "user/forgetPssword/reSendCaptcha.do";
 	// 请求获取验证码
 	$.ajax({
-		url : getUrl,
-		type : "GET",
+		url : postUrl,
+		type : "POST",
 		data : {
-			phone : phone
+			account : account
 		},
 		success : function(result) {
 			console.log(result);
-			if (result.code == 206) {
-				alert("提示", "请输入正确的手机号 ", function() {
-					// 确认按钮回调
-				}, {
-					type : 'warning',
-					confirmButtonText : '好的'
-				});
-				return;
-			}
 			// 请求成功
-			if ("00000" == result.data.respCode) {
-				_this.addClass("to-get-btn");
-
-				var timeout = 60;
-				_this.text(timeout + "秒后重新获取");
-				var timer = setInterval(function() {
-					timeout--;
-					_this.text(timeout + "秒后重新获取");
-					if (timeout == 0) {
-						clearInterval(timer);
-						_this.text(text);
-						_this.removeClass("to-get-btn");
-					}
-				}, 1000);
-			} else {// 请求失败
-				alert("错误", "获取验证码失败，请稍后重试 ", function() {
+			if(result.success){
+				toggleGetMsgButton();
+				layer.msg("发送成功，请查收");
+			}else{
+				alert("错误", "获取验证码失败，将返回上一步重试 ", function() {
 					// 确认按钮回调
+					location.href = bashPath+"user/page/forgetPssword.html";
 				}, {
 					type : 'error',
 					confirmButtonText : '好的'
 				});
 			}
+			
 		},
 		dataType : "json"
 	});
@@ -147,7 +144,7 @@ function checkEmail(val) {
 function showTips(target, message) {
 	target.html(message).stop(true, true).animate({
 		opacity : "1"
-	}).delay(1500).animate({
+	}).delay(3000).animate({
 		opacity : "0"
 	});
 }
@@ -165,11 +162,63 @@ $(".next-step-btn").click(function() {
 	// 手机号或者邮箱号是否输入正确
 	if (!checkPhone(account) && !checkEmail(account)) {
 		showTips($(".forget-password-form .error-tips"), "请填写正确的手机号或邮箱号");
+		return ;
 	}
+	$(".forget-password-form").submit();
 });
 $(".update-pass-btn").click(function() {
 	// 表单是否为空
 	if (!checkEmpty($(".update-password-form"))) {
 		return;
 	}
+	var password = $(".password-input").val();
+	var rePassword = $(".repassword-input").val();
+	if(password != rePassword){
+		layer.msg("再次输入密码不一致，请重新输入");
+		return ;
+	}
+	var postUrl = basePath + "user/forgetPssword/resetPassword.do";
+	$.ajax({
+	  	  url: postUrl,
+	  	  type: "POST",
+	  	  data: $(".update-password-form").serialize(),
+	  	  success: function(result){
+	  		  if(result.success){
+	  			alert("找回密码成功",
+	  					"点击确认将跳转到登录页面 ",
+	  					function(){
+	  						//确认按钮回调
+	  						location.href = basePath + "user/page/login.html";
+	  					},
+	  					{type:'success',confirmButtonText: '好的'});
+	  		  }else{
+	  			var title = "找回密码失败";
+	  			var tips = "";
+	  			var callback = function(){
+	  				
+	  			};
+	  			
+	  			if(result.code == 101){
+	  				tips = "验证码已失效，请重新获取";
+	  				$(".update-password-form input[name='smsCaptcha']").val("").blur();
+	  			}else if(result.code == 102){
+	  				tips = "验证码错误，请重新输入";
+	  				$(".update-password-form input[name='smsCaptcha']").val("").blur();
+	  			}else if(result.code == 103){
+	  				tips = "验证码未获取，请先获取";
+	  				$(".update-password-form input[name='smsCaptcha']").val("").blur();
+	  			}else{
+	  				tips = "非法请求，将返回上一步";
+	  				callback = function(){
+	  					location.href = basePath + "user/page/forgetPssword.html";
+	  				};
+	  			}
+	  			alert(title,
+						tips,
+						callback,
+						{type:'error',confirmButtonText: '好的'});
+	  		  }
+	  	  },
+	  	  dataType: "json"
+	  	});
 });

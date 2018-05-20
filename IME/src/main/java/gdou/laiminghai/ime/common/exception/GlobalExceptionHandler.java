@@ -47,7 +47,15 @@ public class GlobalExceptionHandler extends BaseExceptionHandler{
 			}
 		}else {//页面请求异常
 			if(e instanceof ServiceException) {
-				return handleViewException(request.getRequestURL().toString(), e.getMessage(), "error/service_error");
+				ServiceException servicException = (ServiceException)e;
+				Integer code = servicException.getCode();
+				String viewName = "error/service_error";
+				if(code >= 211 && code <= 213) {
+					viewName = "user/forget_password";
+				}else if(code == 207) {
+					viewName = "user/login";
+				}
+				return handleViewException(request.getRequestURL().toString(), e.getMessage(), viewName);
 			}else {
 				logger.error("未知错误：",e);
 				return handleViewException(request.getRequestURL().toString(),  ServiceResultEnum.UNKONWN_ERROR.getMessage(), "error/service_error");

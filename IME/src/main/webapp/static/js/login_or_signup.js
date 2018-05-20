@@ -211,7 +211,7 @@ function showTips(target, message) {
   stop(true, true).animate({
     opacity: "1"
   }).
-  delay(1500).animate({
+  delay(3000).animate({
     opacity: "0"
   });
 }

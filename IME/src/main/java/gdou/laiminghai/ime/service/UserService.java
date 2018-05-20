@@ -68,4 +68,20 @@ public interface UserService {
 	 * @datetime: 2018年5月10日 上午12:59:07
 	 */
 	String updateUserPortrait(Long userId, MultipartFile portrait, String savedPath);
+	
+	/**
+	 * 忘记密码 - 发送验证码
+	 * @param userVO
+	 * @author: laiminghai
+	 * @datetime: 2018年5月20日 上午1:07:07
+	 */
+	String sendCaptcha(UserVO userVO);
+	
+	/**
+	 * 忘记密码 - 重置密码
+	 * @param userVO
+	 * @author: laiminghai
+	 * @datetime: 2018年5月20日 上午8:37:07
+	 */
+	void retrievePassword(UserVO userVO);
 }

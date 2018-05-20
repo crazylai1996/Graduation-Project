@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,10 +23,12 @@ import gdou.laiminghai.ime.common.exception.ServiceException;
 import gdou.laiminghai.ime.common.exception.ServiceResultEnum;
 import gdou.laiminghai.ime.common.setting.AppSetting;
 import gdou.laiminghai.ime.common.statics.SkinTextureEnum;
+import gdou.laiminghai.ime.common.task.EmailSendTask;
 import gdou.laiminghai.ime.common.util.CaptchaUtil;
 import gdou.laiminghai.ime.common.util.FileUtil;
 import gdou.laiminghai.ime.common.util.RegexUtil;
 import gdou.laiminghai.ime.dao.mapper.UserInfoMapper;
+import gdou.laiminghai.ime.model.dto.SmsCaptchaResponseDTO;
 import gdou.laiminghai.ime.model.entity.UserInfo;
 import gdou.laiminghai.ime.model.vo.UserInfoVO;
 import gdou.laiminghai.ime.model.vo.UserVO;
@@ -47,6 +50,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserInfoMapper userInfoMapper;
+	
+	@Autowired
+	private TaskExecutor taskExecutor;
 
 	@Override
 	public void registerByPhone(UserVO userVO) {
@@ -197,6 +203,79 @@ public class UserServiceImpl implements UserService {
 			FileUtil.delete(savedPath, oldPortraitName);
 		}
 		return portraitPath;
+	}
+
+	@Override
+	public String sendCaptcha(UserVO userVO) {
+		String captcha = "";
+		Map<String,Object> map = new HashMap<>();
+		UserInfo userInfo ;
+		String account = userVO.getAccount();
+		if(StringUtils.isBlank(account)) {
+			throw new ServiceException(ServiceResultEnum.FORGET_PASSWORD_USER_NOT_EXIST);
+		}
+		//输入是手机号
+		if(RegexUtil.checkPhone(account)) {
+			map.put("phone", account);
+			userInfo = userInfoMapper.selectByCondition(map);
+			if(userInfo == null) {
+				throw new ServiceException(ServiceResultEnum.FORGET_PASSWORD_USER_NOT_EXIST);
+			}
+			//发送手机验证码
+			captcha = CaptchaUtil.getRandomNumberCaptcha(AppSetting.CAPTCHA_SMS_NUMBER_LENGTH);
+			SmsCaptchaResponseDTO resutlDTO = CaptchaUtil.sendSmsCaptcha(account, captcha);
+		}else if(RegexUtil.checkEmail(account)) {
+			map.put("email", account);
+			userInfo = userInfoMapper.selectByCondition(map);
+			if(userInfo == null) {
+				throw new ServiceException(ServiceResultEnum.FORGET_PASSWORD_USER_NOT_EXIST);
+			}
+			//发送邮箱验证码
+			long timeout = AppSetting.CAPTCHA_SMS_TIMEOUT/(1000*60);
+			captcha = CaptchaUtil.getRandomNumberCaptcha(AppSetting.CAPTCHA_SMS_NUMBER_LENGTH);
+			taskExecutor.execute(new EmailSendTask(account, 
+					"爱美丽 － 密码找回", "亲爱的"+
+					userInfo.getNickname()
+					+"<br/>你的验证码为："+captcha+"，请于"+timeout+"分钟内输入并验证"));
+		}else {
+			throw new ServiceException(ServiceResultEnum.FORGET_PASSWORD_ACCOUNT_NOT_ALLOWED);
+		}
+		return captcha;
+	}
+
+	@Override
+	public void retrievePassword(UserVO userVO) {
+		String account = userVO.getAccount();
+		if(StringUtils.isBlank(account)) {
+			throw new ServiceException(ServiceResultEnum.FORGET_PASSWORD_ACCOUNT_NOT_ALLOWED);
+		}
+		UserInfo userInfo ;
+		Map<String,Object> map = new HashMap<>();
+		//输入是手机号
+		if(RegexUtil.checkPhone(account)) {
+			map.put("phone", account);
+			userInfo = userInfoMapper.selectByCondition(map);
+			if(userInfo == null) {
+				throw new ServiceException(ServiceResultEnum.FORGET_PASSWORD_USER_NOT_EXIST);
+			}
+		}else if(RegexUtil.checkEmail(account)) {
+			map.put("email", account);
+			userInfo = userInfoMapper.selectByCondition(map);
+			if(userInfo == null) {
+				throw new ServiceException(ServiceResultEnum.FORGET_PASSWORD_USER_NOT_EXIST);
+			}
+		}else {
+			throw new ServiceException(ServiceResultEnum.FORGET_PASSWORD_ACCOUNT_NOT_ALLOWED);
+		}
+		//密码加密
+		//随机生成加密盐
+		String passwordSalt = CaptchaUtil.getRandomCharCaptcha(AppSetting.USER_PASSWORD_SALT_LENGTH);
+		//密码加密
+		String passwordCodec = DigestUtils.md5Hex(userVO.getPassword()+passwordSalt);
+		//更改密码
+		userInfo.setPasswordSalt(passwordSalt);
+		userInfo.setPassword(passwordCodec);
+		userInfoMapper.updateByPrimaryKey(userInfo);
 	}
 
 	/**

@@ -88,6 +88,14 @@ public class AppSetting {
 	 * 分页查询每页记录数
 	 */
 	public static Integer NUMBER_PER_PAGE;
+	/**
+	 * 邮箱账号
+	 */
+	public static String MAIL_ACCOUNT;
+	/**
+	 * 邮箱授权码
+	 */
+	public static String MAIL_AUTH_CODE;
 
 	@Value("${app.root}")
 	public void setAppRoot(String appRoot) {
@@ -181,5 +189,15 @@ public class AppSetting {
 	@Value("${number.per.page}")
 	public void setNuberPerPage(Integer number) {
 		AppSetting.NUMBER_PER_PAGE = number;
+	}
+	
+	@Value("${mail.qq.account}")
+	public void setMailAccount(String mailAccount) {
+		AppSetting.MAIL_ACCOUNT = mailAccount;
+	}
+	
+	@Value("${mail.qq.auth.code}")
+	public void setMailAuthCode(String mailAuthCode) {
+		AppSetting.MAIL_AUTH_CODE = mailAuthCode;
 	}
 }

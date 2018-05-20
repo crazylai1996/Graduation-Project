@@ -58,7 +58,7 @@
             <div class="op-right">
               <input id="rememberMe" type="checkbox" name="">
               <label for="rememberMe">记住我</label>
-              <a href="javascript:void(0);">忘记密码</a>
+              <a href="${basePath }user/page/forgetPssword.html" target="_blank">忘记密码</a>
             </div>
           </div>
           <p class="login-tips">错误信息提示</p>

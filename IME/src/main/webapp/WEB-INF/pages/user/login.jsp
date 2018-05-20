@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="static\css\login.css" />
 <link rel="stylesheet" href="static\plugins\layui\css\layui.css" />
 <script type="text/javascript" src="static\plugins\layui\layui.all.js"></script>
+<link rel="stylesheet" href="static\plugins\BeAlert\BeAlert.css"/>
 </head>
 
 <body>
@@ -34,8 +35,8 @@
 				</ul>
 				<div class="form-container">
 					<!-- 账号登录表单 -->
-					<input type="hidden" name="redirectUrl"
-							value="${param.redirectUrl }">
+					<input type="hidden" class="redirecturl-input" name="redirectUrl"
+							value="${redirectUrl }">
 					<form class="normal-login" method="POST">
 						<div class="form-item">
 							<div class="item-label">手机号/邮箱</div>
@@ -57,11 +58,11 @@
 						<div class="relative-op">
 							<div class="op-left">
 								<a class="select-login-style" href="javascript:void(0);"
-									onclick="switchForm(2)">手机号快捷登录</a>
+									onclick="switchForm(1)">手机号快捷登录</a>
 							</div>
 							<div class="op-right">
 								<input id="rememberMe" type="checkbox" name=""> <label
-									for="rememberMe">记住我</label> <a href="javascript:void(0);">忘记密码</a>
+									for="rememberMe">记住我</label> <a href="${basePath }user/page/forgetPssword">忘记密码</a>
 							</div>
 						</div>
 						<p class="login-tips">错误信息提示</p>
@@ -106,6 +107,7 @@
 	</script>
 	<!-- js脚本 -->
 	<script src="static\js\jquery.js"></script>
+	<script src="static\plugins\BeAlert\BeAlert.js"></script>
 	<script src="static\js\login.js"></script>
 </body>
 

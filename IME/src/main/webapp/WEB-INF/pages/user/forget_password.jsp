@@ -22,11 +22,12 @@
 				<img src="static\img\logo.png" alt=""> <span class="left">
 					| 忘记密码</span>
 			</div>
-			<a class="right" href="javascript:void(0);">登录</a>
+			<a class="right" href="${basePath }user/page/login.html">登录</a>
 		</div>
 		<div class="forget-form form-container">
 			<p class="form-title">请输入可以接收验证码的手机号或邮箱</p>
-			<form class="forget-password-form">
+			<form class="forget-password-form" method="POST"
+				 action="${basePath }user/page/forgetPssword/updatePassword.html">
 				<div class="form-item">
 					<div class="item-label">手机号/邮箱</div>
 					<input class="long-input" type="text" name="account"
@@ -38,7 +39,7 @@
 						class="item-input" autocomplete="off" data-label="验证码"> <img
 						class="captcha-img" alt="看不清，换一张">
 				</div>
-				<p class="error-tips">错误信息提示</p>
+				<p class="error-tips">${errorMessage }</p>
 				<a class="next-step-btn" href="javascript:void(0);">下一步</a>
 			</form>
 		</div>

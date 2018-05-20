@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="static\css\register.css" />
 <link rel="stylesheet" href="static\plugins\layui\css\layui.css" />
 <script type="text/javascript" src="static\plugins\layui\layui.all.js"></script>
+<link rel="stylesheet" href="static\plugins\BeAlert\BeAlert.css"/>
 </head>
 
 <body>
@@ -70,6 +71,7 @@
 	</script>
 	<!-- js脚本 -->
 	<script src="static\js\jquery.js"></script>
+	<script src="static\plugins\BeAlert\BeAlert.js"></script>
 	<script src="static\js\register.js"></script>
 </body>
 

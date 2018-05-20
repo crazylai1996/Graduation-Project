@@ -14,15 +14,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import gdou.laiminghai.ime.BaseTest;
 import gdou.laiminghai.ime.common.setting.AppSetting;
 import gdou.laiminghai.ime.model.entity.CommentReply;
 import gdou.laiminghai.ime.model.entity.CommentReplyVO;
 import gdou.laiminghai.ime.service.CommentReplyService;
 import gdou.laiminghai.ime.service.impl.CommentReplyServiceImpl;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations="classpath*:config/spring-beans.xml")
-public class PageHeplerTest {
+
+public class PageHeplerTest extends BaseTest{
 	
 	@Autowired
 	private CommentReplyMapper commentReplyMapper;

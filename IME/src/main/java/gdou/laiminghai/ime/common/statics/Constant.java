@@ -13,4 +13,12 @@ public interface Constant {
 	 * session范围key前缀：短信验证码获取时间
 	 */
 	static final String WEB_PRE_KEY_SMS_CAPTCHA_TIME = "SMS_CAPTCHA_TIME_";
+	/**
+	 * 忘记密码，验证码存取key
+	 */
+	static final String WEB_PRE_KEY_FORGET_PASSWORD_CAPTCHA = "FORGET_PASSWORD_CAPTCHA_";
+	/**
+	 * 忘记密码，验证码获取时间Key
+	 */
+	static final String WEB_PRE_KEY_FORGET_PASSWORD_CAPTCHA_TIME = "FORGET_PASSWORD_CAPTCHA_TIME_";
 }

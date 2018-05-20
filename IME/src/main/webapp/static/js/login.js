@@ -166,7 +166,7 @@ function showTips(target, message) {
   stop(true, true).animate({
     opacity: "1"
   }).
-  delay(1500).animate({
+  delay(3000).animate({
     opacity: "0"
   });
 }
@@ -197,6 +197,7 @@ function showTips(target, message) {
     if (!checkPhone(account) && !checkEmail(account)) {
       showLoginTips("请填写正确的手机号或邮箱号");
     } else {
+    	var redirectUrl = $(".redirecturl-input").val();
     	var loginUrl = basePath + "/user/accountLogin.do";
     	$.ajax({
     	  	  url: loginUrl,
@@ -206,7 +207,12 @@ function showTips(target, message) {
     	  	  success: function(result){
     	  		  //登录成功
     	  		  if(result.code == 0){
-    	  			  location.reload();
+    	  			  if(redirectUrl != ""){
+    	  				  location.href = redirectUrl;
+    	  			  }else{
+    	  				  location.href = basePath;
+    	  			  }
+    	  			  
     	  		  }else{//登录失败
     	  			  var title = "登录失败";
     	  			  var tips = "";

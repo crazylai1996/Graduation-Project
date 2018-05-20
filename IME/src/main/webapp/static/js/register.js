@@ -166,7 +166,7 @@ function showTips(target, message) {
   stop(true, true).animate({
     opacity: "1"
   }).
-  delay(1500).animate({
+  delay(3000).animate({
     opacity: "0"
   });
 }
@@ -213,8 +213,7 @@ function showTips(target, message) {
   					"点击确认可切换到登录框 ",
   					function(){
   						//确认按钮回调
-  						$(".phone-register input").val("").blur();
-  						$(".navi-tab li:eq(0)").click();
+  						location.href = basePath;
   					},
   					{type:'success',confirmButtonText: '好的'});
   		  }else{

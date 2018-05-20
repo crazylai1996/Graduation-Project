@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,9 +116,88 @@ public class UserController {
 	 * @datetime: 2018年5月19日 下午10:27:41
 	 */
 	@RequestMapping("/page/forgetPssword/updatePassword")
-	public ModelAndView goForgetPasswordStep2() {
+	public ModelAndView goForgetPasswordStep2(UserVO userVO) {
+		logger.debug("忘记密码表单参数："+userVO.toString());
 		ModelAndView mav = new ModelAndView("user/forget_password_step2");
+		//获取验证码
+		HttpSession session = request.getSession();
+		String imageCaptcha = (String)session.getAttribute(Constant.WEB_KEY_IMAGE_CAPTCHA);
+		if(StringUtils.isNotBlank(userVO.getImageCaptcha()) && 
+				!userVO.getImageCaptcha().equalsIgnoreCase(imageCaptcha)) {
+			throw new ServiceException(ServiceResultEnum.FORGET_PASSWORD_CAPTCHA_ERROR);
+		}
+		String captcha = userService.sendCaptcha(userVO);
+		// 短信验证码存入session
+		session.setAttribute(Constant.WEB_PRE_KEY_FORGET_PASSWORD_CAPTCHA + userVO.getAccount(), captcha);
+		// 验证码获取时间存入session
+		session.setAttribute(Constant.WEB_PRE_KEY_FORGET_PASSWORD_CAPTCHA_TIME + 
+				userVO.getAccount(), new Date().getTime());
+		mav.addObject("account",userVO.getAccount());
+		mav.addObject("actionMessage", "向你绑定的" + userVO.getAccount() +"发送验证码");
 		return mav;
+	}
+	
+	/**
+	 * 忘记密码-重发验证码
+	 * @param userVO
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月20日 上午7:59:44
+	 */
+	@ResponseBody
+	@RequestMapping("/forgetPssword/reSendCaptcha.do")
+	public ResultDTO reSendCaptcha(UserVO userVO) {
+		if(userVO == null || StringUtils.isBlank(userVO.getAccount())) {
+			throw new ServiceException(ServiceResultEnum.FORGET_PASSWORD_ACCOUNT_NOT_ALLOWED);
+		}
+		HttpSession session = request.getSession();
+		String captcha = userService.sendCaptcha(userVO);
+		// 短信验证码存入session
+		session.setAttribute(Constant.WEB_PRE_KEY_FORGET_PASSWORD_CAPTCHA + userVO.getAccount(), captcha);
+		// 验证码获取时间存入session
+		session.setAttribute(Constant.WEB_PRE_KEY_FORGET_PASSWORD_CAPTCHA_TIME + 
+				userVO.getAccount(), new Date().getTime());
+		return ResultDTOUtil.success(captcha);
+	}
+	
+	/**
+	 * 忘记密码-重置密码
+	 * @param userVO
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月20日 上午8:27:49
+	 */
+	@ResponseBody
+	@RequestMapping("/forgetPssword/resetPassword.do")
+	public ResultDTO doForgetPasswordStep2(UserVO userVO) {
+		if(userVO == null || StringUtils.isBlank(userVO.getAccount())) {
+			throw new ServiceException(ServiceResultEnum.FORGET_PASSWORD_ACCOUNT_NOT_ALLOWED);
+		}
+		HttpSession session = request.getSession();
+		// 验证码
+		String captcha = (String) session.getAttribute(
+				Constant.WEB_PRE_KEY_FORGET_PASSWORD_CAPTCHA + userVO.getAccount());
+		// 验证码未获取
+		if (StringUtils.isEmpty(captcha)) {
+			throw new ServiceException(ServiceResultEnum.CAPTCHA_SMS_NOT_EXIST);
+		}
+		// 验证码生成时间
+		long smsCaptchaTime = (long) session.getAttribute(
+				Constant.WEB_PRE_KEY_FORGET_PASSWORD_CAPTCHA_TIME + userVO.getAccount());
+		// 验证码生成时隔
+		long distanceTime = new Date().getTime() - smsCaptchaTime;
+		// 验证码失效
+		if (distanceTime > AppSetting.CAPTCHA_SMS_TIMEOUT) {
+			throw new ServiceException(ServiceResultEnum.CAPTCHA_SMS_TIMEOUT);
+		}
+		// 验证码不匹配
+		if (StringUtils.isBlank(userVO.getSmsCaptcha()) ||
+				!userVO.getSmsCaptcha().equals(captcha)) {
+			throw new ServiceException(ServiceResultEnum.CAPTCHA_SMS_NOT_MATCH);
+		}
+		//更改密码
+		userService.retrievePassword(userVO);
+		return ResultDTOUtil.success(null);
 	}
 
 	/**

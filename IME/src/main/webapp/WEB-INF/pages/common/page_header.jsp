@@ -49,7 +49,7 @@
 	          <li class="userinfo-btn">
 	            <a href="javascript:void(0);">${userInfo.userName }</a>
 	            <ul class="user-tools-box more">
-	              <li><a href="javascript:void(0);">个人中心</a></li>
+	              <li><a href="${basePath }user/info.html">个人中心</a></li>
 	
 	              <li><a href="javascript:void(0);">我的评价</a></li>
 	              <li><a href="javascript:void(0);">我的文章</a></li>
