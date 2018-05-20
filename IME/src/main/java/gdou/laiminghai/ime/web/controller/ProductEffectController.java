@@ -31,7 +31,7 @@ public class ProductEffectController {
 	 */
 	@RequestMapping("/getAll")
 	public ModelAndView getAllProductEffects() {
-		ModelAndView mav = new ModelAndView("option_select");
+		ModelAndView mav = new ModelAndView("common/option_select");
 		List<SelectItemVO> selectOptions = productEffectService.getAllProductEffects();
 		mav.addObject("selectOptions", selectOptions);
 		return mav;

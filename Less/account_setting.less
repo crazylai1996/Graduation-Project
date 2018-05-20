@@ -1,0 +1,240 @@
+@import "mixin_style.less";
+@import "global_style.less";
+
+/*
+ *内容主体外层
+ */
+.main_div();
+/*
+ *当前位置
+ */
+.current-pos {
+  .current-position();
+
+  margin-bottom: @div_margin;
+}
+/**
+ * 主左：导航栏
+ */
+.main-left{
+  @_width: 160px;
+
+  float: left;
+
+  width: @_width;
+  box-sizing: border-box;
+}
+/**
+ * 主右：内容
+ */
+.main-right{
+  @_width: 820px;
+
+  float: left;
+
+  width: @_width;
+  margin-left: 20px;
+  box-sizing: border-box;
+}
+/**
+ * 基本信息
+ */
+.account-setting{
+  min-height: 400px;
+  margin-top: @div_margin;
+
+  .title{
+    color: @font_color;
+    font-size: 17px;
+    font-weight: 550;
+  }
+  .line{
+    border: solid 1px @main_color;
+    background-color: @main_color;
+  }
+}
+.setting-list{
+  p{
+    margin: 8px auto;
+    padding-left: 10px;
+
+    color: 14px;
+  }
+  .item-label{
+    display: inline-block;
+    width: 65px;
+
+    text-align: left;
+    color: @desc_strong_color;
+  }
+  .item-val{
+    @_width: 185px;
+    display: inline-block;
+    width: @_width;
+
+    vertical-align: middle;
+    color: @font_color;
+
+    .no_wrap_text();
+  }
+  .item-btn{
+    margin-left: 10px;
+
+    font-size: 13px;
+    color: @font_strong_color;
+    text-decoration: none;
+
+    &:hover{
+      color: @link_color;
+    }
+  }
+}
+/**
+ * 修改密码输入
+ */
+.modify-password-container{
+  @_height: 30px;
+  .input-item{
+    width: 360px;
+    height: @_height;
+    margin: 8px auto;
+
+    line-height: @_height;
+    font-size: 14px;
+    color: @font_color;
+  }
+  .input-label{
+    @_width: 90px;
+    display: inline-block;
+    width: @_width;
+    height: @_height;
+    margin-right: 5px;
+
+    line-height: @_height;
+    text-align: right;
+  }
+  .input-val{
+    @_width: 245px;
+    display: inline-block;
+    width: @_width;
+    height: @_height;
+    padding-left: 8px;
+    color: @desc_strong_color;
+    .purple_input_style();
+  }
+}
+/**
+ * 身份验证
+ */
+.identity-auth-container{
+  @_height: 35px;
+  .input-item{
+    width: 360px;
+    height: @_height;
+    margin: 8px auto;
+
+    line-height: @_height;
+    font-size: 14px;
+    color: @font_color;
+  }
+  .input-label{
+    @_width: 90px;
+    display: inline-block;
+    width: @_width;
+    height: @_height;
+    margin-right: 5px;
+
+    line-height: @_height;
+    text-align: right;
+  }
+  .input-val{
+    @_width: 120px;
+    display: inline-block;
+    width: @_width;
+    height: @_height;
+    padding-left: 8px;
+
+    vertical-align: middle;
+    color: @desc_strong_color;
+    .purple_input_style();
+  }
+  .input-tips{
+    font-size: 12px;
+    color: @desc_strong_color;
+  }
+  img{
+    @_width: 92px;
+
+    width: @_width;
+    height: @_height;
+    vertical-align: middle;
+  }
+}
+/**
+ * 验证码输入
+ */
+.captcha-input-container:extend(.identity-auth-container all){
+  .input-label{
+    text-align: left;
+  }
+}
+/**
+ * 邮箱输入
+ */
+.email-input-container{
+  @_height: 35px;
+  .input-item{
+    width: 360px;
+    height: @_height;
+    margin: 8px auto;
+
+    line-height: @_height;
+    font-size: 14px;
+    color: @font_color;
+  }
+  .input-label{
+    @_width: 90px;
+    display: inline-block;
+    width: @_width;
+    height: @_height;
+    margin-right: 5px;
+
+    line-height: @_height;
+    text-align: left;
+  }
+  .input-val{
+    @_width: 120px;
+    display: inline-block;
+    width: @_width;
+    height: @_height;
+    padding-left: 8px;
+
+    vertical-align: middle;
+    color: @desc_strong_color;
+    .purple_input_style();
+  }
+  .mid-size-input{
+    @_width: 150px;
+    width: @_width;
+  }
+  .get-msg-captcha{
+    width:75px;
+    height: 36px;
+    display: inline-block;
+
+    vertical-align: bottom;
+    line-height: 35px;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+
+    border-radius: 4px;
+    background-color: @link_color;
+  }
+  .to-get-btn{
+    background-color: @border_color;
+
+    pointer-events: none;
+  }
+}

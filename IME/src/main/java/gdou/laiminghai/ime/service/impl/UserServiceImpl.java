@@ -234,7 +234,7 @@ public class UserServiceImpl implements UserService {
 			long timeout = AppSetting.CAPTCHA_SMS_TIMEOUT/(1000*60);
 			captcha = CaptchaUtil.getRandomNumberCaptcha(AppSetting.CAPTCHA_SMS_NUMBER_LENGTH);
 			taskExecutor.execute(new EmailSendTask(account, 
-					"爱美丽 － 密码找回", "亲爱的"+
+					"爱美丽 － 身份验证", "亲爱的"+
 					userInfo.getNickname()
 					+"<br/>你的验证码为："+captcha+"，请于"+timeout+"分钟内输入并验证"));
 		}else {
@@ -275,6 +275,81 @@ public class UserServiceImpl implements UserService {
 		//更改密码
 		userInfo.setPasswordSalt(passwordSalt);
 		userInfo.setPassword(passwordCodec);
+		userInfoMapper.updateByPrimaryKey(userInfo);
+	}
+
+	@Override
+	public void modifyPassword(UserVO userVO) {
+		//用户密码为空
+		if (userVO == null || 
+				StringUtils.isBlank(userVO.getPassword())||
+					StringUtils.isBlank(userVO.getNewPassword())||
+						userVO.getUserId() == null) {
+			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);
+		}
+		Long userId = userVO.getUserId();
+		// 查找用户信息
+		UserInfo userInfo = userInfoMapper.selectByPrimaryKey(userId);
+		// 用户不存在
+		if (userInfo == null) {
+			throw new ServiceException(ServiceResultEnum.USER_NOT_EXIST);
+		}
+		// 用户当前密码校验
+		String password = DigestUtils.md5Hex(userVO.getPassword() + userInfo.getPasswordSalt());
+		if (!password.equals(userInfo.getPassword())) {
+			throw new ServiceException(ServiceResultEnum.USER_ACCOUNT_PASSWORD_NOT_MATCH);
+		}
+		//生成新的密码
+		//密码加密
+		//随机生成加密盐
+		String newPasswrodSalt = CaptchaUtil.getRandomCharCaptcha(AppSetting.USER_PASSWORD_SALT_LENGTH);
+		//密码加密
+		String newPasswordCodec = DigestUtils.md5Hex(userVO.getNewPassword()+newPasswrodSalt);
+		//更新密码至数据库
+		userInfo.setPasswordSalt(newPasswrodSalt);
+		userInfo.setPassword(newPasswordCodec);
+		userInfoMapper.updateByPrimaryKey(userInfo);
+	}
+
+	@Override
+	public String sendAuthCaptcha(String account) {
+		String captcha = "";
+		if(StringUtils.isBlank(account)) {
+			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);
+		}
+		//输入是手机号
+		if(RegexUtil.checkPhone(account)) {
+			//发送手机验证码
+			captcha = CaptchaUtil.getRandomNumberCaptcha(AppSetting.CAPTCHA_SMS_NUMBER_LENGTH);
+			SmsCaptchaResponseDTO resutlDTO = CaptchaUtil.sendSmsCaptcha(account, captcha);
+		}else if(RegexUtil.checkEmail(account)) {
+			//发送邮箱验证码
+			long timeout = AppSetting.CAPTCHA_SMS_TIMEOUT/(1000*60);
+			captcha = CaptchaUtil.getRandomNumberCaptcha(AppSetting.CAPTCHA_SMS_NUMBER_LENGTH);
+			taskExecutor.execute(new EmailSendTask(account, 
+					"爱美丽 － 身份验证", "你的验证码为："+captcha+"，请于"+timeout+"分钟内输入并验证"));
+		}else {
+			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);
+		}
+		return captcha;
+	}
+
+	@Override
+	public void updateAccountSetting(UserVO userVO) {
+		if(userVO == null) {
+			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);
+		}
+		Long userId = userVO.getUserId();
+		UserInfo userInfo = userInfoMapper.selectByPrimaryKey(userId);
+		if(userInfo == null) {
+			throw new ServiceException(ServiceResultEnum.USER_NOT_EXIST);
+		}
+		if(StringUtils.isNotBlank(userVO.getEmail())) {
+			userInfo.setEmail(userVO.getEmail());
+		}
+		if(StringUtils.isNotBlank(userVO.getPhone())) {
+			userInfo.setPhone(userVO.getPhone());
+		}
 		userInfoMapper.updateByPrimaryKey(userInfo);
 	}
 

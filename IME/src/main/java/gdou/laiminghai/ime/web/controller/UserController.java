@@ -1,5 +1,6 @@
 package gdou.laiminghai.ime.web.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +31,7 @@ import gdou.laiminghai.ime.common.util.ResultDTOUtil;
 import gdou.laiminghai.ime.model.dto.ResultDTO;
 import gdou.laiminghai.ime.model.dto.SmsCaptchaResponseDTO;
 import gdou.laiminghai.ime.model.entity.Area;
+import gdou.laiminghai.ime.model.vo.SelectItemVO;
 import gdou.laiminghai.ime.model.vo.UserInfoVO;
 import gdou.laiminghai.ime.model.vo.UserVO;
 import gdou.laiminghai.ime.service.AreaService;
@@ -451,6 +453,355 @@ public class UserController {
 		userInfoVO.setUserId((Long)userInfoMap.get("userId"));
 		//更新
 		userService.updateUserInfo(userInfoVO);
+		return ResultDTOUtil.success(null);
+	}
+	
+	/**
+	 * 跳转到账号设置页面
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月20日 上午10:52:20
+	 */
+	@RequestMapping("/accountSetting")
+	public ModelAndView goAccountSetting() {
+		ModelAndView mav = new ModelAndView("user/account_setting");
+		//获取用户登录信息
+		HttpSession session = request.getSession();
+		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
+		//登录失效
+		if(userInfoMap == null) {
+			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+		}
+		//查找用户信息
+		Long userId = (Long) userInfoMap.get("userId");
+		
+		UserInfoVO userInfoVO = userService.getUserInfoById(userId);
+		mav.addObject("userInfoVO",userInfoVO);
+		return mav;
+	}
+	
+	/**
+	 * 跳转到修改密码页面
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月20日 下午3:59:53
+	 */
+	@RequestMapping("/accountSetting/modifyPassword")
+	public ModelAndView goModifyPassword() {
+		ModelAndView mav = new ModelAndView("user/modify_password");
+		return mav;
+	}
+	
+	/**
+	 * 更改密码
+	 * @param userVO
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月20日 下午4:36:15
+	 */
+	@ResponseBody
+	@RequestMapping("/accountSetting/modifyPassword.do")
+	public ResultDTO modifyPassword(UserVO userVO) {
+		// 获取用户登录信息
+		HttpSession session = request.getSession();
+		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
+		// 登录失效
+		if (userInfoMap == null) {
+			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+		}
+		//表单信息为空
+		if(userVO == null) {
+			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);
+		}		
+		Long userId = (Long)userInfoMap.get("userId");
+		userVO.setUserId(userId);
+		userService.modifyPassword(userVO);
+		session.removeAttribute("userInfo");
+		return ResultDTOUtil.success(null);
+	}
+	
+	/**
+	 * 跳转到身份验证页面
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月20日 下午8:16:14
+	 */
+	@RequestMapping("/accountSetting/identityAuth")
+	public ModelAndView goIdentityAuth(Integer type) {
+		ModelAndView mav = new ModelAndView("user/identity_auth");
+		// 获取用户登录信息
+		HttpSession session = request.getSession();
+		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
+		// 登录失效
+		if (userInfoMap == null) {
+			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+		}
+		Long userId = (Long)userInfoMap.get("userId");
+		UserInfoVO userInfoVO = userService.getUserInfoById(userId);
+		String phone = userInfoVO.getPhone();
+		String email = userInfoVO.getEmail();
+		List<SelectItemVO> authWays = new ArrayList<>();
+		//修改邮箱号
+		if(type == 2) {
+			authWays.add(new SelectItemVO(phone, "手机号验证"));
+			if(StringUtils.isNotBlank(email)) {
+				authWays.add(new SelectItemVO(email,"邮箱号验证"));
+			}
+		}else if(type == 1){
+			authWays.add(new SelectItemVO(phone, "手机号验证"));
+		}else {
+			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);
+		}
+		mav.addObject("authWays",authWays);
+		return mav;
+	}
+	
+	/**
+	 * 获取验证码
+	 * @param userVO
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月20日 下午10:13:34
+	 */
+	@ResponseBody
+	@RequestMapping("/accountSetting/sendAuthCpatha.do")
+	public ResultDTO sendAuthCaptcha(UserVO userVO) {
+		logger.debug("表单信息："+userVO.toString());
+		// 获取用户登录信息
+		HttpSession session = request.getSession();
+		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
+		// 登录失效
+		if (userInfoMap == null) {
+			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+		}
+		String imageCaptcha = (String) session.getAttribute(Constant.WEB_KEY_IMAGE_CAPTCHA);
+		if (StringUtils.isNotBlank(userVO.getImageCaptcha())
+				&& !userVO.getImageCaptcha().equalsIgnoreCase(imageCaptcha)) {
+			throw new ServiceException(ServiceResultEnum.CAPTCHA_IMAGE_NOT_MATCH);
+		}
+		String captcha = userService.sendAuthCaptcha(userVO.getAccount());
+		// 短信验证码存入session
+		session.setAttribute(Constant.WEB_PRE_KEY_IDENTITY_AUTH_CAPTCHA + userVO.getAccount(), captcha);
+		// 验证码获取时间存入session
+		session.setAttribute(Constant.WEB_PRE_KEY_IDENTITY_AUTH_CAPTCHA_TIME + 
+				userVO.getAccount(), new Date().getTime());
+		return ResultDTOUtil.success(null);
+	}
+	
+	/**
+	 * 跳转到验证码输入页面
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月20日 下午9:42:35
+	 */
+	@RequestMapping("/accountSetting/captchaInput")
+	public ModelAndView goAuthCaptchaInput(String account) {
+		ModelAndView mav = new ModelAndView("user/identity_auth_captcha_input");
+		mav.addObject("account", account);
+		return mav;
+	}
+	
+	/**
+	 * 验证码验证
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月20日 下午11:06:26
+	 */
+	@ResponseBody
+	@RequestMapping("/accountSetting/authCaptchaVerify.do")
+	public ResultDTO verifyAuthCaptcha(UserVO userVO) {
+		if(userVO == null) {
+			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);
+		}
+		logger.debug("验证码验证表单："+userVO.toString());
+		HttpSession session = request.getSession();
+		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
+		// 登录失效
+		if (userInfoMap == null) {
+			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+		}
+		Long userId = (Long)userInfoMap.get("userId");
+		// 验证码
+		String captcha = (String) session.getAttribute(
+				Constant.WEB_PRE_KEY_IDENTITY_AUTH_CAPTCHA + userVO.getAccount());
+		// 验证码未获取
+		if (StringUtils.isEmpty(captcha)) {
+			throw new ServiceException(ServiceResultEnum.CAPTCHA_SMS_NOT_EXIST);
+		}
+		// 验证码生成时间
+		long smsCaptchaTime = (long) session.getAttribute(
+				Constant.WEB_PRE_KEY_IDENTITY_AUTH_CAPTCHA_TIME + userVO.getAccount());
+		// 验证码生成时隔
+		long distanceTime = new Date().getTime() - smsCaptchaTime;
+		// 验证码失效
+		if (distanceTime > AppSetting.CAPTCHA_SMS_TIMEOUT) {
+			throw new ServiceException(ServiceResultEnum.CAPTCHA_SMS_TIMEOUT);
+		}
+		// 验证码不匹配
+		if (StringUtils.isBlank(userVO.getSmsCaptcha()) ||
+				!userVO.getSmsCaptcha().equals(captcha)) {
+			throw new ServiceException(ServiceResultEnum.CAPTCHA_SMS_NOT_MATCH);
+		}
+		session.setAttribute(Constant.WEB_PRE_KEY_IDENTITY_AUTH_PASS+userId, "1");
+		return ResultDTOUtil.success(null);
+	}
+	
+	/**
+	 * 跳转到邮箱更改页面
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月21日 上午12:48:45
+	 */
+	@RequestMapping("/accountSetting/modifyEmail")
+	public ModelAndView goModifyEmail() {
+		ModelAndView mav = new ModelAndView("user/modify_email");
+		return mav;
+	}
+	
+	/**
+	 * 绑定新手机号和邮箱，验证码获取
+	 * @param account
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月21日 上午1:20:23
+	 */
+	@ResponseBody
+	@RequestMapping("/accountSetting/sendBandNewCaptcha.do")
+	public ResultDTO sendBandNewCaptcha(String account) {
+		// 获取用户登录信息
+		HttpSession session = request.getSession();
+		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
+		// 登录失效
+		if (userInfoMap == null) {
+			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+		}
+		String captcha = userService.sendAuthCaptcha(account);
+		// 短信验证码存入session
+		session.setAttribute(Constant.WEB_PRE_KEY_IDENTITY_AUTH_CAPTCHA + account, captcha);
+		// 验证码获取时间存入session
+		session.setAttribute(Constant.WEB_PRE_KEY_IDENTITY_AUTH_CAPTCHA_TIME + 
+				account, new Date().getTime());
+		return ResultDTOUtil.success(null);
+	}
+	
+	/**
+	 * 绑定新邮箱
+	 * @param userVO
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月21日 上午1:28:06
+	 */
+	@ResponseBody
+	@RequestMapping("/accountSetting/modifyEmail.do")
+	public ResultDTO modifyEmail(String account,String smsCaptcha) {
+		HttpSession session = request.getSession();
+		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
+		// 登录失效
+		if (userInfoMap == null) {
+			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+		}
+		Long userId = (Long)userInfoMap.get("userId");
+		String authFlag = (String)session.getAttribute(Constant.WEB_PRE_KEY_IDENTITY_AUTH_PASS+userId);
+		if(!"1".equals(authFlag)) {
+			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);
+		}
+		UserInfoVO userInfoVO = userService.getUserInfoById(userId);
+		if(userInfoVO == null) {
+			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);
+		}
+		// 验证码
+		String captcha = (String) session.getAttribute(
+				Constant.WEB_PRE_KEY_IDENTITY_AUTH_CAPTCHA + account);
+		// 验证码未获取
+		if (StringUtils.isEmpty(captcha)) {
+			throw new ServiceException(ServiceResultEnum.CAPTCHA_SMS_NOT_EXIST);
+		}
+		// 验证码生成时间
+		long smsCaptchaTime = (long) session.getAttribute(
+				Constant.WEB_PRE_KEY_IDENTITY_AUTH_CAPTCHA_TIME + account);
+		// 验证码生成时隔
+		long distanceTime = new Date().getTime() - smsCaptchaTime;
+		// 验证码失效
+		if (distanceTime > AppSetting.CAPTCHA_SMS_TIMEOUT) {
+			throw new ServiceException(ServiceResultEnum.CAPTCHA_SMS_TIMEOUT);
+		}
+		// 验证码不匹配
+		if (StringUtils.isBlank(smsCaptcha) ||
+				!smsCaptcha.equals(captcha)) {
+			throw new ServiceException(ServiceResultEnum.CAPTCHA_SMS_NOT_MATCH);
+		}
+		UserVO userVO = new UserVO();
+		userVO.setUserId(userId);
+		userVO.setEmail(account);
+		userService.updateAccountSetting(userVO);
+		session.removeAttribute(Constant.WEB_PRE_KEY_IDENTITY_AUTH_PASS+userId);
+		return ResultDTOUtil.success(null);
+	}
+	
+	/**
+	 * 跳转到修改手机号页面
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月21日 上午7:05:03
+	 */
+	@RequestMapping("/accountSetting/modifyPhone")
+	public ModelAndView goModifyPhone() {
+		ModelAndView mav = new ModelAndView("user/modify_phone");
+		return mav;
+	}
+	
+	/**
+	 * 修改手机号
+	 * @param account
+	 * @param smsCaptcha
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月21日 上午7:06:37
+	 */
+	@ResponseBody
+	@RequestMapping("/accountSetting/modifyPhone.do")
+	public ResultDTO modifyPhone(String account,String smsCaptcha) {
+		HttpSession session = request.getSession();
+		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
+		// 登录失效
+		if (userInfoMap == null) {
+			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+		}
+		Long userId = (Long)userInfoMap.get("userId");
+		String authFlag = (String)session.getAttribute(Constant.WEB_PRE_KEY_IDENTITY_AUTH_PASS+userId);
+		if(!"1".equals(authFlag)) {
+			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);
+		}
+		UserInfoVO userInfoVO = userService.getUserInfoById(userId);
+		if(userInfoVO == null) {
+			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);
+		}
+		// 验证码
+		String captcha = (String) session.getAttribute(
+				Constant.WEB_PRE_KEY_IDENTITY_AUTH_CAPTCHA + account);
+		// 验证码未获取
+		if (StringUtils.isEmpty(captcha)) {
+			throw new ServiceException(ServiceResultEnum.CAPTCHA_SMS_NOT_EXIST);
+		}
+		// 验证码生成时间
+		long smsCaptchaTime = (long) session.getAttribute(
+				Constant.WEB_PRE_KEY_IDENTITY_AUTH_CAPTCHA_TIME + account);
+		// 验证码生成时隔
+		long distanceTime = new Date().getTime() - smsCaptchaTime;
+		// 验证码失效
+		if (distanceTime > AppSetting.CAPTCHA_SMS_TIMEOUT) {
+			throw new ServiceException(ServiceResultEnum.CAPTCHA_SMS_TIMEOUT);
+		}
+		// 验证码不匹配
+		if (StringUtils.isBlank(smsCaptcha) ||
+				!smsCaptcha.equals(captcha)) {
+			throw new ServiceException(ServiceResultEnum.CAPTCHA_SMS_NOT_MATCH);
+		}
+		UserVO userVO = new UserVO();
+		userVO.setUserId(userId);
+		userVO.setPhone(account);
+		userService.updateAccountSetting(userVO);
+		session.removeAttribute(Constant.WEB_PRE_KEY_IDENTITY_AUTH_PASS+userId);
 		return ResultDTOUtil.success(null);
 	}
 }

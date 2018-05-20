@@ -31,7 +31,7 @@ public class ProductPropertyController {
 	 */
 	@RequestMapping("/getAll")
 	public ModelAndView getAllProductProperties() {
-		ModelAndView mav = new ModelAndView("option_select");
+		ModelAndView mav = new ModelAndView("common/option_select");
 		List<SelectItemVO> selectOptions = productPropertyService.getAllProductProperties();
 		mav.addObject("selectOptions", selectOptions);
 		return mav;

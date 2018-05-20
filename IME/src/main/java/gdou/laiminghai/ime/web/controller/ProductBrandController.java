@@ -31,7 +31,7 @@ public class ProductBrandController {
 	 */
 	@RequestMapping("/getAll")
 	public ModelAndView getAllProductBrands() {
-		ModelAndView mav = new ModelAndView("option_select");
+		ModelAndView mav = new ModelAndView("common/option_select");
 		List<SelectItemVO> selectOptions = productBrandService.getAllProductBrands();
 		mav.addObject("selectOptions", selectOptions);
 		return mav;

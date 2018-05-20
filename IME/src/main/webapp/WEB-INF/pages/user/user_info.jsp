@@ -23,7 +23,7 @@
       <div class="main-container">
         <!-- 当前位置开始 -->
         <div class="current-pos">
-          <a href="#">首页</a><span class="split-line"></span>
+          <a href="${basePath }">首页</a><span class="split-line"></span>
           <a href="#">用户中心</a><span class="split-line"></span>
           <sapn class="title">基本信息</span>
         </div>
@@ -31,32 +31,7 @@
         <!-- 主体内容开始 -->
         <div class="main-contents">
           <div class="main-left">
-            <span class="navi-label">用户中心</span>
-            <div class="navi-list">
-              <div class="navi-item">
-                <span class="title">用户信息<span  class="to-down glyphicon glyphicon-chevron-down"></span></span>
-                <ul class="navi-item-child">
-                  <li><a href="javascript:void(0);">基本信息</a></li>
-                  <li><a href="javascript:void(0);">账号设置</a></li>
-                </ul>
-              </div>
-              <div class="navi-item">
-                <span class="title">我的点评<span  class="to-down glyphicon glyphicon-chevron-down"></span></span>
-                <ul class="navi-item-child">
-                  <li><a href="javascript:void(0);">我的关注</a></li>
-                  <li><a href="javascript:void(0);">我发布的</a></li>
-                  <li><a href="javascript:void(0);">我的评论</a></li>
-                </ul>
-              </div>
-              <div class="navi-item">
-                <span class="title">消息中心<span  class="to-down glyphicon glyphicon-chevron-down"></span></span>
-                <ul class="navi-item-child">
-                  <li><a href="javascript:void(0);">系统消息</a></li>
-                  <li><a href="javascript:void(0);">互动消息</a></li>
-                  <li><a href="javascript:void(0);">我的私信</a></li>
-                </ul>
-              </div>
-            </div>
+            <jsp:include page="user_navi.jsp"/>
           </div>
           <div class="main-right">
             <div class="base-info">

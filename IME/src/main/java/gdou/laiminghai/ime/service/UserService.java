@@ -84,4 +84,29 @@ public interface UserService {
 	 * @datetime: 2018年5月20日 上午8:37:07
 	 */
 	void retrievePassword(UserVO userVO);
+	
+	/**
+	 * 修改密码
+	 * @param userVO
+	 * @author: laiminghai
+	 * @datetime: 2018年5月20日 下午4:37:39
+	 */
+	void modifyPassword(UserVO userVO);
+	
+	/**
+	 * 发送身份验证码
+	 * @param account
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月20日 下午10:20:21
+	 */
+	String sendAuthCaptcha(String account);
+	
+	/**
+	 * 更改账户设置
+	 * @param userVO
+	 * @author: laiminghai
+	 * @datetime: 2018年5月21日 上午1:32:15
+	 */
+	void updateAccountSetting(UserVO userVO);
 }

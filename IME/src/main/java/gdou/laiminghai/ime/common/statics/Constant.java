@@ -21,4 +21,16 @@ public interface Constant {
 	 * 忘记密码，验证码获取时间Key
 	 */
 	static final String WEB_PRE_KEY_FORGET_PASSWORD_CAPTCHA_TIME = "FORGET_PASSWORD_CAPTCHA_TIME_";
+	/**
+	 * 身份验证，验证码存取key
+	 */
+	static final String WEB_PRE_KEY_IDENTITY_AUTH_CAPTCHA = "IDENTITY_AUTH_CAPTCHA_";
+	/**
+	 * 身份验证，验证码获取时间Key
+	 */
+	static final String WEB_PRE_KEY_IDENTITY_AUTH_CAPTCHA_TIME = "IDENTITY_AUTH_CAPTCHA_TIME_";
+	/**
+	 * 身份验证，通过标识
+	 */
+	static final String WEB_PRE_KEY_IDENTITY_AUTH_PASS = "WEB_PRE_KEY_IDENTITY_AUTH_PASS_";
 }
