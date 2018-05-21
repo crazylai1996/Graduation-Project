@@ -19,6 +19,7 @@ public enum ServiceResultEnum {
 	FORGET_PASSWORD_CAPTCHA_ERROR(211,"验证码输入错误，请重试"),
 	FORGET_PASSWORD_USER_NOT_EXIST(212,"该用户未注册，请检查是否输入正确"),
 	FORGET_PASSWORD_ACCOUNT_NOT_ALLOWED(213,"请输入正确的手机号或者邮箱号"),
+	ACCOUNT_BE_BINDED(214,"账号已被绑定"),
 	PRODUCT_FORM_IMCOMPLETE(301,"表单必填信息未提供"),
 	PRODUCT_PICTURE_SAVE_FAILURE(302,"商品图片文件保存失败"),
 	PRODUCT_NOT_FOUND(303,"产品不存在"),

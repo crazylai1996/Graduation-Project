@@ -192,6 +192,8 @@ $(".modify-phone-btn").click(function(){
 																	  				tips = "验证码已失效，请返回重新获取";
 																	  			}else if(result.code == 208){
 																	  				tips = "非法请求";
+																	  			}else if(result.code == 214){
+																	  				tips = "手机号已被其他账号绑定，请重新输入";
 																	  			}else{
 																	  				tips = "未知错误，请稍后重试";
 																	  			}
@@ -381,6 +383,8 @@ $(".modify-email-btn").click(function(){
 																	  				tips = "验证码已失效，请返回重新获取";
 																	  			}else if(result.code == 208){
 																	  				tips = "非法请求";
+																	  			}else if(result.code == 214){
+																	  				tips = "邮箱号已被其他账号绑定，请重新输入";
 																	  			}else{
 																	  				tips = "未知错误，请稍后重试";
 																	  			}

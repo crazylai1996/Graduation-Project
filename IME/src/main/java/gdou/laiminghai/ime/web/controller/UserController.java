@@ -385,9 +385,9 @@ public class UserController {
 		String savedPath = session.getServletContext().getRealPath("/"+AppSetting.PORTRAIT_SAVED_PATH);
 		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
 		// 登录失效
-		if (userInfoMap == null) {
-			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
-		}
+//		if (userInfoMap == null) {
+//			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+//		}
 		//获取用户ID
 		Long userId = (Long)userInfoMap.get("userId");
 		//头像更新
@@ -407,10 +407,10 @@ public class UserController {
 		//获取用户登录信息
 		HttpSession session = request.getSession();
 		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
-		//登录失效
-		if(userInfoMap == null) {
-			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
-		}
+//		//登录失效
+//		if(userInfoMap == null) {
+//			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+//		}
 		//性别选项获取
 		mav.addObject("genderList",EnumUtil.toList(GenderEnum.class));
 		//省份列表获取
@@ -446,9 +446,9 @@ public class UserController {
 		HttpSession session = request.getSession();
 		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
 		// 登录失效
-		if (userInfoMap == null) {
-			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
-		}
+//		if (userInfoMap == null) {
+//			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+//		}
 		//当前登录用户ID
 		userInfoVO.setUserId((Long)userInfoMap.get("userId"));
 		//更新
@@ -469,9 +469,9 @@ public class UserController {
 		HttpSession session = request.getSession();
 		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
 		//登录失效
-		if(userInfoMap == null) {
-			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
-		}
+//		if(userInfoMap == null) {
+//			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+//		}
 		//查找用户信息
 		Long userId = (Long) userInfoMap.get("userId");
 		
@@ -506,9 +506,9 @@ public class UserController {
 		HttpSession session = request.getSession();
 		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
 		// 登录失效
-		if (userInfoMap == null) {
-			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
-		}
+//		if (userInfoMap == null) {
+//			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+//		}
 		//表单信息为空
 		if(userVO == null) {
 			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);
@@ -533,9 +533,9 @@ public class UserController {
 		HttpSession session = request.getSession();
 		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
 		// 登录失效
-		if (userInfoMap == null) {
-			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
-		}
+//		if (userInfoMap == null) {
+//			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+//		}
 		Long userId = (Long)userInfoMap.get("userId");
 		UserInfoVO userInfoVO = userService.getUserInfoById(userId);
 		String phone = userInfoVO.getPhone();
@@ -571,9 +571,9 @@ public class UserController {
 		HttpSession session = request.getSession();
 		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
 		// 登录失效
-		if (userInfoMap == null) {
-			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
-		}
+//		if (userInfoMap == null) {
+//			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+//		}
 		String imageCaptcha = (String) session.getAttribute(Constant.WEB_KEY_IMAGE_CAPTCHA);
 		if (StringUtils.isNotBlank(userVO.getImageCaptcha())
 				&& !userVO.getImageCaptcha().equalsIgnoreCase(imageCaptcha)) {
@@ -617,9 +617,9 @@ public class UserController {
 		HttpSession session = request.getSession();
 		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
 		// 登录失效
-		if (userInfoMap == null) {
-			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
-		}
+//		if (userInfoMap == null) {
+//			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+//		}
 		Long userId = (Long)userInfoMap.get("userId");
 		// 验证码
 		String captcha = (String) session.getAttribute(
@@ -672,9 +672,9 @@ public class UserController {
 		HttpSession session = request.getSession();
 		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
 		// 登录失效
-		if (userInfoMap == null) {
-			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
-		}
+//		if (userInfoMap == null) {
+//			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+//		}
 		String captcha = userService.sendAuthCaptcha(account);
 		// 短信验证码存入session
 		session.setAttribute(Constant.WEB_PRE_KEY_IDENTITY_AUTH_CAPTCHA + account, captcha);
@@ -697,9 +697,9 @@ public class UserController {
 		HttpSession session = request.getSession();
 		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
 		// 登录失效
-		if (userInfoMap == null) {
-			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
-		}
+//		if (userInfoMap == null) {
+//			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+//		}
 		Long userId = (Long)userInfoMap.get("userId");
 		String authFlag = (String)session.getAttribute(Constant.WEB_PRE_KEY_IDENTITY_AUTH_PASS+userId);
 		if(!"1".equals(authFlag)) {
@@ -764,9 +764,9 @@ public class UserController {
 		HttpSession session = request.getSession();
 		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
 		// 登录失效
-		if (userInfoMap == null) {
-			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
-		}
+//		if (userInfoMap == null) {
+//			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+//		}
 		Long userId = (Long)userInfoMap.get("userId");
 		String authFlag = (String)session.getAttribute(Constant.WEB_PRE_KEY_IDENTITY_AUTH_PASS+userId);
 		if(!"1".equals(authFlag)) {

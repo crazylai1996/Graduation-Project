@@ -344,11 +344,21 @@ public class UserServiceImpl implements UserService {
 		if(userInfo == null) {
 			throw new ServiceException(ServiceResultEnum.USER_NOT_EXIST);
 		}
+		//修改邮箱号
+		Map<String,Object> map = new HashMap<>();
 		if(StringUtils.isNotBlank(userVO.getEmail())) {
+			map.put("email", userVO.getEmail());
 			userInfo.setEmail(userVO.getEmail());
 		}
+		//修改手机号
 		if(StringUtils.isNotBlank(userVO.getPhone())) {
+			map.put("phone", userVO.getPhone());
 			userInfo.setPhone(userVO.getPhone());
+		}
+		//判断号码是否已被绑定
+		UserInfo ui = userInfoMapper.selectByCondition(map);
+		if(ui != null) {
+			throw new ServiceException(ServiceResultEnum.ACCOUNT_BE_BINDED);
 		}
 		userInfoMapper.updateByPrimaryKey(userInfo);
 	}

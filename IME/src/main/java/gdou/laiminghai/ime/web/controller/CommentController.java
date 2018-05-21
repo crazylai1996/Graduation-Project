@@ -151,9 +151,9 @@ public class CommentController {
 		HttpSession session = request.getSession();
 		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
 		// 登录失效
-		if (userInfoMap == null) {
-			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
-		}
+//		if (userInfoMap == null) {
+//			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+//		}
 		// 表单信息未提供
 		if (commentInfoVO == null || commentInfoVO.getProductId() == null) {
 			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);

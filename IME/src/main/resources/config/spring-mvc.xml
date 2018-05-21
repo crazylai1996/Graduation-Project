@@ -51,4 +51,16 @@
     
     <!-- 自定义异常处理 -->
     <bean class="gdou.laiminghai.ime.common.exception.GlobalExceptionHandler"/>
+    
+    <!-- 登录拦截器 -->
+    <mvc:interceptors>  
+        <mvc:interceptor>  
+            <mvc:mapping path="/user/info**"/> 
+            <mvc:mapping path="/user/update**.do"/> 
+            <mvc:mapping path="/user/accountSetting**"/> 
+            <mvc:mapping path="/user/accountSetting/**"/> 
+            <mvc:mapping path="/**/new.do"/> 
+            <bean class="gdou.laiminghai.ime.web.interceptor.NoLoginInterceptor"></bean>  
+        </mvc:interceptor>  
+    </mvc:interceptors> 
 </beans>

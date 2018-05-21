@@ -114,9 +114,9 @@ public class ProductController {
 		String picturesSavedPath = session.getServletContext().getRealPath("/" + AppSetting.PRODUCT_PICTURES_SAVED_PATH);
 		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
 		// 登录失效
-		if (userInfoMap == null) {
-			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
-		}
+//		if (userInfoMap == null) {
+//			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+//		}
 		productService.addNewProduct(productInfoVO, 
 				coverFile, productFiles, 
 				coverSavedPath, picturesSavedPath);

@@ -42,7 +42,7 @@ $(document).ready(function() {
 		  return ;
 	  }
 	  
-	  var postUrl = basePath + "commentReply/addNewCommentReply.do";
+	  var postUrl = basePath + "commentReply/new.do";
 	  $.ajax({
 		  url: postUrl,
 		  data: $(".reply-form").serialize(),

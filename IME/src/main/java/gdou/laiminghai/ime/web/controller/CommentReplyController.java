@@ -50,16 +50,16 @@ public class CommentReplyController {
 	 * @datetime: 2018年5月18日 上午9:37:04
 	 */
 	@ResponseBody
-	@RequestMapping("/addNewCommentReply.do")
+	@RequestMapping("/new.do")
 	public ResultDTO addCommentReply(CommentReplyVO commentReplyVO) {
 		logger.debug("心得回复表单参数："+commentReplyVO.toString());
 		// 获取用户登录信息
 		HttpSession session = request.getSession();
 		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
 		// 登录失效
-		if (userInfoMap == null) {
-			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
-		}
+//		if (userInfoMap == null) {
+//			throw new ServiceException(ServiceResultEnum.USER_SESSION_TIMEOUT);
+//		}
 		//获取用户ID
 		Long userId = (Long)userInfoMap.get("userId");
 		commentReplyVO.setUserId(userId);
