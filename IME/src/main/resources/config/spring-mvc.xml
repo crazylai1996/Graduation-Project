@@ -60,6 +60,8 @@
             <mvc:mapping path="/user/accountSetting**"/> 
             <mvc:mapping path="/user/accountSetting/**"/> 
             <mvc:mapping path="/**/new.do"/> 
+            <mvc:mapping path="/product/followProduct.do"/>
+            <mvc:mapping path="/product/unfollowProduct.do"/>
             <bean class="gdou.laiminghai.ime.web.interceptor.NoLoginInterceptor"></bean>  
         </mvc:interceptor>  
     </mvc:interceptors> 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import gdou.laiminghai.ime.model.dto.ResultDTO;
 import gdou.laiminghai.ime.model.vo.ProductInfoVO;
 
 /**
@@ -50,4 +51,31 @@ public interface ProductService {
 	 * @datetime: 2018年5月17日 下午10:29:24
 	 */
 	List<ProductInfoVO> findMoreProductInfo(List<Long> productIds);
+	/**
+	 * 关注产品
+	 * @param userId
+	 * @param productId
+	 * @author: laiminghai
+	 * @datetime: 2018年5月21日 上午10:17:34
+	 */
+	ResultDTO followProduct(Long userId,Long productId);
+	
+	/**
+	 * 取消关注产品
+	 * @param userId
+	 * @param productId
+	 * @author: laiminghai
+	 * @datetime: 2018年5月21日 下午12:20:42
+	 */
+	ResultDTO unfollowProduct(Long userId,Long productId);
+	
+	/**
+	 * 判断当前产品是否已经被关注
+	 * @param userId
+	 * @param productId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月21日 下午4:50:32
+	 */
+	boolean isFolloedProduct(Long userId,Long productId);
 }

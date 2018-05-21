@@ -135,6 +135,13 @@ public class ProductController {
 		ModelAndView mav = new ModelAndView("product/product_details");
 		ProductInfoVO productInfoVO = productService.getProductInfo(productId);
 		logger.debug(productInfoVO.toString());
+		//判断当前产品是否已被关注
+		HttpSession session = request.getSession();
+		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
+		if(userInfoMap != null) {
+			Long userId = (Long)userInfoMap.get("userId");
+			productInfoVO.setFollow(productService.isFolloedProduct(userId, productId));
+		}
 		mav.addObject("productInfoVO", productInfoVO);
 		// 购买方式
 		List<SelectItemVO> buyWays = EnumUtil.toList(BuyWayEnum.class);
@@ -148,4 +155,41 @@ public class ProductController {
 		mav.addObject("pageResult", pageResult);
 		return mav;
 	}
-}
+	
+	
+	/**
+	 * 关注产品
+	 * @param productId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月21日 上午10:15:04
+	 */
+	@ResponseBody
+	@RequestMapping("/followProduct.do")
+	public ResultDTO followProduct(Long productId) {
+		// 获取用户登录信息
+		HttpSession session = request.getSession();
+		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
+		Long userId = (Long)userInfoMap.get("userId");
+		ResultDTO resultDTO = productService.followProduct(userId, productId);
+		return resultDTO;
+	}
+	
+	/**
+	 * 取消关注产品
+	 * @param productId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月21日 下午12:17:49
+	 */
+	@ResponseBody
+	@RequestMapping("/unfollowProduct.do")
+	public ResultDTO unfollowProduct(Long productId) {
+		// 获取用户登录信息
+		HttpSession session = request.getSession();
+		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
+		Long userId = (Long)userInfoMap.get("userId");
+		ResultDTO resultDTO = productService.unfollowProduct(userId, productId);
+		return resultDTO;
+	}
+ }

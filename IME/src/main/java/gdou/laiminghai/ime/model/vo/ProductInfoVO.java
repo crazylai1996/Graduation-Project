@@ -28,6 +28,7 @@ public class ProductInfoVO {
     private String classifyName;
     private String propertyName;
     private String effectName;
+    private boolean follow;
     
 	public Long getProductId() {
 		return productId;
@@ -131,12 +132,20 @@ public class ProductInfoVO {
 	public void setEffectName(String effectName) {
 		this.effectName = effectName;
 	}
+	public boolean isFollow() {
+		return follow;
+	}
+	public void setFollow(boolean follow) {
+		this.follow = follow;
+	}
+	
 	@Override
 	public String toString() {
-		return "ProductInfoVO [productName=" + productName + ", brand=" + brand + ", comeInDate=" + comeInDate
-				+ ", spec=" + spec + ", referencePrice=" + referencePrice + ", classify=" + classify + ", property="
-				+ property + ", effect=" + effect + ", skinTexture=" + skinTexture + ", coverImage=" + coverImage
-				+ ", productImages=" + productImages + ", desc=" + desc + ", brandName=" + brandName + ", classifyName="
-				+ classifyName + ", propertyName=" + propertyName + ", effectName=" + effectName + "]";
+		return "ProductInfoVO [productId=" + productId + ", productName=" + productName + ", brand=" + brand
+				+ ", comeInDate=" + comeInDate + ", spec=" + spec + ", referencePrice=" + referencePrice + ", classify="
+				+ classify + ", property=" + property + ", effect=" + effect + ", skinTexture=" + skinTexture
+				+ ", coverImage=" + coverImage + ", productImages=" + productImages + ", desc=" + desc + ", brandName="
+				+ brandName + ", classifyName=" + classifyName + ", propertyName=" + propertyName + ", effectName="
+				+ effectName + ", follow=" + follow + "]";
 	}
 }

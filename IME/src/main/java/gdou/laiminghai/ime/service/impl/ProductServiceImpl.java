@@ -1,12 +1,12 @@
 package gdou.laiminghai.ime.service.impl;
 
-import static org.hamcrest.CoreMatchers.endsWith;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
@@ -20,9 +20,13 @@ import gdou.laiminghai.ime.common.exception.ServiceResultEnum;
 import gdou.laiminghai.ime.common.setting.AppSetting;
 import gdou.laiminghai.ime.common.statics.SkinTextureEnum;
 import gdou.laiminghai.ime.common.util.FileUtil;
+import gdou.laiminghai.ime.common.util.ResultDTOUtil;
 import gdou.laiminghai.ime.dao.mapper.ProductInfoMapper;
+import gdou.laiminghai.ime.dao.mapper.UserFollowProductMapper;
+import gdou.laiminghai.ime.model.dto.ResultDTO;
 import gdou.laiminghai.ime.model.entity.ProductInfo;
 import gdou.laiminghai.ime.model.entity.ProductPicture;
+import gdou.laiminghai.ime.model.entity.UserFollowProduct;
 import gdou.laiminghai.ime.model.vo.ProductInfoVO;
 import gdou.laiminghai.ime.service.ProductPictureService;
 import gdou.laiminghai.ime.service.ProductService;
@@ -34,6 +38,8 @@ public class ProductServiceImpl implements ProductService {
 	private ProductInfoMapper productInfoMapper;
 	@Autowired
 	private ProductPictureService productPictureService;
+	@Autowired
+	private UserFollowProductMapper userFollowProductMapper;
 	
 	//日志记录
 	private static final Logger logger = Logger.getLogger(ProductServiceImpl.class);
@@ -199,5 +205,82 @@ public class ProductServiceImpl implements ProductService {
 		}
 		productInfoVO.setProductImages(pictrueUrls);
 		return productInfoVO;
+	}
+
+	@Override
+	public ResultDTO followProduct(Long userId, Long productId) {
+		//无效操作
+		if(userId == null || productId == null) {
+			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);
+		}
+		//产品不存在
+		ProductInfo productInfo = productInfoMapper.findProductInfoById(productId);
+		if(productInfo == null) {
+			throw new ServiceException(ServiceResultEnum.PRODUCT_NOT_FOUND);
+		}
+		Map<String,Object> map = new HashMap<>();
+		map.put("userId", userId);
+		map.put("productId", productId);
+		//已经关注，取消关注
+		List<UserFollowProduct> follows = userFollowProductMapper.selectByCondition(map);
+		Map<String,Object> data = new HashMap<>();
+		if(follows != null && follows.size() >= 1) {
+			UserFollowProduct follow = follows.get(0);
+			userFollowProductMapper.deleteByPrimaryKey(follow.getUserProductId());
+			data.put("action", 2);
+			return ResultDTOUtil.success(data);//取消关注标识
+		}
+		UserFollowProduct follow = new UserFollowProduct();
+		follow.setUserId(userId);
+		follow.setProductId(productId);
+		follow.setFollowTime(new Date());
+		userFollowProductMapper.insert(follow);
+		data.put("action", 1);
+		return ResultDTOUtil.success(data);//关注标识 
+	}
+
+	@Override
+	public ResultDTO unfollowProduct(Long userId, Long productId) {
+		// 无效操作
+		if (userId == null || productId == null) {
+			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);
+		}
+		// 产品不存在
+		ProductInfo productInfo = productInfoMapper.findProductInfoById(productId);
+		if (productInfo == null) {
+			throw new ServiceException(ServiceResultEnum.PRODUCT_NOT_FOUND);
+		}
+		Map<String,Object> map = new HashMap<>();
+		map.put("userId", userId);
+		map.put("productId", productId);
+		//未关注
+		List<UserFollowProduct> follows = userFollowProductMapper.selectByCondition(map);
+		Map<String, Object> data = new HashMap<>();
+		if(follows == null || follows.size() == 0) {
+			UserFollowProduct follow = new UserFollowProduct();
+			follow.setUserId(userId);
+			follow.setProductId(productId);
+			follow.setFollowTime(new Date());
+			userFollowProductMapper.insert(follow);
+			data.put("action", 1);
+			return ResultDTOUtil.success(data);//关注标识
+		}
+		UserFollowProduct userFollowProduct = follows.get(0);
+		userFollowProductMapper.deleteByPrimaryKey(userFollowProduct.getUserProductId());
+		data.put("action", 2);
+		return ResultDTOUtil.success(data);//取消关注
+	}
+
+	@Override
+	public boolean isFolloedProduct(Long userId, Long productId) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("userId", userId);
+		map.put("productId", productId);
+		//已关注
+		List<UserFollowProduct> follows = userFollowProductMapper.selectByCondition(map);
+		if(follows != null && follows.size() >= 1) {
+			return true;
+		}
+		return false;
 	}
 }

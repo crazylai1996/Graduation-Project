@@ -7,6 +7,9 @@
     <result column="bUserId" jdbcType="BIGINT" property="userId" />
     <result column="dFollowTime" jdbcType="TIMESTAMP" property="followTime" />
   </resultMap>
+  <sql id="UserFollowProductColumns">
+  	bUserProductId, bProductId, bUserId, dFollowTime
+  </sql>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from userfollowproduct
     where bUserProductId = #{userProductId,jdbcType=BIGINT}
@@ -25,12 +28,29 @@
     where bUserProductId = #{userProductId,jdbcType=BIGINT}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select bUserProductId, bProductId, bUserId, dFollowTime
+    select <include refid="UserFollowProductColumns"/>
     from userfollowproduct
     where bUserProductId = #{userProductId,jdbcType=BIGINT}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select bUserProductId, bProductId, bUserId, dFollowTime
+    select <include refid="UserFollowProductColumns"/>
     from userfollowproduct
+  </select>
+  <sql id="selectByCondition_Condition">
+  	<where>
+  		<if test="userId != null">
+  			and bUserId = #{userId}
+  		</if>
+  		<if test="productId != null">
+  			and bProductId = #{productId}
+  		</if>
+  	</where>
+  </sql>
+  <!-- 条件查询用户产品关注 -->
+  <select id="selectByCondition" parameterType="map" 
+  	resultMap="BaseResultMap" >
+  	select <include refid="UserFollowProductColumns"/>
+  	from userfollowproduct 
+  	<include refid="selectByCondition_Condition"/>
   </select>
 </mapper>

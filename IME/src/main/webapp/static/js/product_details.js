@@ -262,6 +262,134 @@ $(document).ready(function() {
   });
 
   /**
+   * 关注按钮
+   */
+  $(".follow-ops").on("click",".follow-btn",function(){
+	  var productId = $(".product-id").val();
+	  
+	  var postUrl = basePath + "product/followProduct.do";
+	  $.ajax({
+		  url: postUrl,
+		  data: {productId:productId},
+		  type: "POST",
+		  dataType: "json",
+		  success: function(result){
+			  console.log(result);
+			  if(result.success){
+				//确认按钮回调
+				  var tips = "";
+					if(result.data.action == 1){
+						//关注成功
+						var html = '<a href="javascript:void(0);" class="love-btn unfollow-btn"> \
+							<font><i class="layui-icon layui-icon-star-fill"></i> 已关注&nbsp;&nbsp;</font>|&nbsp;&nbsp;0人\
+							</a>';
+						$(".follow-ops").html(html);
+						tips = "成功关注";
+					}else if(result.data.action == 2){
+						//取消关注
+						tips = "你已取消关注";
+					}
+				  alert("",
+		  					tips,
+		  					function(){
+		  						
+		  					},
+		  					{type:'success',confirmButtonText: '好的'});
+			  }else{
+				  var title = "";
+		  			var tips = "";
+		  			var callback = function(){
+
+		  			};
+		  			if(result.code == 207){
+		  				tips = "登录失效，请重新登录";
+		  				callback = function(){
+		  					var redirectUrl = window.location.href;
+		  					$.get(basePath+"user/login",{target:"login",redirectUrl:redirectUrl},function(data,status){
+		  						$(document.body).append("<div class='login-popup-container'>"+data+"</div>");
+		  						$("html").css("overflow-y","hidden");
+		  					});
+		  				}
+		  			}else if(result.code == 208){
+		  				tips = "非法请求";
+		  			}else if(result.code == 303){
+		  				tips = "产品不存在或已下架";
+		  			}else{
+		  				tips = "未知错误";
+		  			}
+		  			alert(title,
+							tips,
+							callback,
+							{type:'error',confirmButtonText: '好的'});
+			  }
+		  }});
+  });
+ 
+  /**
+   * 取消关注按钮
+   */
+  $(".follow-ops").on("click",".unfollow-btn",function(){
+var productId = $(".product-id").val();
+	  
+	  var postUrl = basePath + "product/unfollowProduct.do";
+	  $.ajax({
+		  url: postUrl,
+		  data: {productId:productId},
+		  type: "POST",
+		  dataType: "json",
+		  success: function(result){
+			  console.log(result);
+			  if(result.success){
+				//确认按钮回调
+				  var tips = "";
+					if(result.data.action == 2){
+						//关注成功
+						var html = '<a href="javascript:void(0);" class="love-btn follow-btn"> \
+							<font><i class="layui-icon layui-icon-star"></i> 关注&nbsp;&nbsp;</font>|&nbsp;&nbsp;0人\
+							</a>';
+						$(".follow-ops").html(html);
+						tips = "成功取消关注";
+					}else if(result.data.action == 1){
+						//取消关注
+						tips = "你已成功关注该产品";
+					}
+				  alert("",
+		  					tips,
+		  					function(){
+		  						
+		  					},
+		  					{type:'success',confirmButtonText: '好的'});
+			  }else{
+				  var title = "";
+		  			var tips = "";
+		  			var callback = function(){
+
+		  			};
+		  			if(result.code == 207){
+		  				tips = "登录失效，请重新登录";
+		  				callback = function(){
+		  					var redirectUrl = window.location.href;
+		  					$.get(basePath+"user/login",{target:"login",redirectUrl:redirectUrl},function(data,status){
+		  						$(document.body).append("<div class='login-popup-container'>"+data+"</div>");
+		  						$("html").css("overflow-y","hidden");
+		  					});
+		  				}
+		  			}else if(result.code == 208){
+		  				tips = "非法请求";
+		  			}else if(result.code == 303){
+		  				tips = "产品不存在或已下架";
+		  			}else{
+		  				tips = "未知错误";
+		  			}
+		  			alert(title,
+							tips,
+							callback,
+							{type:'error',confirmButtonText: '好的'});
+			  }
+		  }});
+  });
+  
+  /**
    * 加载更多
    */
   $(".load-more-btn").click(function(){
