@@ -59,6 +59,8 @@
             <mvc:mapping path="/user/update**.do"/> 
             <mvc:mapping path="/user/accountSetting**"/> 
             <mvc:mapping path="/user/accountSetting/**"/> 
+            <mvc:mapping path="/user/followUser.do"/>
+            <mvc:mapping path="/user/unfollowUser.do"/>
             <mvc:mapping path="/**/new.do"/> 
             <mvc:mapping path="/product/followProduct.do"/>
             <mvc:mapping path="/product/unfollowProduct.do"/>

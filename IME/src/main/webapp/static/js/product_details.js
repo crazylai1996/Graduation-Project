@@ -262,7 +262,7 @@ $(document).ready(function() {
   });
 
   /**
-   * 关注按钮
+   * 关注产品按钮
    */
   $(".follow-ops").on("click",".follow-btn",function(){
 	  var productId = $(".product-id").val();
@@ -326,11 +326,10 @@ $(document).ready(function() {
   });
  
   /**
-   * 取消关注按钮
+   * 取消关注产品按钮
    */
   $(".follow-ops").on("click",".unfollow-btn",function(){
-var productId = $(".product-id").val();
-	  
+	  var productId = $(".product-id").val();
 	  var postUrl = basePath + "product/unfollowProduct.do";
 	  $.ajax({
 		  url: postUrl,
@@ -378,6 +377,132 @@ var productId = $(".product-id").val();
 		  				tips = "非法请求";
 		  			}else if(result.code == 303){
 		  				tips = "产品不存在或已下架";
+		  			}else{
+		  				tips = "未知错误";
+		  			}
+		  			alert(title,
+							tips,
+							callback,
+							{type:'error',confirmButtonText: '好的'});
+			  }
+		  }});
+  });
+  
+  /**
+   * 关注用户按钮 
+   */
+  $(".comment-list").on("click",".follow-her-btn",function(){
+	  var _this = $(this);
+	  var followedUserId = $(this).data("userId");
+	  
+	  var postUrl = basePath + "user/followUser.do";
+	  $.ajax({
+		  url: postUrl,
+		  data: {followedUserId:followedUserId},
+		  type: "POST",
+		  dataType: "json",
+		  success: function(result){
+			  console.log(result);
+			  if(result.success){
+				//确认按钮回调
+				  var tips = "";
+					if(result.data.action == 1){
+						//关注成功
+						_this.text("取消关注");
+						_this.removeClass("follow-her-btn").addClass("unfollow-her-btn");
+						tips = "成功关注";
+					}else if(result.data.action == 2){
+						//取消关注
+						tips = "你已取消关注";
+					}
+				  alert("",
+		  					tips,
+		  					function(){
+		  						
+		  					},
+		  					{type:'success',confirmButtonText: '好的'});
+			  }else{
+				  var title = "";
+		  			var tips = "";
+		  			var callback = function(){
+
+		  			};
+		  			if(result.code == 207){
+		  				tips = "登录失效，请重新登录";
+		  				callback = function(){
+		  					var redirectUrl = window.location.href;
+		  					$.get(basePath+"user/login",{target:"login",redirectUrl:redirectUrl},function(data,status){
+		  						$(document.body).append("<div class='login-popup-container'>"+data+"</div>");
+		  						$("html").css("overflow-y","hidden");
+		  					});
+		  				}
+		  			}else if(result.code == 208){
+		  				tips = "非法请求";
+		  			}else if(result.code == 205){
+		  				tips = "该用户不存在";
+		  			}else{
+		  				tips = "未知错误";
+		  			}
+		  			alert(title,
+							tips,
+							callback,
+							{type:'error',confirmButtonText: '好的'});
+			  }
+		  }});
+  });
+  
+  /**
+   * 取消关注用户
+   */
+  $(".comment-list").on("click",".unfollow-her-btn",function(){
+	  var _this = $(this);
+	  var followedUserId = $(this).data("userId");
+	  
+	  var postUrl = basePath + "user/unfollowUser.do";
+	  $.ajax({
+		  url: postUrl,
+		  data: {followedUserId:followedUserId},
+		  type: "POST",
+		  dataType: "json",
+		  success: function(result){
+			  console.log(result);
+			  if(result.success){
+				//确认按钮回调
+				  var tips = "";
+					if(result.data.action == 2){
+						//取消关注成功
+						_this.text("关注TA");
+						_this.removeClass("unfollow-her-btn").addClass("follow-her-btn");
+						tips = "成功取消关注";
+					}else if(result.data.action == 1){
+						//成功关注
+						tips = "关注成功";
+					}
+				  alert("",
+		  					tips,
+		  					function(){
+		  						
+		  					},
+		  					{type:'success',confirmButtonText: '好的'});
+			  }else{
+				  var title = "";
+		  			var tips = "";
+		  			var callback = function(){
+
+		  			};
+		  			if(result.code == 207){
+		  				tips = "登录失效，请重新登录";
+		  				callback = function(){
+		  					var redirectUrl = window.location.href;
+		  					$.get(basePath+"user/login",{target:"login",redirectUrl:redirectUrl},function(data,status){
+		  						$(document.body).append("<div class='login-popup-container'>"+data+"</div>");
+		  						$("html").css("overflow-y","hidden");
+		  					});
+		  				}
+		  			}else if(result.code == 208){
+		  				tips = "非法请求";
+		  			}else if(result.code == 205){
+		  				tips = "该用户不存在";
 		  			}else{
 		  				tips = "未知错误";
 		  			}

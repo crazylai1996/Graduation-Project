@@ -2,6 +2,7 @@ package gdou.laiminghai.ime.service;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import gdou.laiminghai.ime.model.dto.ResultDTO;
 import gdou.laiminghai.ime.model.vo.UserInfoVO;
 import gdou.laiminghai.ime.model.vo.UserVO;
 
@@ -109,4 +110,32 @@ public interface UserService {
 	 * @datetime: 2018年5月21日 上午1:32:15
 	 */
 	void updateAccountSetting(UserVO userVO);
+	
+	/**
+	 * 关注用户
+	 * @param userId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月21日 下午7:22:14
+	 */
+	ResultDTO followUser(Long userId,Long followedUserId);
+	
+	/**
+	 * 取消关注用户
+	 * @param userId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月21日 下午7:22:40
+	 */
+	ResultDTO unfollowUser(Long userId,Long followedUserId);
+	
+	/**
+	 * 判断当前用户是否已被关注
+	 * @param userId
+	 * @param followedUserId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月21日 下午7:52:28
+	 */
+	boolean isFollowedUser(Long userId,Long followedUserId);
 }

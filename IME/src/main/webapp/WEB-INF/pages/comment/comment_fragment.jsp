@@ -11,7 +11,7 @@
 					点评数( <font>999</font>)
 				</p>
 				<p>
-					<a href="javascript:void(0);" class="love-her-btn">关注她</a>
+					<a href="javascript:void(0);" data-user-id="${commentInfoVO.userInfo.userId }" class="love-her-btn follow-her-btn">关注她</a>
 				</p>
 			</div>
 		</div>

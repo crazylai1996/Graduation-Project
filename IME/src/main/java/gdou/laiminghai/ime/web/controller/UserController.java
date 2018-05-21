@@ -804,4 +804,40 @@ public class UserController {
 		session.removeAttribute(Constant.WEB_PRE_KEY_IDENTITY_AUTH_PASS+userId);
 		return ResultDTOUtil.success(null);
 	}
+	
+	/**
+	 * 关注用户
+	 * @param followedUserId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月21日 下午7:56:37
+	 */
+	@ResponseBody
+	@RequestMapping("/followUser.do")
+	public ResultDTO followUser(Long followedUserId) {
+		// 获取用户登录信息
+		HttpSession session = request.getSession();
+		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
+		Long userId = (Long)userInfoMap.get("userId");
+		ResultDTO resultDTO = userService.followUser(userId, followedUserId);
+		return resultDTO;
+	}
+	
+	/**
+	 * 取消关注用户
+	 * @param followedUserId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月21日 下午7:59:53
+	 */
+	@ResponseBody
+	@RequestMapping("/unfollowUser.do")
+	public ResultDTO unfollowUser(Long followedUserId) {
+		// 获取用户登录信息
+		HttpSession session = request.getSession();
+		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
+		Long userId = (Long)userInfoMap.get("userId");
+		ResultDTO resultDTO = userService.unfollowUser(userId, followedUserId);
+		return resultDTO;
+	}
 }

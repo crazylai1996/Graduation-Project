@@ -6,6 +6,7 @@
     <result column="bUserId" jdbcType="BIGINT" property="userId" />
     <result column="bFollowedUserId" jdbcType="BIGINT" property="followedUserId" />
   </resultMap>
+  <sql id="UserFollowUserColumns">bUserUserId, bUserId, bFollowedUserId</sql>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from userfollowuser
     where bUserUserId = #{userUserId,jdbcType=BIGINT}
@@ -21,12 +22,29 @@
     where bUserUserId = #{userUserId,jdbcType=BIGINT}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select bUserUserId, bUserId, bFollowedUserId
+    select <include refid="UserFollowUserColumns"/>
     from userfollowuser
     where bUserUserId = #{userUserId,jdbcType=BIGINT}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select bUserUserId, bUserId, bFollowedUserId
+    select <include refid="UserFollowUserColumns"/>
     from userfollowuser
   </select>
-</mapper>
+  <sql id="selectByCondition_Condition">
+  	<where>
+  		<if test="userId != null">
+  			and bUserId = #{userId}
+  		</if>
+  		<if test="followedUserId != null">
+  			and bFollowedUserId = #{followedUserId}
+  		</if>
+  	</where>
+  </sql>
+  <!-- 条件查询 关注用户 -->
+  <select id="selectByCondition" parameterType="map" 
+  	resultMap="BaseResultMap">
+  	select <include refid="UserFollowUserColumns"/>
+  	from userfollowuser
+  	<include refid="selectByCondition_Condition"/>
+  </select>
+</mapper> 

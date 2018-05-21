@@ -3,6 +3,7 @@ package gdou.laiminghai.ime.service.impl;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -22,8 +23,12 @@ import gdou.laiminghai.ime.common.task.EmailSendTask;
 import gdou.laiminghai.ime.common.util.CaptchaUtil;
 import gdou.laiminghai.ime.common.util.FileUtil;
 import gdou.laiminghai.ime.common.util.RegexUtil;
+import gdou.laiminghai.ime.common.util.ResultDTOUtil;
+import gdou.laiminghai.ime.dao.mapper.UserFollowUserMapper;
 import gdou.laiminghai.ime.dao.mapper.UserInfoMapper;
+import gdou.laiminghai.ime.model.dto.ResultDTO;
 import gdou.laiminghai.ime.model.dto.SmsCaptchaResponseDTO;
+import gdou.laiminghai.ime.model.entity.UserFollowUser;
 import gdou.laiminghai.ime.model.entity.UserInfo;
 import gdou.laiminghai.ime.model.vo.UserInfoVO;
 import gdou.laiminghai.ime.model.vo.UserVO;
@@ -48,6 +53,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private TaskExecutor taskExecutor;
+	
+	@Autowired
+	private UserFollowUserMapper userFollowUserMapper;
 
 	@Override
 	public void registerByPhone(UserVO userVO) {
@@ -393,4 +401,80 @@ public class UserServiceImpl implements UserService {
 		userInfoVO.setArea(userInfo.getArea());
 		return userInfoVO;
 	}
+
+	@Override
+	public ResultDTO followUser(Long userId,Long followedUserId) {
+		//无效操作
+		if (userId == null || followedUserId == null) {
+			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);
+		}
+		// 用户不存在
+		UserInfo userInfo = userInfoMapper.selectByPrimaryKey(followedUserId);
+		if (userInfo == null) {
+			throw new ServiceException(ServiceResultEnum.USER_NOT_EXIST);
+		}
+		Map<String, Object> map = new HashMap<>();
+		map.put("userId", userId);
+		map.put("followedUserId", followedUserId);
+		// 已经关注，取消关注
+		List<UserFollowUser> follows = userFollowUserMapper.selectByCondition(map);
+		Map<String, Object> data = new HashMap<>();
+		if (follows != null && follows.size() >= 1) {
+			UserFollowUser follow = follows.get(0);
+			userFollowUserMapper.deleteByPrimaryKey(follow.getUserUserId());
+			data.put("action", 2);
+			return ResultDTOUtil.success(data);// 取消关注标识
+		}
+		UserFollowUser follow = new UserFollowUser();
+		follow.setUserId(userId);
+		follow.setFollowedUserId(followedUserId);
+		userFollowUserMapper.insert(follow);
+		data.put("action", 1);
+		return ResultDTOUtil.success(data);//关注标识 
+	}
+
+	@Override
+	public ResultDTO unfollowUser(Long userId,Long followedUserId) {
+		// 无效操作
+		if (userId == null || followedUserId == null) {
+			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);
+		}
+		// 用户不存在
+		UserInfo userInfo = userInfoMapper.selectByPrimaryKey(followedUserId);
+		if (userInfo == null) {
+			throw new ServiceException(ServiceResultEnum.USER_NOT_EXIST);
+		}
+		Map<String, Object> map = new HashMap<>();
+		map.put("userId", userId);
+		map.put("followedUserId", followedUserId);
+		// 未关注
+		List<UserFollowUser> follows = userFollowUserMapper.selectByCondition(map);
+		Map<String, Object> data = new HashMap<>();
+		if (follows == null || follows.size() == 0) {
+			UserFollowUser follow = new UserFollowUser();
+			follow.setUserId(userId);
+			follow.setFollowedUserId(followedUserId);
+			userFollowUserMapper.insert(follow);
+			data.put("action", 1);
+			return ResultDTOUtil.success(data);// 关注标识
+		}
+		UserFollowUser userFollowUser = follows.get(0);
+		userFollowUserMapper.deleteByPrimaryKey(userFollowUser.getUserUserId());
+		data.put("action", 2);
+		return ResultDTOUtil.success(data);// 取消关注
+	}
+
+	@Override
+	public boolean isFollowedUser(Long userId, Long followedUserId) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("userId", userId);
+		map.put("followedUserId", followedUserId);
+		//已关注
+		List<UserFollowUser> follows = userFollowUserMapper.selectByCondition(map);
+		if(follows != null && follows.size() >= 1) {
+			return true;
+		}
+		return false;
+	}
+	
 }
