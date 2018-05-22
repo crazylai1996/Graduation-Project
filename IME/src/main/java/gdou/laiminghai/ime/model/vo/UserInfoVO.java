@@ -34,6 +34,8 @@ public class UserInfoVO {
     private Integer memberLevel;
     
     private Area area;
+    
+    private boolean follow;
 
 	public Long getUserId() {
 		return userId;
@@ -139,12 +141,19 @@ public class UserInfoVO {
 		this.area = area;
 	}
 
+	public boolean isFollow() {
+		return follow;
+	}
+
+	public void setFollow(boolean follow) {
+		this.follow = follow;
+	}
+
 	@Override
 	public String toString() {
 		return "UserInfoVO [userId=" + userId + ", userName=" + userName + ", nickname=" + nickname + ", gender="
 				+ gender + ", skinTexture=" + skinTexture + ", age=" + age + ", introduction=" + introduction
 				+ ", portrait=" + portrait + ", phone=" + phone + ", email=" + email + ", membershipPoint="
-				+ membershipPoint + ", memberLevel=" + memberLevel + ", area=" + area + "]";
+				+ membershipPoint + ", memberLevel=" + memberLevel + ", area=" + area + ", follow=" + follow + "]";
 	}
-    
 }

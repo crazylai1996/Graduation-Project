@@ -10,6 +10,9 @@ public class UserFollowProduct {
     private Long userId;
 
     private Date followTime;
+    
+    //关联属性
+    private ProductInfo productInfo;
 
     public Long getUserProductId() {
         return userProductId;
@@ -42,4 +45,13 @@ public class UserFollowProduct {
     public void setFollowTime(Date followTime) {
         this.followTime = followTime;
     }
+
+	public ProductInfo getProductInfo() {
+		return productInfo;
+	}
+
+	public void setProductInfo(ProductInfo productInfo) {
+		this.productInfo = productInfo;
+	}
+    
 }

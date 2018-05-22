@@ -11,7 +11,22 @@
 					点评数( <font>999</font>)
 				</p>
 				<p>
-					<a href="javascript:void(0);" data-user-id="${commentInfoVO.userInfo.userId }" class="love-her-btn follow-her-btn">关注她</a>
+					<c:choose>
+						<c:when test="${commentInfoVO.userInfo.userId != sessionScope.userInfo.userId}">
+							<c:choose>
+								<c:when test="${commentInfoVO.userInfo.follow }">
+									<a href="javascript:void(0);" data-user-id="${commentInfoVO.userInfo.userId }" class="love-her-btn unfollow-her-btn">关注她</a>
+								</c:when>
+								<c:otherwise>
+									<a href="javascript:void(0);" data-user-id="${commentInfoVO.userInfo.userId }" class="love-her-btn follow-her-btn">关注她</a>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:otherwise>
+							<a href="javascript:void(0);" data-user-id="${commentInfoVO.userInfo.userId }" class="love-her-btn">我自己</a>
+						</c:otherwise>
+					</c:choose>
+					
 				</p>
 			</div>
 		</div>

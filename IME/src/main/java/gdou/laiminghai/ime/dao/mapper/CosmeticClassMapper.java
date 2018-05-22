@@ -30,4 +30,12 @@ public interface CosmeticClassMapper {
      * @datetime: 2018年5月16日 上午8:42:32
      */
     List<CosmeticClass> getChildCosmeticClasses(Integer parentId);
+    
+    /**
+     * 查询所有二级分类
+     * @return
+     * @author: laiminghai
+     * @datetime: 2018年5月22日 上午10:48:17
+     */
+    List<CosmeticClass> getAllChildClasses();
 }

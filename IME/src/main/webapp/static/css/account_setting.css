@@ -112,11 +112,12 @@ body {
   margin: 0 auto;
 }
 .main-container hr {
+  height: 0px !important;
   margin: 15px 0;
   border: solid 0.5px #e6cce6;
-  opacity: 0.75;
-  filter: alpha(opacity=75);
-  -moz-opacity: 0.75;
+  opacity: 0.35;
+  filter: alpha(opacity=35);
+  -moz-opacity: 0.35;
 }
 /*
  *当前位置
@@ -170,8 +171,8 @@ body {
 }
 .account-setting .title {
   color: #333333;
-  font-size: 17px;
-  font-weight: 550;
+  font-size: 22px;
+  font-weight: 500;
 }
 .account-setting .line {
   border: solid 1px #cc99cc;

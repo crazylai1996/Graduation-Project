@@ -1,5 +1,7 @@
 package gdou.laiminghai.ime.service;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import gdou.laiminghai.ime.model.dto.ResultDTO;
@@ -138,4 +140,13 @@ public interface UserService {
 	 * @datetime: 2018年5月21日 下午7:52:28
 	 */
 	boolean isFollowedUser(Long userId,Long followedUserId);
+	
+	/**
+	 * 查找我关注的用户
+	 * @param userId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月21日 下午11:10:10
+	 */
+	List<UserInfoVO> findMyFollowedUsers(Long userId);
 }

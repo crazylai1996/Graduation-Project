@@ -27,6 +27,6 @@
     </ul>
 
     <script src="static\js\jquery.js"></script>
-    <script src="static\js\option_select.js"></script>
+    <script src="static\js\option_select_more.js"></script>
   </body>
 </html>

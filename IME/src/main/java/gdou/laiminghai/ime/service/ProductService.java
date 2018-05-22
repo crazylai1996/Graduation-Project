@@ -78,4 +78,13 @@ public interface ProductService {
 	 * @datetime: 2018年5月21日 下午4:50:32
 	 */
 	boolean isFolloedProduct(Long userId,Long productId);
+	
+	/**
+	 * 查询关注的产品
+	 * @param userId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月22日 上午12:54:07
+	 */
+	List<ProductInfoVO> findFollowedProducts(Long userId);
 }

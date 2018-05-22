@@ -29,6 +29,7 @@ public class ProductInfoVO {
     private String propertyName;
     private String effectName;
     private boolean follow;
+    private String followTime;
     
 	public Long getProductId() {
 		return productId;
@@ -138,6 +139,12 @@ public class ProductInfoVO {
 	public void setFollow(boolean follow) {
 		this.follow = follow;
 	}
+	public String getFollowTime() {
+		return followTime;
+	}
+	public void setFollowTime(String followTime) {
+		this.followTime = followTime;
+	}
 	
 	@Override
 	public String toString() {
@@ -146,6 +153,6 @@ public class ProductInfoVO {
 				+ classify + ", property=" + property + ", effect=" + effect + ", skinTexture=" + skinTexture
 				+ ", coverImage=" + coverImage + ", productImages=" + productImages + ", desc=" + desc + ", brandName="
 				+ brandName + ", classifyName=" + classifyName + ", propertyName=" + propertyName + ", effectName="
-				+ effectName + ", follow=" + follow + "]";
+				+ effectName + ", follow=" + follow + ", followTime=" + followTime + "]";
 	}
 }

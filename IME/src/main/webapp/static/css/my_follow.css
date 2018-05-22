@@ -99,6 +99,60 @@ html {
 body {
   font-family: "微软雅黑";
 }
+/*
+ *内容主体外层
+ */
+.main-wrapped {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #ffffff;
+}
+.main-container {
+  width: 1000px;
+  margin: 0 auto;
+}
+.main-container hr {
+  height: 0px !important;
+  margin: 15px 0;
+  border: solid 0.5px #e6cce6;
+  opacity: 0.35;
+  filter: alpha(opacity=35);
+  -moz-opacity: 0.35;
+}
+/*
+ *当前位置
+ */
+.current-pos {
+  width: 100%;
+  margin-top: 10px;
+  font-size: 12px;
+  margin-bottom: 13px;
+}
+.current-pos a {
+  color: #1a1a1a;
+  text-decoration: none;
+  transition: all ease-in-out 0.2s;
+}
+.current-pos a:hover {
+  color: #cc99cc;
+  text-decoration: none;
+}
+.current-pos .split-line:before {
+  content: ">>";
+  margin: 0 2px;
+}
+.current-pos .title {
+  color: #666666;
+  font-weight: 500;
+}
+/**
+ * 主左：导航栏
+ */
+.main-left {
+  float: left;
+  width: 160px;
+  box-sizing: border-box;
+}
 /**
  * 主右：内容
  */
@@ -106,6 +160,7 @@ body {
   float: left;
   width: 820px;
   margin-left: 20px;
+  margin-bottom: 30px;
   box-sizing: border-box;
 }
 /**
@@ -116,8 +171,8 @@ body {
 }
 .follow-container .title {
   color: #333333;
-  font-size: 17px;
-  font-weight: 550;
+  font-size: 22px;
+  font-weight: 500;
 }
 .follow-container .line {
   border: solid 1px #cc99cc;
@@ -430,9 +485,9 @@ body {
   font-size: 12px;
   border-radius: 4px;
   background-color: #000000;
-  opacity: 0.55;
-  filter: alpha(opacity=55);
-  -moz-opacity: 0.55;
+  opacity: 0.45;
+  filter: alpha(opacity=45);
+  -moz-opacity: 0.45;
 }
 .followed-product .product-item .product-count a {
   color: #ffffff;
@@ -440,7 +495,7 @@ body {
   transition: all 0.2s ease-in-out;
 }
 .followed-product .product-item .product-count a:hover {
-  color: #cc99cc;
+  color: #be7ebe;
 }
 .followed-product .product-item .follow-time {
   font-size: 12px;
@@ -454,4 +509,15 @@ body {
 }
 .followed-product .product-item .cancel-love:hover {
   color: #be7ebe;
+}
+/**
+ * 没有关注
+ */
+.no-follow {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  font-size: 18px;
+  color: #999999;
 }

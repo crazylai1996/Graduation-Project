@@ -30,9 +30,11 @@ import gdou.laiminghai.ime.model.entity.CosmeticClass;
 import gdou.laiminghai.ime.model.vo.CommentInfoVO;
 import gdou.laiminghai.ime.model.vo.ProductInfoVO;
 import gdou.laiminghai.ime.model.vo.SelectItemVO;
+import gdou.laiminghai.ime.model.vo.UserInfoVO;
 import gdou.laiminghai.ime.service.CommentService;
 import gdou.laiminghai.ime.service.CosmeticClassService;
 import gdou.laiminghai.ime.service.ProductService;
+import gdou.laiminghai.ime.service.UserService;
 
 /**
  * 商品控制器
@@ -59,6 +61,9 @@ public class ProductController {
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private UserService userService;
 
 	/**
 	 * 跳转到添加新商品页面
@@ -151,7 +156,19 @@ public class ProductController {
 		map.put("productId", productId);
 		map.put("pageNum", 1);
 		PageResult<CommentInfoVO> pageResult = commentService.findCommentList(map);
-		System.out.println("分页结果："+pageResult.toString());
+		if(userInfoMap != null) {
+			Long userId = (Long)userInfoMap.get("userId");
+			for (CommentInfoVO commentInfoVO : pageResult.getList()) {
+				UserInfoVO userInfoVO = commentInfoVO.getUserInfo();
+				if(userInfoVO != null) {
+					if(userService.isFollowedUser(userId, userInfoVO.getUserId())) {
+						userInfoVO.setFollow(true);
+					}
+				}
+			}
+		}
+		
+		logger.debug("分页结果："+pageResult.toString());
 		mav.addObject("pageResult", pageResult);
 		return mav;
 	}

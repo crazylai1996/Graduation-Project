@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +30,14 @@ import gdou.laiminghai.ime.common.util.ResultDTOUtil;
 import gdou.laiminghai.ime.model.dto.ResultDTO;
 import gdou.laiminghai.ime.model.dto.SmsCaptchaResponseDTO;
 import gdou.laiminghai.ime.model.entity.Area;
+import gdou.laiminghai.ime.model.entity.CosmeticClass;
+import gdou.laiminghai.ime.model.vo.ProductInfoVO;
 import gdou.laiminghai.ime.model.vo.SelectItemVO;
 import gdou.laiminghai.ime.model.vo.UserInfoVO;
 import gdou.laiminghai.ime.model.vo.UserVO;
 import gdou.laiminghai.ime.service.AreaService;
+import gdou.laiminghai.ime.service.CosmeticClassService;
+import gdou.laiminghai.ime.service.ProductService;
 import gdou.laiminghai.ime.service.UserService;
 
 /**
@@ -61,6 +64,12 @@ public class UserController {
 	
 	@Autowired
 	private AreaService areaService;
+	
+	@Autowired
+	private ProductService productService;
+	
+	@Autowired
+	private CosmeticClassService cosmeticClassService;
 
 	/**
 	 * ajax返回用户登录页面
@@ -839,5 +848,29 @@ public class UserController {
 		Long userId = (Long)userInfoMap.get("userId");
 		ResultDTO resultDTO = userService.unfollowUser(userId, followedUserId);
 		return resultDTO;
+	}
+	
+	/**
+	 * 跳转到我的关注页面
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月21日 下午10:22:43
+	 */
+	@RequestMapping("/follow/list")
+	public ModelAndView goMyFollow() {
+		HttpSession session = request.getSession();
+		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
+		Long userId = (Long)userInfoMap.get("userId");
+		ModelAndView mav = new ModelAndView("user/my_follow");
+		//关注的用户
+		List<UserInfoVO> followedUsers = userService.findMyFollowedUsers(userId);
+		mav.addObject("followedUsers", followedUsers);
+		//关注的产品
+		List<ProductInfoVO> followedProducts = productService.findFollowedProducts(userId);
+		mav.addObject("followedProducts", followedProducts);
+		//关注的化妆品品类
+		List<CosmeticClass> followedClasses = cosmeticClassService.findFollowedClasses(userId);
+		mav.addObject("followedClasses", followedClasses);
+		return mav;
 	}
 }

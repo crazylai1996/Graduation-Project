@@ -117,96 +117,6 @@ public class ProductServiceImpl implements ProductService {
 		return productInfoVOs;
 	}
 
-	/**
-	 * VO=>PO
-	 * @param productInfoVO
-	 * @return
-	 * @author: laiminghai
-	 * @datetime: 2018年5月15日 上午8:18:26
-	 */
-	private ProductInfo productInfoVO2productInfoPO(ProductInfoVO productInfoVO) {
-		ProductInfo productInfoPO = new ProductInfo();
-		productInfoPO.setBrand(productInfoVO.getBrand());
-		productInfoPO.setProductName(productInfoVO.getProductName());
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月");
-		try {
-			String dateText = productInfoVO.getComeInDate();
-			if(StringUtils.isNotBlank(dateText)) {
-				Date date = sdf.parse(dateText);
-				productInfoPO.setComeInDate(date);
-			}
-		} catch (ParseException e) {
-			logger.error("商品上市日期转换错误：",e);
-		}
-		productInfoPO.setSpec(productInfoVO.getSpec());
-		productInfoPO.setReferencePrice(productInfoVO.getReferencePrice());
-		productInfoPO.setClassify(productInfoVO.getClassify());
-		productInfoPO.setProperty(productInfoVO.getProperty());
-		productInfoPO.setEffect(productInfoVO.getEffect());
-		productInfoPO.setSkinTexture(productInfoVO.getSkinTexture());
-		productInfoPO.setDesc(productInfoVO.getDesc());
-		return productInfoPO;
-	}
-	
-	/**
-	 * PO=>VO
-	 * @param productInfoPO
-	 * @return
-	 * @author: laiminghai
-	 * @datetime: 2018年5月16日 下午12:17:49
-	 */
-	private ProductInfoVO productInfoPO2productInfoVO(ProductInfo productInfoPO) {
-		ProductInfoVO productInfoVO = new ProductInfoVO();
-		productInfoVO.setProductId(productInfoPO.getProductId());
-		productInfoVO.setProductName(productInfoPO.getProductName());
-		productInfoVO.setBrand(productInfoPO.getBrand());
-		if(productInfoPO.getProductBrand() != null) {
-			productInfoVO.setBrandName(productInfoPO.getProductBrand().getBrandName());
-		}
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月");
-		//时间转换
-		Date comeInDate = productInfoPO.getComeInDate();
-		if(comeInDate != null) {
-			String dateText = sdf.format(comeInDate);
-			productInfoVO.setComeInDate(dateText);
-		}
-		
-		productInfoVO.setSpec(productInfoPO.getSpec());
-		productInfoVO.setReferencePrice(productInfoPO.getReferencePrice());
-		productInfoVO.setClassify(productInfoPO.getClassify());
-		if(productInfoPO.getProductClass() != null) {
-			productInfoVO.setClassifyName(productInfoPO.getProductClass().getClassName());
-		}
-		productInfoVO.setProperty(productInfoPO.getProperty());
-		if(productInfoPO.getProductProperty() != null) {
-			productInfoVO.setPropertyName(productInfoPO.getProductProperty().getPropertyName());
-		}
-		productInfoVO.setEffect(productInfoPO.getEffect());
-		if(productInfoPO.getProductEffect() != null) {
-			productInfoVO.setEffectName(productInfoPO.getProductEffect().getEffectName());
-		}
-		productInfoVO.setDesc(productInfoPO.getDesc());
-		//肤质
-		if(StringUtils.isNotBlank(productInfoPO.getSkinTexture())) {
-			SkinTextureEnum skinTexture = SkinTextureEnum.of(productInfoPO.getSkinTexture());
-			if(skinTexture != null) {
-				productInfoVO.setSkinTexture(skinTexture.getName());
-			}
-		}
-		//封面图片地址
-		productInfoVO.setCoverImage(AppSetting.APP_ROOT+AppSetting.PRODUCT_COVER_SAVED_PATH+productInfoPO.getCover());
-		//产品图片地址
-		List<ProductPicture> pictures = productInfoPO.getPictures();
-		List<String> pictrueUrls = new ArrayList<>();
-		if(pictures != null) {
-			for (ProductPicture productPicture : pictures) {
-				pictrueUrls.add(AppSetting.APP_ROOT+AppSetting.PRODUCT_PICTURES_SAVED_PATH + productPicture.getPictureUrl());
-			}
-		}
-		productInfoVO.setProductImages(pictrueUrls);
-		return productInfoVO;
-	}
-
 	@Override
 	public ResultDTO followProduct(Long userId, Long productId) {
 		//无效操作
@@ -282,5 +192,108 @@ public class ProductServiceImpl implements ProductService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<ProductInfoVO> findFollowedProducts(Long userId) {
+		List<ProductInfoVO> productInfoVOList = new ArrayList<>();
+		List<UserFollowProduct> followedProducts = userFollowProductMapper.findFollowedProducts(userId);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		for (UserFollowProduct userFollowProduct : followedProducts) {
+			ProductInfoVO productInfoVO = productInfoPO2productInfoVO(userFollowProduct.getProductInfo());
+			productInfoVO.setFollowTime(sdf.format(userFollowProduct.getFollowTime()));
+			productInfoVOList.add(productInfoVO);
+		}
+		return productInfoVOList;
+	}
+
+	/**
+	 * VO=>PO
+	 * @param productInfoVO
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月15日 上午8:18:26
+	 */
+	private ProductInfo productInfoVO2productInfoPO(ProductInfoVO productInfoVO) {
+		ProductInfo productInfoPO = new ProductInfo();
+		productInfoPO.setBrand(productInfoVO.getBrand());
+		productInfoPO.setProductName(productInfoVO.getProductName());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月");
+		try {
+			String dateText = productInfoVO.getComeInDate();
+			if(StringUtils.isNotBlank(dateText)) {
+				Date date = sdf.parse(dateText);
+				productInfoPO.setComeInDate(date);
+			}
+		} catch (ParseException e) {
+			logger.error("商品上市日期转换错误：",e);
+		}
+		productInfoPO.setSpec(productInfoVO.getSpec());
+		productInfoPO.setReferencePrice(productInfoVO.getReferencePrice());
+		productInfoPO.setClassify(productInfoVO.getClassify());
+		productInfoPO.setProperty(productInfoVO.getProperty());
+		productInfoPO.setEffect(productInfoVO.getEffect());
+		productInfoPO.setSkinTexture(productInfoVO.getSkinTexture());
+		productInfoPO.setDesc(productInfoVO.getDesc());
+		return productInfoPO;
+	}
+
+	/**
+	 * PO=>VO
+	 * @param productInfoPO
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月16日 下午12:17:49
+	 */
+	private ProductInfoVO productInfoPO2productInfoVO(ProductInfo productInfoPO) {
+		ProductInfoVO productInfoVO = new ProductInfoVO();
+		productInfoVO.setProductId(productInfoPO.getProductId());
+		productInfoVO.setProductName(productInfoPO.getProductName());
+		productInfoVO.setBrand(productInfoPO.getBrand());
+		if(productInfoPO.getProductBrand() != null) {
+			productInfoVO.setBrandName(productInfoPO.getProductBrand().getBrandName());
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月");
+		//时间转换
+		Date comeInDate = productInfoPO.getComeInDate();
+		if(comeInDate != null) {
+			String dateText = sdf.format(comeInDate);
+			productInfoVO.setComeInDate(dateText);
+		}
+		
+		productInfoVO.setSpec(productInfoPO.getSpec());
+		productInfoVO.setReferencePrice(productInfoPO.getReferencePrice());
+		productInfoVO.setClassify(productInfoPO.getClassify());
+		if(productInfoPO.getProductClass() != null) {
+			productInfoVO.setClassifyName(productInfoPO.getProductClass().getClassName());
+		}
+		productInfoVO.setProperty(productInfoPO.getProperty());
+		if(productInfoPO.getProductProperty() != null) {
+			productInfoVO.setPropertyName(productInfoPO.getProductProperty().getPropertyName());
+		}
+		productInfoVO.setEffect(productInfoPO.getEffect());
+		if(productInfoPO.getProductEffect() != null) {
+			productInfoVO.setEffectName(productInfoPO.getProductEffect().getEffectName());
+		}
+		productInfoVO.setDesc(productInfoPO.getDesc());
+		//肤质
+		if(StringUtils.isNotBlank(productInfoPO.getSkinTexture())) {
+			SkinTextureEnum skinTexture = SkinTextureEnum.of(productInfoPO.getSkinTexture());
+			if(skinTexture != null) {
+				productInfoVO.setSkinTexture(skinTexture.getName());
+			}
+		}
+		//封面图片地址
+		productInfoVO.setCoverImage(AppSetting.APP_ROOT+AppSetting.PRODUCT_COVER_SAVED_PATH+productInfoPO.getCover());
+		//产品图片地址
+		List<ProductPicture> pictures = productInfoPO.getPictures();
+		List<String> pictrueUrls = new ArrayList<>();
+		if(pictures != null) {
+			for (ProductPicture productPicture : pictures) {
+				pictrueUrls.add(AppSetting.APP_ROOT+AppSetting.PRODUCT_PICTURES_SAVED_PATH + productPicture.getPictureUrl());
+			}
+		}
+		productInfoVO.setProductImages(pictrueUrls);
+		return productInfoVO;
 	}
 }

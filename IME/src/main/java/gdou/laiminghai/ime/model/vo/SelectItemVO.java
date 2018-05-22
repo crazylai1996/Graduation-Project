@@ -8,6 +8,11 @@ package gdou.laiminghai.ime.model.vo;
 public class SelectItemVO {
 	private String code;
 	private String name;
+	//我是分割线
+	/**
+	 * 是否已被选中
+	 */
+	private boolean selected;
 	
 	public SelectItemVO() {
 		
@@ -30,9 +35,18 @@ public class SelectItemVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
+
 	@Override
 	public String toString() {
-		return "SelectItem [code=" + code + ", name=" + name + "]";
+		return "SelectItemVO [code=" + code + ", name=" + name + ", selected=" + selected + "]";
 	}
+	
 }

@@ -1,6 +1,29 @@
 @import "mixin_style.less";
 @import "global_style.less";
 
+/*
+ *内容主体外层
+ */
+.main_div();
+/*
+ *当前位置
+ */
+.current-pos {
+  .current-position();
+
+  margin-bottom: @div_margin;
+}
+/**
+ * 主左：导航栏
+ */
+.main-left{
+  @_width: 160px;
+
+  float: left;
+
+  width: @_width;
+  box-sizing: border-box;
+}
 /**
  * 主右：内容
  */
@@ -11,6 +34,7 @@
 
   width: @_width;
   margin-left: 20px;
+  margin-bottom: 30px;
   box-sizing: border-box;
 }
 /**
@@ -21,8 +45,8 @@
 
   .title{
     color: @font_color;
-    font-size: 17px;
-    font-weight: 550;
+    font-size: 22px;
+    font-weight: 500;
   }
   .line{
     border: solid 1px @main_color;
@@ -427,7 +451,7 @@
 
       border-radius: 4px;
       background-color: @dark_color;
-      .opacity_mixin(0.55);
+      .opacity_mixin(0.45);
 
       a{
         color: @white_color;
@@ -436,7 +460,7 @@
         transition: all .2s ease-in-out;
 
         &:hover{
-          color: @main_color;
+          color: @main_strong_color;
         }
       }
     }
@@ -456,4 +480,18 @@
       }
     }
   }
+}
+/**
+ * 没有关注
+ */
+.no-follow{
+  @_height: 50px;
+
+  width: 100%;
+  height: @_height;
+
+  line-height: @_height;
+  text-align: center;
+  font-size: 18px;
+  color: @desc_color;
 }

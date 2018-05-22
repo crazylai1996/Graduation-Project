@@ -10,6 +10,7 @@
     delete from userfollowclass
     where bUserClassId = #{userClassId,jdbcType=BIGINT}
   </delete>
+  <sql id="UserInfoColumns">bUserClassId, bClassId, bUserId</sql>
   <insert id="insert" keyColumn="bUserClassId" keyProperty="userClassId" parameterType="UserFollowClass" useGeneratedKeys="true">
     insert into userfollowclass (bClassId, bUserId)
     values (#{classId,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT})
@@ -21,12 +22,46 @@
     where bUserClassId = #{userClassId,jdbcType=BIGINT}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select bUserClassId, bClassId, bUserId
+    select <include refid="UserInfoColumns"/>
     from userfollowclass
     where bUserClassId = #{userClassId,jdbcType=BIGINT}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select bUserClassId, bClassId, bUserId
+    select <include refid="UserInfoColumns"/>
     from userfollowclass
   </select>
+  <sql id="selectByCondition_Condition">
+  	<where>
+  		<if test="userId != null">
+  			and bUserId = #{userId}
+  		</if>
+  		<if test="classId != null">
+  			and bClassId =#{classId}
+  		</if>
+  	</where>
+  </sql>
+  <!-- 条件查询关注分类 -->
+  <select id="selectByCondition" parameterType="map" 
+  	resultMap="BaseResultMap">
+  	select <include refid="UserInfoColumns"/>
+  	from userfollowclass
+  	<include refid="selectByCondition_Condition"/>
+  </select>
+  <!-- 查询用户关注的品类 -->
+  <select id="findFollowedClasses" parameterType="java.lang.Long" 
+  	resultMap="gdou.laiminghai.ime.dao.mapper.CosmeticClassMapper.BaseResultMap">
+  	select <include refid="gdou.laiminghai.ime.dao.mapper.CosmeticClassMapper.CosmeticClassColumns"/> 
+  	from cosmeticclass 
+  	where bClassId in 
+  		(
+  			select bClassId 
+  			from userfollowclass 
+  			where bUserId = #{_parameter}
+  		)
+  </select>
+  <!-- 根据用户ID删除关注品类 -->
+  <delete id="deleteByUserId" parameterType="java.lang.Long">
+  	delete from userfollowclass
+  	where bUserId = #{_parameter}
+  </delete>
 </mapper>

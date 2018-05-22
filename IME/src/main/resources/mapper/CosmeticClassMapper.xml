@@ -48,4 +48,9 @@
   	from cosmeticclass 
   	where bParentClass is NULL
   </select>
+  <select id="getAllChildClasses" resultMap="BaseResultMap">
+  	select * 
+  	from cosmeticclass
+  	where bParentClass is NOT NULL
+  </select>
 </mapper>

@@ -126,7 +126,7 @@ body {
   width: 100%;
   box-sizing: border-box;
   box-shadow: 0 0 1px #e6e6e6;
-  border: solid 0.5px #cccccc;
+  border: solid 1px #cccccc;
 }
 /**
  * 导航项

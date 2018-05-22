@@ -47,4 +47,16 @@
   	from userfollowuser
   	<include refid="selectByCondition_Condition"/>
   </select>
+  <!-- 查询关注的用户 -->
+  <select id="findFollowedUsers" parameterType="java.lang.Long" 
+  	resultMap="gdou.laiminghai.ime.dao.mapper.UserInfoMapper.BaseResultMap">
+  	select <include refid="gdou.laiminghai.ime.dao.mapper.UserInfoMapper.UserInfoColumns"/> 
+  	from userinfo u 
+  	where u.bUserId in 
+  		(
+  			select bFollowedUserId 
+  			from userfollowuser 
+  			where bUserId = #{_parameter}
+  		)
+  </select>
 </mapper> 

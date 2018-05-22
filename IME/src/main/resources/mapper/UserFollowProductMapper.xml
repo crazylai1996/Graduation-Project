@@ -3,12 +3,16 @@
 <mapper namespace="gdou.laiminghai.ime.dao.mapper.UserFollowProductMapper">
   <resultMap id="BaseResultMap" type="UserFollowProduct">
     <id column="bUserProductId" jdbcType="BIGINT" property="userProductId" />
-    <result column="bProductId" jdbcType="BIGINT" property="productId" />
+    <result column="bFollowedProductId" jdbcType="BIGINT" property="productId" />
     <result column="bUserId" jdbcType="BIGINT" property="userId" />
     <result column="dFollowTime" jdbcType="TIMESTAMP" property="followTime" />
   </resultMap>
+  <resultMap type="UserFollowProduct" id="UserFollowProductResult" extends="BaseResultMap">
+  	<association property="productInfo" column="bFollowedProductId" 
+  		javaType="UserFollowProduct" resultMap="gdou.laiminghai.ime.dao.mapper.ProductInfoMapper.BaseResultMap"/>
+  </resultMap>
   <sql id="UserFollowProductColumns">
-  	bUserProductId, bProductId, bUserId, dFollowTime
+  	bUserProductId, up.bProductId bFollowedProductId, bUserId, dFollowTime
   </sql>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from userfollowproduct
@@ -29,20 +33,20 @@
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select <include refid="UserFollowProductColumns"/>
-    from userfollowproduct
+    from userfollowproduct up
     where bUserProductId = #{userProductId,jdbcType=BIGINT}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select <include refid="UserFollowProductColumns"/>
-    from userfollowproduct
+    from userfollowproduct up
   </select>
   <sql id="selectByCondition_Condition">
   	<where>
   		<if test="userId != null">
-  			and bUserId = #{userId}
+  			and up.bUserId = #{userId}
   		</if>
   		<if test="productId != null">
-  			and bProductId = #{productId}
+  			and up.bProductId = #{productId}
   		</if>
   	</where>
   </sql>
@@ -50,7 +54,15 @@
   <select id="selectByCondition" parameterType="map" 
   	resultMap="BaseResultMap" >
   	select <include refid="UserFollowProductColumns"/>
-  	from userfollowproduct 
+  	from userfollowproduct up
   	<include refid="selectByCondition_Condition"/>
+  </select>
+  <!-- 查询关注的产品 -->
+  <select id="findFollowedProducts" parameterType="java.lang.Long" 
+  	resultMap="UserFollowProductResult">
+  	select <include refid="UserFollowProductColumns"/>,
+  			<include refid="gdou.laiminghai.ime.dao.mapper.ProductInfoMapper.ProductInfoColumns"/> 
+  	from userfollowproduct up inner join productinfo p on up.bProductId = p.bProductId 
+  	where up.bUserId = #{_parameter}
   </select>
 </mapper>

@@ -1,5 +1,6 @@
 package gdou.laiminghai.ime.service.impl;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -366,42 +367,6 @@ public class UserServiceImpl implements UserService {
 		userInfoMapper.updateByPrimaryKey(userInfo);
 	}
 
-	/**
-	 * PO转VO
-	 * @param userInfo
-	 * @return
-	 * @author: laiminghai
-	 * @datetime: 2018年5月9日 上午10:07:57
-	 */
-	private UserInfoVO userInfo2UserInfoVO(UserInfo userInfo) {
-		UserInfoVO userInfoVO = new UserInfoVO();
-		userInfoVO.setUserId(userInfo.getUserId());
-		userInfoVO.setUserName(userInfo.getUserName());
-		userInfoVO.setNickname(userInfo.getNickname());
-		userInfoVO.setGender(userInfo.getGender());
-		//获取用户肤质
-		if(StringUtils.isNotBlank(userInfo.getSkinTexture())) {
-			SkinTextureEnum skinTexture = SkinTextureEnum.of(userInfo.getSkinTexture());
-			if(skinTexture != null) {
-				userInfoVO.setSkinTexture(skinTexture.getName());
-			}
-		}
-		//获取用户年龄
-		if(userInfo.getBornYear() != null) {
-			userInfoVO.setAge(Calendar.getInstance().
-				get(Calendar.YEAR)-userInfo.getBornYear());
-		}
-		
-		userInfoVO.setIntroduction(userInfo.getIntroduction());
-		userInfoVO.setPortrait(AppSetting.APP_ROOT+AppSetting.PORTRAIT_SAVED_PATH+userInfo.getPortrait());
-		userInfoVO.setPhone(userInfo.getPhone());
-		userInfoVO.setEmail(userInfo.getEmail());
-		userInfoVO.setMembershipPoint(userInfo.getMembershipPoint());
-		userInfoVO.setMemberLevel(userInfo.getMemberLevel());
-		userInfoVO.setArea(userInfo.getArea());
-		return userInfoVO;
-	}
-
 	@Override
 	public ResultDTO followUser(Long userId,Long followedUserId) {
 		//无效操作
@@ -475,6 +440,52 @@ public class UserServiceImpl implements UserService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<UserInfoVO> findMyFollowedUsers(Long userId) {
+		List<UserInfoVO> userInfoVOList = new ArrayList<>();
+		List<UserInfo> userInfoList = userFollowUserMapper.findFollowedUsers(userId);
+		for (UserInfo userInfo : userInfoList) {
+			userInfoVOList.add(userInfo2UserInfoVO(userInfo));
+		}
+		return userInfoVOList;
+	}
+
+	/**
+	 * PO转VO
+	 * @param userInfo
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月9日 上午10:07:57
+	 */
+	private UserInfoVO userInfo2UserInfoVO(UserInfo userInfo) {
+		UserInfoVO userInfoVO = new UserInfoVO();
+		userInfoVO.setUserId(userInfo.getUserId());
+		userInfoVO.setUserName(userInfo.getUserName());
+		userInfoVO.setNickname(userInfo.getNickname());
+		userInfoVO.setGender(userInfo.getGender());
+		//获取用户肤质
+		if(StringUtils.isNotBlank(userInfo.getSkinTexture())) {
+			SkinTextureEnum skinTexture = SkinTextureEnum.of(userInfo.getSkinTexture());
+			if(skinTexture != null) {
+				userInfoVO.setSkinTexture(skinTexture.getName());
+			}
+		}
+		//获取用户年龄
+		if(userInfo.getBornYear() != null) {
+			userInfoVO.setAge(Calendar.getInstance().
+				get(Calendar.YEAR)-userInfo.getBornYear());
+		}
+		
+		userInfoVO.setIntroduction(userInfo.getIntroduction());
+		userInfoVO.setPortrait(AppSetting.APP_ROOT+AppSetting.PORTRAIT_SAVED_PATH+userInfo.getPortrait());
+		userInfoVO.setPhone(userInfo.getPhone());
+		userInfoVO.setEmail(userInfo.getEmail());
+		userInfoVO.setMembershipPoint(userInfo.getMembershipPoint());
+		userInfoVO.setMemberLevel(userInfo.getMemberLevel());
+		userInfoVO.setArea(userInfo.getArea());
+		return userInfoVO;
 	}
 	
 }

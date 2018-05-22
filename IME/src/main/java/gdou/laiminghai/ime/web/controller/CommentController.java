@@ -208,12 +208,26 @@ public class CommentController {
 	 */
 	@RequestMapping("/loadMoreComments.do")
 	public ModelAndView getCommentByPage(Integer pageNum,Long productId) {
+		// 获取用户登录信息
+		HttpSession session = request.getSession();
+		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
 		ModelAndView mav = new ModelAndView("comment/comment_fragment");
 		//条件查询使用心得
 		Map<String, Object> map = new HashMap<>();
 		map.put("pageNum", pageNum);
 		map.put("commentId", productId);
 		PageResult<CommentInfoVO> pageResult = commentService.findCommentList(map);
+		if(userInfoMap != null) {
+			Long userId = (Long)userInfoMap.get("userId");
+			for (CommentInfoVO commentInfoVO : pageResult.getList()) {
+				UserInfoVO userInfoVO = commentInfoVO.getUserInfo();
+				if(userInfoVO != null) {
+					if(userService.isFollowedUser(userId, userInfoVO.getUserId())) {
+						userInfoVO.setFollow(true);
+					}
+				}
+			}
+		}
 		logger.debug("分页查询到的心得回复："+pageResult.toString());
 		mav.addObject("pageResult", pageResult);
 		return mav;

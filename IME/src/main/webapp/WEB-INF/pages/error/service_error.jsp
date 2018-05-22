@@ -82,10 +82,10 @@ a:hover {
 				<td>敲错了网址；</td>
 			</tr>
 			<tr>
-				<td>或者没有访问权限；</td>
+				<td>没有访问权限；</td>
 			</tr>
 			<tr>
-				<td>当然，也可能是我们的错；</td>
+				<td>也可能是我们的错；</td>
 			</tr>
 			<tr>
 				<td class="op-tips">你可以：</td>
