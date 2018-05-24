@@ -53,6 +53,10 @@ public class CommentInfoVO {
      */
     private UserInfoVO userInfo;
     /**
+     * 商品信息
+     */
+    private ProductInfoVO productInfo;
+    /**
      * 购买方式描述
      */
     private String buyWayName;
@@ -139,6 +143,13 @@ public class CommentInfoVO {
 	public void setContentHtml(String contentHtml) {
 		this.contentHtml = contentHtml;
 	}
+	
+	public ProductInfoVO getProductInfo() {
+		return productInfo;
+	}
+	public void setProductInfo(ProductInfoVO productInfo) {
+		this.productInfo = productInfo;
+	}
 	public UserInfoVO getUserInfo() {
 		return userInfo;
 	}
@@ -199,9 +210,10 @@ public class CommentInfoVO {
 		return "CommentInfoVO [commentId=" + commentId + ", userId=" + userId + ", productId=" + productId
 				+ ", articleTitle=" + articleTitle + ", worthMark=" + worthMark + ", buyWay=" + buyWay + ", sendTime="
 				+ sendTime + ", contentText=" + contentText + ", contentHtml=" + contentHtml + ", userInfo=" + userInfo
-				+ ", buyWayName=" + buyWayName + ", lastCommentId=" + lastCommentId + ", lastCommentTitle="
-				+ lastCommentTitle + ", nextCommentId=" + nextCommentId + ", nextCommentTitle=" + nextCommentTitle
-				+ ", productInfoVOs=" + productInfoVOs + ", readCount=" + readCount + ", upCount=" + upCount + "]";
+				+ ", productInfo=" + productInfo + ", buyWayName=" + buyWayName + ", lastCommentId=" + lastCommentId
+				+ ", lastCommentTitle=" + lastCommentTitle + ", nextCommentId=" + nextCommentId + ", nextCommentTitle="
+				+ nextCommentTitle + ", productInfoVOs=" + productInfoVOs + ", readCount=" + readCount + ", upCount="
+				+ upCount + "]";
 	}
 	
 }

@@ -232,4 +232,43 @@ public class CommentController {
 		mav.addObject("pageResult", pageResult);
 		return mav;
 	}
+	
+	/**
+	 * 查找最新点评
+	 * @param pageNum
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月24日 上午9:43:59
+	 */
+	@RequestMapping("/newestComments/loadMore.do")
+	public ModelAndView getNewestComments(Integer pageNum) {
+		ModelAndView mav = new ModelAndView("comment/comment_fragment_index");
+		Map<String, Object> map = new HashMap<>();
+		map.put("pageNum", pageNum);
+		PageResult<CommentInfoVO> commentPageResult = commentService.findNewestComments(map);
+		mav.addObject("commentPageResult", commentPageResult);
+		return mav;
+	}
+	
+	/**
+	 * 查找我的关注
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月24日 上午7:44:13
+	 */
+	@RequestMapping("/myFollowed/loadMore.do")
+	public ModelAndView getMyFollowedComments(Integer pageNum) {
+		// 获取用户登录信息
+		HttpSession session = request.getSession();
+		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
+		Long userId = (Long) userInfoMap.get("userId");
+		ModelAndView mav = new ModelAndView("comment/comment_fragment_index");
+		Map<String, Object> map = new HashMap<>();
+		map.put("pageNum", pageNum);
+		map.put("userId", userId);
+		PageResult<CommentInfoVO> commentPageResult = commentService.findMyFollowedComments(map);
+		mav.addObject("commentPageResult", commentPageResult);
+		return mav;
+	}
+	
 }

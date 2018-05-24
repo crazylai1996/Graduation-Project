@@ -106,3 +106,38 @@ body{
     border: solid 1px @main_color;
   }
 }
+//加载更多按钮
+.load-more-wrapped{
+  @_height: 24px;
+
+  width: 100%;
+  height: @_height;
+
+  text-align:center;
+  font-size: 13px;
+
+  .load-more-btn{
+    @_width: 62px;
+
+    display: inline-block;
+    width: @_width;
+    height: @_height;
+
+    line-height: @_height;
+    vertical-align: middle;
+    color: @white_color;
+    font-weight: 550;
+    text-decoration: none;
+
+    background-color: @border_color;
+    border-radius: 2px;
+
+    &:hover{
+      background-color: @main_color;
+    }
+  }
+  .no-more-load{
+    line-height: @_height;
+    color: @desc_color;
+  }
+}

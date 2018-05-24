@@ -8,7 +8,7 @@
     <result column="cPasswordSalt" jdbcType="CHAR" property="passwordSalt" />
     <result column="vNickname" jdbcType="VARCHAR" property="nickname" />
     <result column="cGender" jdbcType="CHAR" property="gender" />
-    <result column="vSkinTexture" jdbcType="VARCHAR" property="skinTexture" />
+    <result column="vUserSkinTexture" jdbcType="VARCHAR" property="skinTexture" />
     <result column="iBornYear" jdbcType="INTEGER" property="bornYear" />
     <result column="iUserAreaId" jdbcType="INTEGER" property="areaId" />
     <result column="vIntroduction" jdbcType="VARCHAR" property="introduction" />
@@ -29,7 +29,7 @@
   		javaType="Area" resultMap="gdou.laiminghai.ime.dao.mapper.AreaMapper.BaseResultMap"/>
   </resultMap>
   <sql id="UserInfoColumns">
-  	u.bUserId, vUserName, vPassword, cPasswordSalt, vNickname, cGender, vSkinTexture, 
+  	u.bUserId, vUserName, vPassword, cPasswordSalt, vNickname, cGender, u.vSkinTexture vUserSkinTexture, 
     iBornYear, iUserAreaId, vIntroduction, vPortrait, cPhone, vEmail, cActivationCode, vUserState, 
     iMembershipPoint, iMemberLevel, dRegisterTime, dLastLoginTime
   </sql>

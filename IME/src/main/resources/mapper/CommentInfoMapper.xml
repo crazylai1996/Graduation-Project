@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="CommentInfo">
     <id column="bCommentId" jdbcType="BIGINT" property="commentId" />
     <result column="bCommentUserId" jdbcType="BIGINT" property="userId" />
-    <result column="bProductId" jdbcType="BIGINT" property="productId" />
+    <result column="bCommentProductId" jdbcType="BIGINT" property="productId" />
     <result column="vArticleTitle" jdbcType="VARCHAR" property="articleTitle" />
     <result column="vArticlaMark" jdbcType="VARCHAR" property="articlaMark" />
     <result column="fWorthMark" jdbcType="REAL" property="worthMark" />
@@ -20,9 +20,11 @@
   <resultMap type="CommentInfo" id="CommentInfoResult" extends="BaseResultMap">
   	<association property="userInfo" column="bCommentUserId" 
   		javaType="UserInfo" resultMap="gdou.laiminghai.ime.dao.mapper.UserInfoMapper.BaseResultMap"/>
+  	<association property="productInfo" column="bCommentProductId" 
+  		javaType="ProductInfo" resultMap="gdou.laiminghai.ime.dao.mapper.ProductInfoMapper.BaseResultMap"/>
   </resultMap>
   <sql id="CommentInfoColumns">
-  	bCommentId, ci.bUserId bCommentUserId, bProductId, vArticleTitle, vArticlaMark, fWorthMark, 
+  	bCommentId, ci.bUserId bCommentUserId, ci.bProductId bCommentProductId, vArticleTitle, vArticlaMark, fWorthMark, 
     vBuyWay, dSendTime, iArticleState, iReadCount, iLoveCount, iUpCount, tContentText,tContentHtml
   </sql>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
@@ -106,5 +108,70 @@
   		<include refid="gdou.laiminghai.ime.dao.mapper.UserInfoMapper.UserInfoColumns"/>
   	from commentinfo ci left join userinfo u on ci.bUserId = u.bUserId 
   	<include refid="selectByCondition_Condition"/> order by ci.dSendTime desc
+  </select>
+  <!-- 查找用户关注动态 -->
+  <select id="findFollowedComments" parameterType="map" 
+  	resultMap="CommentInfoResult">
+  	select <include refid="CommentInfoColumns"/>,
+  			<include refid="gdou.laiminghai.ime.dao.mapper.UserInfoMapper.UserInfoColumns"/>,
+  			<include refid="gdou.laiminghai.ime.dao.mapper.ProductInfoMapper.ProductInfoColumns"/>
+  	from commentinfo ci inner join userinfo u on ci.bUserId = u.bUserId 
+  			inner join productinfo p on ci.bProductId = p.bProductId 
+  	<where>
+  		<if test="followedUserIds != nul">
+  			<choose>
+  				<when test="followedUserIds.size > 0">
+  					or ci.bUserId in 
+		  			<foreach collection="followedUserIds" item="followedUserId" 
+		  			open="(" close=")" separator=",">
+		  				#{followedUserId}
+		  			</foreach>
+  				</when>
+  				<otherwise>
+  					or ci.bUserId = 0
+  				</otherwise>
+  			</choose>
+  			
+  		</if>
+  		<if test="followedProductIds != null">
+  			<choose>
+  				<when test="followedProductIds.size > 0">
+  					or ci.bProductId in 
+		  			<foreach collection="followedProductIds" item="followedProductId" 
+		  			open="(" close=")" separator=",">
+		  				#{followedProductId}
+		  			</foreach>
+  				</when>
+  				<otherwise>
+  					or ci.bProductId = 0
+  				</otherwise>
+  			</choose>
+  		</if>
+  		<if test="followedClassIds != null">
+  			<choose>
+  				<when test="followedClassIds.size > 0">
+  					or p.iClassify in
+		  			<foreach collection="followedClassIds" item="followedClassId" 
+		  			 open="(" close=")" separator=",">
+		  				#{followedClassId} 
+		  			</foreach>
+  				</when>
+  				<otherwise>
+  					or p.iClassify = 0
+  				</otherwise>
+  			</choose>
+  		</if>
+  	</where>
+  	order by ci.dSendTime desc
+  </select>
+  <!-- 查找最新使用心得 -->
+  <select id="findNewestComments" parameterType="map" 
+  	resultMap="CommentInfoResult">
+  	select <include refid="CommentInfoColumns"/>,
+  			<include refid="gdou.laiminghai.ime.dao.mapper.UserInfoMapper.UserInfoColumns"/>,
+  			<include refid="gdou.laiminghai.ime.dao.mapper.ProductInfoMapper.ProductInfoColumns"/>
+    from commentinfo ci inner join userinfo u on ci.bUserId = u.bUserId 
+  			inner join productinfo p on ci.bProductId = p.bProductId
+    order by ci.dSendTime desc
   </select>
 </mapper>

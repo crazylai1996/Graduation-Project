@@ -11,6 +11,7 @@
   <title>爱美丽 - 化妆品导购与评价平台</title>
   <link rel="stylesheet" href="static\plugins\layui\css\layui.css"/>
   <script type="text/javascript" src="static\plugins\layui\layui.js"></script>
+  <script type="text/javascript" src="static\plugins\layui\layui.all.js"></script>
   <link rel="stylesheet" href="static\css\index.css" />
 </head>
 
@@ -162,11 +163,25 @@
       <!-- 最新点评 -->
       <div class="newest-comments">
         <ul class="nc-title">
-          <li class="current">最新点评</li>
-          <li>关注动态</li>
+          <li class="current newest-tab">最新点评</li>
+          <c:if test="${sessionScope.userInfo != null}">
+          	<li class="followed-tab">关注动态</li>
+          </c:if>
         </ul>
-        <ul class="nc-list">
-          <li>
+        
+        <ul class="nc-list" data-page-num="1" data-pages="${commentPageResult.pages }">
+        	<c:choose>
+        		<c:when test="${commentPageResult.list.size() > 0 }">
+        			<jsp:include page="comment/comment_fragment_index.jsp"/>
+        		</c:when>
+        		<c:otherwise>
+        			<div class="no-more-contents">
+        				暂时没有新的内容
+        			</div>
+        		</c:otherwise>
+        	</c:choose>
+        	
+          <!-- <li>
             <a class="item-title" href="www.baidu.com">每日白菜精选：无痕免钉钩、单肩迷你小包、玻璃储物罐等</a>
             <div class="item-contents">
               <img src="static\img\commodity_test.jpg" alt="商品图片">
@@ -207,9 +222,24 @@
                   </div>
                 </div>
               </div>
-            </li>
+            </li> -->
         </ul>
-      </div>
+        <!-- 加载更多 -->
+			<div class="load-more-wrapped">
+				<c:if test="${commentPageResult.list.size() > 0 }">
+					<c:choose>
+						<c:when test="${commentPageResult.pages > 1 }">
+							<a class="load-more-btn load-more-newest" href="javascript:void(0);">加载更多</a>
+							<span class="hidden-btn no-more-load">我是有底线的</span>
+						</c:when>
+						<c:otherwise>
+							<a class="load-more-btn hidden-btn load-more-newest" href="javascript:void(0);">加载更多</a>
+							<span class="no-more-load">我是有底线的</span>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</div>
+		</div>
     </div>
     <div class="main-right">
       <!-- 最多点击 -->

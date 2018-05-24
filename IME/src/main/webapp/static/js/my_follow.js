@@ -324,7 +324,7 @@ $(".tag-list").on("click",".add-more-tag",function(){
 	var getUrl = basePath + "cosmeticClass/classSelect";
 	layer.open({
 	  type: 2, 
-	  title: "选择产品属性",
+	  title: "选择要关注的标签",
 	  content: [getUrl, 'yes'],
 	  area: ["400px"],
 	  btn: ['保存', '取消'],

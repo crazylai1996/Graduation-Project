@@ -8,7 +8,7 @@
     <result column="iProductClassify" jdbcType="INTEGER" property="classify" />
     <result column="iProductProperty" jdbcType="INTEGER" property="property" />
     <result column="iProductEffect" jdbcType="INTEGER" property="effect" />
-    <result column="vSkinTexture" jdbcType="VARCHAR" property="skinTexture" />
+    <result column="vProductSkinTexture" jdbcType="VARCHAR" property="skinTexture" />
     <result column="vSpec" jdbcType="VARCHAR" property="spec" />
     <result column="dComeInDate" jdbcType="DATE" property="comeInDate" />
     <result column="fReferencePrice" jdbcType="REAL" property="referencePrice" />
@@ -21,7 +21,7 @@
   </resultMap>
   <sql id="ProductInfoColumns">
   	p.bProductId, vProductName, p.iBrand iProductBrand, p.iClassify iProductClassify, 
-  	p.iProperty iProductProperty, p.iEffect iProductEffect, vSkinTexture, 
+  	p.iProperty iProductProperty, p.iEffect iProductEffect, p.vSkinTexture vProductSkinTexture, 
     vSpec, dComeInDate, fReferencePrice, fWorthCount, bCommentCount, bBrowserCount, bFollowCount, 
     tDesc,vCover
   </sql>

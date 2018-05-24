@@ -51,4 +51,21 @@ public interface CommentService {
 	 * @datetime: 2018年5月19日 上午12:43:05
 	 */
 	PageResult<CommentInfoVO> findCommentList(Map<String,Object> map);
+	
+	/**
+	 * 查询用户关注的使用心得
+	 * @param map
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月23日 下午10:55:15
+	 */
+	PageResult<CommentInfoVO> findMyFollowedComments(Map<String,Object> map);
+	
+	/**
+	 * 查找最新点评 
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月24日 上午7:47:15
+	 */
+	PageResult<CommentInfoVO> findNewestComments(Map<String,Object> map);
 }

@@ -48,4 +48,20 @@ public interface CommentInfoMapper {
      * @datetime: 2018年5月19日 上午12:46:20
      */
     List<CommentInfo> selectByCondition(Map<String,Object> map);
+    /**
+     * 查找用户关注动态
+     * @param map
+     * @return
+     * @author: laiminghai
+     * @datetime: 2018年5月24日 上午12:41:21
+     */
+    List<CommentInfo> findFollowedComments(Map<String,Object> map);
+    /**
+     * 查找最新使用心得
+     * @param map
+     * @return
+     * @author: laiminghai
+     * @datetime: 2018年5月24日 上午7:54:39
+     */
+    List<CommentInfo> findNewestComments();
 }

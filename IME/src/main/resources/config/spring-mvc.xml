@@ -65,6 +65,7 @@
             <mvc:mapping path="/**/new.do"/> 
             <mvc:mapping path="/product/followProduct.do"/>
             <mvc:mapping path="/product/unfollowProduct.do"/>
+            <mvc:mapping path="/comment/myFollowed/loadMore.do"/>
             <mvc:mapping path="/cosmeticClass/unfollowClass.do"/>
             <mvc:mapping path="/cosmeticClass/classSelect**"/>
             <mvc:mapping path="/cosmeticClass/followMoreClasses.do"/>

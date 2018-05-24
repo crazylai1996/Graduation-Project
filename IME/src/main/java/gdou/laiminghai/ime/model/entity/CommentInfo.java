@@ -33,6 +33,8 @@ public class CommentInfo {
     
     //我是分割线，下面是关联属性
     private UserInfo userInfo;
+    
+    private ProductInfo productInfo;
 
     public Long getCommentId() {
         return commentId;
@@ -153,4 +155,13 @@ public class CommentInfo {
 	public void setUserInfo(UserInfo userInfo) {
 		this.userInfo = userInfo;
 	}
+
+	public ProductInfo getProductInfo() {
+		return productInfo;
+	}
+
+	public void setProductInfo(ProductInfo productInfo) {
+		this.productInfo = productInfo;
+	}
+	
 }

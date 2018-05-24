@@ -30,9 +30,17 @@ import gdou.laiminghai.ime.common.statics.BuyWayEnum;
 import gdou.laiminghai.ime.common.statics.SkinTextureEnum;
 import gdou.laiminghai.ime.common.util.FileUtil;
 import gdou.laiminghai.ime.dao.mapper.CommentInfoMapper;
+import gdou.laiminghai.ime.dao.mapper.UserFollowClassMapper;
+import gdou.laiminghai.ime.dao.mapper.UserFollowProductMapper;
+import gdou.laiminghai.ime.dao.mapper.UserFollowUserMapper;
 import gdou.laiminghai.ime.model.dto.PageResult;
 import gdou.laiminghai.ime.model.entity.CommentInfo;
 import gdou.laiminghai.ime.model.entity.CommentPicture;
+import gdou.laiminghai.ime.model.entity.ProductInfo;
+import gdou.laiminghai.ime.model.entity.ProductPicture;
+import gdou.laiminghai.ime.model.entity.UserFollowClass;
+import gdou.laiminghai.ime.model.entity.UserFollowProduct;
+import gdou.laiminghai.ime.model.entity.UserFollowUser;
 import gdou.laiminghai.ime.model.entity.UserInfo;
 import gdou.laiminghai.ime.model.vo.CommentInfoVO;
 import gdou.laiminghai.ime.model.vo.ProductInfoVO;
@@ -56,6 +64,15 @@ public class CommentServiceImpl implements CommentService {
 	
 	@Autowired
 	private CommentPictureService commentPictureService;
+	
+	@Autowired
+	private UserFollowUserMapper userFollowUserMapper;
+	
+	@Autowired
+	private UserFollowProductMapper userFollowProductMapper;
+	
+	@Autowired
+	private UserFollowClassMapper userFollowClassMapper;
 
 	@Override
 	public String saveCommentPicture(MultipartFile imgFile, String savedPath) {
@@ -167,6 +184,73 @@ public class CommentServiceImpl implements CommentService {
 		pageResult.setPages(pageInfo.getPages());
 		return pageResult;
 	}
+	
+	@Override
+	public PageResult<CommentInfoVO> findMyFollowedComments(Map<String, Object> map) {
+		Integer pageNum = (Integer)map.get("pageNum");
+		//获取关注的用户
+		List<Long> followedUserIds = new ArrayList<>();
+		List<UserFollowUser> followedUsers = userFollowUserMapper.selectByCondition(map);
+		for (UserFollowUser follow : followedUsers) {
+			followedUserIds.add(follow.getFollowedUserId());
+		}
+		map.put("followedUserIds", followedUserIds);
+		//获取关注的商品
+		List<Long> followedProductIds = new ArrayList<>();
+		List<UserFollowProduct> followedProducts = userFollowProductMapper.selectByCondition(map);
+		for (UserFollowProduct follow : followedProducts) {
+			followedProductIds.add(follow.getProductId());
+		}
+		map.put("followedProductIds", followedProductIds);
+		//获取关注的品类
+		List<Integer> followedClassIds = new ArrayList<>();
+		List<UserFollowClass> followedClasses = userFollowClassMapper.selectByCondition(map);
+		for (UserFollowClass follow : followedClasses) {
+			followedClassIds.add(follow.getClassId());
+		}
+		map.put("followedClassIds", followedClassIds);
+		PageHelper.startPage(pageNum, AppSetting.NUMBER_PER_PAGE);
+		List<CommentInfo> commentList = commentInfoMapper.findFollowedComments(map);
+		//构建分页结果并返回
+		PageInfo<CommentInfo> pageInfo = new PageInfo<CommentInfo>(commentList);
+		List<CommentInfoVO> commentInfoVOList = new ArrayList<CommentInfoVO>();
+		for (CommentInfo commentInfo : commentList) {
+			CommentInfoVO commentInfoVO = commentInfoPO2CommentInfoVO(commentInfo);
+			String contentText = commentInfo.getContentText();
+			if(StringUtils.isNotBlank(contentText) && contentText.length() > 120) {
+				contentText = contentText.substring(0, 120);
+			}
+			commentInfoVO.setContentText(contentText);
+			commentInfoVOList.add(commentInfoVO);
+		}
+		//构建分页结果并返回
+		PageResult<CommentInfoVO> pageResult = new PageResult<CommentInfoVO>(commentInfoVOList);
+		pageResult.setPages(pageInfo.getPages());
+		return pageResult;
+	}
+	
+	@Override
+	public PageResult<CommentInfoVO> findNewestComments(Map<String,Object> map) {
+		Integer pageNum = (Integer)map.get("pageNum");
+		PageHelper.startPage(pageNum, AppSetting.NUMBER_PER_PAGE);
+		List<CommentInfo> commentList = commentInfoMapper.findNewestComments();
+		//构建分页结果并返回
+		PageInfo<CommentInfo> pageInfo = new PageInfo<CommentInfo>(commentList);
+		List<CommentInfoVO> commentInfoVOList = new ArrayList<CommentInfoVO>();
+		for (CommentInfo commentInfo : commentList) {
+			CommentInfoVO commentInfoVO = commentInfoPO2CommentInfoVO(commentInfo);
+			String contentText = commentInfo.getContentText();
+			if (StringUtils.isNotBlank(contentText) && contentText.length() > 120) {
+				contentText = contentText.substring(0, 120);
+			}
+			commentInfoVO.setContentText(contentText);
+			commentInfoVOList.add(commentInfoVO);
+		}
+		// 构建分页结果并返回
+		PageResult<CommentInfoVO> pageResult = new PageResult<CommentInfoVO>(commentInfoVOList);
+		pageResult.setPages(pageInfo.getPages());
+		return pageResult;
+	}
 
 	/**
 	 * VO=>PO
@@ -244,6 +328,59 @@ public class CommentServiceImpl implements CommentService {
 			userInfoVO.setArea(userInfo.getArea());
 			
 			commentInfoVO.setUserInfo(userInfoVO);
+		}
+		//商品信息转换
+		if(commentInfoPO.getProductInfo() != null) {
+			ProductInfo productInfoPO = commentInfoPO.getProductInfo();
+			ProductInfoVO productInfoVO = new ProductInfoVO();
+			productInfoVO.setProductId(productInfoPO.getProductId());
+			productInfoVO.setProductName(productInfoPO.getProductName());
+			productInfoVO.setBrand(productInfoPO.getBrand());
+			if(productInfoPO.getProductBrand() != null) {
+				productInfoVO.setBrandName(productInfoPO.getProductBrand().getBrandName());
+			}
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月");
+			//时间转换
+			Date comeInDate = productInfoPO.getComeInDate();
+			if(comeInDate != null) {
+				String dateText = sdf.format(comeInDate);
+				productInfoVO.setComeInDate(dateText);
+			}
+			
+			productInfoVO.setSpec(productInfoPO.getSpec());
+			productInfoVO.setReferencePrice(productInfoPO.getReferencePrice());
+			productInfoVO.setClassify(productInfoPO.getClassify());
+			if(productInfoPO.getProductClass() != null) {
+				productInfoVO.setClassifyName(productInfoPO.getProductClass().getClassName());
+			}
+			productInfoVO.setProperty(productInfoPO.getProperty());
+			if(productInfoPO.getProductProperty() != null) {
+				productInfoVO.setPropertyName(productInfoPO.getProductProperty().getPropertyName());
+			}
+			productInfoVO.setEffect(productInfoPO.getEffect());
+			if(productInfoPO.getProductEffect() != null) {
+				productInfoVO.setEffectName(productInfoPO.getProductEffect().getEffectName());
+			}
+			productInfoVO.setDesc(productInfoPO.getDesc());
+			//肤质
+			if(StringUtils.isNotBlank(productInfoPO.getSkinTexture())) {
+				SkinTextureEnum skinTexture = SkinTextureEnum.of(productInfoPO.getSkinTexture());
+				if(skinTexture != null) {
+					productInfoVO.setSkinTexture(skinTexture.getName());
+				}
+			}
+			//封面图片地址
+			productInfoVO.setCoverImage(AppSetting.APP_ROOT+AppSetting.PRODUCT_COVER_SAVED_PATH+productInfoPO.getCover());
+			//产品图片地址
+			List<ProductPicture> pictures = productInfoPO.getPictures();
+			List<String> pictrueUrls = new ArrayList<>();
+			if(pictures != null) {
+				for (ProductPicture productPicture : pictures) {
+					pictrueUrls.add(AppSetting.APP_ROOT+AppSetting.PRODUCT_PICTURES_SAVED_PATH + productPicture.getPictureUrl());
+				}
+			}
+			productInfoVO.setProductImages(pictrueUrls);
+			commentInfoVO.setProductInfo(productInfoVO);
 		}
 		return commentInfoVO;
 	}
