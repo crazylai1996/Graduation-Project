@@ -68,4 +68,14 @@ public interface CommentService {
 	 * @datetime: 2018年5月24日 上午7:47:15
 	 */
 	PageResult<CommentInfoVO> findNewestComments(Map<String,Object> map);
+	
+	/**
+	 * 分页搜索心得
+	 * @param pageNum
+	 * @param keyword
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月24日 下午11:31:39
+	 */
+	PageResult<CommentInfoVO> searchCommentsByPage(int pageNum,String keyword);
 }

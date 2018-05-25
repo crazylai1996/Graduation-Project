@@ -96,6 +96,9 @@
   </select>
   <sql id="selectByCondition_Condition">
   	<where>
+  		<if test="commentId != null">
+  			ci.bCommentId = #{commentId}
+  		</if>
   		<if test="productId != null">
   			ci.bProductId = #{productId}
   		</if>
@@ -104,9 +107,11 @@
   <!-- 根据条件查询使用心得列表 -->
   <select id="selectByCondition" parameterType="map" 
   	resultMap="CommentInfoResult">
-  	select <include refid="CommentInfoColumns"/> ,
-  		<include refid="gdou.laiminghai.ime.dao.mapper.UserInfoMapper.UserInfoColumns"/>
-  	from commentinfo ci left join userinfo u on ci.bUserId = u.bUserId 
+  	select <include refid="CommentInfoColumns"/>,
+  			<include refid="gdou.laiminghai.ime.dao.mapper.UserInfoMapper.UserInfoColumns"/>,
+  			<include refid="gdou.laiminghai.ime.dao.mapper.ProductInfoMapper.ProductInfoColumns"/>
+  	from commentinfo ci inner join userinfo u on ci.bUserId = u.bUserId 
+  			inner join productinfo p on ci.bProductId = p.bProductId 
   	<include refid="selectByCondition_Condition"/> order by ci.dSendTime desc
   </select>
   <!-- 查找用户关注动态 -->

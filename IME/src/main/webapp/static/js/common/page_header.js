@@ -36,3 +36,15 @@ $(".gosignup-btn").click(function(){
 		$("html").css("overflow-y","hidden");
 	});
 });
+/**
+ * 搜索
+ */
+$(".search-btn").click(function(){
+	var keyword = $(".search-keyword").val();
+	if($.trim(keyword) == ""){
+		layer.msg("请先输入要搜索的关键字");
+		return ;
+	}
+	location.href=basePath + "comment/search.html"+"?keyword="+keyword;
+});
+

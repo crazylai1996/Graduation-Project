@@ -587,7 +587,8 @@ body {
 /*
  *最新内容
  */
-.newest-comments {
+.newest-comments,
+.search-comments {
   width: 100%;
   height: auto;
   overflow: hidden;
@@ -598,22 +599,34 @@ body {
   margin-top: 13px;
   margin-bottom: 39px;
 }
+/**
+ * 搜索结果
+ */
+.search-comments {
+  margin-top: 0;
+}
+.sc-title li {
+  width: auto !important;
+}
 /*
  title: 最新内容
  */
-.nc-title {
+.nc-title,
+.sc-title {
   margin: 0;
   padding: 0;
   list-style: none;
   height: 35px;
   border-bottom: 0.5px solid #e6e6e6;
 }
-.nc-title .current {
+.nc-title .current,
+.sc-title .current {
   border-left: 0.5px solid #cccccc;
   border-right: 0.5px solid #cccccc;
   background-color: #ffffff;
 }
-.nc-title li {
+.nc-title li,
+.sc-title li {
   position: relative;
   float: left;
   left: -1px;

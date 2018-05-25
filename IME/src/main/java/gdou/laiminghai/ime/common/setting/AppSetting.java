@@ -1,5 +1,6 @@
 package gdou.laiminghai.ime.common.setting;
 
+import org.apache.taglibs.standard.lang.jstl.test.beans.PublicInterface2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -96,6 +97,18 @@ public class AppSetting {
 	 * 邮箱授权码
 	 */
 	public static String MAIL_AUTH_CODE;
+	/**
+	 * 心得索引目录
+	 */
+	public static String COMMENT_INDEX_PATH;
+	/**
+	 * 索引同步策略
+	 */
+	public static String INDEX_SYNC_STRATEGY;
+	/**
+	 * 是否重建索引
+	 */
+	public static boolean INDEX_RECREATE;
 
 	@Value("${app.root}")
 	public void setAppRoot(String appRoot) {
@@ -199,5 +212,20 @@ public class AppSetting {
 	@Value("${mail.qq.auth.code}")
 	public void setMailAuthCode(String mailAuthCode) {
 		AppSetting.MAIL_AUTH_CODE = mailAuthCode;
+	}
+	
+	@Value("${comment.index.path}")
+	public void setCommentIndexPath(String indexPath) {
+		AppSetting.COMMENT_INDEX_PATH = indexPath;
+	}
+	
+	@Value("${index.sync.strategy}")
+	public void setIndexSyncStrategy(String syncStrategy) {
+		AppSetting.INDEX_SYNC_STRATEGY = syncStrategy;
+	}
+	
+	@Value("${index.recreate}")
+	public void setIndexRecreate(boolean indexRecreate) {
+		AppSetting.INDEX_RECREATE = indexRecreate;
 	}
 }

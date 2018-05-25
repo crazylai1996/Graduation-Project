@@ -25,6 +25,27 @@ $(".mc-head-time li").click(function(){
 $(".mc-body>li").hover(function(){
   $(this).addClass("current").siblings("li").removeClass("current");
 });
+/**
+ * 加载更多搜索结果 
+ */
+$(".load-more-search-result").click(function(){
+	var pageNum = $(".nc-list").data("pageNum") + 1;
+	var keyword = $(".nc-list").data("keyword");
+	var postUrl = basePath + "comment/loadMoreSearchResult.do";
+	if($.trim(keyword) == ""){
+		return;
+	}
+	$.post(postUrl,{pageNum:pageNum,keyword:keyword},function(result){
+		if($.trim(result) == ""){
+			layer.msg("没有更多啦");
+			$(".load-more-wrapped").html('<span class="no-more-load">我是有底线的</span>');
+		}else{
+			$(".nc-list").append(result);
+			$(".nc-list").data("pageNum",pageNum);
+		}
+	});
+	
+});
 //加载更多最新
 function loadMoreNewest(){
 	var pageNum = $(".nc-list").data("pageNum") + 1;

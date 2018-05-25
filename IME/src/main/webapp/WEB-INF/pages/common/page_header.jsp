@@ -96,12 +96,13 @@
   <div class="search-container">
     <span class="want-search left">我要找：</span>
     <span class="search-box left">
-      <a class="search-type" href="javascript:void(0);">产品</a>
-      <input type="text" class="keyword" name="keyword" autocomplete="off" placeholder="请输入产品、品牌等">
+      <a class="search-type" href="javascript:void(0);">点评</a>
+      <input type="text" class="keyword search-keyword" name="keyword" 
+      	autocomplete="off" placeholder="请输入点评标题、内容等" value="${param.keyword }">
       <ul class="s-type-slector">
-        <li><a href="javascript:void(0);">产品</a></li>
+<!--         <li><a href="javascript:void(0);">产品</a></li> -->
         <li><a href="javascript:void(0);">点评</a></li>
-        <li><a href="javascript:void(0);">文章</a></li>
+<!--         <li><a href="javascript:void(0);">文章</a></li> -->
       </ul>
     </span>
     <a class="search-btn left" href="javascript:void(0);">搜&nbsp;索</a>

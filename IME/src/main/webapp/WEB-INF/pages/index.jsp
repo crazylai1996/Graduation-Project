@@ -122,6 +122,7 @@
   <div class="main-contents">
     <div class="main-left">
       <!-- 猜你喜欢-->
+      <c:if test="${empty param.keyword }">
       <div class="guess-you-need">
         <div class="gyn-title">
           <a class="left" href="#">猜你喜欢</a>
@@ -160,6 +161,35 @@
           </li>
         </ul>
       </div>
+      </c:if>
+      <c:if test="${!empty param.keyword and !empty searchResult}">
+      	<div class="search-comments">
+      		<ul class="sc-title">
+	          <li class="current">“${param.keyword }”搜索结果</li>
+	        </ul>
+	        <c:choose>
+		        <c:when test="${searchResult.list.size() > 0 }">
+		        	<ul class="nc-list" data-page-num="1" data-keyword="${param.keyword }">
+			      		<jsp:include page="comment/comment_search_result.jsp"/>
+			      	</ul>
+		        </c:when>
+		       	<c:otherwise>
+	        		<div class="no-more-contents">
+        				“${param.keyword }”搜索结果为空
+        			</div>
+        		</c:otherwise>
+        	</c:choose>
+	      	<!-- 加载更多 -->
+            <div class="load-more-wrapped">
+            	<c:choose>
+            		<c:when test="${searchResult.list.size() >= searchResult.pageSize }">
+            			<a class="load-more-btn load-more-search-result" href="javascript:void(0);">加载更多</a>
+            		</c:when>
+            	</c:choose>
+            </div>
+      	</div>
+      </c:if>
+      <c:if test="${empty searchResult}">
       <!-- 最新点评 -->
       <div class="newest-comments">
         <ul class="nc-title">
@@ -240,6 +270,7 @@
 				</c:if>
 			</div>
 		</div>
+		</c:if>
     </div>
     <div class="main-right">
       <!-- 最多点击 -->

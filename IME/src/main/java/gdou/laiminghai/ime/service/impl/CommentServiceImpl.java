@@ -1,7 +1,5 @@
 package gdou.laiminghai.ime.service.impl;
 
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
-
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,8 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import javax.xml.stream.events.Comment;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -29,6 +25,7 @@ import gdou.laiminghai.ime.common.setting.AppSetting;
 import gdou.laiminghai.ime.common.statics.BuyWayEnum;
 import gdou.laiminghai.ime.common.statics.SkinTextureEnum;
 import gdou.laiminghai.ime.common.util.FileUtil;
+import gdou.laiminghai.ime.dao.lucene.CommentIndexDao;
 import gdou.laiminghai.ime.dao.mapper.CommentInfoMapper;
 import gdou.laiminghai.ime.dao.mapper.UserFollowClassMapper;
 import gdou.laiminghai.ime.dao.mapper.UserFollowProductMapper;
@@ -73,6 +70,9 @@ public class CommentServiceImpl implements CommentService {
 	
 	@Autowired
 	private UserFollowClassMapper userFollowClassMapper;
+	
+	@Autowired
+	private CommentIndexDao commentIndexDao;
 
 	@Override
 	public String saveCommentPicture(MultipartFile imgFile, String savedPath) {
@@ -119,6 +119,8 @@ public class CommentServiceImpl implements CommentService {
 		}
 		// 插入到数据库
 		commentInfoMapper.insert(commentInfoPO);
+		//建立索引 
+		commentIndexDao.addCommentIndex(commentInfoPO);
 		// 将心得图片从临时图片目录移动到正式目录
 		for (String pictureName : commentPictures) {
 			if (contentText.contains(pictureName)) {
@@ -127,7 +129,6 @@ public class CommentServiceImpl implements CommentService {
 						new CommentPicture(commentInfoPO.getCommentId(),pictureName));
 			}
 		}
-
 	}
 
 	@Override
@@ -250,6 +251,31 @@ public class CommentServiceImpl implements CommentService {
 		PageResult<CommentInfoVO> pageResult = new PageResult<CommentInfoVO>(commentInfoVOList);
 		pageResult.setPages(pageInfo.getPages());
 		return pageResult;
+	}
+
+	@Override
+	public PageResult<CommentInfoVO> searchCommentsByPage(int pageNum, String keyword) {
+		List<CommentInfoVO> commentResult = commentIndexDao.searchByPage(keyword, pageNum);
+		List<CommentInfoVO> pageList = new ArrayList<>();
+		Map<String,Object> map = new HashMap<>();
+		for (CommentInfoVO comment : commentResult) {
+			map.put("commentId", comment.getCommentId());
+			List<CommentInfo> commentInfoPOs = commentInfoMapper.selectByCondition(map);
+			if(commentInfoPOs != null && commentInfoPOs.size() > 0) {
+				CommentInfo comentInfoPO = commentInfoPOs.get(0);
+				CommentInfoVO commentInfoVO = commentInfoPO2CommentInfoVO(comentInfoPO);
+				if(StringUtils.isNotBlank(comment.getContentText())) {
+					commentInfoVO.setContentText(comment.getContentText());
+				}
+				if(StringUtils.isNotBlank(comment.getArticleTitle())) {
+					commentInfoVO.setArticleTitle(comment.getArticleTitle());
+				}
+				pageList.add(commentInfoVO);
+			}
+		}
+		PageResult<CommentInfoVO> searchResult = new PageResult<>(pageList);
+		searchResult.setPageSize(AppSetting.NUMBER_PER_PAGE);
+		return searchResult;
 	}
 
 	/**

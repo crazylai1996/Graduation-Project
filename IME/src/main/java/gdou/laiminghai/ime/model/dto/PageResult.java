@@ -7,6 +7,8 @@ public class PageResult<T> {
 	private int pages;
 	// 结果集
 	protected List<T> list;
+	//每页的数量
+    private int pageSize;
 
 	public PageResult(List<T> list) {
 		this.list = list;
@@ -28,9 +30,17 @@ public class PageResult<T> {
 		this.list = list;
 	}
 
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
 	@Override
 	public String toString() {
-		return "PageResult [pages=" + pages + ", list=" + list.toString() + "]";
+		return "PageResult [pages=" + pages + ", list=" + list + ", pageSize=" + pageSize + "]";
 	}
-	
+
 }

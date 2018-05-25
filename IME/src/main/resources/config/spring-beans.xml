@@ -94,4 +94,6 @@
 	    </property>
 	</bean>
 	
+	<!-- 心得索引Dao -->
+	<bean id="commentIndexDao" class="gdou.laiminghai.ime.dao.lucene.CommentIndexDao"/>
 </beans>

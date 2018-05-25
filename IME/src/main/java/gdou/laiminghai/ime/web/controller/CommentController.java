@@ -271,4 +271,40 @@ public class CommentController {
 		return mav;
 	}
 	
+	/**
+	 * 使用心得搜索
+	 * @param keyword
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月25日 上午12:43:01
+	 */
+	@RequestMapping("/search")
+	public ModelAndView searchComment(@RequestParam(value="pageNum",required=false,defaultValue="1")int pageNum,
+			@RequestParam(value="keyword",required=false)String keyword) {
+		ModelAndView mav = new ModelAndView("index");
+		if(StringUtils.isBlank(keyword)) {
+			mav.setViewName("redirect:/");
+			return mav;
+		}
+		PageResult<CommentInfoVO> searchResult = commentService.searchCommentsByPage(pageNum, keyword);
+		mav.addObject("searchResult",searchResult);
+		return mav;
+	}
+	
+	/**
+	 * 加载更多搜索结果 
+	 * @param pageNum
+	 * @param keyword
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月25日 上午9:27:33
+	 */
+	@RequestMapping("/loadMoreSearchResult.do")
+	public ModelAndView loadMoreSerachResult(@RequestParam(value="pageNum",required=false,defaultValue="1")int pageNum,
+			@RequestParam(value="keyword",required=false)String keyword) {
+		ModelAndView mav = new ModelAndView("comment/comment_search_result");
+		PageResult<CommentInfoVO> searchResult = commentService.searchCommentsByPage(pageNum, keyword);
+		mav.addObject("searchResult",searchResult);
+		return mav;
+	}
 }
