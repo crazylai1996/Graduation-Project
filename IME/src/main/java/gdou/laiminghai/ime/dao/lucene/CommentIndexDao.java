@@ -221,6 +221,12 @@ public class CommentIndexDao {
 			}
         }catch (IOException e) {
 			logger.error("同步失败");
+		}finally {
+			try {
+                indexDeletionPolicy.release(snapshot);
+            } catch (IOException e) {
+                logger.error("释放失败");
+            }
 		}
 	}
 	

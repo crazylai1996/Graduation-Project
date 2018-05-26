@@ -3,6 +3,7 @@ package gdou.laiminghai.ime.service.impl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +23,7 @@ import gdou.laiminghai.ime.common.statics.SkinTextureEnum;
 import gdou.laiminghai.ime.common.util.FileUtil;
 import gdou.laiminghai.ime.common.util.ResultDTOUtil;
 import gdou.laiminghai.ime.dao.mapper.ProductInfoMapper;
+import gdou.laiminghai.ime.dao.mapper.UserBrowserRecordMapper;
 import gdou.laiminghai.ime.dao.mapper.UserFollowProductMapper;
 import gdou.laiminghai.ime.model.dto.ResultDTO;
 import gdou.laiminghai.ime.model.entity.ProductInfo;
@@ -40,6 +42,8 @@ public class ProductServiceImpl implements ProductService {
 	private ProductPictureService productPictureService;
 	@Autowired
 	private UserFollowProductMapper userFollowProductMapper;
+	@Autowired
+	private UserBrowserRecordMapper userBrowserRecordMapper;
 	
 	//日志记录
 	private static final Logger logger = Logger.getLogger(ProductServiceImpl.class);

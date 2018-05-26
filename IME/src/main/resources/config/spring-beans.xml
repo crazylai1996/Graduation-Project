@@ -84,14 +84,41 @@
 	
 	<!-- 线程池 -->
 	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
-	    <property name="corePoolSize" value="4"/> <!--核心线程数 -->
-	    <property name="maxPoolSize" value="8"/> <!--最大线程数 -->
-	    <property name="keepAliveSeconds" value ="3000"/> <!--线程最大空闲时间 -->
-	    <property name="queueCapacity" value="100"/> <!-- 队列大小 -->
-	    <property name="threadNamePrefix" value="TASK_EXECUTOR"/>
+	    <property name="corePoolSize" value="${threadPool.corePoolSize}"/> <!--核心线程数 -->
+	    <property name="maxPoolSize" value="${threadPool.maxPoolSize}"/> <!--最大线程数 -->
+	    <property name="keepAliveSeconds" value ="${threadPool.keepAliveSeconds}"/> <!--线程最大空闲时间 -->
+	    <property name="queueCapacity" value="${threadPool.queueCapacity}"/> <!-- 队列大小 -->
+	    <property name="threadNamePrefix" value="${threadPool.threadNamePrefix}"/>
 	    <property name="rejectedExecutionHandler">
 	        <bean class="java.util.concurrent.ThreadPoolExecutor.CallerRunsPolicy"/>
 	    </property>
+	</bean>
+	
+	<!-- redis连接池 -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <property name="maxWaitMillis" value="${redis.maxWait}"/>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+    </bean>
+    
+    <!-- redis服务中心 -->
+    <bean id="connectionFactory" 
+        class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="poolConfig" ref="poolConfig"/>
+        <property name="hostName" value="${redis.host}"/>
+        <property name="port" value="${redis.port}"/>
+        <property name="password" value="${redis.auth}"/>
+        <property name="timeout" value="${redis.timeout}"/>
+	</bean>
+	
+	<!-- redis模板 -->
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+	    <property name="connectionFactory" ref="connectionFactory" />
+	</bean>
+	
+	<!-- redisUtil -->
+	<bean id="" class="gdou.laiminghai.ime.dao.redis.RedisDao">
+		<property name="redisTemplate" ref="redisTemplate"/>
 	</bean>
 	
 	<!-- 心得索引Dao -->

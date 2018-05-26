@@ -1,6 +1,5 @@
 package gdou.laiminghai.ime.common.setting;
 
-import org.apache.taglibs.standard.lang.jstl.test.beans.PublicInterface2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -109,6 +108,10 @@ public class AppSetting {
 	 * 是否重建索引
 	 */
 	public static boolean INDEX_RECREATE;
+	/**
+	 * 排行榜显示条目
+	 */
+	public static Integer PRODUCT_RANK_COUNT;
 
 	@Value("${app.root}")
 	public void setAppRoot(String appRoot) {
@@ -227,5 +230,10 @@ public class AppSetting {
 	@Value("${index.recreate}")
 	public void setIndexRecreate(boolean indexRecreate) {
 		AppSetting.INDEX_RECREATE = indexRecreate;
+	}
+	
+	@Value("${product.rank.count}")
+	public void setProductRankCount(Integer rankCount) {
+		AppSetting.PRODUCT_RANK_COUNT = rankCount;
 	}
 }

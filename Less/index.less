@@ -835,7 +835,16 @@ body{
 
   width: 100%;
   box-sizing: border-box;
+  .no-rank-li{
+    @_height: 120px;
 
+    height: @_height;
+
+    line-height: @_height;
+    text-align: center;
+    font-size: 16px;
+    color: @desc_strong_color;
+  }
   img{
     float: left;
 

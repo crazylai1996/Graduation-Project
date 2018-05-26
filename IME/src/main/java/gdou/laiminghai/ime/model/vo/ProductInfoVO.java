@@ -31,6 +31,10 @@ public class ProductInfoVO {
     private boolean follow;
     private String followTime;
     
+    private long browserCount;
+    private long followCount;
+    private long commentCount;
+    
 	public Long getProductId() {
 		return productId;
 	}
@@ -145,6 +149,24 @@ public class ProductInfoVO {
 	public void setFollowTime(String followTime) {
 		this.followTime = followTime;
 	}
+	public long getBrowserCount() {
+		return browserCount;
+	}
+	public void setBrowserCount(long browserCount) {
+		this.browserCount = browserCount;
+	}
+	public long getFollowCount() {
+		return followCount;
+	}
+	public void setFollowCount(long followCount) {
+		this.followCount = followCount;
+	}
+	public long getCommentCount() {
+		return commentCount;
+	}
+	public void setCommentCount(long commentCount) {
+		this.commentCount = commentCount;
+	}
 	
 	@Override
 	public String toString() {
@@ -153,6 +175,8 @@ public class ProductInfoVO {
 				+ classify + ", property=" + property + ", effect=" + effect + ", skinTexture=" + skinTexture
 				+ ", coverImage=" + coverImage + ", productImages=" + productImages + ", desc=" + desc + ", brandName="
 				+ brandName + ", classifyName=" + classifyName + ", propertyName=" + propertyName + ", effectName="
-				+ effectName + ", follow=" + follow + ", followTime=" + followTime + "]";
+				+ effectName + ", follow=" + follow + ", followTime=" + followTime + ", browserCount=" + browserCount
+				+ ", followCount=" + followCount + ", commentCount=" + commentCount + "]";
 	}
+	
 }

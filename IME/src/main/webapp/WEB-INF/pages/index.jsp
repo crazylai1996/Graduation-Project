@@ -279,11 +279,37 @@
           <span class="mc-head-title">最多点击</span>
           <ul class="mc-head-time">
             <li class="current">7天</li>
-            <li>30天</li>
+<!--             <li>30天</li> -->
           </ul>
         </div>
         <ul class="mc-body">
-          <li class="current">
+          <c:choose>
+          	<c:when test="${productRank != null and productRank.size() > 0 }">
+	          	<c:forEach items="${productRank }" var="productInfo" varStatus="status">
+		          	<li class='<c:if test="${ status.count == 1}">current</c:if>'>
+			            <a class="brief-title" href="${basePath }product/info/${productInfo.productId}.html" target="_blank">
+			            	${productInfo.productName }
+			            </a>
+			            <a href="${basePath }product/info/${productInfo.productId}.html" target="_blank"><img src="${productInfo.coverImage }" alt="化妆品图片"></a>
+			            <div class="mc-body-right">
+			              <a class="mc-body-title" href="${basePath }product/info/${productInfo.productId}.html" target="_blank">${productInfo.productName }</a>
+			              <div class="mc-body-ext">
+			                <span class="love-sum"><i class="layui-icon layui-icon-reply-fill"></i>0</span>
+			                <a href="#" class="comment-sum"><i class="layui-icon layui-icon-star-fill"></i>0</a>
+			              </div>
+			            </div>
+			          </li>
+		          </c:forEach>
+	        </c:when>
+	        <c:otherwise>
+	        	<div class="no-rank-li">
+	        		暂时还没有内容
+	        	</div>
+	        </c:otherwise>
+          </c:choose>
+          
+          
+          <!-- <li class="current">
             <a class="brief-title" href="#">1 欧植萃 天然玫瑰保湿护手霜欧植萃 天然玫瑰保湿护手霜</a>
             <img src="static\img\commodity_test.jpg" alt="化妆品图片">
             <div class="mc-body-right">
@@ -333,7 +359,7 @@
                 <span class="love-sum">49</span><a href="#" class="comment-sum">11</a>
               </div>
             </div>
-          </li>
+          </li> -->
         </ul>
       </div>
       <!-- 性价精选 -->

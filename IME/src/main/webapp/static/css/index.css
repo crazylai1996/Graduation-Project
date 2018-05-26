@@ -805,6 +805,13 @@ body {
   width: 100%;
   box-sizing: border-box;
 }
+.mc-body .no-rank-li {
+  height: 120px;
+  line-height: 120px;
+  text-align: center;
+  font-size: 16px;
+  color: #666666;
+}
 .mc-body img {
   float: left;
   display: none;

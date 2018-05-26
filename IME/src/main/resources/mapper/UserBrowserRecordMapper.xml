@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gdou.laiminghai.ime.dao.mapper.UserBrowserRecordMapper">
+  <resultMap id="BaseResultMap" type="gdou.laiminghai.ime.model.entity.UserBrowserRecord">
+    <id column="bBrowserId" jdbcType="BIGINT" property="browserId" />
+    <result column="bUserId" jdbcType="BIGINT" property="userId" />
+    <result column="bProductId" jdbcType="BIGINT" property="productId" />
+    <result column="dBrowserTime" jdbcType="TIMESTAMP" property="browserTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from userbrowserrecord
+    where bBrowserId = #{browserId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="bBrowserId" keyProperty="browserId" parameterType="gdou.laiminghai.ime.model.entity.UserBrowserRecord" useGeneratedKeys="true">
+    insert into userbrowserrecord (bUserId, bProductId, dBrowserTime
+      )
+    values (#{userId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{browserTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="gdou.laiminghai.ime.model.entity.UserBrowserRecord">
+    update userbrowserrecord
+    set bUserId = #{userId,jdbcType=BIGINT},
+      bProductId = #{productId,jdbcType=BIGINT},
+      dBrowserTime = #{browserTime,jdbcType=TIMESTAMP}
+    where bBrowserId = #{browserId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select bBrowserId, bUserId, bProductId, dBrowserTime
+    from userbrowserrecord
+    where bBrowserId = #{browserId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select bBrowserId, bUserId, bProductId, dBrowserTime
+    from userbrowserrecord
+  </select>
+  <resultMap type="map" id="browserCountResult">
+  	<result column="bProductId" property="productId" jdbcType="BIGINT"/>
+  	<result column="browserCount" property="count" jdbcType="BIGINT"/>
+  </resultMap>
+  <select id="findBrowserCountRank" resultMap="browserCountResult" 
+  	parameterType="map">
+  	select bProductId,count(*) browserCount
+  	from userbrowserrecord 
+	where dBrowserTime &gt;= #{startTime} and dBrowserTime &lt;= #{endTime}
+  	group by bProductId order by browserCount desc limit 50
+  </select>
+</mapper>

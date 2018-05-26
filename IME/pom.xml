@@ -17,6 +17,8 @@
 		<aspectj.version>1.7.4</aspectj.version>
 		<!-- lucene版本号 -->
 		<lucene.version>6.6.1</lucene.version>
+		<!-- jedis版本号 -->
+		<jedis.version>2.9.0</jedis.version>
 	</properties>
 
 	<dependencies>
@@ -254,6 +256,25 @@
 		    <groupId>org.apache.lucene</groupId>
 		    <artifactId>lucene-analyzers-smartcn</artifactId>
 		    <version>${lucene.version}</version>
+		</dependency>
+
+		<!-- redis客户端:Jedis -->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>${jedis.version}</version>
+		</dependency>
+		<!-- spring-data-redis -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>1.8.6.RELEASE</version>
+		</dependency>
+		<!-- quartz -->
+	     <dependency>
+		    <groupId>org.quartz-scheduler</groupId>
+		    <artifactId>quartz</artifactId>
+		    <version>2.2.1</version>
 		</dependency>
 				
 		<!-- spring test -->

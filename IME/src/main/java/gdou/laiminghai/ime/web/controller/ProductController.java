@@ -27,6 +27,7 @@ import gdou.laiminghai.ime.common.util.ResultDTOUtil;
 import gdou.laiminghai.ime.model.dto.PageResult;
 import gdou.laiminghai.ime.model.dto.ResultDTO;
 import gdou.laiminghai.ime.model.entity.CosmeticClass;
+import gdou.laiminghai.ime.model.entity.UserBrowserRecord;
 import gdou.laiminghai.ime.model.vo.CommentInfoVO;
 import gdou.laiminghai.ime.model.vo.ProductInfoVO;
 import gdou.laiminghai.ime.model.vo.SelectItemVO;
@@ -34,6 +35,7 @@ import gdou.laiminghai.ime.model.vo.UserInfoVO;
 import gdou.laiminghai.ime.service.CommentService;
 import gdou.laiminghai.ime.service.CosmeticClassService;
 import gdou.laiminghai.ime.service.ProductService;
+import gdou.laiminghai.ime.service.RankService;
 import gdou.laiminghai.ime.service.UserService;
 
 /**
@@ -64,6 +66,9 @@ public class ProductController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RankService rankService;
 
 	/**
 	 * 跳转到添加新商品页面
@@ -143,8 +148,9 @@ public class ProductController {
 		//判断当前产品是否已被关注
 		HttpSession session = request.getSession();
 		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
+		Long userId = null;
 		if(userInfoMap != null) {
-			Long userId = (Long)userInfoMap.get("userId");
+			userId = (Long)userInfoMap.get("userId");
 			productInfoVO.setFollow(productService.isFolloedProduct(userId, productId));
 		}
 		mav.addObject("productInfoVO", productInfoVO);
@@ -157,7 +163,6 @@ public class ProductController {
 		map.put("pageNum", 1);
 		PageResult<CommentInfoVO> pageResult = commentService.findCommentList(map);
 		if(userInfoMap != null) {
-			Long userId = (Long)userInfoMap.get("userId");
 			for (CommentInfoVO commentInfoVO : pageResult.getList()) {
 				UserInfoVO userInfoVO = commentInfoVO.getUserInfo();
 				if(userInfoVO != null) {
@@ -170,6 +175,8 @@ public class ProductController {
 		
 		logger.debug("分页结果："+pageResult.toString());
 		mav.addObject("pageResult", pageResult);
+		//添加浏览记录
+		rankService.addBrowserRecord(new UserBrowserRecord(userId,productId));
 		return mav;
 	}
 	

@@ -11,7 +11,7 @@
     delete from commentpicture
     where lCommentPictureId = #{pictureId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="CommentPicture">
+  <insert id="insert" parameterType="CommentPicture" keyProperty="pictureId" useGeneratedKeys="true">
     insert into commentpicture (lCommentPictureId, bCommentId, vCommentPictureUrl
       )
     values (#{pictureId,jdbcType=BIGINT}, #{commentId,jdbcType=BIGINT}, #{pictureUrl,jdbcType=VARCHAR}
