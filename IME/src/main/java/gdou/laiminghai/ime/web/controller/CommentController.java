@@ -31,6 +31,7 @@ import gdou.laiminghai.ime.common.setting.AppSetting;
 import gdou.laiminghai.ime.common.util.ResultDTOUtil;
 import gdou.laiminghai.ime.model.dto.PageResult;
 import gdou.laiminghai.ime.model.dto.ResultDTO;
+import gdou.laiminghai.ime.model.dto.UserPrefDTO;
 import gdou.laiminghai.ime.model.entity.CommentReplyVO;
 import gdou.laiminghai.ime.model.vo.CommentInfoVO;
 import gdou.laiminghai.ime.model.vo.ProductInfoVO;
@@ -38,6 +39,7 @@ import gdou.laiminghai.ime.model.vo.UserInfoVO;
 import gdou.laiminghai.ime.service.CommentReplyService;
 import gdou.laiminghai.ime.service.CommentService;
 import gdou.laiminghai.ime.service.ProductService;
+import gdou.laiminghai.ime.service.RecommendationService;
 import gdou.laiminghai.ime.service.UserService;
 
 /**
@@ -68,6 +70,9 @@ public class CommentController {
 
 	@Autowired
 	private CommentReplyService commentReplyService;
+	
+	@Autowired
+	private RecommendationService recommendationService;
 
 	/**
 	 * 评论心得图片上传
@@ -162,9 +167,15 @@ public class CommentController {
 		String savedPath = session.getServletContext().getRealPath("/" + AppSetting.COMMENT_PICTURE_SAVED_PATH);
 		// 获取用户ID
 		Long userId = (Long) userInfoMap.get("userId");
+		Integer bornYear = (Integer)userInfoMap.get("bornYear");
+		String skinTexture = (String)userInfoMap.get("skinTexture");
 		commentInfoVO.setUserId(userId);
 		List<String> commentPictures = (List<String>) session.getAttribute("uploadPictures");
 		commentService.addNewComment(commentInfoVO, commentPictures, tmpPath, savedPath);
+		//记录用户偏好
+		recommendationService.addNewPref(
+				new UserPrefDTO(userId, commentInfoVO.getProductId(), 
+						commentInfoVO.getWorthMark(), bornYear, skinTexture));
 		return ResultDTOUtil.success(null);
 	}
 

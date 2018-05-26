@@ -123,13 +123,25 @@
     <div class="main-left">
       <!-- 猜你喜欢-->
       <c:if test="${empty param.keyword }">
+      <c:if test="${sessionScope.userInfo != null and recProductList != null and recProductList.size() > 0}">
       <div class="guess-you-need">
         <div class="gyn-title">
-          <a class="left" href="#">猜你喜欢</a>
-          <a class="right" href="#">换一批</a>
+          <a class="left" href="javascript:void(0);">猜你喜欢</a>
+<!--           <a class="right" href="#">换一批</a> -->
         </div>
+        
         <ul class="gyn-contents">
-          <li><a href="#">
+        	
+	        	<c:forEach items="${recProductList }" var="productInfo">
+	        		<li><a href="${basePaht }product/info/${productInfo.productId}.html">
+			            <img src="${productInfo.coverImage }">
+			            <span class="commodity-title">
+			              ${productInfo.productName }
+			            </span></a>
+			          </li>
+	        	</c:forEach>
+        	
+          <!--  <li><a href="#">
             <img src="static\img\commodity_test.jpg">
             <span class="commodity-title">
               Green Skin格润丝 花青素明眸眼霜Green Skin格润丝 花青素明眸眼霜Green Skin格润丝 花青素明眸眼霜
@@ -158,9 +170,9 @@
             <span class="commodity-title">
               Green Skin格润丝 花青素明眸眼霜Green Skin格润丝 花青素明眸眼霜Green Skin格润丝 花青素明眸眼霜
             </span></a>
-          </li>
+          </li>-->
         </ul>
-      </div>
+      </div></c:if>
       </c:if>
       <c:if test="${!empty param.keyword and !empty searchResult}">
       	<div class="search-comments">

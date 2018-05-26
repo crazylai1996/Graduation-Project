@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title>首次登录 - 爱美丽</title>
+  <link rel="stylesheet" href="plugins\layui\css\layui.css"/>
+  <script type="text/javascript" src="plugins\layui\layui.all.js"></script>
+  <link rel="stylesheet" href="plugins\BeAlert\BeAlert.css"/>
+  <link rel="stylesheet" href="css\first_login.css">
+</head>
+
+<body>
+  <div class="main-wrapped">
+    <div class="main-container">
+      <!-- 当前位置开始 -->
+      <div class="current-pos">
+        <a href="${basePath }">首页</a><span class="split-line"></span>
+        <sapn class="title">首次登录</span>
+      </div>
+      <!-- 当前位置结束 -->
+      <!-- 主体内容开始 -->
+      <div class="main-contents">
+        <h2 class="tips">
+          请填写肤质和年龄，以获得更准确的推荐结果
+        </h2>
+        <div class="input-container">
+          <div class="input-label">
+                  适用肤质：
+          </div>
+          <div class="input-contents">
+            <select class="sm-input" name="skinTexture">
+              <option value="">中性</option>
+              <option value="">干性</option>
+              <option value="">油性</option>
+              <option value="">混合</option>
+              <option value="">敏感</option>
+            </select>
+          </div>
+          <div class="input-label">
+                  出生年月：
+          </div>
+          <div class="input-contents">
+            <input class="born-year" type="text" readonly/>
+          </div>
+        </div>
+        <div class="btn-container">
+          <a href="javascript:void(0);" class="save-btn">保存</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js\jquery.js"></script>
+  <script type="text/javascript" src="plugins\BeAlert\BeAlert.js"></script>
+  <script type="text/javascript">
+  var laydate = layui.laydate, layer = layui.layer;
+  laydate.render({
+    elem : '.born-year',
+    type : 'year',
+    format : 'yyyy',
+    theme : '#CC99CC'
+  });
+  </script>
+</body>
+
+</html>

@@ -34,7 +34,7 @@
     from recommendationresult
   </select>
   <!-- 查找用户推荐结果 -->
-  <select id="findProductIdsByUserId" parameterType="long">
+  <select id="findProductIdsByUserId" parameterType="long" resultType="java.lang.Long">
   	select bProductId 
   	from recommendationresult 
   	where bUserId = #{_parameter}

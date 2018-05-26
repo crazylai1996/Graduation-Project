@@ -69,7 +69,15 @@
             <mvc:mapping path="/cosmeticClass/unfollowClass.do"/>
             <mvc:mapping path="/cosmeticClass/classSelect**"/>
             <mvc:mapping path="/cosmeticClass/followMoreClasses.do"/>
-            <bean class="gdou.laiminghai.ime.web.interceptor.NoLoginInterceptor"></bean>  
+            <bean class="gdou.laiminghai.ime.web.interceptor.NoLoginInterceptor"></bean>
         </mvc:interceptor>  
+        <mvc:interceptor>
+        	<mvc:mapping path="/"/> 
+        	<mvc:mapping path="/index**"/> 
+        	<mvc:mapping path="/user/info**"/> 
+        	<mvc:mapping path="/user/accountSetting**"/> 
+        	<mvc:mapping path="/**/info/**"/> 
+        	<bean class="gdou.laiminghai.ime.web.interceptor.FirstLoginInterceptor"></bean>
+        </mvc:interceptor>
     </mvc:interceptors> 
 </beans>

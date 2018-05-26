@@ -18,6 +18,8 @@ public class UserInfoVO {
     private String gender;
 
     private String skinTexture;
+    
+    private Integer bornYear;
 
     private Integer age;
 
@@ -34,6 +36,8 @@ public class UserInfoVO {
     private Integer memberLevel;
     
     private Area area;
+    
+    private String status;
     
     private boolean follow;
 
@@ -75,6 +79,20 @@ public class UserInfoVO {
 
 	public void setSkinTexture(String skinTexture) {
 		this.skinTexture = skinTexture;
+	}
+
+	/**
+	 * @return the bornYear
+	 */
+	public Integer getBornYear() {
+		return bornYear;
+	}
+
+	/**
+	 * @param bornYear the bornYear to set
+	 */
+	public void setBornYear(Integer bornYear) {
+		this.bornYear = bornYear;
 	}
 
 	public Integer getAge() {
@@ -141,6 +159,20 @@ public class UserInfoVO {
 		this.area = area;
 	}
 
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public boolean isFollow() {
 		return follow;
 	}
@@ -152,8 +184,10 @@ public class UserInfoVO {
 	@Override
 	public String toString() {
 		return "UserInfoVO [userId=" + userId + ", userName=" + userName + ", nickname=" + nickname + ", gender="
-				+ gender + ", skinTexture=" + skinTexture + ", age=" + age + ", introduction=" + introduction
-				+ ", portrait=" + portrait + ", phone=" + phone + ", email=" + email + ", membershipPoint="
-				+ membershipPoint + ", memberLevel=" + memberLevel + ", area=" + area + ", follow=" + follow + "]";
+				+ gender + ", skinTexture=" + skinTexture + ", bornYear=" + bornYear + ", age=" + age
+				+ ", introduction=" + introduction + ", portrait=" + portrait + ", phone=" + phone + ", email=" + email
+				+ ", membershipPoint=" + membershipPoint + ", memberLevel=" + memberLevel + ", area=" + area
+				+ ", status=" + status + ", follow=" + follow + "]";
 	}
+
 }

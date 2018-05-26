@@ -20,6 +20,7 @@ import gdou.laiminghai.ime.common.exception.ServiceException;
 import gdou.laiminghai.ime.common.exception.ServiceResultEnum;
 import gdou.laiminghai.ime.common.setting.AppSetting;
 import gdou.laiminghai.ime.common.statics.SkinTextureEnum;
+import gdou.laiminghai.ime.common.statics.UserStatusEnum;
 import gdou.laiminghai.ime.common.task.EmailSendTask;
 import gdou.laiminghai.ime.common.util.CaptchaUtil;
 import gdou.laiminghai.ime.common.util.FileUtil;
@@ -89,6 +90,7 @@ public class UserServiceImpl implements UserService {
 		//生成默认用户名
 		String defaultUserName = "IME用户"+userInfoPO.getUserId();
 		userInfoPO.setUserName(defaultUserName);
+		userInfoPO.setUserState(UserStatusEnum.FIRST_LOGIN.getCode());
 		//更新用户名至数据库
 		userInfoMapper.updateByPrimaryKey(userInfoPO);
 	}
@@ -137,6 +139,7 @@ public class UserServiceImpl implements UserService {
 		if (userInfoPO == null) {
 			userInfoPO = new UserInfo();
 			userInfoPO.setPhone(userVO.getPhone());
+			userInfoPO.setUserState(UserStatusEnum.FIRST_LOGIN.getCode());
 			userInfoPO.setRegisterTime(new Date());
 			userInfoMapper.insert(userInfoPO);
 			//生成默认用户名
@@ -451,6 +454,26 @@ public class UserServiceImpl implements UserService {
 		}
 		return userInfoVOList;
 	}
+	
+	
+
+	@Override
+	public void saveFristLogin(UserInfoVO userInfoVO) {
+		// 无效动作
+		if (userInfoVO == null || 
+				userInfoVO.getUserId() == null) {
+			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);
+		}
+		UserInfo userInfoPO = userInfoMapper.selectByPrimaryKey(userInfoVO.getUserId());
+		// 用户不存在
+		if (userInfoPO == null) {
+			throw new ServiceException(ServiceResultEnum.USER_NOT_EXIST);
+		}
+		userInfoPO.setSkinTexture(userInfoVO.getSkinTexture());
+		userInfoPO.setBornYear(userInfoVO.getBornYear());
+		userInfoPO.setUserState(UserStatusEnum.NORMAL_STATUS.getCode());
+		userInfoMapper.updateByPrimaryKey(userInfoPO);
+	}
 
 	/**
 	 * PO转VO
@@ -465,6 +488,7 @@ public class UserServiceImpl implements UserService {
 		userInfoVO.setUserName(userInfo.getUserName());
 		userInfoVO.setNickname(userInfo.getNickname());
 		userInfoVO.setGender(userInfo.getGender());
+		userInfoVO.setBornYear(userInfo.getBornYear());
 		//获取用户肤质
 		if(StringUtils.isNotBlank(userInfo.getSkinTexture())) {
 			SkinTextureEnum skinTexture = SkinTextureEnum.of(userInfo.getSkinTexture());
@@ -485,6 +509,7 @@ public class UserServiceImpl implements UserService {
 		userInfoVO.setMembershipPoint(userInfo.getMembershipPoint());
 		userInfoVO.setMemberLevel(userInfo.getMemberLevel());
 		userInfoVO.setArea(userInfo.getArea());
+		userInfoVO.setStatus(userInfo.getUserState());
 		return userInfoVO;
 	}
 	

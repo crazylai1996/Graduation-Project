@@ -98,15 +98,24 @@
   	where p.bProductId = #{productId}
    </select>
    <!-- 根据ID查找多个产品信息 -->
-   <select id="findMoreProductInfoByIds" resultMap="BaseResultMap">
-   	select p.bProductId,p.vProductName,p.vCover 
-   	from productinfo p 
-   	<if test="list != null and list.size > 0"> 
-   		where p.bProductId in 
-   		<foreach collection="list" item="productId" 
-   			open="(" close=")" separator=",">
-   			#{productId}
-   		</foreach>
-   	</if>
-   </select>
+	<select id="findMoreProductInfoByIds" resultMap="BaseResultMap">
+		select p.bProductId,p.vProductName,p.vCover
+		from productinfo p
+		<where>
+			<if test="list != null">
+				<choose>
+					<when test="list.size > 0">
+						p.bProductId in
+						<foreach collection="list" item="productId" open="("
+							close=")" separator=",">
+							#{productId}
+						</foreach>
+					</when>
+					<otherwise>
+						or p.bProductId = 0
+					</otherwise>
+				</choose>
+			</if>
+		</where>
+	</select>
 </mapper>

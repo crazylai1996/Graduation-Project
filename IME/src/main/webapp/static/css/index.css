@@ -499,6 +499,7 @@ body {
 .guess-you-need {
   width: 100%;
   height: auto;
+  margin-bottom: 13px;
   overflow: hidden;
   border-radius: 1px;
   box-shadow: 0 0 2px #dab4da;
@@ -591,12 +592,12 @@ body {
 .search-comments {
   width: 100%;
   height: auto;
+  margin-bottom: 13px;
   overflow: hidden;
   border-radius: 1px;
   box-shadow: 0 0 2px #dab4da;
   background-color: #ffffff;
   padding-bottom: 8px;
-  margin-top: 13px;
   margin-bottom: 39px;
 }
 /**

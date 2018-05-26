@@ -1,6 +1,8 @@
 package gdou.laiminghai.ime.dao.redis;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -56,5 +58,17 @@ public class RedisTest extends BaseTest {
 //		UserBrowserRecord record2 = JSONUtil.map2Object(map, UserBrowserRecord.class);
 //		System.out.println(record2.getUserId());
 //		System.out.println(jsonMap);//null
+	}
+	
+	@Test
+	public void test33() {
+//		long l = 3;
+//		Map<Long,String> map = new HashMap<>();
+//		map.put(l, "lai");
+//		System.out.println(map.get(l));
+		List<String> list = null;
+		for (String string : list) {
+			System.out.println(string);
+		}
 	}
 }

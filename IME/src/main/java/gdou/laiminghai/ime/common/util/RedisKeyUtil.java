@@ -1,5 +1,6 @@
 package gdou.laiminghai.ime.common.util;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
@@ -9,9 +10,9 @@ public class RedisKeyUtil {
 	 */
 	private static final String USER_PREF_PRE_KEY = "IME:USER:PREF";
 	/**
-	 * 用户新增偏好记录：SET
+	 * 用户新增偏好记录：ZSET
 	 */
-	private static final String USER_NEW_PREFS_PRE_KEY = "IME:USER:PREFS_NEW";
+	private static final String USER_NEW_PREFS_KEY = "IME:USER:PREFS_NEW";
 	/**
 	 * 用户偏好集合：SET
 	 */
@@ -37,16 +38,30 @@ public class RedisKeyUtil {
 		return USER_PREF_PRE_KEY+":"+userId+":"+timestamp;
 	}
 	/**
-	 * 用户新增偏好记录：SET
+	 * 用户新增偏好记录：ZSET
 	 */
-	public static final String getUserNewPrefsKey(long userId) {
-		return USER_NEW_PREFS_PRE_KEY + ":" +userId;
+	public static final String getUserNewPrefsKey() {
+		return USER_NEW_PREFS_KEY;
 	}
 	/**
 	 * 用户偏好集合：SET
 	 */
-	public static String getUserClassPrefsKey(String skinTexture,int age) {
-		return USER_PREFS_CLASS_PRE_KEY+":"+skinTexture+":"+age;
+	public static String getUserClassPrefsKey(String skinTexture,int bornYear) {
+		//年龄阶段划分
+		int age = Calendar.getInstance().get(Calendar.YEAR) - bornYear;
+		String ageRange = "";
+		if(age <= 25) {
+			ageRange = "0_25";
+		}else if (age <= 30) {
+			ageRange = "25_30";
+		}else if (age <= 40) {
+			ageRange = "30_40";
+		}else if (age <= 45) {
+			ageRange = "40_45";
+		}else {
+			ageRange = "45_over";
+		}
+		return USER_PREFS_CLASS_PRE_KEY+":"+skinTexture+":"+ageRange;
 	}
 	/**
 	 * 待同步商品浏览记录：HASH

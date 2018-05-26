@@ -117,7 +117,7 @@
 	</bean>
 	
 	<!-- redisUtil -->
-	<bean id="" class="gdou.laiminghai.ime.dao.redis.RedisDao">
+	<bean id="redisDao" class="gdou.laiminghai.ime.dao.redis.RedisDao">
 		<property name="redisTemplate" ref="redisTemplate"/>
 	</bean>
 	

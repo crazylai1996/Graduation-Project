@@ -1,0 +1,91 @@
+@import "mixin_style.less";
+@import "global_style.less";
+
+/*
+ *内容主体外层
+ */
+.main_div();
+/*
+ *当前位置
+ */
+.main-contents{
+  text-align: center;
+  min-height: 200px;
+  padding-top: 40px;
+}
+.tips{
+  font-size: 23px;
+  color: @font_strong_color;
+}
+.input-container{
+  margin: 15px auto;
+}
+.btn-container{
+  margin-top: 30px
+}
+.current-pos {
+  .current-position();
+
+  margin-bottom: @div_margin;
+}
+
+.input-label{
+  @_width: 150px;
+  @_height: 45px;
+
+  display: inline-block;
+  width: @_width;
+  margin-right: 10px;
+
+  line-height: @_height;
+  text-align:right;
+  font-size: 14px;
+  color: @font_color;
+}
+.input-contents{
+  display: inline-block;
+  min-height: 42px;
+  padding-left: 5px;
+
+  line-height: 45px;
+
+  background-color: @white_color;
+}
+.input-container{
+  input[type='text'],select{
+    @_height: 27px;
+    @_width: 130px;
+
+    width: @_width;
+    height: @_height;
+    padding-left: 5px;
+    margin-right: 8px;
+
+    vertical-align: middle;
+
+    .purple_input_style();
+  }
+}
+.save-btn{
+  @_width: 70px;
+  @_height: 30px;
+
+  display: inline-block;
+  width: @_width;
+  height: @_height;
+  box-sizing: border-box;
+  color: @white_color;
+
+  line-height: @_height;
+  text-decoration: none;
+  text-align: center;
+
+  border-radius: 2px;
+  background-color: @main_color;
+
+  &:hover{
+    color: @white_color;
+    text-decoration: none;
+    background-color: @main_strong_color;
+  }
+}

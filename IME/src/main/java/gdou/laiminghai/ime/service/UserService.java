@@ -149,4 +149,12 @@ public interface UserService {
 	 * @datetime: 2018年5月21日 下午11:10:10
 	 */
 	List<UserInfoVO> findMyFollowedUsers(Long userId);
+	
+	/**
+	 * 保存用户肤质和出生年份
+	 * @param userInfoVO
+	 * @author: laiminghai
+	 * @datetime: 2018年5月27日 上午12:14:45
+	 */
+	void saveFristLogin(UserInfoVO userInfoVO);
 }

@@ -276,6 +276,27 @@
 		    <artifactId>quartz</artifactId>
 		    <version>2.2.1</version>
 		</dependency>
+		<!-- mahout -->
+		<dependency>
+		    <groupId>org.apache.mahout</groupId>
+		    <artifactId>mahout-core</artifactId>
+		    <version>0.9</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.mahout</groupId>
+		    <artifactId>mahout-math</artifactId>
+		    <version>0.9</version>
+		</dependency>
+		<dependency>
+	        <groupId>org.apache.mahout</groupId>
+	        <artifactId>mahout-integration</artifactId>
+	        <version>0.9</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.mahout</groupId>
+		    <artifactId>mahout-examples</artifactId>
+		    <version>0.9</version>
+		</dependency>
 				
 		<!-- spring test -->
 		<dependency>

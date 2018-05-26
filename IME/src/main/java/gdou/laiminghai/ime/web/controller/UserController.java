@@ -23,6 +23,8 @@ import gdou.laiminghai.ime.common.exception.ServiceResultEnum;
 import gdou.laiminghai.ime.common.setting.AppSetting;
 import gdou.laiminghai.ime.common.statics.Constant;
 import gdou.laiminghai.ime.common.statics.GenderEnum;
+import gdou.laiminghai.ime.common.statics.SkinTextureEnum;
+import gdou.laiminghai.ime.common.statics.UserStatusEnum;
 import gdou.laiminghai.ime.common.util.CaptchaUtil;
 import gdou.laiminghai.ime.common.util.EnumUtil;
 import gdou.laiminghai.ime.common.util.RegexUtil;
@@ -305,6 +307,9 @@ public class UserController {
 		Map<String,Object> userInfoMap = new HashMap<String,Object>();
 		userInfoMap.put("userId", userInfo.getUserId());
 		userInfoMap.put("userName", userInfo.getUserName());
+		userInfoMap.put("skinTexture", userInfo.getSkinTexture());
+		userInfoMap.put("bornYear", userInfo.getSkinTexture());
+		userInfoMap.put("status", userInfo.getStatus());
 		session.setAttribute("userInfo", userInfoMap);
 		return ResultDTOUtil.success(null);
 	}
@@ -348,6 +353,9 @@ public class UserController {
 		Map<String, Object> userInfoMap = new HashMap<String, Object>();
 		userInfoMap.put("userId", userInfo.getUserId());
 		userInfoMap.put("userName", userInfo.getUserName());
+		userInfoMap.put("skinTexture", userInfo.getSkinTexture());
+		userInfoMap.put("bornYear", userInfo.getSkinTexture());
+		userInfoMap.put("status", userInfo.getStatus());
 		session.setAttribute("userInfo", userInfoMap);
 		return ResultDTOUtil.success(null);
 	}
@@ -872,5 +880,45 @@ public class UserController {
 		List<CosmeticClass> followedClasses = cosmeticClassService.findFollowedClasses(userId);
 		mav.addObject("followedClasses", followedClasses);
 		return mav;
+	}
+	
+	/**
+	 * 第一次登录 
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月26日 下午11:02:02
+	 */
+	@RequestMapping("/firstLogin")
+	public ModelAndView goFirstLogin() {
+		ModelAndView mav = new ModelAndView("user/first_login");
+		//肤质列表
+		List<SelectItemVO> skinTextures = EnumUtil.toList(SkinTextureEnum.class);
+		mav.addObject("skinTextures", skinTextures);
+		return mav;
+	}
+	
+	/**
+	 * 保存用户肤质和出生年份
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月27日 上午12:09:00
+	 */
+	@ResponseBody
+	@RequestMapping("/firstLogin.do")
+	public ResultDTO firstLogin(UserInfoVO userInfoVO) {
+		// 获取登录信息
+		HttpSession session = request.getSession();
+		Map<String, Object> userInfoMap = (Map<String, Object>) session.getAttribute("userInfo");
+		Long userId = (Long)userInfoMap.get("userId");
+		if(userInfoVO == null) {
+			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);
+		}
+		userInfoVO.setUserId(userId);
+		userService.saveFristLogin(userInfoVO);
+		userInfoMap.put("skinTexture", userInfoVO.getSkinTexture());
+		userInfoMap.put("bornYear", userInfoVO.getSkinTexture());
+		userInfoMap.put("status", UserStatusEnum.NORMAL_STATUS);
+		session.setAttribute("userInfo", userInfoMap);
+		return ResultDTOUtil.success(null);
 	}
 }
