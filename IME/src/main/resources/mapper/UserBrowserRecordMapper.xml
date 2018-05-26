@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gdou.laiminghai.ime.dao.mapper.UserBrowserRecordMapper">
-  <resultMap id="BaseResultMap" type="gdou.laiminghai.ime.model.entity.UserBrowserRecord">
+  <resultMap id="BaseResultMap" type="UserBrowserRecord">
     <id column="bBrowserId" jdbcType="BIGINT" property="browserId" />
     <result column="bUserId" jdbcType="BIGINT" property="userId" />
     <result column="bProductId" jdbcType="BIGINT" property="productId" />
@@ -11,13 +11,13 @@
     delete from userbrowserrecord
     where bBrowserId = #{browserId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="bBrowserId" keyProperty="browserId" parameterType="gdou.laiminghai.ime.model.entity.UserBrowserRecord" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="bBrowserId" keyProperty="browserId" parameterType="UserBrowserRecord" useGeneratedKeys="true">
     insert into userbrowserrecord (bUserId, bProductId, dBrowserTime
       )
     values (#{userId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{browserTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <update id="updateByPrimaryKey" parameterType="gdou.laiminghai.ime.model.entity.UserBrowserRecord">
+  <update id="updateByPrimaryKey" parameterType="UserBrowserRecord">
     update userbrowserrecord
     set bUserId = #{userId,jdbcType=BIGINT},
       bProductId = #{productId,jdbcType=BIGINT},

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gdou.laiminghai.ime.dao.mapper.RecommendationResultMapper">
+  <resultMap id="BaseResultMap" type="RecommendationResult">
+    <id column="bRecommendationId" jdbcType="BIGINT" property="recommendationId" />
+    <result column="bProductId" jdbcType="BIGINT" property="productId" />
+    <result column="bUserId" jdbcType="BIGINT" property="userId" />
+    <result column="dGenTime" jdbcType="TIMESTAMP" property="genTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from recommendationresult
+    where bRecommendationId = #{recommendationId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="bRecommendationId" keyProperty="recommendationId" parameterType="RecommendationResult" useGeneratedKeys="true">
+    insert into recommendationresult (bProductId, bUserId, dGenTime
+      )
+    values (#{productId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{genTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="RecommendationResult">
+    update recommendationresult
+    set bProductId = #{productId,jdbcType=BIGINT},
+      bUserId = #{userId,jdbcType=BIGINT},
+      dGenTime = #{genTime,jdbcType=TIMESTAMP}
+    where bRecommendationId = #{recommendationId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select bRecommendationId, bProductId, bUserId, dGenTime
+    from recommendationresult
+    where bRecommendationId = #{recommendationId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select bRecommendationId, bProductId, bUserId, dGenTime
+    from recommendationresult
+  </select>
+  <!-- 查找用户推荐结果 -->
+  <select id="findProductIdsByUserId" parameterType="long">
+  	select bProductId 
+  	from recommendationresult 
+  	where bUserId = #{_parameter}
+  </select>
+  <!-- 删除用户推荐结果 -->
+  <delete id="deleteByUserId" parameterType="long">
+  	delete 
+  	from recommendationresult 
+  	where bUserId = #{_parameter}
+  </delete>
+</mapper>
