@@ -25,7 +25,17 @@
     <div class="category-wrapped">
       <div class="category-title">全部分类</div>
       <ul class="category-index">
-        <li>
+      	<c:forEach items="${cosmeticClasses }" var="cosmeticClass">
+      		<li>
+	          <a href="javascript:void(0);">${cosmeticClass.className }</a>
+	          <ul class="sub-category">
+	          	<c:forEach items="${cosmeticClass.childClasses }" var="childClass">
+	          		<li><a href="javascript:void(0);">${childClass.className }</a></li>
+	          	</c:forEach>
+	          </ul>
+	        </li>
+      	</c:forEach>
+        <!-- <li>
           <a href="javascript:void(0);">面部护肤</a>
           <ul class="sub-category">
             <li><a href="javascript:void(0);">脸部保养</a></li>
@@ -41,7 +51,7 @@
         <li><a href="javascript:void(0);">香水香氛</a></li>
         <li><a href="javascript:void(0);">孕妈/婴童</a></li>
         <li><a href="javascript:void(0);">工具/隐形眼镜</a></li>
-        <li><a href="javascript:void(0);">男士用品</a></li>
+        <li><a href="javascript:void(0);">男士用品</a></li> -->
       </ul>
     </div>
     <!-- 标签索引 -->
@@ -383,6 +393,9 @@
   <!-- 包含尾部 -->
   <jsp:include page="common/page_footer.jsp"/>
 
+  <script>
+  	var basePath = "${basePath}";
+  </script>
   <script src="static\js\jquery.js"></script>
   <script src="static\js\index.js"></script>
 </body>

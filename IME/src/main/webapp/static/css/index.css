@@ -282,10 +282,11 @@ body {
 .label-index {
   float: left;
   display: inline-block;
-  width: 590px;
+  width: 585px;
   height: 271px;
   box-sizing: border-box;
   margin-left: 10px;
+  padding-left: 5px;
   border-radius: 1px;
   box-shadow: 0 0 2px #dab4da;
   background-color: #ffffff;

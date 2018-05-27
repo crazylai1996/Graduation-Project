@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import gdou.laiminghai.ime.model.dto.PageResult;
+import gdou.laiminghai.ime.model.entity.CosmeticClass;
 import gdou.laiminghai.ime.model.vo.CommentInfoVO;
 import gdou.laiminghai.ime.model.vo.ProductInfoVO;
 import gdou.laiminghai.ime.service.CommentService;
+import gdou.laiminghai.ime.service.CosmeticClassService;
 import gdou.laiminghai.ime.service.RankService;
 import gdou.laiminghai.ime.service.RecommendationService;
 
@@ -32,6 +34,9 @@ public class IndexController {
 	private RecommendationService recommendationService;
 	
 	@Autowired
+	private CosmeticClassService cosmeticClassService;
+	
+	@Autowired
 	private HttpServletRequest request;
 	
 	/**
@@ -42,9 +47,14 @@ public class IndexController {
 	public ModelAndView index(){
 		ModelAndView mav = new ModelAndView("index");
 		Map<String,Object> map = new HashMap<>();
+		//化妆品分类加载
+		List<CosmeticClass> cosmeticClasses = cosmeticClassService.findAllClass();
+		mav.addObject("cosmeticClasses", cosmeticClasses);
+		//最新点评
 		map.put("pageNum", 1);
 		PageResult<CommentInfoVO> commentPageResult = commentService.findNewestComments(map);
 		mav.addObject("commentPageResult", commentPageResult);
+		//商品排行
 		List<ProductInfoVO> productRank = rankService.getBrowserCountRank();
 		mav.addObject("productRank", productRank);
 		// 获取用户登录信息

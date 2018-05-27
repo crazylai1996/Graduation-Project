@@ -13,6 +13,11 @@ $(".sub-category").hover(function(){
   $(this).siblings("a").toggleClass("current-category");
   $(this).hide();
 });
+//分类点击事件，搜索商品分类下的商品
+$(".sub-category a").click(function(){
+	var className = $(this).text();
+	window.open(basePath+"product/list.html"+"?class="+className,"_blank");
+});
 /*
  *最新动态导航栏点击事件，榜单时间段切换
  */
