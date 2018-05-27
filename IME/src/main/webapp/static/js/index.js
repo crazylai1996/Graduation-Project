@@ -18,6 +18,21 @@ $(".sub-category a").click(function(){
 	var className = $(this).text();
 	window.open(basePath+"product/list.html"+"?class="+className,"_blank");
 });
+//商品属性点击事件，搜索商品
+$(".property-container a").click(function(){
+	var property = $(this).text();
+	window.open(basePath+"product/list.html"+"?property="+property,"_blank");
+});
+//商品功效点击事件，搜索商品
+$(".effect-container a").click(function(){
+	var effect = $(this).text();
+	window.open(basePath+"product/list.html"+"?effect="+effect,"_blank");
+});
+//商品点击品牌事件，搜索商品
+$(".brand-container a").click(function(){
+	var brand = $(this).text();
+	window.open(basePath+"product/list.html"+"?brand="+brand,"_blank");
+});
 /*
  *最新动态导航栏点击事件，榜单时间段切换
  */

@@ -61,31 +61,31 @@
       </div>
       <table class="label-items">
         <tbody>
-          <tr>
+          <tr class="property-container">
             <td class="title">属性：</td>
             <td class="contents">
-              <a href="#">散粉/蜜粉</a><a href="#">散粉/蜜粉</a><a href="#">散粉/蜜粉</a><a href="#">散粉/蜜粉</a>
-              <a href="#">散粉/蜜粉</a><a href="#">散粉/蜜粉</a><a href="#">散粉/蜜粉</a><a href="#">散粉/蜜粉</a>
-              <a href="#">散粉/蜜粉</a><a href="#">散粉/蜜粉</a><a href="#">散粉/蜜粉</a><a href="#">散粉/蜜粉</a>
-              <a href="#">散粉/蜜粉</a><a href="#">散粉/蜜粉</a><a href="#">散粉/蜜粉</a><a href="#">散粉/蜜粉</a>
+              <c:forEach items="${productProperties }" var="productProperty">
+              	<a href="javascript:void(0);">${productProperty.name }</a>
+              </c:forEach>
             </td>
           </tr>
-          <tr>
+          <tr class="effect-container">
             <td class="title">功效：</td>
             <td class="contents">
-              <a href="#">抗氧化</a><a href="#">抗氧化</a><a href="#">抗氧化</a>
-              <a href="#">抗氧化</a><a href="#">抗氧化</a><a href="#">抗氧化</a>
-              <a href="#">抗氧化</a><a href="#">抗氧化</a><a href="#">抗氧化</a>
-              <a href="#">抗氧化</a><a href="#">抗氧化</a><a href="#">抗氧化</a>
-              <a href="#">抗氧化</a><a href="#">抗氧化</a><a href="#">抗氧化</a>
+              <c:forEach items="${productEffects }" var="productEffect">
+              	<a href="javascript:void(0);">${productEffect.name }</a>
+              </c:forEach>
             </td>
           </tr>
-          <tr>
+          <tr class="brand-container">
             <td class="title">品牌：</td>
             <td class="contents">
+           	  <c:forEach items="${productBrands }" var="productBrand">
+              	<a href="javascript:void(0);">${productBrand.name }</a>
+              </c:forEach>
+              <!-- <a href="#">SulWhaSoo雪花秀</a><a href="#">SulWhaSoo雪花秀</a><a href="#">SulWhaSoo雪花秀</a>
               <a href="#">SulWhaSoo雪花秀</a><a href="#">SulWhaSoo雪花秀</a><a href="#">SulWhaSoo雪花秀</a>
-              <a href="#">SulWhaSoo雪花秀</a><a href="#">SulWhaSoo雪花秀</a><a href="#">SulWhaSoo雪花秀</a>
-              <a href="#">SulWhaSoo雪花秀</a><a href="#">SulWhaSoo雪花秀</a><a href="#">SulWhaSoo雪花秀</a>
+              <a href="#">SulWhaSoo雪花秀</a><a href="#">SulWhaSoo雪花秀</a><a href="#">SulWhaSoo雪花秀</a>-->
             </td>
           </tr>
         </tbody>

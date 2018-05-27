@@ -16,8 +16,12 @@ import gdou.laiminghai.ime.model.dto.PageResult;
 import gdou.laiminghai.ime.model.entity.CosmeticClass;
 import gdou.laiminghai.ime.model.vo.CommentInfoVO;
 import gdou.laiminghai.ime.model.vo.ProductInfoVO;
+import gdou.laiminghai.ime.model.vo.SelectItemVO;
 import gdou.laiminghai.ime.service.CommentService;
 import gdou.laiminghai.ime.service.CosmeticClassService;
+import gdou.laiminghai.ime.service.ProductBrandService;
+import gdou.laiminghai.ime.service.ProductEffectService;
+import gdou.laiminghai.ime.service.ProductPropertyService;
 import gdou.laiminghai.ime.service.RankService;
 import gdou.laiminghai.ime.service.RecommendationService;
 
@@ -37,6 +41,15 @@ public class IndexController {
 	private CosmeticClassService cosmeticClassService;
 	
 	@Autowired
+	private ProductPropertyService productPropertyService;
+	
+	@Autowired
+	private ProductEffectService productEffectService;
+	
+	@Autowired
+	private ProductBrandService productBrandService;
+	
+	@Autowired
 	private HttpServletRequest request;
 	
 	/**
@@ -50,6 +63,15 @@ public class IndexController {
 		//化妆品分类加载
 		List<CosmeticClass> cosmeticClasses = cosmeticClassService.findAllClass();
 		mav.addObject("cosmeticClasses", cosmeticClasses);
+		//商品属性
+		List<SelectItemVO> productProperties = productPropertyService.getAllProductProperties();
+		mav.addObject("productProperties", productProperties);
+		//商品功效
+		List<SelectItemVO> productEffects = productEffectService.getAllProductEffects();
+		mav.addObject("productEffects", productEffects);
+		//商品品牌
+		List<SelectItemVO> productBrands = productBrandService.getAllProductBrands();
+		mav.addObject("productBrands", productBrands);
 		//最新点评
 		map.put("pageNum", 1);
 		PageResult<CommentInfoVO> commentPageResult = commentService.findNewestComments(map);
