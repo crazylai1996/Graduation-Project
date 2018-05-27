@@ -216,4 +216,20 @@ public class ProductController {
 		ResultDTO resultDTO = productService.unfollowProduct(userId, productId);
 		return resultDTO;
 	}
+	
+	/**
+	 * 化妆品大全
+	 * @param params
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月27日 下午7:41:38
+	 */
+	@RequestMapping("/list")
+	public ModelAndView goProductList(@RequestParam Map<String, String> params) {
+		logger.debug("化妆品大全请求参数："+params.toString());
+		ModelAndView mav = new ModelAndView("product/product_list");
+		PageResult<ProductInfoVO> pageResult = productService.searchProductsByPage(params, 1);
+		mav.addObject("pageResult", pageResult);
+		return mav;
+	}
  }

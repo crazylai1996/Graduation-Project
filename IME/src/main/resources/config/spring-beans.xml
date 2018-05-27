@@ -123,4 +123,6 @@
 	
 	<!-- 心得索引Dao -->
 	<bean id="commentIndexDao" class="gdou.laiminghai.ime.dao.lucene.CommentIndexDao"/>
+	<!-- 商品索引Dao -->
+	<bean id="productIndexDao" class="gdou.laiminghai.ime.dao.lucene.ProductIndexDao"/>
 </beans>

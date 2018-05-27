@@ -45,7 +45,7 @@ import gdou.laiminghai.ime.dao.mapper.CommentInfoMapper;
 import gdou.laiminghai.ime.model.entity.CommentInfo;
 import gdou.laiminghai.ime.model.vo.CommentInfoVO;
 
-public class CommentIndexDao {
+public class CommentIndexDao extends BaseIndexDao{
 	//日志记录
 	private static final Logger logger = Logger.getLogger(CommentIndexDao.class);
 	
@@ -213,9 +213,9 @@ public class CommentIndexDao {
             Path path = Paths.get(AppSetting.COMMENT_INDEX_PATH);
             //配置文件决定全量还是增量
             if("INCR".equals(AppSetting.INDEX_SYNC_STRATEGY)) {
-            	this.incrSync(fileNames, path);
+            	this.incrSync(ramDirectory,fileNames, path);
             }else if ("FULL".equals(AppSetting.INDEX_SYNC_STRATEGY)) {
-				this.fullSync(fileNames, path);
+				this.fullSync(ramDirectory,fileNames, path);
 			}else {
 				logger.info("不同步");
 			}
@@ -229,65 +229,6 @@ public class CommentIndexDao {
             }
 		}
 	}
-	
-	/**
-	 * 全量同步
-	 * @param fileNames
-	 * @param path
-	 * @author: laiminghai
-	 * @datetime: 2018年5月24日 下午9:39:30
-	 */
-	private void fullSync(Collection<String> fileNames, Path path) {
-        Directory to;
-        logger.info("开始全量同步");
-        try {
-            to = FSDirectory.open(path);
-            // 全量备份，直接清空拷贝
-            for (File file : path.toFile().listFiles()) {
-                file.delete();
-            }
-            for (String fileName : fileNames) {
-                to.copyFrom(ramDirectory, fileName, fileName, IOContext.DEFAULT);
-            }
-            to.close();
-            logger.info("全量同步完成");
-        } catch (IOException e) {
-            logger.error("全量同步策略异常：",e);
-        }
-    }
-	/**
-	 * 增量同步
-	 * @param fileNames
-	 * @param path
-	 * @author: laiminghai
-	 * @datetime: 2018年5月24日 下午9:39:20
-	 */
-    private void incrSync(Collection<String> fileNames, Path path) {
-    	logger.info("开始增量同步");
-        //fileNames被IndexCommit引用，需要重新构造set集合，进行移除操作
-        Set<String> files = new HashSet<>(fileNames);
-        for (File file : path.toFile().listFiles()) {
-            if (files.contains(file.getName())) {
-                //该索引已存在，则不拷贝
-                files.remove(file.getName());
-            } else {
-                //删除已经过时的索引
-                file.delete();
-            }
-        }
-        //拷贝全部新增索引
-        try {
-            Directory to = FSDirectory.open(path);
-            for (String file : files) {
-                to.copyFrom(ramDirectory, file, file, IOContext.DEFAULT);
-            }
-            to.close();
-            logger.info("增量同步完成");
-        } catch (IOException e) {
-            logger.error("增量同步策略异常：",e);
-        }
-    }
-    
     /**
      * 重建所有索引
      * @author: laiminghai

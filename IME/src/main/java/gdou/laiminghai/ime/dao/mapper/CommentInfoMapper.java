@@ -64,4 +64,12 @@ public interface CommentInfoMapper {
      * @datetime: 2018年5月24日 上午7:54:39
      */
     List<CommentInfo> findNewestComments();
+    /**
+     * 查找最近一个点评 
+     * @param productId
+     * @return
+     * @author: laiminghai
+     * @datetime: 2018年5月27日 下午8:41:56
+     */
+    CommentInfo findLatestCommentByProductId(Long productId);
 }

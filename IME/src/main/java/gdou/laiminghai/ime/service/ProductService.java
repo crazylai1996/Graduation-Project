@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import gdou.laiminghai.ime.model.dto.PageResult;
 import gdou.laiminghai.ime.model.dto.ResultDTO;
 import gdou.laiminghai.ime.model.vo.ProductInfoVO;
 
@@ -88,4 +89,20 @@ public interface ProductService {
 	 * @datetime: 2018年5月22日 上午12:54:07
 	 */
 	List<ProductInfoVO> findFollowedProducts(Long userId);
+	/**
+	 * 查找所有
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月27日 上午8:02:44
+	 */
+	List<ProductInfoVO> findAll();
+	/**
+	 * 商品搜索
+	 * @param params
+	 * @param keyword
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月27日 上午8:34:35
+	 */
+	PageResult<ProductInfoVO> searchProductsByPage(Map<String,String> params,int pageNum);
 }

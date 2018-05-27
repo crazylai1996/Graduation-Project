@@ -96,11 +96,11 @@
   </select>
   <sql id="selectByCondition_Condition">
   	<where>
-  		<if test="commentId != null">
-  			ci.bCommentId = #{commentId}
-  		</if>
   		<if test="productId != null">
   			ci.bProductId = #{productId}
+  		</if>
+  		<if test="commentId != null">
+  			ci.bCommentId = #{commentId}
   		</if>
   	</where>
   </sql>
@@ -178,5 +178,16 @@
     from commentinfo ci inner join userinfo u on ci.bUserId = u.bUserId 
   			inner join productinfo p on ci.bProductId = p.bProductId
     order by ci.dSendTime desc
+  </select>
+  <!-- 查找商品最近一个点评  -->
+  <select id="findLatestCommentByProductId" parameterType="java.lang.Long" 
+  	resultMap="CommentInfoResult">
+  	select <include refid="CommentInfoColumns"/>,
+  			<include refid="gdou.laiminghai.ime.dao.mapper.UserInfoMapper.UserInfoColumns"/>,
+  			<include refid="gdou.laiminghai.ime.dao.mapper.ProductInfoMapper.ProductInfoColumns"/>
+    from commentinfo ci inner join userinfo u on ci.bUserId = u.bUserId 
+  			inner join productinfo p on ci.bProductId = p.bProductId 
+  	where ci.bProductId = #{_parameter}
+    order by ci.dSendTime desc limit 1
   </select>
 </mapper>

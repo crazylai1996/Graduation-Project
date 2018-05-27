@@ -278,6 +278,15 @@ public class CommentServiceImpl implements CommentService {
 		return searchResult;
 	}
 
+	@Override
+	public CommentInfoVO findLatestCommentByProductId(Long productId) {
+		CommentInfo commentInfo = commentInfoMapper.findLatestCommentByProductId(productId);
+		if(commentInfo == null) {
+			return null;
+		}
+		return commentInfoPO2CommentInfoVO(commentInfo);
+	}
+
 	/**
 	 * VO=>PO
 	 * @param commentInfoVO

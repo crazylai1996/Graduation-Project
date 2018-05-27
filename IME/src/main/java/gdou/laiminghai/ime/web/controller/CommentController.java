@@ -226,7 +226,7 @@ public class CommentController {
 		//条件查询使用心得
 		Map<String, Object> map = new HashMap<>();
 		map.put("pageNum", pageNum);
-		map.put("commentId", productId);
+		map.put("productId", productId);
 		PageResult<CommentInfoVO> pageResult = commentService.findCommentList(map);
 		if(userInfoMap != null) {
 			Long userId = (Long)userInfoMap.get("userId");

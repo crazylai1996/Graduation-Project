@@ -45,6 +45,11 @@ $(".search-btn").click(function(){
 		layer.msg("请先输入要搜索的关键字");
 		return ;
 	}
-	location.href=basePath + "comment/search.html"+"?keyword="+keyword;
+	if($(".search-type").text() == "商品"){
+		window.open(basePath + "product/list.html"+"?keyword="+keyword,"_blank");   
+	}
+	if($(".search-type").text() == "点评"){
+		location.href=basePath + "comment/search.html"+"?keyword="+keyword;
+	}
 });
 

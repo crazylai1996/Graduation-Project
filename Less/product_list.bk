@@ -15,9 +15,24 @@
  * 主-左
  */
 .main-left{
+  @_width: 740px;
+
   float: left;
 
-  width: 100%;
+  width: @_width;
+  box-sizing: border-box;
+  margin-top: 2 * @div_margin;
+}
+/**
+ * 主-右
+ */
+.main-right{
+  @_width: 240px;
+
+  float: left;
+
+  width: @_width;
+  margin-left: 20px;
   box-sizing: border-box;
   margin-top: 2 * @div_margin;
 }
@@ -226,7 +241,7 @@
     height: 100%;
   }
   .right{
-    @_width: 765px;
+    @_width: 505px;
 
     float: left;
 
@@ -252,6 +267,7 @@
       margin: auto;
       position: absolute;
       top: 0; left: 0; bottom: 0; right: 0;
+      background-color: red;
     }
   }
   //产品名称

@@ -100,7 +100,7 @@
       <input type="text" class="keyword search-keyword" name="keyword" 
       	autocomplete="off" placeholder="请输入点评标题、内容等" value="${param.keyword }">
       <ul class="s-type-slector">
-<!--         <li><a href="javascript:void(0);">产品</a></li> -->
+        <li><a href="javascript:void(0);">商品</a></li>
         <li><a href="javascript:void(0);">点评</a></li>
 <!--         <li><a href="javascript:void(0);">文章</a></li> -->
       </ul>

@@ -31,6 +31,8 @@ public class ProductInfoVO {
     private boolean follow;
     private String followTime;
     
+    private CommentInfoVO lastestComment;
+    
     private long browserCount;
     private long followCount;
     private long commentCount;
@@ -149,6 +151,18 @@ public class ProductInfoVO {
 	public void setFollowTime(String followTime) {
 		this.followTime = followTime;
 	}
+	/**
+	 * @return the lastestComment
+	 */
+	public CommentInfoVO getLastestComment() {
+		return lastestComment;
+	}
+	/**
+	 * @param lastestComment the lastestComment to set
+	 */
+	public void setLastestComment(CommentInfoVO lastestComment) {
+		this.lastestComment = lastestComment;
+	}
 	public long getBrowserCount() {
 		return browserCount;
 	}
@@ -175,8 +189,9 @@ public class ProductInfoVO {
 				+ classify + ", property=" + property + ", effect=" + effect + ", skinTexture=" + skinTexture
 				+ ", coverImage=" + coverImage + ", productImages=" + productImages + ", desc=" + desc + ", brandName="
 				+ brandName + ", classifyName=" + classifyName + ", propertyName=" + propertyName + ", effectName="
-				+ effectName + ", follow=" + follow + ", followTime=" + followTime + ", browserCount=" + browserCount
-				+ ", followCount=" + followCount + ", commentCount=" + commentCount + "]";
+				+ effectName + ", follow=" + follow + ", followTime=" + followTime + ", lastestComment="
+				+ lastestComment + ", browserCount=" + browserCount + ", followCount=" + followCount + ", commentCount="
+				+ commentCount + "]";
 	}
 	
 }

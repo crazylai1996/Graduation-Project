@@ -3,7 +3,6 @@ package gdou.laiminghai.ime.service.impl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -16,20 +15,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.github.pagehelper.util.StringUtil;
+
 import gdou.laiminghai.ime.common.exception.ServiceException;
 import gdou.laiminghai.ime.common.exception.ServiceResultEnum;
 import gdou.laiminghai.ime.common.setting.AppSetting;
 import gdou.laiminghai.ime.common.statics.SkinTextureEnum;
 import gdou.laiminghai.ime.common.util.FileUtil;
 import gdou.laiminghai.ime.common.util.ResultDTOUtil;
+import gdou.laiminghai.ime.dao.lucene.ProductIndexDao;
 import gdou.laiminghai.ime.dao.mapper.ProductInfoMapper;
-import gdou.laiminghai.ime.dao.mapper.UserBrowserRecordMapper;
 import gdou.laiminghai.ime.dao.mapper.UserFollowProductMapper;
+import gdou.laiminghai.ime.model.dto.PageResult;
 import gdou.laiminghai.ime.model.dto.ResultDTO;
 import gdou.laiminghai.ime.model.entity.ProductInfo;
 import gdou.laiminghai.ime.model.entity.ProductPicture;
 import gdou.laiminghai.ime.model.entity.UserFollowProduct;
 import gdou.laiminghai.ime.model.vo.ProductInfoVO;
+import gdou.laiminghai.ime.service.CommentService;
 import gdou.laiminghai.ime.service.ProductPictureService;
 import gdou.laiminghai.ime.service.ProductService;
 
@@ -43,7 +46,9 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private UserFollowProductMapper userFollowProductMapper;
 	@Autowired
-	private UserBrowserRecordMapper userBrowserRecordMapper;
+	private ProductIndexDao productIndexDao;
+	@Autowired
+	private CommentService commentService;
 	
 	//日志记录
 	private static final Logger logger = Logger.getLogger(ProductServiceImpl.class);
@@ -209,6 +214,41 @@ public class ProductServiceImpl implements ProductService {
 			productInfoVOList.add(productInfoVO);
 		}
 		return productInfoVOList;
+	}
+	
+
+	@Override
+	public List<ProductInfoVO> findAll() {
+		List<ProductInfoVO> productInfoVOList = new ArrayList<>();
+		List<ProductInfo> productList = productInfoMapper.findAllProducts();
+		for (ProductInfo productInfo : productList) {
+			ProductInfoVO productInfoVO = productInfoPO2productInfoVO(productInfo);
+			productInfoVOList.add(productInfoVO);
+		}
+		return productInfoVOList;
+	}
+	
+	@Override
+	public PageResult<ProductInfoVO> searchProductsByPage(Map<String, String> params, int pageNum) {
+		List<ProductInfoVO> productResult = productIndexDao.searchByPage(params, pageNum);
+		List<ProductInfoVO> pageList = new ArrayList<>();
+		for (ProductInfoVO productInfoVO : productResult) {
+			ProductInfo productInfoPO = productInfoMapper.findProductInfoById(productInfoVO.getProductId());
+			if(productInfoPO != null) {
+				ProductInfoVO productInfo = productInfoPO2productInfoVO(productInfoPO);
+				productInfo.setLastestComment(commentService.findLatestCommentByProductId(productInfoVO.getProductId()));
+				if(StringUtils.isNotBlank(productInfoVO.getProductName())) {
+					productInfo.setProductName(productInfoVO.getProductName());
+				}
+				if(StringUtils.isNotBlank(productInfoVO.getDesc())) {
+					productInfo.setDesc(productInfoVO.getDesc());
+				}
+				pageList.add(productInfo);
+			}
+		}
+		PageResult<ProductInfoVO> pageResult = new PageResult<>(pageList);
+		pageResult.setPageSize(AppSetting.NUMBER_PER_PAGE);
+		return pageResult;
 	}
 
 	/**

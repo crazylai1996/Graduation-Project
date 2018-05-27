@@ -31,4 +31,11 @@ public interface ProductInfoMapper {
      * @datetime: 2018年5月17日 下午10:32:03
      */
     List<ProductInfo> findMoreProductInfoByIds(List<Long> productIds);
+    /**
+     * 查找所有商品
+     * @return
+     * @author: laiminghai
+     * @datetime: 2018年5月27日 上午8:06:02
+     */
+    List<ProductInfo> findAllProducts();
 }

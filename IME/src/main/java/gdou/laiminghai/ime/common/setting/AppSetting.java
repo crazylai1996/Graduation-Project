@@ -1,5 +1,7 @@
 package gdou.laiminghai.ime.common.setting;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -101,13 +103,25 @@ public class AppSetting {
 	 */
 	public static String COMMENT_INDEX_PATH;
 	/**
-	 * 索引同步策略
+	 * 商品索引目录
+	 */
+	public static String PRODUCT_INDEX_PATH;
+	/**
+	 * 心得索引同步策略
 	 */
 	public static String INDEX_SYNC_STRATEGY;
+	/**
+	 * 商品索引同步策略
+	 */
+	public static String PRODUCT_INDEX_SYNC_STRATEGY;
 	/**
 	 * 是否重建索引
 	 */
 	public static boolean INDEX_RECREATE;
+	/**
+	 *是否重建商品索引 
+	 */
+	public static boolean PRODUCT_INDEX_RECREATE;
 	/**
 	 * 排行榜显示条目
 	 */
@@ -222,14 +236,29 @@ public class AppSetting {
 		AppSetting.COMMENT_INDEX_PATH = indexPath;
 	}
 	
+	@Value("${product.index.path}")
+	public void setProductIndexPath(String indexPath) {
+		AppSetting.PRODUCT_INDEX_PATH = indexPath;
+	}
+	
 	@Value("${index.sync.strategy}")
 	public void setIndexSyncStrategy(String syncStrategy) {
 		AppSetting.INDEX_SYNC_STRATEGY = syncStrategy;
 	}
 	
+	@Value("${product.index.sync.tragegy}")
+	public void setProductIndexSyncStragegy(String syncStrategy) {
+		AppSetting.PRODUCT_INDEX_SYNC_STRATEGY = syncStrategy;
+	}
+	
 	@Value("${index.recreate}")
 	public void setIndexRecreate(boolean indexRecreate) {
 		AppSetting.INDEX_RECREATE = indexRecreate;
+	}
+	
+	@Value("${product.index.recreate}")
+	public void setProductIndexRecreate(boolean indexRecreate) {
+		AppSetting.PRODUCT_INDEX_RECREATE = indexRecreate;
 	}
 	
 	@Value("${product.rank.count}")

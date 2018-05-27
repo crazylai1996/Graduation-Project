@@ -78,4 +78,13 @@ public interface CommentService {
 	 * @datetime: 2018年5月24日 下午11:31:39
 	 */
 	PageResult<CommentInfoVO> searchCommentsByPage(int pageNum,String keyword);
+	
+	/**
+	 * 查找商品最近的一个点评
+	 * @param productId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月27日 下午8:40:19
+	 */
+	CommentInfoVO findLatestCommentByProductId(Long productId);
 }

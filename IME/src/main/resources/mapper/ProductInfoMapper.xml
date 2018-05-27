@@ -118,4 +118,12 @@
 			</if>
 		</where>
 	</select>
+	<select id="findAllProducts" resultMap="ProductInfoResult">
+		select <include refid="ProductInfoColumns"/>,pb.*,cc.*,pp.*,pe.*,ppe.vPictureUrl
+	  	from productinfo p left join productbrand pb on p.iBrand = pb.iBrandId 
+	  		left join cosmeticclass cc on p.iClassify = cc.bClassId
+	  		left join productproperty pp on p.iProperty = pp.iPropertyId 
+	  		left join producteffect pe on p.iEffect = pe.iEffectId 
+	  		left join productpicture ppe on p.bProductId = ppe.bProductId
+	</select>
 </mapper>
