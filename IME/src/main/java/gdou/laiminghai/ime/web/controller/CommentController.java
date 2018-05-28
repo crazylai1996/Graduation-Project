@@ -33,11 +33,17 @@ import gdou.laiminghai.ime.model.dto.PageResult;
 import gdou.laiminghai.ime.model.dto.ResultDTO;
 import gdou.laiminghai.ime.model.dto.UserPrefDTO;
 import gdou.laiminghai.ime.model.entity.CommentReplyVO;
+import gdou.laiminghai.ime.model.entity.CosmeticClass;
 import gdou.laiminghai.ime.model.vo.CommentInfoVO;
 import gdou.laiminghai.ime.model.vo.ProductInfoVO;
+import gdou.laiminghai.ime.model.vo.SelectItemVO;
 import gdou.laiminghai.ime.model.vo.UserInfoVO;
 import gdou.laiminghai.ime.service.CommentReplyService;
 import gdou.laiminghai.ime.service.CommentService;
+import gdou.laiminghai.ime.service.CosmeticClassService;
+import gdou.laiminghai.ime.service.ProductBrandService;
+import gdou.laiminghai.ime.service.ProductEffectService;
+import gdou.laiminghai.ime.service.ProductPropertyService;
 import gdou.laiminghai.ime.service.ProductService;
 import gdou.laiminghai.ime.service.RecommendationService;
 import gdou.laiminghai.ime.service.UserService;
@@ -73,6 +79,18 @@ public class CommentController {
 	
 	@Autowired
 	private RecommendationService recommendationService;
+	
+	@Autowired
+	private CosmeticClassService cosmeticClassService;
+	
+	@Autowired
+	private ProductPropertyService productPropertyService;
+	
+	@Autowired
+	private ProductEffectService productEffectService;
+	
+	@Autowired
+	private ProductBrandService productBrandService;
 
 	/**
 	 * 评论心得图片上传
@@ -298,6 +316,18 @@ public class CommentController {
 			return mav;
 		}
 		PageResult<CommentInfoVO> searchResult = commentService.searchCommentsByPage(pageNum, keyword);
+		//化妆品分类加载
+		List<CosmeticClass> cosmeticClasses = cosmeticClassService.findAllClass();
+		mav.addObject("cosmeticClasses", cosmeticClasses);
+		//商品属性
+		List<SelectItemVO> productProperties = productPropertyService.getAllProductProperties();
+		mav.addObject("productProperties", productProperties);
+		//商品功效
+		List<SelectItemVO> productEffects = productEffectService.getAllProductEffects();
+		mav.addObject("productEffects", productEffects);
+		//商品品牌
+		List<SelectItemVO> productBrands = productBrandService.getAllProductBrands();
+		mav.addObject("productBrands", productBrands);
 		mav.addObject("searchResult",searchResult);
 		return mav;
 	}

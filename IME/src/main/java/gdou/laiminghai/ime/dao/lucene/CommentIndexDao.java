@@ -145,7 +145,7 @@ public class CommentIndexDao extends BaseIndexDao{
 			String[] fields = { "TITLE", "CONTENT" };
 			Analyzer analyzer = new SmartChineseAnalyzer();
 			QueryParser queryParser = new MultiFieldQueryParser(fields, analyzer);
-			Query query = queryParser.parse(keyword);
+			Query query = queryParser.parse(QueryParser.escape(keyword));
 			ScoreDoc preScore = null;
 			if (pageNum > 1) {
 				int start = (pageNum - 1) * AppSetting.NUMBER_PER_PAGE;

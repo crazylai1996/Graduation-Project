@@ -16,7 +16,7 @@ $(".sub-category").hover(function(){
 //分类点击事件，搜索商品分类下的商品
 $(".sub-category a").click(function(){
 	var className = $(this).text();
-	window.open(basePath+"product/list.html"+"?class="+className,"_blank");
+	window.open(basePath+"product/list.html"+"?classify="+className,"_blank");
 });
 //商品属性点击事件，搜索商品
 $(".property-container a").click(function(){

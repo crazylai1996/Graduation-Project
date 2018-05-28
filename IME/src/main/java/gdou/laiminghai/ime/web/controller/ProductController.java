@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import gdou.laiminghai.ime.common.exception.ServiceException;
-import gdou.laiminghai.ime.common.exception.ServiceResultEnum;
 import gdou.laiminghai.ime.common.setting.AppSetting;
 import gdou.laiminghai.ime.common.statics.BuyWayEnum;
 import gdou.laiminghai.ime.common.statics.SkinTextureEnum;
@@ -34,6 +32,9 @@ import gdou.laiminghai.ime.model.vo.SelectItemVO;
 import gdou.laiminghai.ime.model.vo.UserInfoVO;
 import gdou.laiminghai.ime.service.CommentService;
 import gdou.laiminghai.ime.service.CosmeticClassService;
+import gdou.laiminghai.ime.service.ProductBrandService;
+import gdou.laiminghai.ime.service.ProductEffectService;
+import gdou.laiminghai.ime.service.ProductPropertyService;
 import gdou.laiminghai.ime.service.ProductService;
 import gdou.laiminghai.ime.service.RankService;
 import gdou.laiminghai.ime.service.UserService;
@@ -60,6 +61,15 @@ public class ProductController {
 	
 	@Autowired
 	private CosmeticClassService cosmeticClassService;
+	
+	@Autowired
+	private ProductPropertyService productPropertyService;
+	
+	@Autowired
+	private ProductEffectService productEffectService;
+	
+	@Autowired
+	private ProductBrandService productBrandService;
 	
 	@Autowired
 	private CommentService commentService;
@@ -229,6 +239,32 @@ public class ProductController {
 		logger.debug("化妆品大全请求参数："+params.toString());
 		ModelAndView mav = new ModelAndView("product/product_list");
 		PageResult<ProductInfoVO> pageResult = productService.searchProductsByPage(params, 1);
+		mav.addObject("pageResult", pageResult);
+		//商品属性
+		List<SelectItemVO> productProperties = productPropertyService.getAllProductProperties();
+		mav.addObject("productProperties", productProperties);
+		// 商品功效
+		List<SelectItemVO> productEffects = productEffectService.getAllProductEffects();
+		mav.addObject("productEffects", productEffects);
+		// 商品品牌
+		List<SelectItemVO> productBrands = productBrandService.getAllProductBrands();
+		mav.addObject("productBrands", productBrands);
+		return mav;
+	}
+	
+	/**
+	 * 分页查找更多商品
+	 * @param params
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月28日 下午9:28:44
+	 */
+	@RequestMapping("/loadMoreProducts.do")
+	public ModelAndView loadMoreProducts(@RequestParam Map<String, String> params) {
+		logger.debug("商品搜索参数："+params.toString());
+		ModelAndView mav = new ModelAndView("product/product_item_fragment");
+		int pageNum = Integer.parseInt(params.get("pageNum"));
+		PageResult<ProductInfoVO> pageResult = productService.searchProductsByPage(params, pageNum);
 		mav.addObject("pageResult", pageResult);
 		return mav;
 	}

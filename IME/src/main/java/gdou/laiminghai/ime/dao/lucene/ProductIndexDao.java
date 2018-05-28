@@ -17,6 +17,7 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
+import org.apache.lucene.document.Field.Store;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexCommit;
 import org.apache.lucene.index.IndexWriter;
@@ -30,6 +31,7 @@ import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.highlight.Highlighter;
 import org.apache.lucene.search.highlight.QueryScorer;
@@ -149,35 +151,47 @@ public class ProductIndexDao extends BaseIndexDao {
 			//关键字
 			if (params.containsKey("keyword")) {
 				QueryParser parser = new QueryParser("NAME", analyzer);
-				Query query = parser.parse(params.get("keyword"));
+				Query query = parser.parse(QueryParser.escape(params.get("keyword")));
 				builder.add(query, Occur.SHOULD);
 
 				QueryParser parser2 = new QueryParser("DESC", analyzer);
-				Query query2 = parser2.parse(params.get("keyword"));
+				Query query2 = parser2.parse(QueryParser.escape(params.get("keyword")));
 				builder.add(query2, Occur.SHOULD);
 			}
 			//品牌
 			if (params.containsKey("brand")) {
-				QueryParser parser = new QueryParser("BRAND", analyzer);
-				Query query = parser.parse(params.get("brand"));
+//				QueryParser parser = new QueryParser("BRAND", analyzer);
+//				Query query = parser.parse(QueryParser.escape(params.get("brand")));
+				//全匹配搜索
+				Term t = new Term("BRAND", params.get("brand"));
+				Query query = new TermQuery(t);
 				builder.add(query, Occur.MUST);
 			}
 			//分类
-			if (params.containsKey("class")) {
-				QueryParser parser = new QueryParser("CLASS", analyzer);
-				Query query = parser.parse(params.get("class"));
+			if (params.containsKey("classify")) {
+//				QueryParser parser = new QueryParser("CLASS", analyzer);
+//				Query query = parser.parse(QueryParser.escape(params.get("classify")));
+				//全匹配搜索
+				Term t = new Term("CLASS", params.get("classify"));
+				Query query = new TermQuery(t);
 				builder.add(query, Occur.MUST);
 			}
 			//属性
 			if (params.containsKey("property")) {
-				QueryParser parser = new QueryParser("PROPERTY", analyzer);
-				Query query = parser.parse(params.get("property"));
+//				QueryParser parser = new QueryParser("PROPERTY", analyzer);
+//				Query query = parser.parse(QueryParser.escape(params.get("property")));
+				//全匹配搜索
+				Term t = new Term("PROPERTY", params.get("property"));
+				Query query = new TermQuery(t);
 				builder.add(query, Occur.MUST);
 			}
 			//功效
 			if (params.containsKey("effect")) {
-				QueryParser parser = new QueryParser("EFFECT", analyzer);
-				Query query = parser.parse(params.get("effect"));
+//				QueryParser parser = new QueryParser("EFFECT", analyzer);
+//				Query query = parser.parse(QueryParser.escape(params.get("effect")));
+				//全匹配搜索
+				Term t = new Term("EFFECT", params.get("effect"));
+				Query query = new TermQuery(t);
 				builder.add(query, Occur.MUST);
 			}
 			BooleanQuery query = builder.build();
@@ -226,10 +240,10 @@ public class ProductIndexDao extends BaseIndexDao {
 		doc.add(new StringField("ID", String.valueOf(productInfoVO.getProductId()), Field.Store.YES));
 		doc.add(new Field("NAME", productInfoVO.getProductName(), TextField.TYPE_STORED));
 		doc.add(new Field("DESC", productInfoVO.getDesc(), TextField.TYPE_STORED));
-		doc.add(new Field("CLASS", productInfoVO.getClassifyName(), TextField.TYPE_STORED));
-		doc.add(new Field("PROPERTY", productInfoVO.getPropertyName(), TextField.TYPE_STORED));
-		doc.add(new Field("EFFECT", productInfoVO.getEffectName(), TextField.TYPE_STORED));
-		doc.add(new Field("BRAND", productInfoVO.getBrandName(), TextField.TYPE_STORED));
+		doc.add(new StringField("CLASS", productInfoVO.getClassifyName(), Field.Store.YES));
+		doc.add(new StringField("PROPERTY", productInfoVO.getPropertyName(),Field.Store.YES));
+		doc.add(new StringField("EFFECT", productInfoVO.getEffectName(), Field.Store.YES));
+		doc.add(new StringField("BRAND", productInfoVO.getBrandName(), Field.Store.YES));
 		return doc;
 	}
 

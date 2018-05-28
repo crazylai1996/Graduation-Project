@@ -72,7 +72,7 @@
     line-height: @_height;
     color: @title_color;
   }
-  .property-items{
+  .filter-items{
     @_width: 850px;
     @_height: 24px;
 
@@ -83,6 +83,11 @@
 
     overflow: hidden;
 
+    .selected{
+      color: @white_color;
+
+      background-color: @main_color;
+    }
     a{
       display: inline-block;
       padding-top: 2px;
@@ -112,6 +117,7 @@
 
     a{
       text-decoration: none;
+      vertical-align: middle;
 
       &:before{
         content: "∨";
@@ -422,4 +428,14 @@
       background-color: @main_color;
     }
   }
+}
+.no-more-contents{
+  @_height: 120px;
+
+  min-height: @_height;
+
+  color: @desc_color;
+  line-height: @_height;
+  text-align: center;
+  font-size: 20px;
 }
