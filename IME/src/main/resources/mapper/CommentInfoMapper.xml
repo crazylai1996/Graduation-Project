@@ -197,4 +197,35 @@
   	from commentinfo 
   	where bProductId = #{_parameter}
   </select>
+  <!-- 统计商品评分 -->
+  <select id="countCommentHeart" parameterType="map" 
+   resultType="java.lang.Long">
+  	select count(*) 
+  	from commentinfo 
+  	where bProductId = #{productId} 
+  		and fWorthMark = #{heart}
+  </select>
+  <!-- 用户肤质统计 -->
+  <select id="countUserSkinTexture" parameterType="map" 
+   resultType="java.lang.Long">
+  	select count(*) 
+  	from commentinfo c left join userinfo u on c.bUserId = u.bUserId
+  	where bProductId = #{productId} 
+  		and u.vSkinTexture = #{skinTexture}
+  </select>
+  <!-- 用户年龄统计 -->
+  <select id="countUserAge" parameterType="map" 
+  	resultType="java.lang.Long">
+  	select count(*) 
+  	from commentinfo c left join userinfo u on c.bUserId = u.bUserId
+  	where bProductId = #{productId} 
+  		and iBornYear &gt;= #{minYear} and iBornYear &lt; #{maxYear}
+  </select>
+  <!-- 统计性价综合评分 -->
+  <select id="countAvgScore" parameterType="java.lang.Long" 
+  	resultType="java.lang.Float">
+  	select sum(fWorthMark)/count(*) 
+	from commentinfo 
+	where bProductId = #{_parameter}
+  </select>
 </mapper>

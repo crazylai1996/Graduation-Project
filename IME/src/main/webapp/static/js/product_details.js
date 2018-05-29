@@ -195,13 +195,18 @@ $(document).ready(function() {
   /**
 	 * [显示图形统计]
 	 */
-  function showPower(power) {
-    var powerClassName = $(power).attr("class")+"-wrapped";
-    var powerWidth = parseInt($("."+powerClassName).css("max-width"));
-    $(power).width(powerWidth * parseFloat($(power).data("power")));
-  }
+//  function showPower(power) {
+//    var powerClassName = $(power).attr("class")+"-wrapped";
+//    var powerWidth = parseInt($("."+powerClassName).css("max-width"));
+//    $(power).width(powerWidth * parseFloat($(power).data("power")));
+//  }
   // 评分占比评论心得分析
-  showPower($(".rating-power,.item-power"));
+//  showPower($(".rating-power,.item-power"));
+  $(".rating-power,.item-power").each(function(){
+	  var powerClassName = $(this).attr("class")+"-wrapped";
+	    var powerWidth = parseInt($("."+powerClassName).css("max-width"));
+	    $(this).width(powerWidth * parseFloat($(this).data("power")));
+  });
 
   /**
 	 * 购买方式选择

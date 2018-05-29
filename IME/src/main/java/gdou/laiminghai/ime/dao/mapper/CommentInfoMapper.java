@@ -80,4 +80,37 @@ public interface CommentInfoMapper {
      * @datetime: 2018年5月29日 上午12:51:07
      */
     Long countCommentByProductId(Long productId);
+    /**
+     * 评分统计
+     * @param productId
+     * @return
+     * @author: laiminghai
+     * @datetime: 2018年5月29日 上午10:33:13
+     */
+    Long countCommentHeart(Map<String,Object> map);
+    
+    /**
+     * 用户肤质统计
+     * @param map
+     * @return
+     * @author: laiminghai
+     * @datetime: 2018年5月29日 下午12:11:21
+     */
+    Long countUserSkinTexture(Map<String,Object> map);
+    /**
+     * 用户年龄统计
+     * @param map
+     * @return
+     * @author: laiminghai
+     * @datetime: 2018年5月29日 下午12:30:33
+     */
+    Long countUserAge(Map<String,Object> map);
+    /**
+     * 统计性价综合评分
+     * @param productId
+     * @return
+     * @author: laiminghai
+     * @datetime: 2018年5月29日 下午3:06:29
+     */
+    Float countAvgScore(Long productId);
 }

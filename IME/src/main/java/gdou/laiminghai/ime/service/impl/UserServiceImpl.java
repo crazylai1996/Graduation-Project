@@ -287,9 +287,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void modifyPassword(UserVO userVO) {
-		//用户密码为空
+		//用户新密码为空
 		if (userVO == null || 
-				StringUtils.isBlank(userVO.getPassword())||
 					StringUtils.isBlank(userVO.getNewPassword())||
 						userVO.getUserId() == null) {
 			throw new ServiceException(ServiceResultEnum.USER_INVALID_ACTION);
@@ -302,9 +301,11 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException(ServiceResultEnum.USER_NOT_EXIST);
 		}
 		// 用户当前密码校验
-		String password = DigestUtils.md5Hex(userVO.getPassword() + userInfo.getPasswordSalt());
-		if (!password.equals(userInfo.getPassword())) {
-			throw new ServiceException(ServiceResultEnum.USER_ACCOUNT_PASSWORD_NOT_MATCH);
+		if(userVO.getPassword() == null && userInfo.getPasswordSalt() == null) {
+			String password = DigestUtils.md5Hex(userVO.getPassword() + userInfo.getPasswordSalt());
+			if (!password.equals(userInfo.getPassword())) {
+				throw new ServiceException(ServiceResultEnum.USER_ACCOUNT_PASSWORD_NOT_MATCH);
+			}
 		}
 		//生成新的密码
 		//密码加密
@@ -503,7 +504,11 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		userInfoVO.setIntroduction(userInfo.getIntroduction());
-		userInfoVO.setPortrait(AppSetting.APP_ROOT+AppSetting.PORTRAIT_SAVED_PATH+userInfo.getPortrait());
+		if(userInfo.getPortrait() != null) {
+			userInfoVO.setPortrait(AppSetting.APP_ROOT+AppSetting.PORTRAIT_SAVED_PATH+userInfo.getPortrait());
+		}else {
+			userInfoVO.setPortrait(AppSetting.APP_ROOT+AppSetting.PORTRAIT_SAVED_PATH+"default_portrait.png");
+		}
 		userInfoVO.setPhone(userInfo.getPhone());
 		userInfoVO.setEmail(userInfo.getEmail());
 		userInfoVO.setMembershipPoint(userInfo.getMembershipPoint());

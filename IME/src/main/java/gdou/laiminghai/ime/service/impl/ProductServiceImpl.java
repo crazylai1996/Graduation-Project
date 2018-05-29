@@ -99,6 +99,10 @@ public class ProductServiceImpl implements ProductService {
 		productInfoMapper.updateByPrimaryKey(productInfoPO);
 		//添加商品图片地址至数据库
 		productPictureService.saveAll(productPictures);
+		//添加商品索引
+		productIndexDao.addProductIndex(
+				productInfoPO2productInfoVO(
+						productInfoMapper.findProductInfoById(productInfoPO.getProductId())));
 		logger.debug("添加新产品成功！");
 	}
 	

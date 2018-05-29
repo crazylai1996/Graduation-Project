@@ -19,7 +19,7 @@
 	<div class="forget-container">
 		<div class="forget-label">
 			<div class="logo-title">
-				<img src="static\img\logo.png" alt=""> <span class="left">
+				<a href="${basePath }index.html"><img src="static\img\logo.png" alt=""></a><span class="left">
 					| 忘记密码</span>
 			</div>
 			<a class="right" href="${basePath }user/page/login.html">登录</a>

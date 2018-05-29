@@ -93,26 +93,53 @@
     </div>
     <!-- 用户信息、用户推荐 -->
     <div class="user-center">
-      <!-- 用户头像 -->
-      <div class="portrait-wrapped">
-        <a href="javascript:void(0);">
-          <img src="static\img\portrait_test.jpg" alt="点击进入个人中心">
-        </a>
-      </div>
-      <!-- 用户名 -->
-      <div class="username-wrapped">
-        Hi!&nbsp;<strong>crazylai1996</strong>
-      </div>
-      <!-- 用户积分 -->
-      <div class="user-integration">
-        <span>积分:<a href="#">7845</a></span>
-        <span>会员类型:<a href="#">超级会员</a></span>
-      </div>
-      <!-- 用户操作 -->
-      <div class="user-ops">
-        <a href="javascript:void(0);">&#10010;添加评价</a>
-        <a href="javascript:void(0);"><i class="layui-icon layui-icon-star"></i> 我的关注</a>
-      </div>
+	   <div class="user-info-container">
+    	<c:choose>
+    		<c:when test="${!empty userInfo}">
+    			<!-- 用户头像 -->
+		      <div class="portrait-wrapped">
+		        <a href="${basePath }user/info.html">
+		          <img src="${userInfo.portrait }" alt="点击进入个人中心">
+		        </a>
+		      </div>
+		      <!-- 用户名 -->
+		      <div class="username-wrapped">
+		        Hi!&nbsp;<strong>${userInfo.userName }</strong>
+		      </div>
+		      <!-- 用户积分 -->
+		      <div class="user-integration">
+		        <span>积分:<a href="javascript:void(0);">7845</a></span>
+		        <span>会员类型:<a href="javascript:void(0);">超级会员</a></span>
+		      </div>
+		      <!-- 用户操作 -->
+		      <div class="user-ops">
+		        <a href="${basePath }product/new.html" target="_blank">&#10010;添加商品</a>
+		        <a href="${basePath }user/follow/list.html"><i class="layui-icon layui-icon-star"></i> 我的关注</a>
+		      </div>
+    		</c:when>
+    		<c:otherwise>
+    			<!-- 用户头像 -->
+		      <div class="portrait-wrapped">
+		        <a href="javascript:void(0);">
+		          <img src="static\img\portraits\default_portrait.png" alt="点击进入个人中心">
+		        </a>
+		      </div>
+		      <!-- 用户名 -->
+		      <div class="username-wrapped">
+		        Hi!&nbsp;<strong>你好</strong>
+		      </div>
+		      <!-- 用户积分 -->
+		      <div class="user-integration">
+		        <a href="${basePath }user/page/login.html">登录</a>发现更多精彩
+		      </div>
+		      <!-- 用户操作 -->
+		      <div class="user-ops">
+		        <a href="${basePath }product/new.html" target="_blank">&#10010;添加商品</a>
+		        <a href="${basePath }user/follow/list.html"><i class="layui-icon layui-icon-star"></i> 我的关注</a>
+		      </div>
+    		</c:otherwise>
+    	</c:choose>
+     </div>
       <!-- 公告 -->
       <div class="notice-wrapped">
         <div class="notice-title">

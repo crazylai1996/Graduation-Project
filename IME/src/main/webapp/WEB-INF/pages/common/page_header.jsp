@@ -19,7 +19,7 @@
   <div class="bar-wrapped">
     <div class="top-bar">
       <div class="bar-left">
-        在这里，一起发现你的专属美丽。
+        	发现你的专属美丽。
       </div>
       <div class="bar-right">
         <!-- 未登录显示 -->
@@ -52,7 +52,6 @@
 	              <li><a href="${basePath }user/info.html">个人中心</a></li>
 	
 	              <li><a href="javascript:void(0);">我的评价</a></li>
-	              <li><a href="javascript:void(0);">我的文章</a></li>
 	              <li><a href="javascript:void(0);">我的消息</a></li>
 	
 	              <li><a href="user/logout">退出登录</a></li>
@@ -67,7 +66,7 @@
   <!-- logo位置 -->
   <div class="logo-wrapped">
     <div class="container">
-      <img src="static\img\logo.png" alt="爱美丽">
+      <a href="${basePath }index.html"><img src="static\img\logo.png" alt="爱美丽"></a>
     </div>
   </div>
 
@@ -98,7 +97,7 @@
     <span class="search-box left">
       <a class="search-type" href="javascript:void(0);">点评</a>
       <input type="text" class="keyword search-keyword" name="keyword" 
-      	autocomplete="off" placeholder="请输入点评标题、内容等" value="${param.keyword }">
+      	autocomplete="off" placeholder="请输入标题、内容等" value="${param.keyword }">
       <ul class="s-type-slector">
         <li><a href="javascript:void(0);">商品</a></li>
         <li><a href="javascript:void(0);">点评</a></li>

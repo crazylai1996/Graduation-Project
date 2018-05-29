@@ -26,6 +26,7 @@ import gdou.laiminghai.ime.model.dto.PageResult;
 import gdou.laiminghai.ime.model.dto.ResultDTO;
 import gdou.laiminghai.ime.model.entity.CosmeticClass;
 import gdou.laiminghai.ime.model.entity.UserBrowserRecord;
+import gdou.laiminghai.ime.model.vo.CommentAnalysisVO;
 import gdou.laiminghai.ime.model.vo.CommentInfoVO;
 import gdou.laiminghai.ime.model.vo.ProductInfoVO;
 import gdou.laiminghai.ime.model.vo.SelectItemVO;
@@ -164,6 +165,9 @@ public class ProductController {
 			productInfoVO.setFollow(productService.isFolloedProduct(userId, productId));
 		}
 		mav.addObject("productInfoVO", productInfoVO);
+		//点评统计
+		CommentAnalysisVO commentAnalysis = commentService.commentAnalyze(productId);
+		mav.addObject("commentAnalysis",commentAnalysis);
 		// 购买方式
 		List<SelectItemVO> buyWays = EnumUtil.toList(BuyWayEnum.class);
 		mav.addObject("buyWays", buyWays);

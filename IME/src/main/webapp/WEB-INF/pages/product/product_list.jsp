@@ -22,8 +22,8 @@
       <div class="main-container">
         <!-- 当前位置 -->
         <div class="current-pos">
-          <a href="#">首页</a><span class="split-line"></span>
-          <a href="#">化妆品大全</a><span class="split-line"></span>
+          <a href="${basePath }">首页</a><span class="split-line"></span>
+          <a href="javascript(0);">化妆品大全</a><span class="split-line"></span>
           <sapn class="title">
           	<c:choose>
           		<c:when test="${!empty param.classify }">

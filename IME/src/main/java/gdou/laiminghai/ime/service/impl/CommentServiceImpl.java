@@ -39,6 +39,7 @@ import gdou.laiminghai.ime.model.entity.UserFollowClass;
 import gdou.laiminghai.ime.model.entity.UserFollowProduct;
 import gdou.laiminghai.ime.model.entity.UserFollowUser;
 import gdou.laiminghai.ime.model.entity.UserInfo;
+import gdou.laiminghai.ime.model.vo.CommentAnalysisVO;
 import gdou.laiminghai.ime.model.vo.CommentInfoVO;
 import gdou.laiminghai.ime.model.vo.ProductInfoVO;
 import gdou.laiminghai.ime.model.vo.UserInfoVO;
@@ -291,6 +292,98 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public Long countCommentByProductId(Long productId) {
 		return commentInfoMapper.countCommentByProductId(productId);
+	}
+
+	@Override
+	public CommentAnalysisVO commentAnalyze(Long productId) {
+		CommentAnalysisVO commentAnalysis = new CommentAnalysisVO();
+		long commentCount = commentInfoMapper.countCommentByProductId(productId);
+		logger.debug("评分个数："+commentCount);
+		commentAnalysis.setCommentCount(commentCount);
+		if(commentCount == 0) {
+			return commentAnalysis;
+		}
+		Map<String,Object> params = new HashMap<>();
+		params.put("productId", productId);
+		//统计综合评分
+		float avgScore = commentInfoMapper.countAvgScore(productId);
+		float avgScoreFmt = (float)(Math.round(avgScore*100))/100;
+		commentAnalysis.setAvgScore(avgScoreFmt);
+		//统计评分
+		Map<String,Float> scoreAnalysis = new HashMap<>();
+		params.put("heart", 1);
+		scoreAnalysis.put("oneHeart", countProportion(commentInfoMapper.countCommentHeart(params),commentCount));
+		params.put("heart", 2);
+		scoreAnalysis.put("twoHearts", countProportion(commentInfoMapper.countCommentHeart(params),commentCount));
+		params.put("heart", 3);
+		scoreAnalysis.put("threeHearts", countProportion(commentInfoMapper.countCommentHeart(params),commentCount));
+		params.put("heart", 4);
+		scoreAnalysis.put("fourHearts", countProportion(commentInfoMapper.countCommentHeart(params),commentCount));
+		params.put("heart", 5);
+		scoreAnalysis.put("fiveHearts", countProportion(commentInfoMapper.countCommentHeart(params),commentCount));
+		logger.debug("评分统计："+scoreAnalysis.toString());
+		commentAnalysis.setScoreAnalysis(scoreAnalysis);
+		//用户肤质统计
+		Map<String,Float> skinTextureAnalysis = new HashMap<>();
+		params.put("skinTexture", SkinTextureEnum.DRY_SKIN.getCode());
+		scoreAnalysis.put("drySkin", countProportion(commentInfoMapper.countUserSkinTexture(params), commentCount));
+		params.put("skinTexture", SkinTextureEnum.NEUTRAL_SKIN.getCode());
+		scoreAnalysis.put("neutralSkin", countProportion(commentInfoMapper.countUserSkinTexture(params), commentCount));
+		params.put("skinTexture", SkinTextureEnum.OILY_SKIN.getCode());
+		scoreAnalysis.put("oilySkin", countProportion(commentInfoMapper.countUserSkinTexture(params), commentCount));
+		params.put("skinTexture", SkinTextureEnum.MIXED_SKIN.getCode());
+		scoreAnalysis.put("mixedSkin", countProportion(commentInfoMapper.countUserSkinTexture(params), commentCount));
+		params.put("skinTexture", SkinTextureEnum.SENSITIVE_SKIN.getCode());
+		scoreAnalysis.put("sensitiveSkin", countProportion(commentInfoMapper.countUserSkinTexture(params), commentCount));
+		commentAnalysis.setScoreAnalysis(scoreAnalysis);
+		//用户年龄统计
+		Map<String,Float> ageAnalysis = new HashMap<>();
+		Calendar c = Calendar.getInstance();
+		int currentYear = c.get(Calendar.YEAR);
+		int minYear = currentYear - 25;
+		int maxYear = currentYear - 0;
+		params.put("minYear", minYear);
+		params.put("maxYear", maxYear);
+		ageAnalysis.put("phase1", countProportion(commentInfoMapper.countUserAge(params), commentCount));
+		minYear = currentYear - 30;
+		maxYear = currentYear - 25;
+		params.put("minYear", minYear);
+		params.put("maxYear", maxYear);
+		ageAnalysis.put("phase2", countProportion(commentInfoMapper.countUserAge(params), commentCount));
+		minYear = currentYear - 40;
+		maxYear = currentYear -30;
+		params.put("minYear", minYear);
+		params.put("maxYear", maxYear);
+		ageAnalysis.put("phase3", countProportion(commentInfoMapper.countUserAge(params), commentCount));
+		minYear = currentYear - 45;
+		maxYear = currentYear -40;
+		params.put("minYear", minYear);
+		params.put("maxYear", maxYear);
+		ageAnalysis.put("phase4", countProportion(commentInfoMapper.countUserAge(params), commentCount));
+		minYear = currentYear - 100;
+		maxYear = currentYear -45;
+		params.put("minYear", minYear);
+		params.put("maxYear", maxYear);
+		ageAnalysis.put("phase5", countProportion(commentInfoMapper.countUserAge(params), commentCount));
+		commentAnalysis.setAgeAnalysis(ageAnalysis);
+		return commentAnalysis;
+	}
+	
+	/**
+	 * 计算占比 
+	 * @param a
+	 * @param sum 总
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月29日 上午10:56:42
+	 */
+	private float countProportion(long a,long sum) {
+		if(sum == 0) {
+			return 0.0F;
+		}
+		float proportion = a/(float)sum;
+		logger.debug(a+"/"+sum+"="+proportion);
+		return (float)(Math.round(proportion*100))/100;
 	}
 
 	/**

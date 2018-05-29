@@ -346,6 +346,9 @@ body {
   box-shadow: 0 0 2px #dab4da;
   background-color: #ffffff;
 }
+.user-info-container {
+  height: 145px;
+}
 /*
  *头像块
  */

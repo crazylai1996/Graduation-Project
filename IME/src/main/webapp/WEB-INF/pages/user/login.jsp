@@ -19,7 +19,7 @@
 	<div class="login-container">
 		<div class="login-label">
 			<div class="logo-title">
-				<img src="static\img\logo.png" alt="爱美丽"> <span class="left"> |
+				<a href="${basePath }index.html"><img src="static\img\logo.png" alt="爱美丽"></a><span class="left"> |
 					登录</span>
 			</div>
 			<a class="right" href="${basePath }user/page/register.html">注册</a>

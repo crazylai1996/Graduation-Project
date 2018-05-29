@@ -25,20 +25,20 @@
     <div class="main-container">
       <!-- 当前位置 -->
       <div class="current-pos">
-        <a href="#">首页</a><span class="split-line"></span>
+        <a href="${basePath }">首页</a><span class="split-line"></span>
         <sapn class="title">添加新产品</span>
       </div>
-      <div class="quick-get-info">
+      <!-- <div class="quick-get-info">
         <a href="javascript:void(0);" class="pointer">快速获取&gt;&gt;</a>
         <span class="expand-more">
           <span class="" class="tips">输入购买地址:</span>
           <input type="text" name="" value="">
           <a href="#" class="get-btn">获取</a>
         </span>
-      </div>
+      </div> -->
       <div class="product-add-container">
         <div class="add-title-label">
-          <a href="#">商品信息</a>
+          <a href="javascript:void(0);">商品信息</a>
         </div>
         <div class="product-form-div">
           <ul class="input-list">

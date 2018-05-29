@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
 import gdou.laiminghai.ime.model.dto.PageResult;
+import gdou.laiminghai.ime.model.vo.CommentAnalysisVO;
 import gdou.laiminghai.ime.model.vo.CommentInfoVO;
 
 /**
@@ -96,4 +97,13 @@ public interface CommentService {
 	 * @datetime: 2018年5月29日 上午12:49:58
 	 */
 	Long countCommentByProductId(Long productId);
+	
+	/**
+	 * 商品点评统计分析
+	 * @param productId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月29日 上午10:30:33
+	 */
+	CommentAnalysisVO commentAnalyze(Long productId);
 }

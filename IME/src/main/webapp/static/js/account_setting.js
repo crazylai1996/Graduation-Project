@@ -16,12 +16,15 @@ $(".modify-password-btn").click(function() {
 				var newPassword = $(".new-password-input").val();
 				var reNewPassword = $(".re-new-password-input").val();
 				var pass = true;
-				$(".modify-password-form input").each(function(n) {
-					if ($(this).val() == "") {
-						pass = false;
-						return false;
-					}
-				});
+//				$(".modify-password-form input").each(function(n) {
+//					if ($(this).val() == "") {
+//						pass = false;
+//						return false;
+//					}
+//				});
+				if($.trim(newPassword) == "" || $.trim(reNewPassword) == ""){
+					pass = false;
+				}
 				if(!pass){
 					layer.msg("表单信息不能留空");
 					return ;

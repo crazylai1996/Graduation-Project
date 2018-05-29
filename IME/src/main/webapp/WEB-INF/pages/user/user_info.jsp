@@ -24,7 +24,7 @@
         <!-- 当前位置开始 -->
         <div class="current-pos">
           <a href="${basePath }">首页</a><span class="split-line"></span>
-          <a href="#">用户中心</a><span class="split-line"></span>
+          <a href="javascript:void(0);">用户中心</a><span class="split-line"></span>
           <sapn class="title">基本信息</span>
         </div>
         <!-- 当前位置结束 -->

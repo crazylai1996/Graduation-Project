@@ -9,15 +9,15 @@
 		<span class="title">用户信息<span
 			class="to-down glyphicon glyphicon-chevron-down"></span></span>
 		<ul class="navi-item-child">
-			<li><a href="javascript:void(0);">基本信息</a></li>
-			<li><a href="javascript:void(0);">账号设置</a></li>
+			<li><a href="${basePath }user/info.html">基本信息</a></li>
+			<li><a href="${basePath }user/accountSetting.html">账号设置</a></li>
 		</ul>
 	</div>
 	<div class="navi-item">
 		<span class="title">我的点评<span
 			class="to-down glyphicon glyphicon-chevron-down"></span></span>
 		<ul class="navi-item-child">
-			<li><a href="javascript:void(0);">我的关注</a></li>
+			<li><a href="${basePath }user/follow/list.html">我的关注</a></li>
 			<li><a href="javascript:void(0);">我发布的</a></li>
 			<li><a href="javascript:void(0);">我的评论</a></li>
 		</ul>

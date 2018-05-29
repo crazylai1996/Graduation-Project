@@ -307,6 +307,7 @@ public class UserController {
 		Map<String,Object> userInfoMap = new HashMap<String,Object>();
 		userInfoMap.put("userId", userInfo.getUserId());
 		userInfoMap.put("userName", userInfo.getUserName());
+		userInfoMap.put("portrait", userInfo.getPortrait());
 		userInfoMap.put("skinTexture", userInfo.getSkinTexture());
 		userInfoMap.put("bornYear", userInfo.getSkinTexture());
 		userInfoMap.put("status", userInfo.getStatus());
@@ -353,6 +354,7 @@ public class UserController {
 		Map<String, Object> userInfoMap = new HashMap<String, Object>();
 		userInfoMap.put("userId", userInfo.getUserId());
 		userInfoMap.put("userName", userInfo.getUserName());
+		userInfoMap.put("portrait", userInfo.getPortrait());
 		userInfoMap.put("skinTexture", userInfo.getSkinTexture());
 		userInfoMap.put("bornYear", userInfo.getSkinTexture());
 		userInfoMap.put("status", userInfo.getStatus());

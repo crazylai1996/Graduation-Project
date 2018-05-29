@@ -27,7 +27,9 @@
 		<div class="main-container">
 			<!-- 当前位置 -->
 			<div class="current-pos">
-				<a href="#">首页</a><span class="split-line"></span> <a href="#">${productInfoVO.brandName }</a><span
+				<a href="${basePath }">首页</a><span class="split-line"></span> 
+				<a href="${basePath }product/list.html?brand=${productInfoVO.brandName }" target="_blank">
+					${productInfoVO.brandName }</a><span
 					class="split-line"></span>
 				<sapn class="title">${productInfoVO.productName }</span>
 			</div>
@@ -110,13 +112,13 @@
 							<div class="rating-title">综合性价评分</div>
 							<div class="rating-count">
 								<div class="left">
-									<strong>9.0</strong>
+									<strong>${commentAnalysis.avgScore }</strong>
 								</div>
 								<div class="right">
 									<span class="right-up"> <input value="4.5" type="number"
 										class="rating" min=0 max=5 step=0.5 data-size="xxs"
 										data-only-show="true" data-symbol="&#xe005;">
-									</span> <span class="right-down"><a href="#">283471人评价</a></span>
+									</span> <span class="right-down"><a href="javascript:void(0);">${commentAnalysis.commentCount }个评价</a></span>
 								</div>
 							</div>
 						</div>
@@ -129,8 +131,8 @@
 										step=0.5 data-size="xxxs" data-only-show="true"
 										data-symbol="&#xe005;">
 								</span> <span class="rating-power-wrapped"> <span
-										class="rating-power" data-power="1.0"></span>
-								</span> <span class="rating-per"> 100% </span></li>
+										class="rating-power" data-power="${commentAnalysis.scoreAnalysis.fiveHearts }"></span>
+								</span> <span class="rating-per"> ${commentAnalysis.scoreAnalysis.fiveHearts * 100}% </span></li>
 								<!-- 一个结束  -->
 								<!-- 一个 -->
 								<li class="rating-on-weight"><span class="rating-wrapped">
@@ -138,8 +140,8 @@
 										step=0.5 data-size="xxxs" data-only-show="true"
 										data-symbol="&#xe005;">
 								</span> <span class="rating-power-wrapped"> <span
-										class="rating-power" data-power="1.0"></span>
-								</span> <span class="rating-per"> 100% </span></li>
+										class="rating-power" data-power="${commentAnalysis.scoreAnalysis.fourHearts}"></span>
+								</span> <span class="rating-per"> ${commentAnalysis.scoreAnalysis.fourHearts * 100 }% </span></li>
 								<!-- 一个结束  -->
 								<!-- 一个 -->
 								<li class="rating-on-weight"><span class="rating-wrapped">
@@ -147,8 +149,8 @@
 										step=0.5 data-size="xxxs" data-only-show="true"
 										data-symbol="&#xe005;">
 								</span> <span class="rating-power-wrapped"> <span
-										class="rating-power" data-power="1.0"></span>
-								</span> <span class="rating-per"> 100% </span></li>
+										class="rating-power" data-power="${commentAnalysis.scoreAnalysis.threeHearts}"></span>
+								</span> <span class="rating-per"> ${commentAnalysis.scoreAnalysis.threeHearts* 100}% </span></li>
 								<!-- 一个结束  -->
 								<!-- 一个 -->
 								<li class="rating-on-weight"><span class="rating-wrapped">
@@ -156,8 +158,8 @@
 										step=0.5 data-size="xxxs" data-only-show="true"
 										data-symbol="&#xe005;">
 								</span> <span class="rating-power-wrapped"> <span
-										class="rating-power" data-power="1.0"></span>
-								</span> <span class="rating-per"> 100% </span></li>
+										class="rating-power" data-power="${commentAnalysis.scoreAnalysis.twoHearts}"></span>
+								</span> <span class="rating-per"> ${commentAnalysis.scoreAnalysis.twoHearts* 100}% </span></li>
 								<!-- 一个结束  -->
 								<!-- 一个 -->
 								<li class="rating-on-weight"><span class="rating-wrapped">
@@ -165,8 +167,8 @@
 										step=0.5 data-size="xxxs" data-only-show="true"
 										data-symbol="&#xe005;">
 								</span> <span class="rating-power-wrapped"> <span
-										class="rating-power" data-power="1.0"></span>
-								</span> <span class="rating-per"> 100% </span></li>
+										class="rating-power" data-power="${commentAnalysis.scoreAnalysis.oneHeart}"></span>
+								</span> <span class="rating-per"> ${commentAnalysis.scoreAnalysis.oneHeart* 100}% </span></li>
 								<!-- 一个结束  -->
 							</ul>
 							<hr>
@@ -203,7 +205,7 @@
 				<!-- 使用心得分析 -->
 				<div class="comment-analysis">
 					<div class="analysis-title">
-						<a class="name" href="#">Green Skin格润丝 花青素明眸眼霜</a> <span
+						<a class="name" href="javascript:void(0);">${productInfoVO.productName }</a> <span
 							class="title">使用心得分析</span>
 					</div>
 					<div class="analysis-contents">
@@ -213,24 +215,24 @@
 								<ul class="type-details">
 									<li class="type-on-weight"><span class="type-item">
 											5星 </span> <span class="item-power-wrapped"> <span
-											class="item-power" data-power="1.0"></span>
-									</span> <span class="item-per"> 100% </span></li>
+											class="item-power" data-power="${commentAnalysis.scoreAnalysis.fiveHearts}"></span>
+									</span> <span class="item-per"> ${commentAnalysis.scoreAnalysis.fiveHearts * 100}% </span></li>
 									<li class="type-on-weight"><span class="type-item">
 											4星 </span> <span class="item-power-wrapped"> <span
-											class="item-power" data-power="1.0"></span>
-									</span> <span class="item-per"> 100% </span></li>
+											class="item-power" data-power="${commentAnalysis.scoreAnalysis.fourHearts}"></span>
+									</span> <span class="item-per"> ${commentAnalysis.scoreAnalysis.fourHearts * 100}% </span></li>
 									<li class="type-on-weight"><span class="type-item">
 											3星 </span> <span class="item-power-wrapped"> <span
-											class="item-power" data-power="1.0"></span>
-									</span> <span class="item-per"> 100% </span></li>
+											class="item-power" data-power="${commentAnalysis.scoreAnalysis.threeHearts}"></span>
+									</span> <span class="item-per"> ${commentAnalysis.scoreAnalysis.threeHearts * 100}% </span></li>
 									<li class="type-on-weight"><span class="type-item">
 											2星 </span> <span class="item-power-wrapped"> <span
-											class="item-power" data-power="1.0"></span>
-									</span> <span class="item-per"> 100% </span></li>
+											class="item-power" data-power="${commentAnalysis.scoreAnalysis.twoHearts}"></span>
+									</span> <span class="item-per"> ${commentAnalysis.scoreAnalysis.twoHearts * 100}% </span></li>
 									<li class="type-on-weight"><span class="type-item">
 											1星 </span> <span class="item-power-wrapped"> <span
-											class="item-power" data-power="1.0"></span>
-									</span> <span class="item-per"> 100% </span></li>
+											class="item-power" data-power="${commentAnalysis.scoreAnalysis.oneHeart}"></span>
+									</span> <span class="item-per"> ${commentAnalysis.scoreAnalysis.oneHeart * 100}% </span></li>
 								</ul>
 							</div>
 							<div class="analysis-type">
@@ -238,49 +240,49 @@
 								<ul class="type-details">
 									<li class="type-on-weight"><span class="type-item">
 											中性 </span> <span class="item-power-wrapped"> <span
-											class="item-power" data-power="1.0"></span>
-									</span> <span class="item-per"> 100% </span></li>
+											class="item-power" data-power="${commentAnalysis.scoreAnalysis.neutralSkin }"></span>
+									</span> <span class="item-per"> ${commentAnalysis.scoreAnalysis.neutralSkin * 100 }% </span></li>
 									<li class="type-on-weight"><span class="type-item">
 											干性 </span> <span class="item-power-wrapped"> <span
-											class="item-power" data-power="1.0"></span>
-									</span> <span class="item-per"> 100% </span></li>
+											class="item-power" data-power="${commentAnalysis.scoreAnalysis.drySkin }"></span>
+									</span> <span class="item-per"> ${commentAnalysis.scoreAnalysis.drySkin * 100 }% </span></li>
 									<li class="type-on-weight"><span class="type-item">
 											油性 </span> <span class="item-power-wrapped"> <span
-											class="item-power" data-power="1.0"></span>
-									</span> <span class="item-per"> 100% </span></li>
+											class="item-power" data-power="${commentAnalysis.scoreAnalysis.oilySkin }"></span>
+									</span> <span class="item-per"> ${commentAnalysis.scoreAnalysis.oilySkin * 100 }% </span></li>
 									<li class="type-on-weight"><span class="type-item">
 											混合 </span> <span class="item-power-wrapped"> <span
-											class="item-power" data-power="1.0"></span>
-									</span> <span class="item-per"> 100% </span></li>
+											class="item-power" data-power="${commentAnalysis.scoreAnalysis.mixedSkin }"></span>
+									</span> <span class="item-per"> ${commentAnalysis.scoreAnalysis.mixedSkin * 100 }% </span></li>
 									<li class="type-on-weight"><span class="type-item">
 											敏感 </span> <span class="item-power-wrapped"> <span
-											class="item-power" data-power="1.0"></span>
-									</span> <span class="item-per"> 100% </span></li>
+											class="item-power" data-power="${commentAnalysis.scoreAnalysis.sensitiveSkin }"></span>
+									</span> <span class="item-per"> ${commentAnalysis.scoreAnalysis.sensitiveSkin * 100 }% </span></li>
 								</ul>
 							</div>
 							<div class="analysis-type">
 								<span class="type-name">年龄分布</span>
 								<ul class="type-details">
 									<li class="type-on-weight"><span class="type-item">
-											&#8804;19 </span> <span class="item-power-wrapped"> <span
-											class="item-power" data-power="1.0"></span>
-									</span> <span class="item-per"> 100% </span></li>
+											&#8804;25 </span> <span class="item-power-wrapped"> <span
+											class="item-power" data-power="${commentAnalysis.ageAnalysis.phase1 }"></span>
+									</span> <span class="item-per"> ${commentAnalysis.ageAnalysis.phase1 * 100 }% </span></li>
 									<li class="type-on-weight"><span class="type-item">
-											20-24 </span> <span class="item-power-wrapped"> <span
-											class="item-power" data-power="1.0"></span>
-									</span> <span class="item-per"> 100% </span></li>
+											25-30 </span> <span class="item-power-wrapped"> <span
+											class="item-power" data-power="${commentAnalysis.ageAnalysis.phase2 }"></span>
+									</span> <span class="item-per"> ${commentAnalysis.ageAnalysis.phase2 * 100 }% </span></li>
 									<li class="type-on-weight"><span class="type-item">
-											25-29 </span> <span class="item-power-wrapped"> <span
-											class="item-power" data-power="1.0"></span>
-									</span> <span class="item-per"> 100% </span></li>
+											30-40 </span> <span class="item-power-wrapped"> <span
+											class="item-power" data-power="${commentAnalysis.ageAnalysis.phase3 }"></span>
+									</span> <span class="item-per"> ${commentAnalysis.ageAnalysis.phase3 * 100 }% </span></li>
 									<li class="type-on-weight"><span class="type-item">
-											30-34 </span> <span class="item-power-wrapped"> <span
-											class="item-power" data-power="1.0"></span>
-									</span> <span class="item-per"> 100% </span></li>
+											40-45 </span> <span class="item-power-wrapped"> <span
+											class="item-power" data-power="${commentAnalysis.ageAnalysis.phase4 }"></span>
+									</span> <span class="item-per"> ${commentAnalysis.ageAnalysis.phase4 * 100}% </span></li>
 									<li class="type-on-weight"><span class="type-item">
-											&#8805;35 </span> <span class="item-power-wrapped"> <span
-											class="item-power" data-power="1.0"></span>
-									</span> <span class="item-per"> 100% </span></li>
+											&#8805;45 </span> <span class="item-power-wrapped"> <span
+											class="item-power" data-power="${commentAnalysis.ageAnalysis.phase5 }"></span>
+									</span> <span class="item-per"> ${commentAnalysis.ageAnalysis.phase5 * 100 }% </span></li>
 								</ul>
 							</div>
 						</div>
@@ -290,7 +292,7 @@
 				<div class="comment-contents">
 					<!-- 使用心得标题 -->
 					<div class="comment-list-title">
-						<a class="name" href="#">Green Skin格润丝 花青素明眸眼霜</a> <span
+						<a class="name" href="javascript(0);">${productInfoVO.productName }</a> <span
 							class="title">使用心得</span>
 					</div>
 					<!-- 使用心得筛选条件 -->

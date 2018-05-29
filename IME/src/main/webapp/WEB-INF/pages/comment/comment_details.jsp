@@ -25,10 +25,11 @@
     <div class="main-wrapped">
       <div class="main-container">
         <div class="current-pos">
-          <a href="#">首页</a><span class="split-line"></span>
-          <a href="#">${productInfoVO.brandName }</a><span class="split-line"></span>
-          <a href="#">${productInfoVO.productName }</a><span class="split-line"></span>
-          <a href="#">全部点评</a><span class="split-line"></span>
+          <a href="${basePath }">首页</a><span class="split-line"></span>
+          <a href="${basePath }product/list.html?brand=${productInfoVO.brandName }" target="_blank">
+          	${productInfoVO.brandName }</a><span class="split-line"></span>
+          <a href="${basePath }product/info/${productInfoVO.productId}.html">${productInfoVO.productName }</a><span class="split-line"></span>
+          <a href="javascript:void(0);">全部点评</a><span class="split-line"></span>
           <sapn class="title">${commentInfoVO.articleTitle }</span>
         </div>
         <div class="main-contents">
