@@ -62,7 +62,8 @@
             </div>
           </div>
           <p class="login-tips">错误信息提示</p>
-          <a class="login-btn" href="javascript:void(0);">登录</a>
+<!--           <a class="login-btn" href="javascript:void(0);">登录</a> -->
+			<button class="login-btn" type="button">登录</button>
           <!-- <input class="login-btn" type="submit" value="登录"> -->
         </form>
         <!-- 手机号快速注册表单 -->
@@ -95,7 +96,8 @@
             </div>
           </div>
           <p class="register-tips">错误信息提示</p>
-          <a class="register-btn" href="javascript:void(0);">注册</a>
+<!--           <a class="register-btn" href="javascript:void(0);">注册</a> -->
+			<button type="button" class="register-btn">注册</button>
         </form>
         <!-- 手机号快速登录表单 -->
         <form class="phone-quick-login">
@@ -124,7 +126,8 @@
             </div>
           </div>
           <p class="quick-login-tips">错误信息提示</p>
-          <a class="quick-login-btn" href="javascript:void(0);">登录</a>
+<!--           <a class="quick-login-btn" href="javascript:void(0);">登录</a> -->
+			<button type="button" class="quick-login-btn">登录</button>
           <!-- <input class="login-btn" type="submit" value="登录"> -->
         </form>
       </div>

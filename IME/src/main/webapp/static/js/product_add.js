@@ -191,6 +191,7 @@ $(".product-effect-input").click(function(){
  * 添加按钮监听
  */
 $(".add-confirm").click(function(){
+	var _this = $(this);
 	var inputs = $(".product-form input[required='required']");
 	var flag = true;
 	$.each(inputs,function(){
@@ -218,6 +219,8 @@ $(".add-confirm").click(function(){
 	$.each(productImageArr,function(){
 		fd.append("productFiles",toBlob(this));
 	});
+	
+	_this.attr("disabled",true);
 	var postUrl = basePath + "product/new.do";
 	$.ajax({
 		url: postUrl,
@@ -242,13 +245,9 @@ $(".add-confirm").click(function(){
 
 	  			};
 	  			if(result.code == 207){
-	  				tips = "登录失效，请重新登录";
+	  				tips = "未登录或登录失效，请重新登录";
 	  				callback = function(){
-	  					var redirectUrl = window.location.href;
-	  					$.get(basePath+"user/login",{target:"login",redirectUrl:redirectUrl},function(data,status){
-	  						$(document.body).append("<div class='login-popup-container'>"+data+"</div>");
-	  						$("html").css("overflow-y","hidden");
-	  					});
+	  					window.open(basePath + "user/page/login.html","_blank");
 	  				}
 	  			}else if(result.code == 301){
 	  				tips = "所需产品图片未提供，请先提供";
@@ -261,6 +260,7 @@ $(".add-confirm").click(function(){
 						tips,
 						callback,
 						{type:'error',confirmButtonText: '好的'});
+	  			_this.attr("disabled",false);
 			}
 		}
 	});

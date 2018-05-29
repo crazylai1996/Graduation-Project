@@ -556,6 +556,7 @@ $(document).ready(function() {
 	 * 添加按钮
 	 */
   $(".add-btn").click(function(){
+	  var _this = $(this);
 	  var productId = $(".product-id").val();
 	  var count = editor.count('text');
 	  var articleTitle = $(".comment-title-input").val();
@@ -584,6 +585,7 @@ $(document).ready(function() {
 		  layer.msg("请选择你的性价评分");
 		  return ;
 	  }
+	  
 	  var param = new Object();
 	  param.productId = productId;
 	  param.articleTitle = articleTitle;
@@ -591,6 +593,8 @@ $(document).ready(function() {
 	  param.buyWay = buyWay;
 	  param.contentText = contentText;
 	  param.contentHtml = contentHtml;
+	  
+	  _this.attr("disabled",true);
 	  var postUrl = basePath + "comment/new.do";
 	  $.ajax({
 		  url: postUrl,
@@ -614,13 +618,9 @@ $(document).ready(function() {
 
 		  			};
 		  			if(result.code == 207){
-		  				tips = "登录失效，请重新登录";
+		  				tips = "未登录或登录失效，请重新登录";
 		  				callback = function(){
-		  					var redirectUrl = window.location.href;
-		  					$.get(basePath+"user/login",{target:"login",redirectUrl:redirectUrl},function(data,status){
-		  						$(document.body).append("<div class='login-popup-container'>"+data+"</div>");
-		  						$("html").css("overflow-y","hidden");
-		  					});
+		  					window.open(basePath + "user/page/login.html","_blank");
 		  				}
 		  			}else if(result.code == 208){
 		  				tips = "非法请求";
@@ -633,6 +633,7 @@ $(document).ready(function() {
 							tips,
 							callback,
 							{type:'error',confirmButtonText: '好的'});
+		  			_this.attr("disabled",false);
 				}
 		  }
 	  });

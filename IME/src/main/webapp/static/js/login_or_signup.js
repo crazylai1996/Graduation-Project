@@ -231,6 +231,7 @@ function showTips(target, message) {
   }
   //账号密码登录按钮
   $(".login-btn").click(function() {
+	var _this = $(this);
     var account = $(".normal-login input[name='account']").val();
     var password = $(".normal-login input[name='password']").val();
 
@@ -242,6 +243,7 @@ function showTips(target, message) {
     if (!checkPhone(account) && !checkEmail(account)) {
       showLoginTips("请填写正确的手机号或邮箱号");
     } else {
+    	_this.attr("disabled",true);
     	var loginUrl = basePath + "/user/accountLogin.do";
     	$.ajax({
     	  	  url: loginUrl,
@@ -276,6 +278,7 @@ function showTips(target, message) {
     	  				  		  $(".captcha-img").click();
 		    	  			  },
 		    	  			  {type:'error',confirmButtonText: '好的'});
+    	  			_this.attr("disabled",false);
     	  		  }
     	  	  }});
     }
@@ -300,6 +303,7 @@ function showTips(target, message) {
    * 登录按钮点击
    */
   $(".quick-login-btn").click(function() {
+	var _this = $(this);
     var phone = $(".phone-quick-login input[name='phone']").val();
 
     //表单是否为空
@@ -311,6 +315,7 @@ function showTips(target, message) {
       showQuickTips("请填写正确的手机号");
       return ;
     }
+    _this.attr("disabled",true);
     var loginUrl = basePath + "/user/phoneLogin.do";
 	$.ajax({
 	  	  url: loginUrl,
@@ -344,6 +349,7 @@ function showTips(target, message) {
 	  						//确认按钮回调
 						},
 						{type:'error',confirmButtonText: '好的'});
+	  			_this.attr("disabled",false);
 	  		  }
   		  }});
   });
@@ -367,6 +373,7 @@ function showTips(target, message) {
    * 手机号注册按钮点击事件
    */
   $(".register-btn").click(function() {
+	var _this = $(this);
     var phone = $(".phone-register input[name='phone']").val();
     //表单是否为空
     if (!checkEmpty($(".phone-register"))) {
@@ -378,6 +385,7 @@ function showTips(target, message) {
       return;
     }
     
+    _this.attr("disabled",true);
     //手机号注册地址
     var registerUrl = basePath + "/user/phoneRegister.do";
     //注册请求
@@ -420,6 +428,7 @@ function showTips(target, message) {
   						//确认按钮回调
 					},
 					{type:'error',confirmButtonText: '好的'});
+  			_this.attr("disabled",false);
   		  }
   	  },
   	  dataType: "json"

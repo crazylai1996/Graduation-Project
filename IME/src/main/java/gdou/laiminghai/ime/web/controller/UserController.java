@@ -919,7 +919,7 @@ public class UserController {
 		userService.saveFristLogin(userInfoVO);
 		userInfoMap.put("skinTexture", userInfoVO.getSkinTexture());
 		userInfoMap.put("bornYear", userInfoVO.getSkinTexture());
-		userInfoMap.put("status", UserStatusEnum.NORMAL_STATUS);
+		userInfoMap.put("status", UserStatusEnum.NORMAL_STATUS.getCode());
 		session.setAttribute("userInfo", userInfoMap);
 		return ResultDTOUtil.success(null);
 	}

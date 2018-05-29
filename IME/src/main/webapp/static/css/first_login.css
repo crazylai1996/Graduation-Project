@@ -96,6 +96,9 @@ html {
 .clearfix {
   *zoom: 1;
 }
+button {
+  border: none;
+}
 body {
   font-family: "微软雅黑";
 }
@@ -227,6 +230,7 @@ body {
   text-align: center;
   border-radius: 2px;
   background-color: #cc99cc;
+  cursor: pointer;
 }
 .save-btn:hover {
   color: #ffffff;

@@ -44,7 +44,8 @@
 					</div>
 				</div>
 				<div class="btn-container">
-					<a href="javascript:void(0);" class="save-btn">保存</a>
+<!-- 					<a href="javascript:void(0);" class="save-btn">保存</a> -->
+					<button class="save-btn" type="button">保存</button>
 				</div>
 			</div>
 		</div>
@@ -66,12 +67,15 @@
 			theme : '#CC99CC'
 		});
 		$(".save-btn").click(function(){
+			var _this = $(this);
 			var skinTexture = $(".skin-texture").val();
 			var bornYear = $(".born-year").val();
 			if(skinTexture == "" || bornYear == ""){
 				layer.msg("表单不能留空");
 				return ;
 			}
+			
+			_this.attr("disabled",true);
 			var postUrl = basePath + "user/firstLogin.do";
 			$.ajax({
 				url: postUrl,
@@ -101,7 +105,7 @@
 			  						$(document.body).append("<div class='login-popup-container'>"+data+"</div>");
 			  						$("html").css("overflow-y","hidden");
 			  					});
-			  				}
+			  				};
 			  			}else{
 			  				tips = "其他错误";
 			  			}
@@ -109,6 +113,7 @@
 								tips,
 								callback,
 								{type:'error',confirmButtonText: '好的'});
+			  			_this.attr("disabled",false);
 					}
 				}
 			});

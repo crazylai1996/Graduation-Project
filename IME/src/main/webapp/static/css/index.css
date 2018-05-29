@@ -96,6 +96,9 @@ html {
 .clearfix {
   *zoom: 1;
 }
+button {
+  border: none;
+}
 body {
   font-family: "微软雅黑";
 }

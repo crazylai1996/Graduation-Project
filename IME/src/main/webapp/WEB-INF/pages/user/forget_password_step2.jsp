@@ -47,7 +47,8 @@
 						class="item-input" autocomplete="off" data-label="确认密码">
 				</div>
 				<p class="error-tips">${errorMessage }</p>
-				<a class="update-pass-btn" href="javascript:void(0);">更新密码</a>
+<!-- 				<a class="update-pass-btn" href="javascript:void(0);">更新密码</a> -->
+				<button type="button" class="update-pass-btn">更新密码</button>
 			</form>
 		</div>
 	</div>

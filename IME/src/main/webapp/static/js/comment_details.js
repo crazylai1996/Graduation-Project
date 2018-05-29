@@ -32,6 +32,7 @@ $(document).ready(function() {
   
   //回复添加按钮
   $(".add-btn").click(function(){
+	  var _this = $(this);
 	  var replyDetail = $(".reply-detail-textarea").val();
 	  if(replyDetail == ""){
 		  layer.msg("回复内容不能留空");
@@ -42,6 +43,7 @@ $(document).ready(function() {
 		  return ;
 	  }
 	  
+	  _this.attr("disabled",true);
 	  var postUrl = basePath + "commentReply/new.do";
 	  $.ajax({
 		  url: postUrl,
@@ -65,13 +67,9 @@ $(document).ready(function() {
 
 		  			};
 		  			if(result.code == 207){
-		  				tips = "登录失效，请重新登录";
+		  				tips = "未登录或登录失效，请重新登录";
 		  				callback = function(){
-		  					var redirectUrl = window.location.href;
-		  					$.get(basePath+"user/login",{target:"login",redirectUrl:redirectUrl},function(data,status){
-		  						$(document.body).append("<div class='login-popup-container'>"+data+"</div>");
-		  						$("html").css("overflow-y","hidden");
-		  					});
+		  					window.open(basePath + "user/page/login.html","_blank");
 		  				}
 		  			}else{
 		  				tips = "未知错误";
@@ -80,6 +78,7 @@ $(document).ready(function() {
 							tips,
 							callback,
 							{type:'error',confirmButtonText: '好的'});
+		  			_this.attr("disabled",false);
 				}
 		  }
 	  });

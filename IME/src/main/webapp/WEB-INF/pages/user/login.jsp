@@ -66,7 +66,8 @@
 							</div>
 						</div>
 						<p class="login-tips">错误信息提示</p>
-						<a class="login-btn" href="javascript:void(0);">登录</a>
+<!-- 						<a class="login-btn" href="javascript:void(0);">登录</a> -->
+							<button class="login-btn" type="button">登录</button>
 						<!-- <input class="login-btn" type="submit" value="登录"> -->
 					</form>
 					<!-- 手机号快速登录表单 -->
@@ -94,8 +95,9 @@
 							</div>
 						</div>
 						<p class="quick-login-tips">错误信息提示</p>
-						<a class="quick-login-btn" href="javascript:void(0);">登录</a>
+<!-- 						<a class="quick-login-btn" href="javascript:void(0);">登录</a> -->
 						<!-- <input class="login-btn" type="submit" value="登录"> -->
+						<button class="quick-login-btn" type="button">登录</button>
 					</form>
 				</div>
 			</div>

@@ -189,6 +189,7 @@ function showTips(target, message) {
    * 手机号注册按钮点击事件
    */
   $(".register-btn").click(function() {
+	var _this = $(this);
     var phone = $(".phone-register input[name='phone']").val();
     //表单是否为空
     if (!checkEmpty($(".phone-register"))) {
@@ -200,6 +201,7 @@ function showTips(target, message) {
       return;
     }
 
+    _this.attr("disabled",true);
     //手机号注册地址
     var registerUrl = basePath + "/user/phoneRegister.do";
     //注册请求
@@ -241,6 +243,7 @@ function showTips(target, message) {
   						//确认按钮回调
 					},
 					{type:'error',confirmButtonText: '好的'});
+  			_this.attr("disabled",false);
   		  }
   	  },
   	  dataType: "json"

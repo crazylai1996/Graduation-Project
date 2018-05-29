@@ -431,7 +431,9 @@
           </textarea>
 					<!-- 评论添加按钮 -->
 					<div class="comment-add-btn">
-						<span class="word-count-wrapped">当前字数：<span class="word-count">0</span></span><a href="javascript:void(0);" class="add-btn">写好了</a>
+						<span class="word-count-wrapped">当前字数：<span class="word-count">0</span></span>
+<!-- 						<a href="javascript:void(0);" class="add-btn">写好了</a> -->
+							<button type="button" class="add-btn">写好了</button>
 					</div>
 				</div>
 			</div>

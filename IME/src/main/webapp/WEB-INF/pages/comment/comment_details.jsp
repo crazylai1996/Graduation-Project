@@ -210,7 +210,8 @@
 	              <textarea class="reply-detail-textarea" name="replyDetail" rows="10" cols="88"></textarea>
 	              <!-- 回复添加按钮 -->
 	              <div class="reply-add-btn">
-	                <a href="javascript:void(0);" class="add-btn">写好了</a>
+<!-- 	                <a href="javascript:void(0);" class="add-btn">写好了</a> -->
+						<button type="button" class="add-btn">写好了</button>
 	              </div>
               </form>
             </div>

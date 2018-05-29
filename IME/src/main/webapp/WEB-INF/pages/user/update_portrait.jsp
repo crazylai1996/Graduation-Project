@@ -32,7 +32,8 @@
 				</div>
 				<div class="target-image-container">
 					<canvas class="picture-pre-show" width="300px" height="300px"></canvas>
-					<a class="confirm-btn" href="javascript:void(0);">上传</a>
+<!-- 					<a class="confirm-btn" href="javascript:void(0);">上传</a> -->
+						<button type="button" class="confirm-btn">上传</button>
 				</div>
 			</div>
 		</div>

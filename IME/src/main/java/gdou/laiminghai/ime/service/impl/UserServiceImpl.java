@@ -237,12 +237,16 @@ public class UserServiceImpl implements UserService {
 			if(userInfo == null) {
 				throw new ServiceException(ServiceResultEnum.FORGET_PASSWORD_USER_NOT_EXIST);
 			}
+			String nickname = userInfo.getNickname();
+			if(StringUtils.isEmpty(nickname)) {
+				nickname = "用户";
+			}
 			//发送邮箱验证码
 			long timeout = AppSetting.CAPTCHA_SMS_TIMEOUT/(1000*60);
 			captcha = CaptchaUtil.getRandomNumberCaptcha(AppSetting.CAPTCHA_SMS_NUMBER_LENGTH);
 			taskExecutor.execute(new EmailSendTask(account, 
 					"爱美丽 － 身份验证", "亲爱的"+
-					userInfo.getNickname()
+							nickname
 					+"<br/>你的验证码为："+captcha+"，请于"+timeout+"分钟内输入并验证"));
 		}else {
 			throw new ServiceException(ServiceResultEnum.FORGET_PASSWORD_ACCOUNT_NOT_ALLOWED);

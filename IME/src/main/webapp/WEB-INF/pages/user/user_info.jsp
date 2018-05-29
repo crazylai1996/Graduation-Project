@@ -131,7 +131,8 @@
                 </form>
               </div>
               <div class="info-ops">
-                <a href="javascript:void(0);" class="update-confirm">更新</a>
+<!--                 <a href="javascript:void(0);" class="update-confirm">更新</a> -->
+					<button class="update-confirm" type="button">更新</button>
               </div>
               
             </div>

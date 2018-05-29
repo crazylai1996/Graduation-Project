@@ -32,6 +32,8 @@ $(".province-selector").change(function(){
 });
 //用户信息更新操作
 $(".update-confirm").click(function(){
+	var _this = $(this);
+	_this.attr("disabled",true);
 	$.ajax({
 		url: basePath + "user/updateUserInfo.do",
 		type: "POST",
@@ -71,6 +73,7 @@ $(".update-confirm").click(function(){
 						tips,
 						callback,
 						{type:'error',confirmButtonText: '好的'});
+	  			_this.attr("disabled",false);
 			}
 		}
 	});

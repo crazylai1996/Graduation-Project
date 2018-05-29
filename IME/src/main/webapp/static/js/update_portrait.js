@@ -1,5 +1,6 @@
 //上传按钮
 $(".confirm-btn").click(function(){
+	var _this = $(this);
 	var canvas = $(".picture-pre-show")[0];
 	var src=canvas.toDataURL();
 	src=src.split(",")[1];
@@ -9,6 +10,7 @@ $(".confirm-btn").click(function(){
 	for(var i=0;i<src.length;i++){
 		ua[i]=src.charCodeAt(i);
 	}
+	_this.attr("disabled",true);
 	//canvas.toDataURL 返回的默认格式就是 image/png
 	var postUrl = basePath + "user/updatePortrait.do";
 	var blob=new Blob([ua],{type:"image/png"});
@@ -61,6 +63,7 @@ $(".confirm-btn").click(function(){
 						tips,
 						callback,
 						{type:'error',confirmButtonText: '好的'});
+					_this.attr("disabled",false);
 			}
 
 		}

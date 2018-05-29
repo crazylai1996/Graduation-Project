@@ -153,6 +153,7 @@ function showTips(target, message) {
  * 登录按钮点击
  */
 $(".next-step-btn").click(function() {
+	var _this = $(this);
 	var account = $(".forget-password-form input[name='account']").val();
 
 	// 表单是否为空
@@ -164,9 +165,11 @@ $(".next-step-btn").click(function() {
 		showTips($(".forget-password-form .error-tips"), "请填写正确的手机号或邮箱号");
 		return ;
 	}
+	_this.attr("disabled",true);
 	$(".forget-password-form").submit();
 });
 $(".update-pass-btn").click(function() {
+	var _this = $(this);
 	// 表单是否为空
 	if (!checkEmpty($(".update-password-form"))) {
 		return;
@@ -177,6 +180,8 @@ $(".update-pass-btn").click(function() {
 		layer.msg("再次输入密码不一致，请重新输入");
 		return ;
 	}
+	
+	_this.attr("disabled",true);
 	var postUrl = basePath + "user/forgetPssword/resetPassword.do";
 	$.ajax({
 	  	  url: postUrl,
@@ -217,6 +222,7 @@ $(".update-pass-btn").click(function() {
 						tips,
 						callback,
 						{type:'error',confirmButtonText: '好的'});
+	  			_this.attr("disabled",false);
 	  		  }
 	  	  },
 	  	  dataType: "json"

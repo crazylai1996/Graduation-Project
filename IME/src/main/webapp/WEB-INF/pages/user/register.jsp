@@ -59,7 +59,8 @@
 							</div>
 						</div>
 						<p class="register-tips">错误信息提示</p>
-						<a class="register-btn" href="javascript:void(0);">注册</a>
+<!-- 						<a class="register-btn" href="javascript:void(0);">注册</a> -->
+						<button type="button" class="register-btn">注册</button>
 					</form>
 				</div>
 			</div>

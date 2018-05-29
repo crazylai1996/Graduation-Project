@@ -40,7 +40,8 @@
 						class="captcha-img" alt="看不清，换一张">
 				</div>
 				<p class="error-tips">${errorMessage }</p>
-				<a class="next-step-btn" href="javascript:void(0);">下一步</a>
+<!-- 				<a class="next-step-btn" href="javascript:void(0);">下一步</a> -->
+				<button class="next-step-btn" type="button">下一步</button>
 			</form>
 		</div>
 	</div>

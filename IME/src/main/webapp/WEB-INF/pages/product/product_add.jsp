@@ -186,7 +186,8 @@
             </form>
           </ul>
           <div class="add-product-op">
-            <a href="javascript:void(0);" class="add-confirm">添加</a>
+<!--             <a href="javascript:void(0);" class="add-confirm">添加</a> -->
+			<button class="add-confirm" type="button">添加</button>
           </div>
         </div>
       </div>
