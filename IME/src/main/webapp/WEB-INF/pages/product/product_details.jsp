@@ -172,18 +172,20 @@
 							<hr>
 							<div class="product-ops">
 								<div class="btn-wrapped">
-									<a href="/IME/product/info/${productInfoVO.productId }.html#addComment" class="reply-btn">发表使用心得</a>
+									<a href="/IME/product/info/${productInfoVO.productId }.html#addComment" class="reply-btn">添加点评</a>
 								</div>
 								<div class="btn-wrapped follow-ops">
 									<c:choose>
 										<c:when test="${productInfoVO.follow }">
 											<a href="javascript:void(0);" class="love-btn unfollow-btn"> 
-												<font><i class="layui-icon layui-icon-star-fill"></i> 已关注&nbsp;&nbsp;</font>|&nbsp;&nbsp;0人
+												<font><i class="layui-icon layui-icon-star-fill"></i> 已关注&nbsp;&nbsp;</font>|&nbsp;&nbsp;
+												<font class="follow-count">${productInfoVO.followCount }</font>人
 											</a>
 										</c:when>
 										<c:otherwise>
 											<a href="javascript:void(0);" class="love-btn follow-btn"> 
-												<font><i class="layui-icon layui-icon-star"></i> 关注&nbsp;&nbsp;</font>|&nbsp;&nbsp;0人
+												<font><i class="layui-icon layui-icon-star"></i> 关注&nbsp;&nbsp;</font>|&nbsp;&nbsp;
+												<font class="follow-count">${productInfoVO.followCount }</font>人
 											</a>
 										</c:otherwise>
 									</c:choose>

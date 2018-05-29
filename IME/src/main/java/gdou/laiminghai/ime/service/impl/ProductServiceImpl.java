@@ -15,8 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.github.pagehelper.util.StringUtil;
-
 import gdou.laiminghai.ime.common.exception.ServiceException;
 import gdou.laiminghai.ime.common.exception.ServiceResultEnum;
 import gdou.laiminghai.ime.common.setting.AppSetting;
@@ -35,6 +33,7 @@ import gdou.laiminghai.ime.model.vo.ProductInfoVO;
 import gdou.laiminghai.ime.service.CommentService;
 import gdou.laiminghai.ime.service.ProductPictureService;
 import gdou.laiminghai.ime.service.ProductService;
+import gdou.laiminghai.ime.service.UserBrowserRecordService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -49,6 +48,9 @@ public class ProductServiceImpl implements ProductService {
 	private ProductIndexDao productIndexDao;
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private UserBrowserRecordService userBrowserRecordService;
 	
 	//日志记录
 	private static final Logger logger = Logger.getLogger(ProductServiceImpl.class);
@@ -114,6 +116,9 @@ public class ProductServiceImpl implements ProductService {
 		//统计关注量
 		long followCount = userFollowProductMapper.countUserFollow(productId);
 		productInfoVO.setFollowCount(followCount);
+		//统计浏览量
+		long browserCount = userBrowserRecordService.countBrowserByProductId(productId);
+		productInfoVO.setBrowserCount(browserCount);
 		return productInfoVO;
 	}
 
@@ -218,6 +223,16 @@ public class ProductServiceImpl implements ProductService {
 		for (UserFollowProduct userFollowProduct : followedProducts) {
 			ProductInfoVO productInfoVO = productInfoPO2productInfoVO(userFollowProduct.getProductInfo());
 			productInfoVO.setFollowTime(sdf.format(userFollowProduct.getFollowTime()));
+			long productId = userFollowProduct.getProductId();
+			//统计点评量
+			long commentCount = commentService.countCommentByProductId(productId);
+			productInfoVO.setCommentCount(commentCount);
+			//统计关注量
+			long followCount = userFollowProductMapper.countUserFollow(productId);
+			productInfoVO.setFollowCount(followCount);
+			//统计浏览量
+			long browserCount = userBrowserRecordService.countBrowserByProductId(productId);
+			productInfoVO.setBrowserCount(browserCount);
 			productInfoVOList.add(productInfoVO);
 		}
 		return productInfoVOList;

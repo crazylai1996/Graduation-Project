@@ -1,6 +1,5 @@
 package gdou.laiminghai.ime.model.vo;
 
-import java.util.Date;
 import java.util.List;
 
 /**

@@ -135,13 +135,13 @@
 												<img class="product-picture" src="${followedProduct.coverImage }">
 												<div class="product-count">
 													<p class="browser">
-														浏览：<a href="javascript:void(0);">99</a>
+														浏览：<a href="javascript:void(0);">${followedProduct.browserCount }</a>
 													</p>
 													<p class="follow">
-														收藏：<a href="javascript:void(0);">999</a>
+														关注：<a href="javascript:void(0);">${followedProduct.followCount }</a>
 													</p>
 													<p class="comment">
-														点评：<a href="javascript:void(0);">999</a>
+														点评：<a href="javascript:void(0);">${followedProduct.commentCount }</a>
 													</p>
 													<a href="javascript:void(0);"
 														class="cancel-love unfollow-product-btn" data-product-id="${followedProduct.productId }">

@@ -278,14 +278,18 @@ $(document).ready(function() {
 			  if(result.success){
 				//确认按钮回调
 				  var tips = "";
+				  var count = parseInt($(".follow-count").text());
 					if(result.data.action == 1){
+						count = count+1;
 						//关注成功
 						var html = '<a href="javascript:void(0);" class="love-btn unfollow-btn"> \
-							<font><i class="layui-icon layui-icon-star-fill"></i> 已关注&nbsp;&nbsp;</font>|&nbsp;&nbsp;0人\
+							<font><i class="layui-icon layui-icon-star-fill"></i> 已关注&nbsp;&nbsp;</font>|&nbsp;&nbsp;<font class="follow-count">'+count+'</font>人\
 							</a>';
 						$(".follow-ops").html(html);
 						tips = "成功关注";
 					}else if(result.data.action == 2){
+						count = count-1;
+						$(".follow-count").text(count);
 						//取消关注
 						tips = "你已取消关注";
 					}
@@ -341,15 +345,19 @@ $(document).ready(function() {
 			  if(result.success){
 				//确认按钮回调
 				  var tips = "";
+				  var count = parseInt($(".follow-count").text());
 					if(result.data.action == 2){
-						//关注成功
+						//取消关注成功
+						count = count - 1;
 						var html = '<a href="javascript:void(0);" class="love-btn follow-btn"> \
-							<font><i class="layui-icon layui-icon-star"></i> 关注&nbsp;&nbsp;</font>|&nbsp;&nbsp;0人\
+							<font><i class="layui-icon layui-icon-star"></i> 关注&nbsp;&nbsp;</font>|&nbsp;&nbsp;<font class="follow-count">'+count+'</font>人\
 							</a>';
 						$(".follow-ops").html(html);
 						tips = "成功取消关注";
 					}else if(result.data.action == 1){
-						//取消关注
+					count = count + 1;
+					$(".follow-count").text(count);
+						//成功关注
 						tips = "你已成功关注该产品";
 					}
 				  alert("",
