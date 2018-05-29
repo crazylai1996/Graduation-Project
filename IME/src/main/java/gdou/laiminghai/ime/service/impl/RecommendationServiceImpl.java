@@ -128,10 +128,15 @@ public class RecommendationServiceImpl implements RecommendationService {
 			
 			try {
 				DataModel dataModel = new GenericDataModel(fastByIDMap);
+				//指定用户相似度计算方法
 				UserSimilarity userSimilarity = new PearsonCorrelationSimilarity(dataModel);
-				UserNeighborhood userNeighborhood = new NearestNUserNeighborhood(2, userSimilarity, dataModel);
+				//指定距离最近的10个用户作为邻居
+				UserNeighborhood userNeighborhood = new NearestNUserNeighborhood(10, userSimilarity, dataModel);
+				//创建推荐引擎，根据数据模型、用户相似度模型、以及邻近值构建推荐引擎
+				//这里选用基于用户的推荐器，用户数量少时速度快
 				Recommender recommender = new GenericUserBasedRecommender(dataModel, userNeighborhood, userSimilarity);
-				List<RecommendedItem> recommendedItems = recommender.recommend(userId, 5);//用户userId的20条推荐
+				//向ID为userId的用户的推荐20个商品
+				List<RecommendedItem> recommendedItems = recommender.recommend(userId, 20);
 				List<Long> productIds = new ArrayList<>();
 				for (RecommendedItem recommendedItem : recommendedItems) {
 					Long productId = recommendedItem.getItemID();

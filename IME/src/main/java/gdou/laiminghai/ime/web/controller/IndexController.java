@@ -1,5 +1,6 @@
 package gdou.laiminghai.ime.web.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import gdou.laiminghai.ime.common.util.ListUtil;
 import gdou.laiminghai.ime.model.dto.PageResult;
 import gdou.laiminghai.ime.model.entity.CosmeticClass;
 import gdou.laiminghai.ime.model.vo.CommentInfoVO;
@@ -85,9 +87,35 @@ public class IndexController {
 		//获取商品推荐
 		if(userInfoMap != null) {
 			Long userId = (Long)userInfoMap.get("userId");
-			List<ProductInfoVO> recProductList = recommendationService.getRecommendationResult(userId);
+			//所有结果 
+			List<ProductInfoVO> recResultList = recommendationService.getRecommendationResult(userId);
+			//所有结果存入session
+			session.setAttribute("recResultList", recResultList);
+			//随机获取若干个元素
+			List<ProductInfoVO> recProductList = ListUtil.getRandomList(recResultList, 5);
 			mav.addObject("recProductList", recProductList);
 		}
+		return mav;
+	}
+	
+	/**
+	 * 换一换
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月29日 下午8:29:50
+	 */
+	@RequestMapping("/changeYouNeed.do")
+	public ModelAndView changeYouNeed() {
+		HttpSession session = request.getSession();
+		ModelAndView mav = new ModelAndView("product/guess-you-need-fragment");
+		//取出推荐结果
+		List<ProductInfoVO> recResultList = (List<ProductInfoVO>) session.getAttribute("recResultList");
+		List<ProductInfoVO> recProductList = new ArrayList<>();
+		if(recResultList != null) {
+			//随机获取若干个元素
+			recProductList = ListUtil.getRandomList(recResultList, 5);
+		}
+		mav.addObject("recProductList", recProductList);
 		return mav;
 	}
 }

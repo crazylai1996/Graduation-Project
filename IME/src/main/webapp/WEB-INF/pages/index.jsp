@@ -164,11 +164,10 @@
       <div class="guess-you-need">
         <div class="gyn-title">
           <a class="left" href="javascript:void(0);">猜你喜欢</a>
-<!--           <a class="right" href="#">换一批</a> -->
+          <a class="right change-you-need-btn" href="javascript:void(0);">换一批</a>
         </div>
         
         <ul class="gyn-contents">
-        	
 	        	<c:forEach items="${recProductList }" var="productInfo">
 	        		<li><a href="${basePaht }product/info/${productInfo.productId}.html">
 			            <img src="${productInfo.coverImage }">

@@ -143,3 +143,12 @@ $(".followed-tab").click(function(){
 	loadMoreFollowed();
 	$(this).addClass("current").siblings("li").removeClass("current");
 });
+//猜你喜欢，换一换
+$(".change-you-need-btn").click(function(){
+	var getUrl = basePath + "changeYouNeed.do";
+	$.get(getUrl, function(result){
+		if($.trim(result) != ""){
+			  $(".change-you-need-btn").html(result);
+		  }
+	});
+});
