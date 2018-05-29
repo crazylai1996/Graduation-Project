@@ -33,4 +33,12 @@ public interface UserFollowProductMapper {
      * @datetime: 2018年5月22日 上午1:14:06
      */
     List<UserFollowProduct> findFollowedProducts(Long userId);
+    /**
+     * 统计商品关注量
+     * @param productId
+     * @return
+     * @author: laiminghai
+     * @datetime: 2018年5月29日 上午8:31:39
+     */
+    Long countUserFollow(Long productId);
 }

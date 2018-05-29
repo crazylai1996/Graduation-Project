@@ -105,4 +105,13 @@ public interface ProductService {
 	 * @datetime: 2018年5月27日 上午8:34:35
 	 */
 	PageResult<ProductInfoVO> searchProductsByPage(Map<String,String> params,int pageNum);
+	
+	/**
+	 * 统计商品关注量
+	 * @param productId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月29日 上午8:29:34
+	 */
+	Long countUserFollow(Long productId);
 }

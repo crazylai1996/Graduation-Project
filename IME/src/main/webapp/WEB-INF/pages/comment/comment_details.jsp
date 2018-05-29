@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <base href="${basePath }">
-    <title>评论详情 - 爱美丽</title>
+    <title>点评详情 - 爱美丽</title>
     <link rel="stylesheet" href="static\css\bootstrap.min.css">
     <link rel="stylesheet" href="static\plugins\star-rating\star-rating.css">
     <link rel="stylesheet" href="static\plugins\layui\css\layui.css"/>
@@ -227,10 +227,10 @@
                   <img src="${productInfoVO.coverImage }">
                 </div>
                 <span class="comment-sum">
-                  共<font>12805</font>条点评
+                  共<font>${productInfoVO.commentCount }</font>条点评
                 </span>
                 <span class="comment-more">
-                  <a href="javascript:void(0);">查看它的更多点评&gt;&gt;</a>
+                  <a href="${basePath }product/info/${productInfoVO.productId}.html" target="_blank">查看它的更多点评&gt;&gt;</a>
                 </span>
               </div>
             </div>

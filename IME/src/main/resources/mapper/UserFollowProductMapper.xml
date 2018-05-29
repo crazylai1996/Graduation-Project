@@ -65,4 +65,11 @@
   	from userfollowproduct up inner join productinfo p on up.bProductId = p.bProductId 
   	where up.bUserId = #{_parameter}
   </select>
+  <!-- 统计商品关注量 -->
+  <select id="countUserFollow" parameterType="java.lang.Long" 
+  	resultType="java.lang.Long">
+  	select count(*) 
+  	from userfollowproduct 
+  	where bProductId = #{_parameter}
+  </select>
 </mapper>

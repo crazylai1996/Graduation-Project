@@ -107,7 +107,14 @@ public class ProductServiceImpl implements ProductService {
 		if(productInfoPO == null) {
 			throw new ServiceException(ServiceResultEnum.PRODUCT_NOT_FOUND);
 		}
-		return productInfoPO2productInfoVO(productInfoPO);
+		ProductInfoVO productInfoVO = productInfoPO2productInfoVO(productInfoPO);
+		//统计点评量
+		long commentCount = commentService.countCommentByProductId(productId);
+		productInfoVO.setCommentCount(commentCount);
+		//统计关注量
+		long followCount = userFollowProductMapper.countUserFollow(productId);
+		productInfoVO.setFollowCount(followCount);
+		return productInfoVO;
 	}
 
 	@Override
@@ -249,6 +256,11 @@ public class ProductServiceImpl implements ProductService {
 		PageResult<ProductInfoVO> pageResult = new PageResult<>(pageList);
 		pageResult.setPageSize(AppSetting.NUMBER_PER_PAGE);
 		return pageResult;
+	}
+
+	@Override
+	public Long countUserFollow(Long productId) {
+		return userFollowProductMapper.countUserFollow(productId);
 	}
 
 	/**

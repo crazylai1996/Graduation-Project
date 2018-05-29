@@ -20,4 +20,12 @@ public interface UserBrowserRecordService {
 	 * @datetime: 2018年5月26日 上午9:04:01
 	 */
 	void addUserBrowserRecord(UserBrowserRecord record);
+	/**
+	 * 统计商品浏览记录量
+	 * @param productId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月29日 上午12:42:41
+	 */
+	Long countBrowserByProductId(Long productId);
 }

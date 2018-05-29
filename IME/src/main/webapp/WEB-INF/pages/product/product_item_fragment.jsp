@@ -20,7 +20,7 @@
 			</p>
 			<p class="smaller-p">
 				<span class="p-label">参考价格：</span><span class="p-value">${productInfo.referencePrice }</span>
-				<span class="p-label">点评数：</span><span class="p-value">99</span>
+				<span class="p-label">点评数：</span><span class="p-value">${productInfo.commentCount }</span>
 			</p>
 			<div class="product-desc">
 				<p class="product-introduction">

@@ -190,4 +190,11 @@
   	where ci.bProductId = #{_parameter}
     order by ci.dSendTime desc limit 1
   </select>
+  <!-- 统计商品心得数量 -->
+  <select id="countCommentByProductId" parameterType="java.lang.Long" 
+  	resultType="java.lang.Long">
+  	select count(*) 
+  	from commentinfo 
+  	where bProductId = #{_parameter}
+  </select>
 </mapper>

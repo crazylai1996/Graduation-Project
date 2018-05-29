@@ -286,6 +286,12 @@ public class CommentServiceImpl implements CommentService {
 		}
 		return commentInfoPO2CommentInfoVO(commentInfo);
 	}
+	
+
+	@Override
+	public Long countCommentByProductId(Long productId) {
+		return commentInfoMapper.countCommentByProductId(productId);
+	}
 
 	/**
 	 * VO=>PO

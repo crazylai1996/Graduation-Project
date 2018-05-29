@@ -8,7 +8,7 @@
 				<img src="${commentInfoVO.userInfo.portrait }">
 				<p>${commentInfoVO.userInfo.nickname }</p>
 				<p>
-					点评数( <font>999</font>)
+					 <font>${commentInfoVO.userInfo.age }</font>岁
 				</p>
 				<p>
 					<c:choose>
@@ -35,7 +35,7 @@
 				<div class="background"></div>
 			</div>
 			<div class="comment-detail">
-				<a href="#" class="comment-title">${commentInfoVO.articleTitle }</a> <input value="4"
+				<a href="${basePath }comment/info/${commentInfoVO.commentId }.html" target="_blank" class="comment-title">${commentInfoVO.articleTitle }</a> <input value="4"
 					type="number" class="rating" min=0 max=5 step=0.5 data-size="xxs"
 					data-only-show="true" data-symbol="&#xe005;">
 				<div class="comment-user">
@@ -44,7 +44,7 @@
 					&nbsp;&nbsp;${commentInfoVO.userInfo.age }
 					&nbsp;&nbsp;购买方式：${commentInfoVO.buyWayName }
 				</div>
-				<p class="comment-comment">${commentInfoVO.contentText }…&nbsp;&nbsp;<a target="_blank" class="show-details" href="/IME/comment/info/${commentInfoVO.commentId }.html">
+				<p class="comment-comment">${commentInfoVO.contentText }…&nbsp;&nbsp;<a target="_blank" class="show-details" href="${basePath }comment/info/${commentInfoVO.commentId }.html">
 					阅读全文&gt;&gt;</a></p>
 				<span class="comment-time">${commentInfoVO.sendTime }</span>
 				<hr>

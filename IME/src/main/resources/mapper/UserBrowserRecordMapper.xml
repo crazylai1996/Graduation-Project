@@ -44,4 +44,11 @@
 	where dBrowserTime &gt;= #{startTime} and dBrowserTime &lt;= #{endTime}
   	group by bProductId order by browserCount desc limit 50
   </select>
+  <!-- 统计商品浏览量 -->
+  <select id="countBrowserByProductId" parameterType="java.lang.Long" 
+  	resultType="java.lang.Long">
+  	select count(*) 
+  	from userbrowserrecord 
+  	where bProductId = #{_parameter}
+  </select>
 </mapper>

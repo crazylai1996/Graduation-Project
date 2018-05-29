@@ -119,10 +119,10 @@
           公告消息
         </div>
         <ul class="notice-list">
-          <li><a href="#">第二支半价稚优泉口红正品持久保湿不易脱色防水南瓜脏橘色姨妈</a></li>
-          <li><a href="#">第二支半价稚优泉口红正品持久保湿不易脱色防水南瓜脏橘色姨妈</a></li>
-          <li><a href="#">第二支半价稚优泉口红正品持久保湿不易脱色防水南瓜脏橘色姨妈</a></li>
-          <li><a href="#">第二支半价稚优泉口红正品持久保湿不易脱色防水南瓜脏橘色姨妈</a></li>
+          <li><a href="javascript:void(0);">第二支半价稚优泉口红正品持久保湿不易脱色防水南瓜脏橘色姨妈</a></li>
+          <li><a href="javascript:void(0);">第二支半价稚优泉口红正品持久保湿不易脱色防水南瓜脏橘色姨妈</a></li>
+          <li><a href="javascript:void(0);">第二支半价稚优泉口红正品持久保湿不易脱色防水南瓜脏橘色姨妈</a></li>
+          <li><a href="javascript:void(0);">第二支半价稚优泉口红正品持久保湿不易脱色防水南瓜脏橘色姨妈</a></li>
         </ul>
       </div>
     </div>
@@ -316,8 +316,12 @@
 			            <div class="mc-body-right">
 			              <a class="mc-body-title" href="${basePath }product/info/${productInfo.productId}.html" target="_blank">${productInfo.productName }</a>
 			              <div class="mc-body-ext">
-			                <span class="love-sum"><i class="layui-icon layui-icon-reply-fill"></i>0</span>
-			                <a href="#" class="comment-sum"><i class="layui-icon layui-icon-star-fill"></i>0</a>
+			                <span class="comment-sum">
+			                	<i class="layui-icon layui-icon-reply-fill"></i>${productInfo.commentCount }
+			                </span>
+			                <a href="javascript:void(0);" class="love-sum">
+			                	<i class="layui-icon layui-icon-star-fill"></i>${productInfo.followCount }
+			                </a>
 			              </div>
 			            </div>
 			          </li>

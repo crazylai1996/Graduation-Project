@@ -34,4 +34,9 @@ public class UserBrowserRecordServiceImpl implements UserBrowserRecordService {
 		userBrowserRecordMapper.insert(record);
 	}
 
+	@Override
+	public Long countBrowserByProductId(Long productId) {
+		return userBrowserRecordMapper.countBrowserByProductId(productId);
+	}
+
 }

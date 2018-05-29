@@ -87,4 +87,13 @@ public interface CommentService {
 	 * @datetime: 2018年5月27日 下午8:40:19
 	 */
 	CommentInfoVO findLatestCommentByProductId(Long productId);
+	
+	/**
+	 * 统计商品心得数量
+	 * @param productId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月29日 上午12:49:58
+	 */
+	Long countCommentByProductId(Long productId);
 }
