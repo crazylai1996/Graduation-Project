@@ -123,6 +123,9 @@ public class ProductServiceImpl implements ProductService {
 		//统计浏览量
 		long browserCount = userBrowserRecordService.countBrowserByProductId(productId);
 		productInfoVO.setBrowserCount(browserCount);
+		//综合评分
+		Float avgScore = commentService.countAvgScore(productId);
+		productInfoVO.setAvgScore(avgScore);
 		return productInfoVO;
 	}
 
@@ -262,6 +265,12 @@ public class ProductServiceImpl implements ProductService {
 			ProductInfo productInfoPO = productInfoMapper.findProductInfoById(productInfoVO.getProductId());
 			if(productInfoPO != null) {
 				ProductInfoVO productInfo = productInfoPO2productInfoVO(productInfoPO);
+				//综合评分
+				Float avgScore = commentService.countAvgScore(productInfoPO.getProductId());
+				productInfo.setAvgScore(avgScore);
+				//点评量
+				Long commentCount = commentService.countCommentCount(productInfoPO.getProductId());
+				productInfo.setCommentCount(commentCount);
 				productInfo.setLastestComment(commentService.findLatestCommentByProductId(productInfoVO.getProductId()));
 				if(StringUtils.isNotBlank(productInfoVO.getProductName())) {
 					productInfo.setProductName(productInfoVO.getProductName());

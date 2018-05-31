@@ -26,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
 
+import gdou.laiminghai.ime.common.setting.AppSetting;
 import gdou.laiminghai.ime.common.util.RedisKeyUtil;
 import gdou.laiminghai.ime.dao.redis.RedisDao;
 import gdou.laiminghai.ime.model.dto.UserPrefDTO;
@@ -64,16 +65,17 @@ public class RecommendationServiceImpl implements RecommendationService {
 		String userPrefKey = RedisKeyUtil.getUserPrefKey(userId);
 		//存储用户偏好
 		redisDao.hPutAll(userPrefKey, prefMap);
+		logger.debug("新增用户偏好："+userPrefKey+":"+prefMap.toString());
 		//加入分类偏好集合
 		String userClassPrefsKey = RedisKeyUtil.getUserClassPrefsKey(
 				prefDTO.getSkinTexture(), prefDTO.getBornYear());
 		redisDao.sAdd(userClassPrefsKey, userPrefKey);
 		//记录用户新增偏好Count
 		String userNewPrefsKey = RedisKeyUtil.getUserNewPrefsKey();
-		redisDao.zAdd(userNewPrefsKey, userId+"", 1);
+		redisDao.zIncrementScore(userNewPrefsKey, userId+"", 1);
 		double newCount = redisDao.zScore(userNewPrefsKey, userId + "");
-		//当前存在10个以上新偏好，重新生成推荐结果
-		if(newCount >= 10) {
+		//当前存在threshold个以上新偏好，重新生成推荐结果
+		if(newCount >= AppSetting.RECOMMENDATION_RECREATE_THRESHOLD) {
 			//重新生成推荐记录
 			taskExecutor.execute(
 					new RecommendationTask(userId, userClassPrefsKey));
@@ -105,13 +107,14 @@ public class RecommendationServiceImpl implements RecommendationService {
 
 		@Override
 		public void run() {
+			logger.debug("开始重新生成用户推荐结果："+userId);
 			Set<String> prefKeys = redisDao.setMembers(prefsSetKey);
 			Map<Long,List<Preference>> prefsMap = new HashMap<>();
 			for (String prefKey : prefKeys) {
 				Map<Object,Object> prefMap = redisDao.hGetAll(prefKey);
-				long userId = (long) prefMap.get("userId");
-				long productId = (long) prefMap.get("productId");
-				float value = (float) prefMap.get("value");
+				long userId = Long.parseLong((String)prefMap.get("userId"));
+				long productId = Long.parseLong((String) prefMap.get("productId"));
+				float value = Float.parseFloat((String)prefMap.get("value"));
 				Preference preference = new GenericPreference(userId,productId,value);
 				
 				List<Preference> preferences = prefsMap.get(userId);
@@ -144,6 +147,8 @@ public class RecommendationServiceImpl implements RecommendationService {
 				}
 				//推荐结果保存至数据库
 				recommendationResultService.addRecommendationResult(userId, productIds);
+				redisDao.zRemove(RedisKeyUtil.getUserNewPrefsKey(), userId + "");
+				logger.debug("重新生成的推荐结果："+productIds);
 			} catch (TasteException e) {
 				logger.error("推荐计算异常：",e);
 			}

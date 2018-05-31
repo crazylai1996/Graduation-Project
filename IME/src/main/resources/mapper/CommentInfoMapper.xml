@@ -75,7 +75,7 @@
   	resultMap="BaseResultMap">
   	select bCommentId,vArticleTitle 
   	from commentinfo 
-  	where bCommentId &lt; #{commentId} and bUserId = #{userId}
+  	where bCommentId &lt; #{commentId} and bProductId = #{productId}
   	order by bCommentId desc limit 1
   </select>
   <!-- 查找用户下一篇心得 -->
@@ -83,7 +83,7 @@
   	resultMap="BaseResultMap">
   	select bCommentId,vArticleTitle 
   	from commentinfo 
-  	where bCommentId &gt; #{commentId} and bUserId = #{userId}
+  	where bCommentId &gt; #{commentId} and bProductId = #{productId}
   	order by bCommentId asc limit 1
   </select>
   <!-- 查找 用户最近3个点评记录 -->

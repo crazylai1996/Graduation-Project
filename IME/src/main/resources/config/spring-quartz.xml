@@ -8,7 +8,7 @@
           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- redis工具 -->
+	<!-- redis同步任务 -->
 	<bean id="rankTask" class="gdou.laiminghai.ime.common.task.RankTask" />
 
 	<!-- 排行榜更新定时任务 -->
@@ -23,7 +23,7 @@
 	<bean id="rankUpdateTrigger"
 		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="rankUpdate" />
-		<property name="cronExpression" value="0 0 2 * * ?" /><!-- 每天凌晨两点调度一次 -->
+		<property name="cronExpression" value="0 0 1 * * ?" /><!-- 每天凌晨1点调度一次 -->
 	</bean>
 	<!-- quartz实例化5秒后仅执行一次 -->
      <bean id="rankUpdateOnceTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
@@ -46,17 +46,35 @@
 	<bean id="browserRecordSyncTrigger"
 		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="browserRecordSync" />
-		<property name="cronExpression" value="0 30 2 * * ?" /><!-- 每天凌晨两点半调度一次 -->
+		<property name="cronExpression" value="0 0 0 * * ?" /><!-- 每天0点调度一次 -->
 	</bean>
 	<!-- 结束 -->
+	
+	<!-- Lucene索引同步任务 -->
+	<bean id="indexSyncTask" class="gdou.laiminghai.ime.common.task.IndexSyncTask" />
+	<!-- Lucene索引同步任务 -->
+	<bean id="indexSyncJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="indexSyncTask" />
+		<property name="targetMethod" value="syncIndex" />
+		<!-- 如果前一个任务还没有结束第二个任务不会启动 false -->  
+        <property name="concurrent" value="false" />  
+	</bean>
+	<!-- 触发器, 使用定时触发 -->
+	<bean id="indexSyncJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="indexSyncJob" />
+		<property name="cronExpression" value="0 0 2 * * ?" /><!-- 每天2点调度一次 -->
+	</bean>
 	
 	<!-- 配置调度工厂 -->
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
-				<ref bean="rankUpdateTrigger" />
+				<ref bean="browserRecordSyncTrigger" /><!-- 0 -->
+				<ref bean="rankUpdateTrigger" /><!-- 1 -->
 				<ref bean="rankUpdateOnceTrigger"/>
-				<ref bean="browserRecordSyncTrigger" />
+				<ref bean="indexSyncJobTrigger"/><!-- 2 -->
 			</list>
 		</property>
 	</bean>

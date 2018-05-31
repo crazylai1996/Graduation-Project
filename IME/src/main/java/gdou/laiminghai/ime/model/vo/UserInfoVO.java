@@ -16,9 +16,11 @@ public class UserInfoVO {
     private String nickname;
 
     private String gender;
+    
+    private String skinTextureCode;
 
     private String skinTexture;
-    
+        
     private Integer bornYear;
 
     private Integer age;
@@ -71,6 +73,15 @@ public class UserInfoVO {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	
+	public String getSkinTextureCode() {
+		return skinTextureCode;
+	}
+
+	public void setSkinTextureCode(String skinTextureCode) {
+		this.skinTextureCode = skinTextureCode;
 	}
 
 	public String getSkinTexture() {
@@ -184,10 +195,10 @@ public class UserInfoVO {
 	@Override
 	public String toString() {
 		return "UserInfoVO [userId=" + userId + ", userName=" + userName + ", nickname=" + nickname + ", gender="
-				+ gender + ", skinTexture=" + skinTexture + ", bornYear=" + bornYear + ", age=" + age
-				+ ", introduction=" + introduction + ", portrait=" + portrait + ", phone=" + phone + ", email=" + email
-				+ ", membershipPoint=" + membershipPoint + ", memberLevel=" + memberLevel + ", area=" + area
-				+ ", status=" + status + ", follow=" + follow + "]";
+				+ gender + ", skinTextureCode=" + skinTextureCode + ", skinTexture=" + skinTexture + ", bornYear="
+				+ bornYear + ", age=" + age + ", introduction=" + introduction + ", portrait=" + portrait + ", phone="
+				+ phone + ", email=" + email + ", membershipPoint=" + membershipPoint + ", memberLevel=" + memberLevel
+				+ ", area=" + area + ", status=" + status + ", follow=" + follow + "]";
 	}
 
 }

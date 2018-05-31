@@ -94,7 +94,7 @@ $(".filter-list a").click(function(){
 		        		  </div>');
 			  }
 			  var len = $(".product-list li").length;
-			  if(len >= 2){
+			  if(len >= 5){
 				  $(".load-more-wrapped").html('<a class="load-more-btn" href="javascript:void(0);">加载更多</a>');
 			  }else{
 				  $(".load-more-wrapped").html('<span class="no-more-load">我是有底线的</span>');

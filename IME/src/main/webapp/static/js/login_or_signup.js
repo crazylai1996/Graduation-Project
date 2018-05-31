@@ -74,6 +74,8 @@ $(".get-msg-captcha").click(function(){
 		layer.msg("请输入正确的手机号");
 		return ;
 	}
+	
+	_this.attr("disabled",true);
 	var getUrl = basePath + "/user/getSmsCaptcha.do";
 	// 请求获取验证码
 	$.ajax({
@@ -81,6 +83,7 @@ $(".get-msg-captcha").click(function(){
 	  type: "GET",
 	  data: {phone:phone},
 	  success: function(result){
+		  _this.attr("disabled",false);
 		  console.log(result);
 		  if(result.code == 206){
 			  alert("提示",

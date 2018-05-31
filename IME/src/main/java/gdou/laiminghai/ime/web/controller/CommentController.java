@@ -45,6 +45,7 @@ import gdou.laiminghai.ime.service.ProductBrandService;
 import gdou.laiminghai.ime.service.ProductEffectService;
 import gdou.laiminghai.ime.service.ProductPropertyService;
 import gdou.laiminghai.ime.service.ProductService;
+import gdou.laiminghai.ime.service.RankService;
 import gdou.laiminghai.ime.service.RecommendationService;
 import gdou.laiminghai.ime.service.UserService;
 
@@ -70,6 +71,9 @@ public class CommentController {
 
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private RankService rankService;
 
 	@Autowired
 	private UserService userService;
@@ -210,6 +214,7 @@ public class CommentController {
 		ModelAndView mav = new ModelAndView("comment/comment_details");
 		// 心得详情
 		CommentInfoVO commentInfoVO = commentService.getCommentInfo(commentId);
+		logger.debug(commentInfoVO.toString());
 		mav.addObject("commentInfoVO", commentInfoVO);
 		// 产品详情
 		ProductInfoVO productInfoVO = productService.getProductInfo(commentInfoVO.getProductId());
@@ -328,6 +333,9 @@ public class CommentController {
 		//商品品牌
 		List<SelectItemVO> productBrands = productBrandService.getAllProductBrands();
 		mav.addObject("productBrands", productBrands);
+		//商品排行
+		List<ProductInfoVO> productRank = rankService.getBrowserCountRank();
+		mav.addObject("productRank", productRank);
 		mav.addObject("searchResult",searchResult);
 		return mav;
 	}

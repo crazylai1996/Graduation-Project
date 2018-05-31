@@ -34,7 +34,9 @@
 					<div class="input-contents">
 						<select class="sm-input skin-texture" name="skinTexture">
 							<c:forEach items="${skinTextures }" var="skinTexture">
-		                    	<option value="${skinTexture.code }">${skinTexture.name }</option>-->
+								<c:if test="${skinTexture.code != '1111' }">
+		                    		<option value="${skinTexture.code }">${skinTexture.name }</option>
+		                    	</c:if>
 		                    </c:forEach>
 						</select>
 					</div>

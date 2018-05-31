@@ -154,7 +154,7 @@ body{
     position: relative;
 
     display: inline-block;
-    width: @_width/2;
+    width: @_width/2 - 1;
 
     &:before{
       content: "·";
@@ -720,6 +720,9 @@ body{
       text-decoration: underline;
     }
   }
+  .rank-point{
+    display: inline-block;
+  }
 }
 .contents-detail{
   @_height: 54px;
@@ -955,5 +958,5 @@ body{
   font-size: 20px;
 }
 .hidden-btn{
-  display: none;
+  display: none !important;
 }

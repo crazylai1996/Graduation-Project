@@ -9,7 +9,9 @@
 				<div class="contents-label">
 					<span class="label-user">点评By：<a href="javascript:void(0);">${commentInfoVO.userInfo.nickname }</a></span>
 					<span class="label-rank">性价评分：<a class="rank-point"
-						href="javascript:void(0);">${commentInfoVO.worthMark }</a></span>
+						href="javascript:void(0);"><input
+					value="${commentInfoVO.worthMark }" type="number" class="rating" min=0 max=5 step=0.5
+					data-size="xxs" data-only-show="true" data-symbol="&#xe005;"></a></span>
 				</div>
 				<div class="contents-detail">${commentInfoVO.contentText }</div>
 				<div class="item-btns">

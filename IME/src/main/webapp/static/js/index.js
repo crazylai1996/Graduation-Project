@@ -6,6 +6,17 @@ $(".category-index>li>a").hover(function(){
 },function(){
   $(this).siblings(".sub-category").hide();
 });
+/**
+ * 加载评分
+ * @returns
+ */
+function reloadStarRating(){
+	var $input = $('input.rating'), count = Object.keys($input).length;
+	if (count > 0) {
+	    $input.rating();
+	}
+}
+reloadStarRating();
 $(".sub-category").hover(function(){
   $(this).siblings("a").toggleClass("current-category");
   $(this).show();
@@ -62,6 +73,7 @@ $(".load-more-search-result").click(function(){
 		}else{
 			$(".nc-list").append(result);
 			$(".nc-list").data("pageNum",pageNum);
+			reloadStarRating();
 		}
 	});
 	
@@ -79,6 +91,7 @@ function loadMoreNewest(){
 		}else{
 			$(".nc-list").append(result);
 		}
+		reloadStarRating();
 		layer.close(index);
 		pages = $(".nc-list").data("pages");
 		console.log(pageNum >= pages);
@@ -107,6 +120,7 @@ function loadMoreFollowed(){
 		}else{
 			$(".nc-list").append(result);
 		}
+		reloadStarRating();
 		layer.close(index);
 		if($(".nc-list li").length == 0){
 			$(".nc-list").html('<div class="no-more-contents">\
@@ -148,7 +162,7 @@ $(".change-you-need-btn").click(function(){
 	var getUrl = basePath + "changeYouNeed.do";
 	$.get(getUrl, function(result){
 		if($.trim(result) != ""){
-			  $(".change-you-need-btn").html(result);
+			  $(".gyn-contents").html(result);
 		  }
 	});
 });

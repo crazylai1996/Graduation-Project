@@ -308,8 +308,8 @@ public class UserController {
 		userInfoMap.put("userId", userInfo.getUserId());
 		userInfoMap.put("userName", userInfo.getUserName());
 		userInfoMap.put("portrait", userInfo.getPortrait());
-		userInfoMap.put("skinTexture", userInfo.getSkinTexture());
-		userInfoMap.put("bornYear", userInfo.getSkinTexture());
+		userInfoMap.put("skinTexture", userInfo.getSkinTextureCode());
+		userInfoMap.put("bornYear", userInfo.getBornYear());
 		userInfoMap.put("status", userInfo.getStatus());
 		session.setAttribute("userInfo", userInfoMap);
 		return ResultDTOUtil.success(null);
@@ -355,8 +355,8 @@ public class UserController {
 		userInfoMap.put("userId", userInfo.getUserId());
 		userInfoMap.put("userName", userInfo.getUserName());
 		userInfoMap.put("portrait", userInfo.getPortrait());
-		userInfoMap.put("skinTexture", userInfo.getSkinTexture());
-		userInfoMap.put("bornYear", userInfo.getSkinTexture());
+		userInfoMap.put("skinTexture", userInfo.getSkinTextureCode());
+		userInfoMap.put("bornYear", userInfo.getBornYear());
 		userInfoMap.put("status", userInfo.getStatus());
 		session.setAttribute("userInfo", userInfoMap);
 		return ResultDTOUtil.success(null);

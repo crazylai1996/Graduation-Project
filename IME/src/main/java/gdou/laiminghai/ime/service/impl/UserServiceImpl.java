@@ -498,6 +498,7 @@ public class UserServiceImpl implements UserService {
 		if(StringUtils.isNotBlank(userInfo.getSkinTexture())) {
 			SkinTextureEnum skinTexture = SkinTextureEnum.of(userInfo.getSkinTexture());
 			if(skinTexture != null) {
+				userInfoVO.setSkinTextureCode(userInfo.getSkinTexture());
 				userInfoVO.setSkinTexture(skinTexture.getName());
 			}
 		}

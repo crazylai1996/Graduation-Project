@@ -151,6 +151,9 @@ public class CommentIndexDao extends BaseIndexDao{
 				int start = (pageNum - 1) * AppSetting.NUMBER_PER_PAGE;
 				// 查询数据， 结束页面自前的数据都会查询到，但是只取本页的数据
 				TopDocs topDocs = searcher.search(query, start);
+				if(start > topDocs.scoreDocs.length) {
+					return commentResults;
+				}
 				//获取到上一页最后一条
 				preScore = topDocs.scoreDocs[start - 1];
 			}

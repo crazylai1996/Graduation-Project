@@ -201,6 +201,9 @@ public class ProductIndexDao extends BaseIndexDao {
 				// 查询数据， 结束页面自前的数据都会查询到，但是只取本页的数据
 				TopDocs topDocs = searcher.search(query, start);
 				// 获取到上一页最后一条
+				if(start > topDocs.scoreDocs.length) {
+					return productResults;
+				}
 				preScore = topDocs.scoreDocs[start - 1];
 			}
 			TopDocs resultDocs = searcher.searchAfter(preScore, query, AppSetting.NUMBER_PER_PAGE);

@@ -15,7 +15,7 @@
 			</p>
 			<p class="rating-p">
 				<span class="rating-label">综合评价</span><span class="rating-wrapped"><input
-					value="4" type="number" class="rating" min=0 max=5 step=0.5
+					value="${productInfo.avgScore }" type="number" class="rating" min=0 max=5 step=0.5
 					data-size="xxs" data-only-show="true" data-symbol="&#xe005;"></span>
 			</p>
 			<p class="smaller-p">

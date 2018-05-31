@@ -10,9 +10,11 @@
   <base href="${basePath }">
   <title>爱美丽 - 化妆品导购与评价平台</title>
   <link rel="stylesheet" href="static\plugins\layui\css\layui.css"/>
-  <script type="text/javascript" src="static\plugins\layui\layui.js"></script>
   <script type="text/javascript" src="static\plugins\layui\layui.all.js"></script>
+  <link rel="stylesheet" href="static\plugins\star-rating\star-rating.css">
   <link rel="stylesheet" href="static\css\index.css" />
+  <link rel="stylesheet" href="static\css\bootstrap.min.css">
+  
 </head>
 
 <body>
@@ -427,6 +429,7 @@
   	var basePath = "${basePath}";
   </script>
   <script src="static\js\jquery.js"></script>
+  <script src="static\plugins\star-rating\star-rating.js"></script>
   <script src="static\js\index.js"></script>
 </body>
 

@@ -110,24 +110,28 @@ public class CommentServiceImpl implements CommentService {
 		}
 		String contentText = commentInfoVO.getContentText();
 		//删除img标签
-		contentText = contentText.replaceAll("<img[^>]*/>", "");
+		String contentTextNew = contentText.replaceAll("<img[^>]*/>", "");
 		String contentHtml = commentInfoVO.getContentHtml();
 		CommentInfo commentInfoPO = commentInfoVO2CommentInfoPO(commentInfoVO);
+		commentInfoPO.setContentText(contentTextNew);
+		commentInfoPO.setContentHtml(contentHtml);
 		if(commentPictures != null && commentPictures.size() > 0) {
 			// 替换源文本内容的目录
-			contentHtml.replace(AppSetting.COMMENT_PICTURE_TMP_PATH, AppSetting.COMMENT_PICTURE_SAVED_PATH);
-			commentInfoPO.setContentHtml(contentHtml);
+			String comtentHtmlNew = contentHtml.replace(AppSetting.COMMENT_PICTURE_TMP_PATH, AppSetting.COMMENT_PICTURE_SAVED_PATH);
+			commentInfoPO.setContentHtml(comtentHtmlNew);
 		}
 		// 插入到数据库
 		commentInfoMapper.insert(commentInfoPO);
 		//建立索引 
 		commentIndexDao.addCommentIndex(commentInfoPO);
 		// 将心得图片从临时图片目录移动到正式目录
-		for (String pictureName : commentPictures) {
-			if (contentText.contains(pictureName)) {
-				FileUtil.moveFile(new File(tmpPath, pictureName), new File(savedPath, pictureName));
-				commentPictureService.addNewCommentPicture(
-						new CommentPicture(commentInfoPO.getCommentId(),pictureName));
+		if(commentPictures != null) {
+			for (String pictureName : commentPictures) {
+				if (contentText.contains(pictureName)) {
+					FileUtil.moveFile(new File(tmpPath, pictureName), new File(savedPath, pictureName));
+					commentPictureService.addNewCommentPicture(
+							new CommentPicture(commentInfoPO.getCommentId(),pictureName));
+				}
 			}
 		}
 	}
@@ -140,23 +144,23 @@ public class CommentServiceImpl implements CommentService {
 			throw new ServiceException(ServiceResultEnum.COMMENT_NOT_FOUND);
 		}
 		CommentInfoVO commentInfoVO = commentInfoPO2CommentInfoVO(commentInfoPO);
-		//查找用户上一篇心得
+		//查找产品上一篇心得
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("commentId", commentInfoVO.getCommentId());
 		map.put("userId", commentInfoVO.getUserId());
+		map.put("productId", commentInfoVO.getProductId());
 		CommentInfo lastCommentInfo = commentInfoMapper.findLastComment(map);
 		if(lastCommentInfo != null) {
 			commentInfoVO.setLastCommentId(lastCommentInfo.getCommentId());
 			commentInfoVO.setLastCommentTitle(lastCommentInfo.getArticleTitle());
 		}
-		//查找用户下一篇心得
+		//查找产品下一篇心得
 		CommentInfo nextCommentInfo = commentInfoMapper.findNextComment(map);
 		if(nextCommentInfo != null) {
 			commentInfoVO.setNextCommentId(nextCommentInfo.getCommentId());
 			commentInfoVO.setNextCommentTitle(nextCommentInfo.getArticleTitle());
 		}
 		//查找用户最近三个心得记录
-		map.put("productId", commentInfoVO.getProductId());
 		List<Long> productIds = commentInfoMapper.findThreeLastestCommentRecords(map);
 		if(productIds.size() > 0) {
 			List<ProductInfoVO> productInfoVOs = productService.findMoreProductInfo(productIds);
@@ -369,6 +373,27 @@ public class CommentServiceImpl implements CommentService {
 		return commentAnalysis;
 	}
 	
+	
+	
+	@Override
+	public float countAvgScore(Long productId) {
+		Float avgScore = commentInfoMapper.countAvgScore(productId);
+		if(avgScore == null) {
+			return 0F;
+		}
+		return avgScore;
+	}
+	
+	
+	@Override
+	public long countCommentCount(Long productId) {
+		Long commentCount = commentInfoMapper.countCommentByProductId(productId);
+		if(commentCount == null){
+			return 0L;
+		}
+		return commentCount;
+	}
+
 	/**
 	 * 计算占比 
 	 * @param a

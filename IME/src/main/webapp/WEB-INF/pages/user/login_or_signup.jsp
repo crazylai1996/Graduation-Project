@@ -79,7 +79,8 @@
               输入验证码
             </div>
             <input class="short-input" type="text" name="smsCaptcha" class="item-input" autocomplete="off" data-label="验证码">
-            <a class="get-msg-captcha" href="javascript:void(0);">获取短信验证码</a>
+<!--             <a class="get-msg-captcha" href="javascript:void(0);">获取短信验证码</a> -->
+			<button class="get-msg-captcha" type="button">获取短信验证码</button>
           </div>
           <div class="form-item">
             <div class="item-label">
@@ -113,7 +114,8 @@
               输入验证码
             </div>
             <input class="short-input" type="text" name="smsCaptcha" class="item-input" autocomplete="off" data-label="验证码">
-            <a class="get-msg-captcha" href="javascript:void(0);">获取短信验证码</a>
+<!--             <a class="get-msg-captcha" href="javascript:void(0);">获取短信验证码</a> -->
+			<button class="get-msg-captcha" type="button">获取短信验证码</button>
           </div>
           <!-- 其他操作 -->
           <div class="relative-op">

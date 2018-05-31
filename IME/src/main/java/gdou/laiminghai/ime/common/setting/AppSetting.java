@@ -1,7 +1,5 @@
 package gdou.laiminghai.ime.common.setting;
 
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -126,6 +124,10 @@ public class AppSetting {
 	 * 排行榜显示条目
 	 */
 	public static Integer PRODUCT_RANK_COUNT;
+	/**
+	 * 重新生成推荐结果的阀值
+	 */
+	public static Integer RECOMMENDATION_RECREATE_THRESHOLD;
 
 	@Value("${app.root}")
 	public void setAppRoot(String appRoot) {
@@ -264,5 +266,10 @@ public class AppSetting {
 	@Value("${product.rank.count}")
 	public void setProductRankCount(Integer rankCount) {
 		AppSetting.PRODUCT_RANK_COUNT = rankCount;
+	}
+	
+	@Value("${recommendation.result.recreate.threshold}")
+	public void setRecommendationResultRecreateThreshold(Integer threshold) {
+		AppSetting.RECOMMENDATION_RECREATE_THRESHOLD = threshold;
 	}
 }

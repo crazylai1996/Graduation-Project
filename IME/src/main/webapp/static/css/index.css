@@ -251,7 +251,7 @@ body {
 .sub-category li {
   position: relative;
   display: inline-block;
-  width: 140px;
+  width: 139px;
 }
 .sub-category li:before {
   content: "·";
@@ -723,6 +723,9 @@ body {
 .contents-label a:hover {
   text-decoration: underline;
 }
+.contents-label .rank-point {
+  display: inline-block;
+}
 .contents-detail {
   width: 100%;
   height: 54px;
@@ -908,5 +911,5 @@ body {
   font-size: 20px;
 }
 .hidden-btn {
-  display: none;
+  display: none !important;
 }

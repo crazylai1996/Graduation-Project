@@ -35,7 +35,7 @@
 				<div class="background"></div>
 			</div>
 			<div class="comment-detail">
-				<a href="${basePath }comment/info/${commentInfoVO.commentId }.html" target="_blank" class="comment-title">${commentInfoVO.articleTitle }</a> <input value="4"
+				<a href="${basePath }comment/info/${commentInfoVO.commentId }.html" target="_blank" class="comment-title">${commentInfoVO.articleTitle }</a> <input value="${commentInfoVO.worthMark }"
 					type="number" class="rating" min=0 max=5 step=0.5 data-size="xxs"
 					data-only-show="true" data-symbol="&#xe005;">
 				<div class="comment-user">

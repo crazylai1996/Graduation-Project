@@ -106,4 +106,22 @@ public interface CommentService {
 	 * @datetime: 2018年5月29日 上午10:30:33
 	 */
 	CommentAnalysisVO commentAnalyze(Long productId);
+	
+	/**
+	 * 统计综合评分
+	 * @param productId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月31日 上午9:19:12
+	 */
+	float countAvgScore(Long productId);
+	
+	/**
+	 * 统计点评量
+	 * @param productId
+	 * @return
+	 * @author: laiminghai
+	 * @datetime: 2018年5月31日 下午3:42:08
+	 */
+	long countCommentCount(Long productId);
 }

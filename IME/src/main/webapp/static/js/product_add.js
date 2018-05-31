@@ -164,7 +164,7 @@ $(".product-effect-input").click(function(){
 	var getUrl = basePath + "productEffect/getAll";
 	layer.open({
 	  type: 2, 
-	  title: "选择产品属性",
+	  title: "选择产品功效",
 	  content: [getUrl, 'yes'],
 	  area: ["400px"],
 	  btn: ['确定', '取消'],

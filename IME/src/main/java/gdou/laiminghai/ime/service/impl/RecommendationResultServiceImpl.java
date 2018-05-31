@@ -29,7 +29,7 @@ public class RecommendationResultServiceImpl implements RecommendationResultServ
 		for (Long productId : productIds) {
 			RecommendationResult result = new RecommendationResult();
 			result.setUserId(userId);
-			result.setUserId(productId);
+			result.setProductId(productId);
 			result.setGenTime(new Date());
 			recommendationResultMapper.insert(result);
 		}

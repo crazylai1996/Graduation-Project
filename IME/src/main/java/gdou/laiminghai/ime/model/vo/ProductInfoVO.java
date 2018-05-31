@@ -35,6 +35,7 @@ public class ProductInfoVO {
     private long browserCount;
     private long followCount;
     private long commentCount;
+    private float avgScore;
     
 	public Long getProductId() {
 		return productId;
@@ -181,6 +182,13 @@ public class ProductInfoVO {
 		this.commentCount = commentCount;
 	}
 	
+	public float getAvgScore() {
+		return avgScore;
+	}
+	public void setAvgScore(float avgScore) {
+		this.avgScore = avgScore;
+	}
+	
 	@Override
 	public String toString() {
 		return "ProductInfoVO [productId=" + productId + ", productName=" + productName + ", brand=" + brand
@@ -190,7 +198,7 @@ public class ProductInfoVO {
 				+ brandName + ", classifyName=" + classifyName + ", propertyName=" + propertyName + ", effectName="
 				+ effectName + ", follow=" + follow + ", followTime=" + followTime + ", lastestComment="
 				+ lastestComment + ", browserCount=" + browserCount + ", followCount=" + followCount + ", commentCount="
-				+ commentCount + "]";
+				+ commentCount + ", avgScore=" + avgScore + "]";
 	}
 	
 }

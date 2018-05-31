@@ -92,6 +92,9 @@
 							href="#">${productInfoVO.effectName }</a>
 					</p>
 					<p>
+						产品属性：<a href="#">${productInfoVO.propertyName }</a>
+					</p>
+					<p>
 						适用肤质：<a href="#">${productInfoVO.skinTexture }</a>
 					</p>
 					<p>
@@ -100,7 +103,7 @@
 					<div class="product-details">
 						<span>产品信息：</span>
 						<p>${productInfoVO.desc }
-							<a href="#" class="show-more">展开&gt;&gt;</a>
+							<a href="javascript:void(0);" class="show-more">展开&gt;&gt;</a>
 						</p>
 					</div>
 				</div>
@@ -409,7 +412,7 @@
 					<div class="rating-input">
 						<input type="hidden" class="product-rating">
 						<span class="comment-rating-label">性价评分：</span> <input value="0"
-							type="number" class="rating product-rating-input" min=0 max=5 step=1 data-size="xs"
+							type="number" class="rating product-rating-input" min="0" max="5" step="1" data-size="xs"
 							data-symbol="&#xe005;">
 						<div class="buy-way">
 							<input type="hidden" class="buy-way-input">
